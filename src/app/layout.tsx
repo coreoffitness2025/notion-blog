@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+
 import Layout from "@/components/layout";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -63,28 +64,9 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-
-  import "./globals.css";
-import Navbar from "@/components/Navbar";
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
-      <body>
-        <Navbar />
-        {children}
-      </body>
-    </html>
-  );
-}
-
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
