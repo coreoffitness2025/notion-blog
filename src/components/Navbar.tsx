@@ -1,20 +1,41 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
 
-export default function Navbar() {
+const inter = Inter({ subsets: ["latin"] });
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://coreviahomepage.vercel.app";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Corevia",
+    template: "%s | Corevia",
+  },
+  description: "Corevia 공식 홈페이지",
+  openGraph: {
+    title: "Corevia",
+    description: "Corevia 공식 홈페이지",
+    url: siteUrl,
+    siteName: "Corevia",
+    locale: "ko_KR",
+    type: "website",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <header className="border-b">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-        <Link href="/" className="font-semibold">
-          Corevia
-        </Link>
-
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/solution">Solution</Link>
-          <Link href="/posts">Blog</Link>
-        </nav>
-      </div>
-    </header>
+    <html lang="ko">
+      <body className={inter.className}>
+        <Navbar />
+        <main>{children}</main>
+      </body>
+    </html>
   );
 }
