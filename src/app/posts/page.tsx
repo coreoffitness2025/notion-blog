@@ -6,32 +6,27 @@ import { Badge } from "@/components/ui/badge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "고객 사례",
-  description: "Corevia를 활용한 성공 사례를 확인하세요.",
+  title: "블로그",
+  description: "Corevia의 최신 소식과 인사이트를 확인하세요.",
 };
 
-export default function CasesPage() {
-  // 캐시에서 Case 타입만 가져오기
-  const cases = getPostsFromCache("Case");
+export default function PostsPage() {
+  // 캐시에서 Blog 타입만 가져오기 (Type이 없으면 전체 반환)
+  const allPosts = getPostsFromCache();
+  // Blog 타입이거나 Type이 없는 것들을 블로그로 표시
+  const posts = allPosts.filter((p) => p.type === "Blog" || !p.type);
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 16px" }}>
-      <h1 style={{ fontSize: 32, fontWeight: 900 }}>고객 사례</h1>
+      <h1 style={{ fontSize: 32, fontWeight: 900 }}>블로그</h1>
       <p style={{ marginTop: 10, opacity: 0.8 }}>
-        Corevia를 활용한 성공 사례를 확인하세요.
+        Corevia의 최신 소식과 인사이트를 확인하세요.
       </p>
 
       <hr style={{ margin: "24px 0", opacity: 0.2 }} />
 
-      {cases.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "60px 0" }}>
-          <p style={{ opacity: 0.6, marginBottom: 16 }}>
-            아직 게시된 고객 사례가 없습니다.
-          </p>
-          <p style={{ fontSize: 14, opacity: 0.5 }}>
-            곧 다양한 성공 사례를 공유할 예정입니다.
-          </p>
-        </div>
+      {posts.length === 0 ? (
+        <p style={{ opacity: 0.8 }}>아직 게시물이 없습니다.</p>
       ) : (
         <div
           style={{
@@ -40,10 +35,10 @@ export default function CasesPage() {
             gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
           }}
         >
-          {cases.map((caseItem) => (
+          {posts.map((post) => (
             <Link
-              key={caseItem.id}
-              href={`/cases/${caseItem.slug}`}
+              key={post.id}
+              href={`/posts/${post.slug}`}
               style={{
                 display: "block",
                 border: "1px solid rgba(0,0,0,0.08)",
@@ -54,11 +49,11 @@ export default function CasesPage() {
                 transition: "box-shadow 0.2s",
               }}
             >
-              {caseItem.coverImage ? (
+              {post.coverImage ? (
                 <div style={{ position: "relative", aspectRatio: "16/9" }}>
                   <Image
-                    src={caseItem.coverImage}
-                    alt={caseItem.title}
+                    src={post.coverImage}
+                    alt={post.title}
                     fill
                     style={{ objectFit: "cover" }}
                   />
@@ -67,7 +62,7 @@ export default function CasesPage() {
                 <div
                   style={{
                     aspectRatio: "16/9",
-                    background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -76,12 +71,12 @@ export default function CasesPage() {
                     fontWeight: 700,
                   }}
                 >
-                  Case Study
+                  Corevia
                 </div>
               )}
               <div style={{ padding: 16 }}>
                 <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
-                  {caseItem.title}
+                  {post.title}
                 </h2>
                 <p
                   style={{
@@ -95,7 +90,7 @@ export default function CasesPage() {
                     overflow: "hidden",
                   }}
                 >
-                  {caseItem.description}
+                  {post.description}
                 </p>
                 <div
                   style={{
@@ -106,9 +101,9 @@ export default function CasesPage() {
                   }}
                 >
                   <time style={{ fontSize: 13, opacity: 0.6 }}>
-                    {format(new Date(caseItem.date), "yyyy.MM.dd")}
+                    {format(new Date(post.date), "yyyy.MM.dd")}
                   </time>
-                  {caseItem.tags?.slice(0, 3).map((tag) => (
+                  {post.tags?.slice(0, 3).map((tag) => (
                     <Badge key={tag} variant="outline" style={{ fontSize: 11 }}>
                       {tag}
                     </Badge>
@@ -122,3 +117,4 @@ export default function CasesPage() {
     </div>
   );
 }
+

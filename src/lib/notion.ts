@@ -14,6 +14,7 @@ export interface Post {
   author?: string;
   tags: string[];
   category?: string;
+  type?: "Blog" | "Case"; // Blog 또는 Case 구분
 }
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
@@ -117,6 +118,13 @@ function getPostAuthor(properties: any): string | undefined {
   return people[0]?.name || undefined;
 }
 
+function getPostType(properties: any): "Blog" | "Case" | undefined {
+  // Type 컬럼 (Select)에서 Blog/Case 구분
+  const typeName = properties?.Type?.select?.name;
+  if (typeName === "Blog" || typeName === "Case") return typeName;
+  return undefined;
+}
+
 /** ---------------------------
  * Notion query: build Status filter dynamically
  * -------------------------- */
@@ -150,24 +158,65 @@ async function buildPublishedFilter(): Promise<any | undefined> {
  * Public API
  * -------------------------- */
 
-// Notion에서 "Published" 글 목록(페이지 id 목록)을 가져옴
-export async function fetchPublishedPosts(): Promise<any[]> {
+export interface FetchPostsOptions {
+  type?: "Blog" | "Case";
+  limit?: number;
+  publishedOnly?: boolean;
+}
+
+// Notion에서 글 목록을 가져옴
+export async function fetchPublishedPosts(options: FetchPostsOptions = {}): Promise<any[]> {
   if (!databaseId) return [];
 
-  const filter = await buildPublishedFilter();
+  const { type, limit, publishedOnly = true } = options;
+  
+  try {
+    // 필터 조건들을 모음
+    const filterConditions: any[] = [];
+    
+    // Status 필터 (publishedOnly일 때)
+    if (publishedOnly) {
+      const statusFilter = await buildPublishedFilter();
+      if (statusFilter) {
+        filterConditions.push(statusFilter);
+      }
+    }
+    
+    // Type 필터 (Blog/Case 구분)
+    if (type) {
+      filterConditions.push({
+        property: "Type",
+        select: { equals: type }
+      });
+    }
 
-  const res = await notion.databases.query({
-    database_id: databaseId,
-    ...(filter ? { filter } : {}),
-    sorts: [
-      {
-        property: "Published Date",
-        direction: "descending",
-      },
-    ],
-  });
+    const queryParams: any = {
+      database_id: databaseId,
+      sorts: [
+        {
+          property: "Published Date",
+          direction: "descending",
+        },
+      ],
+    };
 
-  return res.results as any[];
+    // 필터 조건이 있으면 and로 묶어서 적용
+    if (filterConditions.length > 0) {
+      queryParams.filter = filterConditions.length === 1 
+        ? filterConditions[0] 
+        : { and: filterConditions };
+    }
+
+    if (limit) {
+      queryParams.page_size = limit;
+    }
+
+    const res = await notion.databases.query(queryParams);
+    return res.results as any[];
+  } catch (error) {
+    console.error("[notion] fetchPublishedPosts error:", error);
+    return [];
+  }
 }
 
 export async function getPostFromNotion(pageId: string): Promise<Post | null> {
@@ -209,6 +258,7 @@ export async function getPostFromNotion(pageId: string): Promise<Post | null> {
       author: getPostAuthor(properties),
       tags: getPostTags(properties),
       category: getPostCategory(properties),
+      type: getPostType(properties),
     };
 
     return post;
@@ -222,17 +272,31 @@ export async function getPostFromNotion(pageId: string): Promise<Post | null> {
  * 빌드 시 scripts/cache-posts.ts가 생성하는 파일을 읽어옴
  * (레포 루트의 posts-cache.json)
  */
-export function getPostsFromCache(): Post[] {
+export function getPostsFromCache(type?: "Blog" | "Case"): Post[] {
   try {
     const cachePath = path.join(process.cwd(), "posts-cache.json");
     if (!fs.existsSync(cachePath)) return [];
     const raw = fs.readFileSync(cachePath, "utf8");
     const posts = JSON.parse(raw);
-    return Array.isArray(posts) ? (posts as Post[]) : [];
+    const allPosts = Array.isArray(posts) ? (posts as Post[]) : [];
+    
+    // type 필터가 있으면 해당 type만 반환
+    if (type) {
+      return allPosts.filter((p) => p.type === type);
+    }
+    return allPosts;
   } catch (e) {
     console.error("[notion] failed to read posts-cache.json:", e);
     return [];
   }
+}
+
+/**
+ * 캐시에서 slug로 단건 찾기
+ */
+export function getPostBySlugFromCache(slug: string, type?: "Blog" | "Case"): Post | undefined {
+  const posts = getPostsFromCache(type);
+  return posts.find((p) => p.slug === slug);
 }
 
 export function getWordCount(markdown: string): number {

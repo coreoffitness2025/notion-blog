@@ -11,14 +11,14 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
 interface PostPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata(
   { params }: PostPageProps,
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
 
   const posts = getPostsFromCache();
   const post = posts.find((p) => p.slug === slug);
@@ -60,7 +60,7 @@ export async function generateMetadata(
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const posts = getPostsFromCache();
   const post = posts.find((p) => p.slug === slug);

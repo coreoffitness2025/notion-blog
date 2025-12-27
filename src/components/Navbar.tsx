@@ -7,8 +7,10 @@ const nav = [
   { href: "/", label: "홈" },
   { href: "/company", label: "기업 소개" },
   { href: "/solution", label: "솔루션" },
-  { href: "/posts", label: "블로그" }, // ✅ /blog -> /posts 로 변경
+  { href: "/guide", label: "가이드" },
+  { href: "/posts", label: "블로그" },
   { href: "/cases", label: "고객 사례" },
+  { href: "/contact", label: "문의" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -20,23 +22,13 @@ export default function Navbar() {
   const pathname = usePathname() || "/";
 
   return (
-    <header style={{ borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "14px 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 16,
-        }}
-      >
-        <Link href="/" style={{ fontWeight: 800 }}>
+    <header className="bg-white border-b border-blue-100 sticky top-0 z-40">
+      <div className="max-w-[1100px] mx-auto px-4 py-4 flex items-center justify-between gap-4">
+        <Link href="/" className="font-extrabold text-xl text-blue-600">
           Corevia
         </Link>
 
-        <nav style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+        <nav className="flex gap-4 flex-wrap">
           {nav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -44,10 +36,11 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                style={{
-                  fontWeight: active ? 800 : 500,
-                  opacity: active ? 1 : 0.75,
-                }}
+                className={`text-sm transition-colors ${
+                  active
+                    ? "font-bold text-blue-600"
+                    : "font-medium text-gray-600 hover:text-blue-600"
+                }`}
               >
                 {item.label}
               </Link>
