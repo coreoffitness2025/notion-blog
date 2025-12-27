@@ -1,3 +1,7 @@
+import "server-only";
+
+import fs from "fs";
+import path from "path";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import type {
@@ -8,36 +12,29 @@ import type {
 
 export type Post = {
   id: string;
+
+  // 템플릿이 쓰는 필드명으로 맞춤
   title: string;
   slug: string;
-  publishedDate?: string;
-  cover?: string;
+
+  // 템플릿: post.date, post.description, post.coverImage, post.tags, post.author, post.category
+  date: string; // ISO or yyyy-mm-dd
+  description: string;
+  coverImage?: string;
   tags: string[];
-  excerpt?: string;
+  author?: string;
+  category?: string;
+
   content: string; // markdown
 };
 
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-});
-
+const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
-
 const DB_ID = process.env.NOTION_DATABASE_ID;
 
 function requireDbId(): string {
-  if (!DB_ID) {
-    throw new Error("Missing env: NOTION_DATABASE_ID");
-  }
+  if (!DB_ID) throw new Error("Missing env: NOTION_DATABASE_ID");
   return DB_ID;
-}
-
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/[^\p{L}\p{N}]+/gu, "-") // 유니코드 문자/숫자 유지
-    .replace(/^-+|-+$/g, "");
 }
 
 function isFullPage(
@@ -51,31 +48,46 @@ function getPlainTextFromRichText(rt: any[] | undefined): string {
   return rt.map((t) => t?.plain_text ?? "").join("");
 }
 
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** ---- Notion property getters (네 DB 기준) ----
+ * Name: title
+ * Status: select (Published)
+ * Slug: rich_text
+ * Published Date: date
+ * Cover: files
+ * Tags: multi-select
+ * Excerpt: rich_text
+ * (선택) Author / Category: 있으면 읽고, 없으면 undefined
+ */
 function getTitle(props: any): string {
-  // Notion 기본 title 컬럼 이름이 "Name"인 경우가 많음
   const t = props?.Name?.title ?? props?.Title?.title;
-  const title = getPlainTextFromRichText(t);
-  return title || "Untitled";
+  return getPlainTextFromRichText(t) || "Untitled";
 }
 
 function getSlug(props: any, fallbackTitle: string): string {
-  // Slug가 rich_text일 거라 가정(사용자 DB 화면 기준)
   const rt = props?.Slug?.rich_text;
-  const slug = getPlainTextFromRichText(rt);
-  return slug ? slugify(slug) : slugify(fallbackTitle);
+  const s = getPlainTextFromRichText(rt);
+  return s ? slugify(s) : slugify(fallbackTitle);
 }
 
-function getDate(props: any): string | undefined {
-  return props?.["Published Date"]?.date?.start ?? undefined;
+function getDate(props: any): string {
+  return (
+    props?.["Published Date"]?.date?.start ??
+    new Date().toISOString().slice(0, 10)
+  );
 }
 
 function getCoverUrl(props: any): string | undefined {
-  // Cover: files & media
   const files = props?.Cover?.files;
   if (!files || files.length === 0) return undefined;
-
   const f0 = files[0];
-  // Notion 파일은 file or external 타입
   return f0?.file?.url ?? f0?.external?.url ?? undefined;
 }
 
@@ -85,10 +97,26 @@ function getTags(props: any): string[] {
   return ms.map((t: any) => t?.name).filter(Boolean);
 }
 
-function getExcerpt(props: any): string | undefined {
+function getExcerpt(props: any): string {
   const rt = props?.Excerpt?.rich_text;
-  const text = getPlainTextFromRichText(rt);
-  return text || undefined;
+  return getPlainTextFromRichText(rt) || "";
+}
+
+function getAuthor(props: any): string | undefined {
+  // DB에 Author가 없을 수도 있으니 안전하게
+  const author =
+    props?.Author?.rich_text
+      ? getPlainTextFromRichText(props.Author.rich_text)
+      : props?.Author?.people?.[0]?.name;
+  return author || undefined;
+}
+
+function getCategory(props: any): string | undefined {
+  // DB에 Category가 없을 수도 있으니 안전하게
+  const c =
+    props?.Category?.select?.name ??
+    getPlainTextFromRichText(props?.Category?.rich_text);
+  return c || undefined;
 }
 
 async function getStatusPropertyType(): Promise<"status" | "select" | "unknown"> {
@@ -105,42 +133,42 @@ async function getStatusPropertyType(): Promise<"status" | "select" | "unknown">
 }
 
 export async function fetchPublishedPosts(): Promise<
-  Array<Pick<Post, "id" | "title" | "slug" | "publishedDate" | "cover" | "tags" | "excerpt">>
+  Array<Pick<Post, "id" | "title" | "slug" | "date" | "description" | "coverImage" | "tags" | "author" | "category">>
 > {
   const dbId = requireDbId();
-
   const statusType = await getStatusPropertyType();
 
-  const baseQuery: any = {
+  const query: any = {
     database_id: dbId,
     sorts: [{ property: "Published Date", direction: "descending" }],
   };
 
-  // Status 타입에 맞춰 필터를 안전하게 구성
+  // Status 타입에 맞춰 필터 자동 구성
   if (statusType === "status") {
-    baseQuery.filter = { property: "Status", status: { equals: "Published" } };
+    query.filter = { property: "Status", status: { equals: "Published" } };
   } else if (statusType === "select") {
-    baseQuery.filter = { property: "Status", select: { equals: "Published" } };
-  } else {
-    // 타입을 모르겠으면 필터 없이 가져오되, 아래에서 후처리로 Published만 남김(최후의 안전장치)
-    // baseQuery.filter 생략
+    query.filter = { property: "Status", select: { equals: "Published" } };
   }
 
-  const res = await notion.databases.query(baseQuery);
+  const res = await notion.databases.query(query);
 
   const posts = res.results
     .filter(isFullPage)
     .map((page) => {
       const props = (page as any).properties;
       const title = getTitle(props);
+
+      // 템플릿 필드명에 맞춰 리턴
       return {
         id: page.id,
         title,
         slug: getSlug(props, title),
-        publishedDate: getDate(props),
-        cover: getCoverUrl(props),
+        date: getDate(props),
+        coverImage: getCoverUrl(props),
         tags: getTags(props),
-        excerpt: getExcerpt(props),
+        description: getExcerpt(props) || "",
+        author: getAuthor(props),
+        category: getCategory(props),
         _statusName:
           props?.Status?.status?.name ??
           props?.Status?.select?.name ??
@@ -148,7 +176,7 @@ export async function fetchPublishedPosts(): Promise<
       };
     });
 
-  // statusType unknown 이면, 결과에서 Published만 남김
+  // statusType unknown이면 후처리로 Published만 남김
   if (statusType === "unknown") {
     return posts
       .filter((p: any) => p._statusName === "Published")
@@ -168,7 +196,7 @@ export async function getPostFromNotion(pageId: string): Promise<Post | null> {
     const title = getTitle(props);
     const slug = getSlug(props, title);
 
-    // ✅ notion-to-md 버전에 따라 반환 타입이 달라질 수 있어 방어적으로 처리
+    // notion-to-md 버전에 따라 반환 타입(string vs { parent })이 달라서 방어 처리
     const mdBlocks = await n2m.pageToMarkdown(pageId);
     const mdOutput: any = n2m.toMarkdownString(mdBlocks);
 
@@ -179,25 +207,28 @@ export async function getPostFromNotion(pageId: string): Promise<Post | null> {
         ? mdOutput.parent
         : "";
 
-    // Excerpt 우선, 없으면 본문 첫 문단에서 생성
+    // description: Excerpt 우선, 없으면 본문 첫 문단으로 생성
     const excerptFromProp = getExcerpt(props);
-    const paragraphs = (contentString || "")
-      .split("\n")
-      .map((l) => l.trim())
-      .filter(Boolean);
-    const firstParagraph = paragraphs[0] ?? "";
-    const excerpt =
+    const firstLine =
+      contentString
+        .split("\n")
+        .map((l) => l.trim())
+        .filter(Boolean)[0] ?? "";
+
+    const description =
       excerptFromProp ||
-      (firstParagraph ? firstParagraph.slice(0, 160) + (firstParagraph.length > 160 ? "..." : "") : undefined);
+      (firstLine ? firstLine.slice(0, 160) + (firstLine.length > 160 ? "..." : "") : "");
 
     const post: Post = {
       id: page.id,
       title,
       slug,
-      publishedDate: getDate(props),
-      cover: getCoverUrl(props),
+      date: getDate(props),
+      coverImage: getCoverUrl(props),
       tags: getTags(props),
-      excerpt,
+      description: description || "",
+      author: getAuthor(props),
+      category: getCategory(props),
       content: contentString,
     };
 
@@ -208,29 +239,9 @@ export async function getPostFromNotion(pageId: string): Promise<Post | null> {
   }
 }
 
-// slug로 단건 조회가 필요하면 쓸 수 있게 추가 제공
-export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const dbId = requireDbId();
-
-  // Slug가 rich_text 라고 가정
-  const res = await notion.databases.query({
-    database_id: dbId,
-    filter: {
-      property: "Slug",
-      rich_text: { equals: slug },
-    },
-  });
-
-  const page = res.results.find(isFullPage);
-  if (!page) return null;
-
-  return getPostFromNotion(page.id);
-}
-
-import fs from "fs";
-import path from "path";
-
-// 빌드 시 scripts/cache-posts.ts 가 생성한 posts-cache.json을 읽는다
+/** ---- Cache helpers ----
+ * scripts/cache-posts.ts 가 생성한 posts-cache.json 읽기
+ */
 export function getPostsFromCache(): Post[] {
   try {
     const cachePath = path.join(process.cwd(), "posts-cache.json");
@@ -244,8 +255,18 @@ export function getPostsFromCache(): Post[] {
   }
 }
 
-export function getPostFromCacheBySlug(slug: string): Post | null {
-  const posts = getPostsFromCache();
-  return posts.find((p) => p.slug === slug) ?? null;
-}
+export function getWordCount(markdown: string): number {
+  if (!markdown) return 0;
+  // 대충 markdown 문법 제거 후 단어 카운트
+  const text = markdown
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`[^`]*`/g, " ")
+    .replace(/!\[[^\]]*]\([^)]*\)/g, " ")
+    .replace(/\[[^\]]*]\([^)]*\)/g, " ")
+    .replace(/[#>*_~\-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
+  if (!text) return 0;
+  return text.split(" ").filter(Boolean).length;
+}
