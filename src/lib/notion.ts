@@ -226,3 +226,26 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
   return getPostFromNotion(page.id);
 }
+
+import fs from "fs";
+import path from "path";
+
+// 빌드 시 scripts/cache-posts.ts 가 생성한 posts-cache.json을 읽는다
+export function getPostsFromCache(): Post[] {
+  try {
+    const cachePath = path.join(process.cwd(), "posts-cache.json");
+    if (!fs.existsSync(cachePath)) return [];
+    const raw = fs.readFileSync(cachePath, "utf-8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as Post[]) : [];
+  } catch (e) {
+    console.error("Failed to read posts-cache.json:", e);
+    return [];
+  }
+}
+
+export function getPostFromCacheBySlug(slug: string): Post | null {
+  const posts = getPostsFromCache();
+  return posts.find((p) => p.slug === slug) ?? null;
+}
+
