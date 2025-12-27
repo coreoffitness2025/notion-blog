@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getPostsFromCache } from "@/lib/notion";
 import { format } from "date-fns";
+import HeroAnimation from "@/components/HeroAnimation";
 
 export default function HomePage() {
   // 최신 고객 사례 3개 가져오기
@@ -9,22 +10,25 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 16px" }}>
-        {/* Hero Section */}
-        <section className="text-center py-16 md:py-24">
-          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-6">
+        {/* Hero Section - 3D 애니메이션 추가 */}
+        <section className="text-center py-16 md:py-24 relative">
+          {/* 3D 애니메이션 배경 */}
+          <HeroAnimation />
+          
+          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-6 relative z-10">
             AI 기반 피트니스 플랫폼
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight relative z-10">
             헬스케어 AI로
             <br />
             <span className="text-blue-600">운동 경험을 재정의</span>합니다
           </h1>
-          <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed relative z-10">
             기록에서 인사이트로, 인사이트에서 변화로.
             <br />
             Corevia는 AI 기반 피트니스 코칭으로 누구나 꾸준히 운동할 수 있게 돕습니다.
           </p>
-          <div className="flex gap-4 justify-center mt-8 flex-wrap">
+          <div className="flex gap-4 justify-center mt-8 flex-wrap relative z-10">
             <Link
               href="/solution"
               className="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200"
