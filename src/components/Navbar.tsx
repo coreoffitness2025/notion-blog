@@ -1,41 +1,54 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
+"use client";
 
-const inter = Inter({ subsets: ["latin"] });
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://coreviahomepage.vercel.app";
+const nav = [
+  { href: "/", label: "홈" },
+  { href: "/company", label: "기업 소개" },
+  { href: "/solution", label: "솔루션" },
+  { href: "/blog", label: "블로그" },
+  { href: "/cases", label: "고객 사례" },
+];
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "Corevia",
-    template: "%s | Corevia",
-  },
-  description: "Corevia 공식 홈페이지",
-  openGraph: {
-    title: "Corevia",
-    description: "Corevia 공식 홈페이지",
-    url: siteUrl,
-    siteName: "Corevia",
-    locale: "ko_KR",
-    type: "website",
-  },
-};
+export default function Navbar() {
+  const pathname = usePathname();
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
   return (
-    <html lang="ko">
-      <body className={inter.className}>
-        <Navbar />
-        <main>{children}</main>
-      </body>
-    </html>
+    <header style={{ borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+      <div
+        style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          padding: "14px 16px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 16,
+        }}
+      >
+        <Link href="/" style={{ fontWeight: 800 }}>
+          Corevia
+        </Link>
+
+        <nav style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+          {nav.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{
+                  fontWeight: active ? 800 : 500,
+                  opacity: active ? 1 : 0.75,
+                }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+    </header>
   );
 }
