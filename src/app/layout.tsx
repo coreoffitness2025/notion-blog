@@ -15,14 +15,6 @@ export const metadata: Metadata = {
     template: "%s | Corevia",
   },
   description: "Corevia 공식 홈페이지",
-  openGraph: {
-    title: "Corevia",
-    description: "Corevia 공식 홈페이지",
-    url: siteUrl,
-    siteName: "Corevia",
-    locale: "ko_KR",
-    type: "website",
-  },
 };
 
 export default function RootLayout({
