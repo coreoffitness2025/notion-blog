@@ -64,6 +64,21 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({
+
+  import "./globals.css";
+import Navbar from "@/components/Navbar";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko">
+      <body>
+        <Navbar />
+        {children}
+      </body>
+    </html>
+  );
+}
+
   children,
 }: {
   children: React.ReactNode;
