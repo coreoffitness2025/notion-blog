@@ -1,29 +1,31 @@
-import { fetchPublishedPosts, getPostFromNotion } from '../src/lib/notion';
-import fs from 'fs';
-import path from 'path';
+import { fetchPublishedPosts, getPostFromNotion } from "../src/lib/notion";
+import fs from "fs";
+import path from "path";
 
 async function cachePosts() {
-  try {
-    console.log('Fetching posts from Notion...');
-    const posts = await fetchPublishedPosts();
+  console.log("Fetching posts from Notion...");
 
-    const allPosts = [];
+  const posts = await fetchPublishedPosts();
+  const allPosts = [];
 
-    for (const post of posts) {
-      const postDetails = await getPostFromNotion(post.id);
-      if (postDetails) {
-        allPosts.push(postDetails);
-      }
+  for (const p of posts) {
+    try {
+      const full = await getPostFromNotion(p.id);
+      if (full) allPosts.push(full);
+    } catch (e) {
+      console.error(`Failed to fetch post detail: ${p.id}`, e);
+      // 한 개 글이 깨져도 전체 빌드는 살린다
+      continue;
     }
-
-    const cachePath = path.join(process.cwd(), 'posts-cache.json');
-    fs.writeFileSync(cachePath, JSON.stringify(allPosts, null, 2));
-
-    console.log(`Successfully cached ${allPosts.length} posts.`);
-  } catch (error) {
-    console.error('Error caching posts:', error);
-    process.exit(1);
   }
+
+  const cachePath = path.join(process.cwd(), "posts-cache.json");
+  fs.writeFileSync(cachePath, JSON.stringify(allPosts, null, 2), "utf-8");
+
+  console.log(`Successfully cached ${allPosts.length} posts.`);
 }
 
-cachePosts();
+cachePosts().catch((e) => {
+  console.error("Error caching posts:", e);
+  process.exit(1);
+});
