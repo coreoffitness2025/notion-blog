@@ -504,3 +504,4 @@ export const MEAL_PLAN_DATA: MealPlan[] = [
     tags: ['집밥', '가정식', '정성']
   }
 ]; 
+

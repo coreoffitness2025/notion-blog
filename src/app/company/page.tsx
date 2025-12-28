@@ -2,85 +2,92 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "기업 소개",
-  description: "Corevia는 헬스케어 AI 기업으로, 누구나 꾸준히 운동할 수 있는 실전형 피트니스 경험을 만듭니다.",
+  description: "Corevia는 동작 데이터를 기반으로 운동 수행 품질을 정량화하는 AI Biomechanics 평가 기술을 개발합니다.",
 };
 
 export default function CompanyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
+    <div className="min-h-screen bg-white">
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "60px 16px" }}>
         {/* Hero */}
         <section className="mb-16">
-          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-6">
-            헬스케어 AI 기업
+          <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded text-sm font-medium mb-6">
+            AI Biomechanics
           </span>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">
-            기록에서 변화까지,
+            AI Biomechanics 기반
             <br />
-            <span className="text-blue-600">피트니스의 새로운 경험</span>
+            운동평가 기술 기업
           </h1>
           <p className="mt-6 text-lg text-gray-600 leading-relaxed max-w-2xl">
-            Corevia는 <strong className="text-gray-900">헬스케어 AI 기업</strong>입니다.
-            <br />
-            운동 기록과 AI 분석을 결합하여 누구나 꾸준히 운동하고, 실질적인 변화를 경험할 수 있도록 돕습니다.
+            Corevia는 동작 데이터를 기반으로 운동 수행 품질을 정량화하는 평가 기술을 개발합니다.
+            운동역학(Biomechanics) 관점의 분석과 트레이닝 도메인 경험을 결합해, 실사용 환경에서 재현 가능한 평가 워크플로우를 구축합니다.
           </p>
         </section>
 
-        <hr className="border-blue-100 mb-12" />
+        <hr className="border-gray-200 mb-12" />
 
-        {/* Mission */}
+        {/* Principles */}
         <section className="mb-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
-            미션
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">
+            Principles
           </h2>
-          <div className="p-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl text-white">
-            <p className="text-xl font-semibold leading-relaxed">
-              "누구나 꾸준히 실행할 수 있는 실전형 피트니스 경험을 제공합니다."
-            </p>
-          </div>
-          <p className="mt-6 text-gray-600 leading-relaxed">
-            운동은 꾸준함이 핵심입니다. 하지만 많은 사람들이 동기부여 부족, 성과 확인 어려움, 
-            번거로운 기록 과정 때문에 포기합니다. Corevia는 AI 기술로 이 문제를 해결하고, 
-            운동이 일상의 습관이 될 수 있도록 돕습니다.
-          </p>
-        </section>
-
-        {/* What We Do */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
-            우리가 하는 일
-          </h2>
-          <div className="grid gap-4">
+          <div className="grid gap-4 md:grid-cols-3">
             {[
               {
-                icon: "📝",
-                title: "운동/식단 기록 자동화",
-                desc: "복잡한 기록 과정을 최소화하고, AI가 자동으로 분류/분석합니다.",
+                title: "Measurement-first",
+                desc: "동작을 측정 가능한 지표로 정의",
               },
               {
-                icon: "📊",
-                title: "AI 기반 인사이트 제공",
-                desc: "월간/세션별 리포트로 성과를 시각화하고 개선점을 제안합니다.",
+                title: "Privacy-first",
+                desc: "영상 저장/전송 최소화 설계 우선",
               },
               {
-                icon: "🎯",
-                title: "비전 AI 운동 평가",
-                desc: "카메라 기반 자세 분석, 반복 횟수 카운팅, ROM 측정 기술을 개발합니다.",
+                title: "Deployment-ready",
+                desc: "앱/현장 환경에서 재현 가능한 파이프라인 지향",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="p-6 bg-white border border-blue-100 rounded-2xl hover:shadow-lg hover:shadow-blue-100 transition-shadow"
+                className="p-6 bg-gray-50 border border-gray-200 rounded-xl"
               >
-                <div className="flex items-start gap-4">
-                  <div className="text-3xl">{item.icon}</div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* What We Do */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">
+            What We Do
+          </h2>
+          <div className="grid gap-4">
+            {[
+              {
+                title: "Motion Evaluation Pipeline",
+                desc: "rep 분할, ROM/Tempo/Symmetry 지표 추출, 품질 점수 산출",
+              },
+              {
+                title: "Tracking App (Corevia Fitness)",
+                desc: "메인 리프트 중심 성장 추적, 사진 기반 식단 기록, 리포트 자동 생성",
+              },
+              {
+                title: "On-device Module R&D",
+                desc: "프라이버시-우선 추론 모듈 연구, 요약 지표 중심 동기화 설계",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="p-6 bg-white border border-gray-200 rounded-xl"
+              >
+                <h3 className="text-base font-bold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -88,25 +95,22 @@ export default function CompanyPage() {
 
         {/* Team */}
         <section className="mb-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">팀</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Team</h2>
           <p className="text-gray-600 leading-relaxed mb-6">
-            Corevia 팀은 <strong className="text-gray-900">기획, 개발, 트레이닝 도메인 경험</strong>을 갖춘 멤버들로 구성되어 있습니다.
-            실제 피트니스 현장의 니즈를 이해하고, 기술로 해결합니다.
+            기획, 개발, 트레이닝 도메인 경험을 갖춘 멤버로 구성되어 있습니다.
+            피트니스 현장의 요구사항을 이해하고, 기술로 해결합니다.
           </p>
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              { role: "제품 기획", desc: "사용자 경험 설계, 로드맵 관리", icon: "💡" },
-              { role: "개발", desc: "모바일 앱, 백엔드, AI 모델 개발", icon: "💻" },
-              { role: "트레이닝 도메인", desc: "운동 프로그램, 피드백 로직 설계", icon: "🏋️" },
+              { role: "Product", desc: "사용자 경험 설계, 로드맵 관리" },
+              { role: "Engineering", desc: "앱, 백엔드, ML 파이프라인 개발" },
+              { role: "Training Domain", desc: "운동 프로그램, 피드백 로직 설계" },
             ].map((member) => (
               <div
                 key={member.role}
-                className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-200 rounded-2xl text-center"
+                className="p-6 bg-gray-50 border border-gray-200 rounded-xl"
               >
-                <div className="w-16 h-16 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl">
-                  {member.icon}
-                </div>
-                <h4 className="text-lg font-bold text-gray-900 mb-2">
+                <h4 className="text-base font-bold text-gray-900 mb-2">
                   {member.role}
                 </h4>
                 <p className="text-sm text-gray-600">{member.desc}</p>
@@ -115,40 +119,20 @@ export default function CompanyPage() {
           </div>
         </section>
 
-        {/* Values */}
-        <section>
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
-            핵심 가치
+        {/* Contact CTA */}
+        <section className="p-8 bg-gray-900 rounded-2xl text-center">
+          <h2 className="text-xl font-bold text-white mb-2">
+            파일럿/데모 문의
           </h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              {
-                title: "실용성",
-                desc: "현장에서 바로 쓸 수 있는 기능에 집중합니다.",
-                color: "from-blue-400 to-blue-500",
-              },
-              {
-                title: "지속성",
-                desc: "한 번 쓰고 마는 것이 아닌, 습관이 되는 제품을 만듭니다.",
-                color: "from-blue-500 to-blue-600",
-              },
-              {
-                title: "신뢰",
-                desc: "데이터 기반의 정확한 피드백으로 신뢰를 쌓습니다.",
-                color: "from-blue-600 to-blue-700",
-              },
-            ].map((value) => (
-              <div
-                key={value.title}
-                className={`p-6 bg-gradient-to-br ${value.color} rounded-2xl text-white`}
-              >
-                <h3 className="text-xl font-bold mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-blue-100 leading-relaxed">{value.desc}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-gray-400 mb-6">
+            제품 데모, 파트너십, 기타 문의사항을 환영합니다.
+          </p>
+          <a
+            href="/contact"
+            className="inline-block px-6 py-3 bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            문의하기 →
+          </a>
         </section>
       </div>
     </div>
