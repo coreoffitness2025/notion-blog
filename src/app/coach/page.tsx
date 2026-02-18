@@ -15,18 +15,18 @@ export default function CoachPage() {
       {/* 헤더 */}
       <section className="py-16 px-4 bg-[var(--corevia-bg)]">
         <div className="max-w-[1100px] mx-auto text-center">
-          <span className="inline-block px-4 py-1.5 bg-[var(--corevia-ai)]/10 text-[var(--corevia-ai)] text-sm font-semibold rounded-full mb-6">
+          <span className="inline-block px-4 py-1.5 bg-gray-200/60 text-gray-500 text-sm font-medium rounded-full mb-6">
             AI Coach
           </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-4 tracking-tight">
             나만의 AI PT 코치를
             <br />
             만나보세요
           </h1>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            당신의 완전한 기록을 바탕으로 최적의 코칭을.
+          <p className="text-base text-gray-500 max-w-lg mx-auto leading-relaxed">
+            기록을 빠짐없이 할수록 더 정확한 코칭을 받을 수 있어요.
             <br />
-            4가지 성격 중 골라서, 운동+식단 크로스 피드백을 받아보세요.
+            4가지 성격 중 골라보세요.
           </p>
         </div>
       </section>
@@ -40,38 +40,34 @@ export default function CoachPage() {
       {/* 코치 특징 */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-12">
-            일반 AI 챗봇과 뭐가 다른가요?
+          <h2 className="text-3xl font-bold text-gray-800 text-center mb-12 tracking-tight">
+            일반 AI 챗봇과 뭐가 달라요?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               {
                 title: "내 기록을 진짜 봐요",
-                desc: "오늘 운동 기록, 식단 사진, 체형 분석 데이터까지 — AI 코치가 실제로 참고해서 조언합니다.",
-                color: "bg-blue-50",
-                accent: "text-[var(--corevia-primary)]",
+                desc: "운동 기록, 식단 사진, 체형 분석까지. AI가 실제로 보고 조언해줘요.",
               },
               {
-                title: "운동+식단 크로스",
-                desc: '"오늘 등 운동 했는데 단백질이 부족해요" — 운동과 식단을 함께 보고 연결된 피드백을 줍니다.',
-                color: "bg-green-50",
-                accent: "text-green-600",
+                title: "운동+식단 같이 봐요",
+                desc: "\"등 운동 했는데 단백질이 부족해요\" — 따로따로가 아니라 같이 보고 피드백해줘요.",
               },
               {
-                title: "전문가가 직접 튜닝",
-                desc: "생체 2급 자격 + 피트니스 대회 수상 트레이너가 직접 AI 에이전트를 튜닝합니다. 진짜 PT 경험이 녹아있어요.",
-                color: "bg-purple-50",
-                accent: "text-[var(--corevia-ai)]",
+                title: "생체 2급 트레이너가 만들었어요",
+                desc: "생체 2급 자격 + 피트니스 대회 수상 트레이너가 직접 AI를 튜닝했어요.",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className={`${item.color} rounded-2xl p-8`}
+                className="bg-gray-50 rounded-2xl p-8"
               >
-                <h3 className={`text-xl font-bold mb-3 ${item.accent}`}>
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
