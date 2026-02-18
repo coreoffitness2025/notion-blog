@@ -29,11 +29,15 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-500 leading-relaxed mb-10 max-w-2xl mx-auto"
           >
-            점진적 과부하를 위한 운동 기록,
+            운동만? 식단만? 반쪽짜리 PT는 그만,
             <br className="hidden sm:block" />
-            AI가 한 번에 측정하는 음식 칼로리.
-            <br className="hidden sm:block" />
-            운동과 식단을 같이 봐주는 AI 코치까지.
+            코비아 피트니스로 진짜 온라인 PT를 경험해보세요.
+            <br />
+            <span className="text-sm text-gray-400 mt-1 inline-block">
+              선수 출신 개발자가 직접 설계한 쉽고 직관적인 운동/식단 기록과
+              <br className="hidden sm:block" />
+              이를 연결하는 진짜 온라인 PT, 코비아 피트니스가 만들어나갑니다.
+            </span>
           </motion.p>
 
           <motion.div
