@@ -122,7 +122,19 @@
   }
 }
 
-/* 간단한 애니메이션 추가 */
+/* CoreVia Design System */
+:root {
+  --corevia-primary: #4285F4;
+  --corevia-accent: #667eea;
+  --corevia-bg: #F8FAFC;
+  --corevia-text: #1a1a2e;
+  --corevia-text-muted: #64748b;
+  --corevia-pro: #667eea;
+  --corevia-max: #F59E0B;
+  --corevia-ai: #8B5CF6;
+}
+
+/* 애니메이션 */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -130,4 +142,22 @@
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.3); }
+  50% { box-shadow: 0 0 20px 4px rgba(66, 133, 244, 0.15); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }

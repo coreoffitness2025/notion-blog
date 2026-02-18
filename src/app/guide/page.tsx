@@ -118,12 +118,14 @@ export default function GuidePage() {
             실시간 피드백 등 더 많은 기능을 경험해보세요.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/solution"
+            <a
+              href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all"
             >
-              솔루션 알아보기
-            </Link>
+              앱 다운로드
+            </a>
             <Link
               href="/contact"
               className="px-8 py-3 border border-gray-600 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all"
