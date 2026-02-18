@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 
 export default function AppDownloadCTA() {
   return (
-    <section className="relative overflow-hidden bg-gray-900 py-20 px-4">
+    <section className="relative overflow-hidden bg-white py-20 px-4 border-t border-gray-100">
       <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center gap-10">
         <div className="flex-1 text-center md:text-left">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
+            className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 tracking-tight"
           >
             지금 시작하기
           </motion.h2>
@@ -21,7 +21,7 @@ export default function AppDownloadCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-gray-400 text-base mb-8 leading-relaxed"
+            className="text-gray-500 text-base mb-8 leading-relaxed"
           >
             무료로 다운로드하고
             <br />
@@ -39,7 +39,7 @@ export default function AppDownloadCTA() {
               href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-white text-gray-900 font-medium px-6 py-3.5 rounded-xl hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center gap-3 bg-[var(--corevia-primary)] text-white font-medium px-6 py-3.5 rounded-xl hover:bg-blue-600 transition-colors shadow-sm"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -50,7 +50,7 @@ export default function AppDownloadCTA() {
               </svg>
               Google Play
             </a>
-            <div className="inline-flex items-center justify-center gap-3 bg-gray-800 text-gray-500 font-medium px-6 py-3.5 rounded-xl cursor-default">
+            <div className="inline-flex items-center justify-center gap-3 bg-gray-100 text-gray-400 font-medium px-6 py-3.5 rounded-xl cursor-default">
               <svg
                 viewBox="0 0 24 24"
                 className="w-5 h-5"

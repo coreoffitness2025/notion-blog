@@ -1,5 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import FeatureCards from "@/components/FeatureCards";
+import RecordingUI from "@/components/RecordingUI";
 import CoachShowcase from "@/components/CoachShowcase";
 import PointsCustomization from "@/components/PointsCustomization";
 import GuidePreview from "@/components/GuidePreview";
@@ -13,25 +14,28 @@ export default function HomePage() {
       {/* S1. Hero */}
       <HeroSection />
 
-      {/* S2-S3. 문제-해결 프레임 + 핵심 기능 4카드 */}
+      {/* S2. 핵심 기능 4카드 */}
       <FeatureCards />
+
+      {/* S3. 운동/식단 기록 UI */}
+      <RecordingUI />
 
       {/* S4. 코치 캐릭터 쇼케이스 */}
       <CoachShowcase />
 
-      {/* S4.5. 포인트 & 커스터마이징 */}
+      {/* S5. 포인트 & 커스터마이징 */}
       <PointsCustomization />
 
-      {/* S5. 무료 도구 소개 */}
+      {/* S6. 무료 도구 소개 */}
       <GuidePreview />
 
-      {/* S6. 블로그 미리보기 */}
+      {/* S7. 블로그 미리보기 */}
       <BlogPreview />
 
-      {/* S7. FAQ */}
+      {/* S8. FAQ */}
       <FAQ />
 
-      {/* S8. 앱 다운로드 CTA */}
+      {/* S9. 앱 다운로드 CTA */}
       <AppDownloadCTA />
     </div>
   );
