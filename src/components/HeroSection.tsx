@@ -19,7 +19,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
             >
               <span className="inline-block px-4 py-1.5 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] text-sm font-medium rounded-full mb-6">
-                기록은 무료
+                운동 + 식단 기록 무료
               </span>
             </motion.div>
 
@@ -32,7 +32,7 @@ export default function HeroSection() {
               스마트폰 하나로,
               <br />
               <span className="text-[var(--corevia-primary)]">
-                나만의 PT 선생님
+                진짜 온라인 PT
               </span>
             </motion.h1>
 
@@ -42,9 +42,11 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-base md:text-lg text-gray-500 leading-relaxed mb-8 max-w-md mx-auto md:mx-0"
             >
-              생체 2급 트레이너 × IT 대기업 출신 대표가
+              점진적 과부하를 위한 운동 기록,
               <br className="hidden sm:block" />
-              직접 튜닝한 AI 코치. 운동과 식단을 같이 봐줘요
+              AI가 한 번에 측정하는 식단 관리.
+              <br className="hidden sm:block" />
+              운동과 식단을 같이 봐주는 AI 코치까지.
             </motion.p>
 
             <motion.div

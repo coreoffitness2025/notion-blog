@@ -9,10 +9,12 @@ export default function RecordingUI() {
       <div className="max-w-[1100px] mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
-            기록이 쉬워야 빠짐없이 해요
+            이전의 나를 넘는 기록
           </h2>
-          <p className="text-base text-gray-500">
-            부위 선택부터 식단 사진까지, 최소한의 터치로 기록 완료
+          <p className="text-base text-gray-500 max-w-xl mx-auto">
+            운동은 점진적 과부하를 위해 지난 기록과 비교하며,
+            <br className="hidden sm:block" />
+            식단은 AI가 사진 한 장으로 칼로리를 바로 측정해줘요
           </p>
         </div>
 
@@ -35,7 +37,7 @@ export default function RecordingUI() {
             </div>
             <p className="mt-4 text-sm font-medium text-gray-800">운동 기록</p>
             <p className="text-xs text-gray-400 mt-1">
-              부위 선택 → 운동 선택 → 바로 시작
+              지난 무게/횟수 확인 → 오늘 더 나은 기록
             </p>
           </motion.div>
 
@@ -58,7 +60,7 @@ export default function RecordingUI() {
             </div>
             <p className="mt-4 text-sm font-medium text-gray-800">식단 기록</p>
             <p className="text-xs text-gray-400 mt-1">
-              사진 한 장이면 AI가 자동 분석
+              사진 한 장 → AI가 칼로리/영양소 즉시 분석
             </p>
           </motion.div>
         </div>

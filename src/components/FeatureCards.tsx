@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 const features = [
   {
-    title: "쉬운 운동/식단 기록",
+    title: "점진적 과부하 운동 기록",
     description:
-      "부위별 운동, 사진 식단 인식, 기구 촬영까지. 터치 몇 번이면 기록 끝",
+      "이전 기록을 보면서 더 나은 오늘을 기록해요. 무게, 횟수, 볼륨까지 자동 비교",
     icon: (
       <svg
         className="w-10 h-10 text-gray-400"
@@ -25,15 +24,9 @@ const features = [
     ),
   },
   {
-    title: "AI PT 코치 채팅",
+    title: "AI 식단 분석",
     description:
-      "4가지 성격의 캐릭터 코치가 내 기록을 보고 운동+식단 크로스 피드백해줘요",
-    image: "/coach/female_3_face.png",
-  },
-  {
-    title: "기록 → 포인트 적립",
-    description:
-      "운동 기록 +1pt, 식단 기록 +1pt. 꾸준히 기록할수록 포인트가 쌓여요",
+      "사진 한 장이면 AI가 칼로리와 영양소를 바로 측정. 목표에 맞게 식단을 관리해줘요",
     icon: (
       <svg
         className="w-10 h-10 text-gray-400"
@@ -45,15 +38,41 @@ const features = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
         />
       </svg>
     ),
   },
   {
-    title: "포인트로 코치 꾸미기",
+    title: "AI 코치가 같이 봐줘요",
     description:
-      "모은 포인트로 코치 캐릭터 외형을 내 취향대로. 나만의 코치를 만들어보세요",
+      "내 운동과 식단 기록을 분석해서 크로스 피드백. 4가지 성격 중 나에게 맞는 코치를 골라보세요",
+    icon: (
+      <svg
+        className="w-10 h-10 text-gray-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "기록 → 포인트 → 꾸미기",
+    description:
+      "꾸준히 기록하면 포인트가 쌓이고, 포인트로 나만의 코치 외형을 커스터마이징할 수 있어요",
     icon: (
       <svg
         className="w-10 h-10 text-gray-400"
@@ -88,10 +107,10 @@ export default function FeatureCards() {
       <div className="max-w-[1100px] mx-auto">
         <div className="text-center mb-6">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
-            빠짐없이 기록하면, 진짜 달라져요
+            기록하고, 성장하고, 꾸미고
           </h2>
           <p className="text-base text-gray-500 max-w-xl mx-auto">
-            운동도 식단도 다 보고 코칭해주는, 진짜 온라인 PT
+            운동 기록부터 AI 식단 분석, 코치 커스터마이징까지 한 앱에서
           </p>
         </div>
 
@@ -119,19 +138,7 @@ export default function FeatureCards() {
               className="bg-gray-50 rounded-2xl p-8 hover:bg-gray-100/80 transition-colors"
             >
               <div className="mb-5">
-                {f.image ? (
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden bg-white border border-gray-100">
-                    <Image
-                      src={f.image}
-                      alt={f.title}
-                      fill
-                      className="object-cover"
-                      sizes="48px"
-                    />
-                  </div>
-                ) : (
-                  f.icon
-                )}
+                {f.icon}
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">
                 {f.title}
