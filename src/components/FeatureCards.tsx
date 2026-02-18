@@ -5,15 +5,9 @@ import { motion } from "framer-motion";
 
 const features = [
   {
-    title: "AI PT 코치",
+    title: "쉬운 운동/식단 기록",
     description:
-      "4가지 성격 중 골라요. 내 운동 기록, 식단까지 다 보고 크로스 피드백해줘요",
-    image: "/coach/female_3_face.png",
-  },
-  {
-    title: "사진으로 식단 기록",
-    description:
-      "찍으면 끝. 칼로리 세는 거 귀찮잖아요. 빠짐없이 기록해야 제대로 된 코칭을 받을 수 있어요",
+      "부위별 운동, 사진 식단 인식, 기구 촬영까지. 터치 몇 번이면 기록 끝",
     icon: (
       <svg
         className="w-10 h-10 text-gray-400"
@@ -25,21 +19,21 @@ const features = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-          d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"
+          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
         />
       </svg>
     ),
   },
   {
-    title: "기구 인식",
+    title: "AI PT 코치 채팅",
     description:
-      "이름 모르는 기구, 그냥 찍으면 돼요. 사용법부터 세트/횟수까지 바로 기록할 수 있어요",
+      "4가지 성격의 캐릭터 코치가 내 기록을 보고 운동+식단 크로스 피드백해줘요",
+    image: "/coach/female_3_face.png",
+  },
+  {
+    title: "기록 → 포인트 적립",
+    description:
+      "운동 기록 +1pt, 식단 기록 +1pt. 꾸준히 기록할수록 포인트가 쌓여요",
     icon: (
       <svg
         className="w-10 h-10 text-gray-400"
@@ -51,7 +45,7 @@ const features = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
     ),
@@ -59,7 +53,7 @@ const features = [
   {
     title: "포인트로 코치 꾸미기",
     description:
-      "기록하면 포인트가 쌓여요. 모은 포인트로 코치 외형을 내 맘대로 꾸며보세요",
+      "모은 포인트로 코치 캐릭터 외형을 내 취향대로. 나만의 코치를 만들어보세요",
     icon: (
       <svg
         className="w-10 h-10 text-gray-400"
@@ -108,7 +102,7 @@ export default function FeatureCards() {
           viewport={{ once: true }}
           className="text-center text-sm text-gray-400 mb-14"
         >
-          생체 2급 + 피트니스 대회 수상 트레이너가 직접 만든 AI
+          생체 2급 + 대회 수상 트레이너이자 IT 대기업 전략팀 출신 대표가 직접 튜닝한 AI
         </motion.p>
 
         <motion.div

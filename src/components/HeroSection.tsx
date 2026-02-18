@@ -19,7 +19,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
             >
               <span className="inline-block px-4 py-1.5 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] text-sm font-medium rounded-full mb-6">
-                무료로 시작하기
+                기록은 무료
               </span>
             </motion.div>
 
@@ -42,9 +42,9 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-base md:text-lg text-gray-500 leading-relaxed mb-8 max-w-md mx-auto md:mx-0"
             >
-              생체 2급 트레이너가 직접 만든 AI 코치가
+              생체 2급 트레이너 × IT 대기업 출신 대표가
               <br className="hidden sm:block" />
-              운동과 식단을 같이 봐줘요
+              직접 튜닝한 AI 코치. 운동과 식단을 같이 봐줘요
             </motion.p>
 
             <motion.div
