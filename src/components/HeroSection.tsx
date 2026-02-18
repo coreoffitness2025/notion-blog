@@ -10,26 +10,16 @@ export default function HeroSection() {
 
       <div className="max-w-[1100px] mx-auto relative">
         <div className="text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-block px-4 py-1.5 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] text-sm font-medium rounded-full mb-6">
-              운동 + 식단 기록 무료
-            </span>
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
             className="text-5xl md:text-6xl lg:text-[72px] font-bold text-gray-800 leading-tight mb-6 tracking-tight"
           >
-            스마트폰 하나로,
+            진짜 온라인 PT,
             <br />
             <span className="text-[var(--corevia-primary)]">
-              진짜 온라인 PT
+              코비아 피트니스
             </span>
           </motion.h1>
 
@@ -41,7 +31,7 @@ export default function HeroSection() {
           >
             점진적 과부하를 위한 운동 기록,
             <br className="hidden sm:block" />
-            AI가 한 번에 측정하는 식단 관리.
+            AI가 한 번에 측정하는 음식 칼로리.
             <br className="hidden sm:block" />
             운동과 식단을 같이 봐주는 AI 코치까지.
           </motion.p>
