@@ -7,13 +7,13 @@ const features = [
   {
     title: "AI PT 코치",
     description: "4가지 성격 중 골라. 독설형부터 격려형까지, 나한테 맞는 코치가 운동+식단 크로스 피드백",
-    image: "/coach/female_4_face.png",
+    image: "/coach/female_3_face.png",
     color: "bg-blue-50",
     accent: "text-[var(--corevia-primary)]",
   },
   {
     title: "사진 식단",
-    description: "찍으면 끝. 칼로리 세는 거 귀찮잖아. AI가 음식 인식해서 영양소까지 자동 계산",
+    description: "찍으면 끝. 식단 기록의 완전함을 위해. AI가 음식 인식해서 영양소까지 자동 계산",
     icon: (
       <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
@@ -25,7 +25,7 @@ const features = [
   },
   {
     title: "기구 인식",
-    description: "기구 모르면 찍어봐. AI가 기구 이름부터 사용법, 세트/횟수까지 PT처럼 알려줌",
+    description: "찍으면 운동 기록까지. 기구 이름부터 사용법, 세트/횟수까지 정확한 기록을 위해 AI가 알려줌",
     icon: (
       <svg className="w-12 h-12 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -35,9 +35,13 @@ const features = [
     accent: "text-orange-600",
   },
   {
-    title: "코치 성장",
-    description: "기록할수록 코치가 멋있어짐. Lv.2에서 시작해서 Lv.5까지, 포인트로 키우는 나만의 코치",
-    evolution: true,
+    title: "포인트 & 커스터마이징",
+    description: "기록할수록 포인트 적립. 내 취향대로 코치를 꾸미세요. 기록이 곧 동기부여",
+    icon: (
+      <svg className="w-12 h-12 text-[var(--corevia-ai)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+      </svg>
+    ),
     color: "bg-purple-50",
     accent: "text-[var(--corevia-ai)]",
   },
@@ -59,12 +63,11 @@ export default function FeatureCards() {
       <div className="max-w-[1100px] mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-            기록만 하는 앱은 많지만
+            당신의 완전한 기록이 당신을 성장시킵니다
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            기록을 보고 조언해주는 앱은 없었음.
-            <br />
-            CoreVia는 기록 앱이 아니라, <strong className="text-gray-900">온라인 PT 앱</strong>
+            모든 기록을 보고 최적의 전략을 세워주는,{" "}
+            <strong className="text-gray-900">진짜 온라인 PT</strong>
           </p>
         </div>
 
@@ -82,7 +85,7 @@ export default function FeatureCards() {
               </svg>
             </div>
             <p className="text-sm text-gray-600">
-              <strong className="text-gray-900">트레이너 자격 보유 + 피트니스 대회 수상</strong> 대표가 직접 튜닝한 AI 에이전트
+              <strong className="text-gray-900">생체 2급 + 피트니스 대회 수상</strong> 트레이너가 직접 튜닝한 AI 에이전트
             </p>
           </div>
         </motion.div>
@@ -110,27 +113,6 @@ export default function FeatureCards() {
                       className="object-cover"
                       sizes="56px"
                     />
-                  </div>
-                ) : f.evolution ? (
-                  <div className="flex gap-1 items-end">
-                    {[2, 3, 4, 5].map((lv) => (
-                      <div
-                        key={lv}
-                        className="relative bg-white rounded-lg shadow-sm overflow-hidden"
-                        style={{
-                          width: lv === 5 ? 48 : 36,
-                          height: lv === 5 ? 48 : 36,
-                        }}
-                      >
-                        <Image
-                          src={`/coach/male_${lv}_front.png`}
-                          alt={`Lv.${lv}`}
-                          fill
-                          className="object-cover"
-                          sizes="48px"
-                        />
-                      </div>
-                    ))}
                   </div>
                 ) : (
                   f.icon

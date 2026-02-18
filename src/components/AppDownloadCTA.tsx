@@ -64,7 +64,7 @@ export default function AppDownloadCTA() {
             className="relative w-32 h-64 md:w-40 md:h-80"
           >
             <Image
-              src="/coach/male_5_full.png"
+              src="/coach/male_3_full.png"
               alt="AI 코치 남성"
               fill
               className="object-contain drop-shadow-2xl"
@@ -79,7 +79,7 @@ export default function AppDownloadCTA() {
             className="relative w-32 h-64 md:w-40 md:h-80"
           >
             <Image
-              src="/coach/female_5_full.png"
+              src="/coach/female_3_full.png"
               alt="AI 코치 여성"
               fill
               className="object-contain drop-shadow-2xl"

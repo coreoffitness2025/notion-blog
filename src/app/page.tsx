@@ -1,7 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import FeatureCards from "@/components/FeatureCards";
 import CoachShowcase from "@/components/CoachShowcase";
-import LevelEvolution from "@/components/LevelEvolution";
+import PointsCustomization from "@/components/PointsCustomization";
 import GuidePreview from "@/components/GuidePreview";
 import BlogPreview from "@/components/BlogPreview";
 import FAQ from "@/components/FAQ";
@@ -19,8 +19,8 @@ export default function HomePage() {
       {/* S4. 코치 캐릭터 쇼케이스 */}
       <CoachShowcase />
 
-      {/* S4.5. 코치 레벨 진화 */}
-      <LevelEvolution />
+      {/* S4.5. 포인트 & 커스터마이징 */}
+      <PointsCustomization />
 
       {/* S5. 무료 도구 소개 */}
       <GuidePreview />

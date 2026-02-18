@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CoachShowcase from "@/components/CoachShowcase";
-import LevelEvolution from "@/components/LevelEvolution";
+import PointsCustomization from "@/components/PointsCustomization";
 import AppDownloadCTA from "@/components/AppDownloadCTA";
 
 export const metadata: Metadata = {
@@ -24,9 +24,9 @@ export default function CoachPage() {
             만나보세요
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            4가지 성격 중 골라서, 운동+식단 크로스 피드백을 받아보세요.
+            당신의 완전한 기록을 바탕으로 최적의 코칭을.
             <br />
-            기록할수록 코치가 성장합니다.
+            4가지 성격 중 골라서, 운동+식단 크로스 피드백을 받아보세요.
           </p>
         </div>
       </section>
@@ -34,8 +34,8 @@ export default function CoachPage() {
       {/* 성격별 쇼케이스 */}
       <CoachShowcase />
 
-      {/* 레벨 진화 */}
-      <LevelEvolution />
+      {/* 포인트 & 커스터마이징 */}
+      <PointsCustomization />
 
       {/* 코치 특징 */}
       <section className="py-20 px-4 bg-white">
@@ -59,7 +59,7 @@ export default function CoachPage() {
               },
               {
                 title: "전문가가 직접 튜닝",
-                desc: "트레이너 자격을 갖춘 피트니스 대회 수상자인 대표가 직접 AI 에이전트를 튜닝합니다. 진짜 PT 경험이 녹아있어요.",
+                desc: "생체 2급 자격 + 피트니스 대회 수상 트레이너가 직접 AI 에이전트를 튜닝합니다. 진짜 PT 경험이 녹아있어요.",
                 color: "bg-purple-50",
                 accent: "text-[var(--corevia-ai)]",
               },

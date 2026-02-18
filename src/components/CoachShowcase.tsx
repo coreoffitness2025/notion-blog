@@ -12,7 +12,7 @@ const personalities = [
     color: "bg-red-500",
     lightColor: "bg-red-50",
     textColor: "text-red-600",
-    image: "/coach/male_4_side.png",
+    image: "/coach/male_3_side.png",
     chat: [
       { role: "coach", text: "오늘 운동 빠졌네? 또?" },
       { role: "user", text: "오늘 좀 피곤해서..." },
@@ -26,7 +26,7 @@ const personalities = [
     color: "bg-pink-500",
     lightColor: "bg-pink-50",
     textColor: "text-pink-600",
-    image: "/coach/female_4_front.png",
+    image: "/coach/female_3_front.png",
     chat: [
       { role: "coach", text: "오늘 식단 기록 완벽이네! 대단해 👏" },
       { role: "user", text: "근데 저녁에 치킨 먹었어..." },
@@ -54,7 +54,7 @@ const personalities = [
     color: "bg-violet-500",
     lightColor: "bg-violet-50",
     textColor: "text-violet-600",
-    image: "/coach/female_5_side.png",
+    image: "/coach/female_3_side.png",
     chat: [
       { role: "coach", text: "오늘 하체 운동 했네. 스쿼트 볼륨 좋았어!" },
       { role: "user", text: "근데 무릎이 좀 아프던데" },

@@ -43,7 +43,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg md:text-xl text-gray-500 leading-relaxed mb-8 max-w-lg mx-auto md:mx-0"
             >
-              실제 트레이너 자격을 갖춘 대표가 직접 튜닝한
+              생체 2급 자격 + 대회 수상 트레이너가 직접 튜닝한
               <br className="hidden sm:block" />
               AI 코치가 운동+식단을 함께 관리해줌
             </motion.p>
