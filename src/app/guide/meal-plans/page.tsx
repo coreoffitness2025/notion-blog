@@ -53,7 +53,7 @@ export default function MealPlansPage() {
               onClick={() => setSelectedCategory(cat.id)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 selectedCategory === cat.id
-                  ? "bg-yellow-500 text-black"
+                  ? "bg-[var(--corevia-primary)] text-white"
                   : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
               }`}
             >
@@ -69,7 +69,7 @@ export default function MealPlansPage() {
             <button
               key={plan.id}
               onClick={() => setSelectedPlan(plan)}
-              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-yellow-500/50 transition-all shadow-sm"
+              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-[var(--corevia-primary)]/30 transition-all shadow-sm"
             >
               <h3 className="font-bold text-gray-800 mb-2">{plan.title}</h3>
               <p className="text-sm text-gray-500 mb-4 line-clamp-2">{plan.description}</p>
@@ -77,7 +77,7 @@ export default function MealPlansPage() {
               {/* Macros */}
               <div className="grid grid-cols-4 gap-2 text-center">
                 <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="text-lg font-bold text-orange-600">{plan.calories}</p>
+                  <p className="text-lg font-bold text-gray-800">{plan.calories}</p>
                   <p className="text-xs text-gray-500">kcal</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
@@ -85,11 +85,11 @@ export default function MealPlansPage() {
                   <p className="text-xs text-gray-500">단백질</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="text-lg font-bold text-green-600">{plan.carbs}g</p>
+                  <p className="text-lg font-bold text-gray-700">{plan.carbs}g</p>
                   <p className="text-xs text-gray-500">탄수화물</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="text-lg font-bold text-yellow-600">{plan.fat}g</p>
+                  <p className="text-lg font-bold text-gray-700">{plan.fat}g</p>
                   <p className="text-xs text-gray-500">지방</p>
                 </div>
               </div>
@@ -136,20 +136,20 @@ export default function MealPlansPage() {
 
               {/* Macros Summary */}
               <div className="grid grid-cols-4 gap-3 mb-6">
-                <div className="bg-orange-50 border border-orange-500/30 rounded-xl p-3 text-center">
-                  <p className="text-2xl font-bold text-orange-600">{selectedPlan.calories}</p>
+                <div className="bg-[var(--corevia-primary)]/10 border border-[var(--corevia-primary)]/20 rounded-xl p-3 text-center">
+                  <p className="text-2xl font-bold text-gray-800">{selectedPlan.calories}</p>
                   <p className="text-xs text-gray-500">kcal</p>
                 </div>
                 <div className="bg-[var(--corevia-primary)]/10 border border-blue-500/30 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold text-[var(--corevia-primary)]">{selectedPlan.protein}g</p>
                   <p className="text-xs text-gray-500">단백질</p>
                 </div>
-                <div className="bg-green-50 border border-green-500/30 rounded-xl p-3 text-center">
-                  <p className="text-2xl font-bold text-green-600">{selectedPlan.carbs}g</p>
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center">
+                  <p className="text-2xl font-bold text-gray-700">{selectedPlan.carbs}g</p>
                   <p className="text-xs text-gray-500">탄수화물</p>
                 </div>
-                <div className="bg-yellow-50 border border-yellow-500/30 rounded-xl p-3 text-center">
-                  <p className="text-2xl font-bold text-yellow-600">{selectedPlan.fat}g</p>
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center">
+                  <p className="text-2xl font-bold text-gray-700">{selectedPlan.fat}g</p>
                   <p className="text-xs text-gray-500">지방</p>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function MealPlansPage() {
                     <ul className="space-y-1">
                       {meal.items.map((item, itemIdx) => (
                         <li key={itemIdx} className="text-gray-600 text-sm flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full" />
+                          <span className="w-1.5 h-1.5 bg-[var(--corevia-primary)]/40 rounded-full" />
                           {item}
                         </li>
                       ))}
@@ -175,7 +175,7 @@ export default function MealPlansPage() {
               {selectedPlan.tags && (
                 <div className="flex flex-wrap gap-2 mt-6">
                   {selectedPlan.tags.map((tag) => (
-                    <span key={tag} className="px-3 py-1 bg-yellow-50 text-yellow-600 rounded-full text-sm">
+                    <span key={tag} className="px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-sm">
                       #{tag}
                     </span>
                   ))}

@@ -36,9 +36,9 @@ export default function HandbookPage() {
             <button
               key={article.id}
               onClick={() => setSelectedArticle(article)}
-              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-purple-500/50 hover:bg-gray-50 transition-all group"
+              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-[var(--corevia-primary)]/30 hover:bg-gray-50 transition-all group"
             >
-              <h3 className="font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
+              <h3 className="font-bold text-gray-800 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors">
                 {article.title}
               </h3>
               <p className="text-sm text-gray-500 line-clamp-3">
@@ -88,7 +88,7 @@ export default function HandbookPage() {
                   li: ({ children }) => <li className="text-gray-500">{children}</li>,
                   strong: ({ children }) => <strong className="text-gray-800 font-semibold">{children}</strong>,
                   blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-purple-500 pl-4 my-4 text-gray-500 italic">
+                    <blockquote className="border-l-4 border-[var(--corevia-primary)] pl-4 my-4 text-gray-500 italic">
                       {children}
                     </blockquote>
                   ),

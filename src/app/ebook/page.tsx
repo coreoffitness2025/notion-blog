@@ -96,9 +96,16 @@ export default function EbookPage() {
               </h1>
               <p className="text-lg text-gray-500 mb-2">피트니스의 핵심</p>
               <p className="text-sm text-gray-500 leading-relaxed max-w-md mb-6">
+                다이어트는 지식보다 실행과 의지의 문제입니다. 하지만 핵심을 이해하지
+                못한 채 실행하면 지속하기 어렵습니다.
+                <br className="hidden sm:block" /><br className="hidden sm:block" />
+                이 책은 다이어트와 근비대의 핵심이 무엇인지를 명확하게 하고,
+                이를 토대로 한 식단/운동 프로그램을 제공합니다.
                 알아두면 유용한 포인트들과 근본에 살을 붙여나갈 운동/영양 지식들을
-                수록했습니다. 이 책이 여러분들의 건강한 일상을 설계하는 데에 기여할
-                수 있기를 희망합니다.
+                수록했습니다.
+                <br className="hidden sm:block" /><br className="hidden sm:block" />
+                이 책이 여러분들의 건강한 일상을 설계하는 데에 기여할 수 있기를
+                희망합니다.
               </p>
               <p className="text-xs text-gray-400">
                 저자: James (생활스포츠지도자 2급 · 네추럴 보디빌딩 대회 수상)

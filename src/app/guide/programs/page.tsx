@@ -20,17 +20,17 @@ export default function ProgramsPage() {
   const goalColor = (goal: string) => {
     switch (goal) {
       case "근력 향상": return "bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)]";
-      case "근비대": return "bg-green-50 text-green-600";
-      case "체지방 감소": return "bg-red-50 text-red-600";
+      case "근비대": return "bg-[var(--corevia-primary)]/15 text-[var(--corevia-primary)]";
+      case "체지방 감소": return "bg-gray-100 text-gray-600";
       default: return "bg-gray-50 text-gray-500";
     }
   };
 
   const levelColor = (level: string) => {
     switch (level) {
-      case "초급": return "bg-green-50 text-green-600";
+      case "초급": return "bg-[var(--corevia-primary)]/5 text-[var(--corevia-primary)]/70";
       case "중급": return "bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)]";
-      case "고급": return "bg-purple-50 text-purple-600";
+      case "고급": return "bg-[var(--corevia-primary)]/20 text-[var(--corevia-primary)]";
       default: return "bg-gray-50 text-gray-500";
     }
   };

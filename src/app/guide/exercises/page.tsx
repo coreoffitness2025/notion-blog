@@ -37,10 +37,10 @@ export default function ExercisesPage() {
 
   const difficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "beginner": return "bg-green-50 text-green-600";
+      case "beginner": return "bg-[var(--corevia-primary)]/5 text-[var(--corevia-primary)]/70";
       case "intermediate": return "bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)]";
-      case "advanced": return "bg-purple-500/20 text-purple-400";
-      default: return "bg-gray-500/20 text-gray-500";
+      case "advanced": return "bg-[var(--corevia-primary)]/20 text-[var(--corevia-primary)]";
+      default: return "bg-gray-100 text-gray-500";
     }
   };
 
@@ -110,7 +110,7 @@ export default function ExercisesPage() {
                 onClick={() => setSelectedDifficulty(diff.id)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   selectedDifficulty === diff.id
-                    ? "bg-green-600 text-white"
+                    ? "bg-[var(--corevia-primary)] text-white"
                     : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                 }`}
               >
@@ -227,7 +227,7 @@ export default function ExercisesPage() {
                 <ul className="space-y-2">
                   {selectedExercise.tips.map((tip, idx) => (
                     <li key={idx} className="flex gap-2 text-gray-500 text-sm">
-                      <span className="text-green-600">✓</span>
+                      <span className="text-[var(--corevia-primary)]">✓</span>
                       {tip}
                     </li>
                   ))}

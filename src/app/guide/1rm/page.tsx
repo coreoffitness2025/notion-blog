@@ -26,7 +26,7 @@ function getTrainingZones(oneRepMax: number): TrainingZone[] {
       reps: "1회",
       weight: oneRepMax,
       description: "최대 힘을 발휘하는 구간",
-      color: "from-red-500 to-red-600",
+      color: "bg-[var(--corevia-primary)]",
     },
     {
       name: "근력 향상",
@@ -34,7 +34,7 @@ function getTrainingZones(oneRepMax: number): TrainingZone[] {
       reps: "2-4회",
       weight: Math.round(oneRepMax * 0.9),
       description: "순수 근력 발달에 최적",
-      color: "from-orange-500 to-orange-600",
+      color: "bg-[var(--corevia-primary)]/80",
     },
     {
       name: "근력/근비대",
@@ -42,7 +42,7 @@ function getTrainingZones(oneRepMax: number): TrainingZone[] {
       reps: "5-6회",
       weight: Math.round(oneRepMax * 0.8),
       description: "근력과 근비대의 균형",
-      color: "from-yellow-500 to-yellow-600",
+      color: "bg-[var(--corevia-primary)]/60",
     },
     {
       name: "근비대",
@@ -50,7 +50,7 @@ function getTrainingZones(oneRepMax: number): TrainingZone[] {
       reps: "8-12회",
       weight: Math.round(oneRepMax * 0.7),
       description: "근육 크기 증가에 최적",
-      color: "from-green-500 to-green-600",
+      color: "bg-[var(--corevia-primary)]/45",
     },
     {
       name: "근지구력",
@@ -58,7 +58,7 @@ function getTrainingZones(oneRepMax: number): TrainingZone[] {
       reps: "12-15회",
       weight: Math.round(oneRepMax * 0.6),
       description: "근지구력 향상",
-      color: "from-blue-500 to-blue-600",
+      color: "bg-[var(--corevia-primary)]/30",
     },
     {
       name: "지구력/워밍업",
@@ -66,7 +66,7 @@ function getTrainingZones(oneRepMax: number): TrainingZone[] {
       reps: "15회+",
       weight: Math.round(oneRepMax * 0.5),
       description: "가벼운 워밍업 및 지구력 향상",
-      color: "from-purple-500 to-purple-600",
+      color: "bg-[var(--corevia-primary)]/15",
     },
   ];
 }
@@ -173,7 +173,7 @@ export default function OneRepMaxPage() {
                     className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl"
                   >
                     <div
-                      className={`w-2 h-12 rounded-full bg-gradient-to-b ${zone.color}`}
+                      className={`w-2 h-12 rounded-full ${zone.color}`}
                     />
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">

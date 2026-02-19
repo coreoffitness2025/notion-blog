@@ -237,7 +237,7 @@ export default function CalorieCalculatorPage() {
 
           <button
             onClick={handleCalculate}
-            className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-xl hover:from-orange-600 hover:to-red-600 transition-all"
+            className="w-full py-4 bg-[var(--corevia-primary)] text-white font-bold rounded-xl hover:bg-blue-600 transition-all"
           >
             칼로리 계산하기
           </button>
@@ -258,10 +258,10 @@ export default function CalorieCalculatorPage() {
                 <p className="text-3xl font-bold text-gray-800">{result.tdee}</p>
                 <p className="text-gray-500 text-sm">kcal/일</p>
               </div>
-              <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-6 text-center">
-                <p className="text-orange-600 text-sm mb-1">목표 칼로리</p>
+              <div className="bg-[var(--corevia-primary)] rounded-2xl p-6 text-center">
+                <p className="text-blue-100 text-sm mb-1">목표 칼로리</p>
                 <p className="text-3xl font-bold text-white">{result.targetCalories}</p>
-                <p className="text-gray-600 text-sm">kcal/일</p>
+                <p className="text-blue-200 text-sm">kcal/일</p>
               </div>
             </div>
 
@@ -269,18 +269,18 @@ export default function CalorieCalculatorPage() {
             <div className="bg-white border border-gray-100 rounded-2xl p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">권장 매크로 영양소</h2>
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-[var(--corevia-primary)]/10 border border-[var(--corevia-primary)]/30 rounded-xl p-4 text-center">
+                <div className="bg-[var(--corevia-primary)]/10 border border-[var(--corevia-primary)]/20 rounded-xl p-4 text-center">
                   <p className="text-[var(--corevia-primary)] text-sm mb-1">단백질</p>
                   <p className="text-2xl font-bold text-gray-800">{result.protein}g</p>
                   <p className="text-gray-500 text-sm">{result.protein * 4} kcal</p>
                 </div>
-                <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
-                  <p className="text-green-600 text-sm mb-1">탄수화물</p>
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
+                  <p className="text-gray-600 text-sm mb-1">탄수화물</p>
                   <p className="text-2xl font-bold text-gray-800">{result.carbs}g</p>
                   <p className="text-gray-500 text-sm">{result.carbs * 4} kcal</p>
                 </div>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
-                  <p className="text-yellow-600 text-sm mb-1">지방</p>
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
+                  <p className="text-gray-600 text-sm mb-1">지방</p>
                   <p className="text-2xl font-bold text-gray-800">{result.fat}g</p>
                   <p className="text-gray-500 text-sm">{result.fat * 9} kcal</p>
                 </div>
