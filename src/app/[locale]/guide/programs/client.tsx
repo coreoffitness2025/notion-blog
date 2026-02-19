@@ -7,6 +7,7 @@ import { RECOMMENDED_PROGRAMS, PROGRAM_GOALS, PROGRAM_LEVELS, RecommendedProgram
 
 export default function ProgramsClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
+  const t = dict.guideSubpages.programs;
 
   const [selectedGoal, setSelectedGoal] = useState<string>("all");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
@@ -19,6 +20,9 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
       return true;
     });
   }, [selectedGoal, selectedLevel]);
+
+  const translateGoal = (goal: string) => t.goalMap[goal] || goal;
+  const translateLevel = (level: string) => t.levelMap[level] || level;
 
   const goalColor = (goal: string) => {
     switch (goal) {
@@ -50,11 +54,11 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            가이드로 돌아가기
+            {dict.guideSubpages.backToGuide}
           </Link>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">운동 프로그램</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">{t.title}</h1>
           <p className="text-gray-500">
-            목표와 레벨에 맞는 {RECOMMENDED_PROGRAMS.length}개의 맞춤 프로그램
+            {t.subtitleTemplate.replace("{count}", String(RECOMMENDED_PROGRAMS.length))}
           </p>
         </div>
       </div>
@@ -62,9 +66,8 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Filters */}
         <div className="space-y-4 mb-8">
-          {/* Goal Filter */}
           <div>
-            <p className="text-sm text-gray-500 mb-2">목표</p>
+            <p className="text-sm text-gray-500 mb-2">{t.goalLabel}</p>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedGoal("all")}
@@ -74,7 +77,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                     : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                 }`}
               >
-                전체
+                {t.all}
               </button>
               {PROGRAM_GOALS.map((goal) => (
                 <button
@@ -87,15 +90,14 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                   }`}
                 >
                   <span>{goal.icon}</span>
-                  {goal.name}
+                  {translateGoal(goal.name)}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Level Filter */}
           <div>
-            <p className="text-sm text-gray-500 mb-2">레벨</p>
+            <p className="text-sm text-gray-500 mb-2">{t.levelLabel}</p>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedLevel("all")}
@@ -105,7 +107,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                     : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                 }`}
               >
-                전체
+                {t.all}
               </button>
               {PROGRAM_LEVELS.map((level) => (
                 <button
@@ -117,7 +119,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                       : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                   }`}
                 >
-                  {level.name}
+                  {translateLevel(level.name)}
                 </button>
               ))}
             </div>
@@ -139,19 +141,17 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
 
               <div className="flex flex-wrap gap-2 mb-3">
                 <span className={`px-2 py-1 rounded-full text-xs ${goalColor(program.goal)}`}>
-                  {program.goal}
+                  {translateGoal(program.goal)}
                 </span>
                 <span className={`px-2 py-1 rounded-full text-xs ${levelColor(program.level)}`}>
-                  {program.level}
+                  {translateLevel(program.level)}
                 </span>
               </div>
 
-              <p className="text-sm text-gray-500 line-clamp-2">
-                {program.description}
-              </p>
+              <p className="text-sm text-gray-500 line-clamp-2">{program.description}</p>
 
               <p className="text-xs text-gray-500 mt-3">
-                {program.exercises.length}개의 운동
+                {t.exerciseCount.replace("{count}", String(program.exercises.length))}
               </p>
             </button>
           ))}
@@ -159,7 +159,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
 
         {filteredPrograms.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500">조건에 맞는 프로그램이 없습니다</p>
+            <p className="text-gray-500">{t.noResults}</p>
           </div>
         )}
       </div>
@@ -180,10 +180,10 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                   <h2 className="text-2xl font-bold text-gray-800">{selectedProgram.name}</h2>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <span className={`px-3 py-1 rounded-full text-sm ${goalColor(selectedProgram.goal)}`}>
-                      {selectedProgram.goal}
+                      {translateGoal(selectedProgram.goal)}
                     </span>
                     <span className={`px-3 py-1 rounded-full text-sm ${levelColor(selectedProgram.level)}`}>
-                      {selectedProgram.level}
+                      {translateLevel(selectedProgram.level)}
                     </span>
                     <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm">
                       {selectedProgram.duration}
@@ -202,9 +202,8 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
 
               <p className="text-gray-500 mb-6">{selectedProgram.description}</p>
 
-              {/* Exercises */}
               <div className="space-y-3">
-                <h3 className="text-lg font-bold text-gray-800">운동 목록</h3>
+                <h3 className="text-lg font-bold text-gray-800">{t.exerciseList}</h3>
                 {selectedProgram.exercises
                   .sort((a, b) => a.order - b.order)
                   .map((exercise, idx) => (
@@ -233,10 +232,10 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                       </div>
                       <div className="text-right">
                         <p className="text-gray-800 font-medium">
-                          {exercise.targetSets}세트 × {exercise.targetReps}회
+                          {exercise.targetSets} {t.setsReps.replace("{reps}", String(exercise.targetReps))}
                         </p>
                         <p className="text-xs text-gray-500">
-                          {exercise.type === "main" ? "메인 운동" : "보조 운동"}
+                          {exercise.type === "main" ? t.mainExercise : t.accessoryExercise}
                         </p>
                       </div>
                     </div>

@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 
 export default function HandbookClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
+  const t = dict.guideSubpages.handbook;
 
   const [selectedArticle, setSelectedArticle] = useState<HandbookArticle | null>(null);
 
@@ -23,11 +24,11 @@ export default function HandbookClient({ dict, locale }: { dict: Dictionary; loc
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            가이드로 돌아가기
+            {dict.guideSubpages.backToGuide}
           </Link>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">피트니스 핸드북</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">{t.title}</h1>
           <p className="text-gray-500">
-            운동과 영양에 대한 {HANDBOOK_DATA.length}개의 심층 가이드
+            {t.subtitleTemplate.replace("{count}", String(HANDBOOK_DATA.length))}
           </p>
         </div>
       </div>
@@ -62,7 +63,6 @@ export default function HandbookClient({ dict, locale }: { dict: Dictionary; loc
             className="bg-white border border-gray-200 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
             <div className="p-6 border-b border-gray-200 flex items-start justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-gray-800">{selectedArticle.title}</h2>
@@ -78,7 +78,6 @@ export default function HandbookClient({ dict, locale }: { dict: Dictionary; loc
               </button>
             </div>
 
-            {/* Modal Content */}
             <div className="p-6 overflow-y-auto prose prose-purple max-w-none">
               <ReactMarkdown
                 components={{

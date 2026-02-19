@@ -5,26 +5,10 @@ import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n";
 import { EXERCISE_DATABASE, searchExercises, Exercise } from "@/data/exerciseDatabase";
 
-const BODY_PARTS = [
-  { id: "all", name: "전체" },
-  { id: "chest", name: "가슴" },
-  { id: "back", name: "등" },
-  { id: "shoulder", name: "어깨" },
-  { id: "leg", name: "하체" },
-  { id: "arm", name: "팔" },
-  { id: "core", name: "코어" },
-  { id: "cardio", name: "유산소" },
-];
-
-const DIFFICULTY_OPTIONS = [
-  { id: "all", name: "전체", color: "gray" },
-  { id: "beginner", name: "초급", color: "green" },
-  { id: "intermediate", name: "중급", color: "blue" },
-  { id: "advanced", name: "고급", color: "purple" },
-];
-
 export default function ExercisesClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
+  const t = dict.guideSubpages.exercises;
+  const isEn = locale === "en";
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBodyPart, setSelectedBodyPart] = useState("all");
@@ -48,13 +32,11 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
   };
 
   const difficultyLabel = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner": return "초급";
-      case "intermediate": return "중급";
-      case "advanced": return "고급";
-      default: return difficulty;
-    }
+    return t.difficulty[difficulty as keyof typeof t.difficulty] || difficulty;
   };
+
+  const displayName = (exercise: Exercise) => isEn ? exercise.nameEn : exercise.name;
+  const secondaryName = (exercise: Exercise) => isEn ? exercise.name : exercise.nameEn;
 
   return (
     <main className="min-h-screen bg-[var(--corevia-bg)]">
@@ -68,11 +50,11 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            가이드로 돌아가기
+            {dict.guideSubpages.backToGuide}
           </Link>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">운동 가이드</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">{t.title}</h1>
           <p className="text-gray-500">
-            {EXERCISE_DATABASE.length}개의 운동 방법과 올바른 자세를 확인하세요
+            {EXERCISE_DATABASE.length} {t.subtitleTemplate}
           </p>
         </div>
       </div>
@@ -84,13 +66,13 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="운동 이름, 근육 부위로 검색..."
+            placeholder={t.searchPlaceholder}
             className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:border-[var(--corevia-primary)] focus:outline-none"
           />
 
           {/* Body Part Filter */}
           <div className="flex flex-wrap gap-2">
-            {BODY_PARTS.map((part) => (
+            {t.bodyParts.map((part) => (
               <button
                 key={part.id}
                 onClick={() => setSelectedBodyPart(part.id)}
@@ -107,17 +89,17 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
 
           {/* Difficulty Filter */}
           <div className="flex flex-wrap gap-2">
-            {DIFFICULTY_OPTIONS.map((diff) => (
+            {(["all", "beginner", "intermediate", "advanced"] as const).map((diff) => (
               <button
-                key={diff.id}
-                onClick={() => setSelectedDifficulty(diff.id)}
+                key={diff}
+                onClick={() => setSelectedDifficulty(diff)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedDifficulty === diff.id
+                  selectedDifficulty === diff
                     ? "bg-[var(--corevia-primary)] text-white"
                     : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                 }`}
               >
-                {diff.name}
+                {difficultyLabel(diff)}
               </button>
             ))}
           </div>
@@ -132,12 +114,12 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
               className="text-left bg-white border border-gray-100 rounded-xl p-4 hover:border-[var(--corevia-primary)]/30 transition-all"
             >
               <div className="flex items-start justify-between mb-2">
-                <h3 className="font-bold text-gray-800">{exercise.name}</h3>
+                <h3 className="font-bold text-gray-800">{displayName(exercise)}</h3>
                 <span className={`px-2 py-1 rounded-full text-xs ${difficultyColor(exercise.difficulty)}`}>
                   {difficultyLabel(exercise.difficulty)}
                 </span>
               </div>
-              <p className="text-sm text-gray-500 mb-2">{exercise.nameEn}</p>
+              <p className="text-sm text-gray-500 mb-2">{secondaryName(exercise)}</p>
               <div className="flex flex-wrap gap-1">
                 {exercise.muscles.primary.map((muscle) => (
                   <span key={muscle} className="px-2 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded text-xs">
@@ -151,7 +133,7 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
 
         {filteredExercises.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500">검색 결과가 없습니다</p>
+            <p className="text-gray-500">{t.noResults}</p>
           </div>
         )}
       </div>
@@ -169,8 +151,8 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
             <div className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-800">{selectedExercise.name}</h2>
-                  <p className="text-gray-500">{selectedExercise.nameEn}</p>
+                  <h2 className="text-2xl font-bold text-gray-800">{displayName(selectedExercise)}</h2>
+                  <p className="text-gray-500">{secondaryName(selectedExercise)}</p>
                 </div>
                 <button
                   onClick={() => setSelectedExercise(null)}
@@ -194,11 +176,11 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
 
               {/* Muscles */}
               <div className="mb-6">
-                <h3 className="text-sm font-medium text-gray-500 mb-2">타겟 근육</h3>
+                <h3 className="text-sm font-medium text-gray-500 mb-2">{t.targetMuscles}</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedExercise.muscles.primary.map((muscle) => (
                     <span key={muscle} className="px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-sm">
-                      {muscle} (주동근)
+                      {muscle} {t.primary}
                     </span>
                   ))}
                   {selectedExercise.muscles.secondary.map((muscle) => (
@@ -211,7 +193,7 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
 
               {/* Instructions */}
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">운동 방법</h3>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">{t.howTo}</h3>
                 <ol className="space-y-2">
                   {selectedExercise.instructions.map((instruction, idx) => (
                     <li key={idx} className="flex gap-3 text-gray-500">
@@ -226,7 +208,7 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
 
               {/* Tips */}
               <div className="bg-gray-50 rounded-xl p-4">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">💡 팁</h3>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">{t.tips}</h3>
                 <ul className="space-y-2">
                   {selectedExercise.tips.map((tip, idx) => (
                     <li key={idx} className="flex gap-2 text-gray-500 text-sm">

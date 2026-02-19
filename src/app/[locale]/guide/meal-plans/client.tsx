@@ -5,18 +5,9 @@ import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n";
 import { MEAL_PLAN_DATA, MealPlan } from "@/data/mealPlanData";
 
-const CATEGORIES = [
-  { id: "all", name: "전체", icon: "📋" },
-  { id: "intermittent", name: "간헐적 단식", icon: "⏰" },
-  { id: "lowcarb", name: "저탄수화물", icon: "🥑" },
-  { id: "bulk", name: "근비대/벌크업", icon: "💪" },
-  { id: "balanced", name: "균형 식단", icon: "⚖️" },
-  { id: "korean", name: "전통 한식", icon: "🍚" },
-  { id: "quick", name: "간편 식단", icon: "⚡" },
-];
-
 export default function MealPlansClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
+  const t = dict.guideSubpages.mealPlans;
 
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPlan, setSelectedPlan] = useState<MealPlan | null>(null);
@@ -38,11 +29,11 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            가이드로 돌아가기
+            {dict.guideSubpages.backToGuide}
           </Link>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">식단 추천</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">{t.title}</h1>
           <p className="text-gray-500">
-            목표에 맞는 {MEAL_PLAN_DATA.length}개의 한국인 맞춤 식단 플랜
+            {t.subtitleTemplate.replace("{count}", String(MEAL_PLAN_DATA.length))}
           </p>
         </div>
       </div>
@@ -50,7 +41,7 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 mb-8">
-          {CATEGORIES.map((cat) => (
+          {t.categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
@@ -77,7 +68,6 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
               <h3 className="font-bold text-gray-800 mb-2">{plan.title}</h3>
               <p className="text-sm text-gray-500 mb-4 line-clamp-2">{plan.description}</p>
 
-              {/* Macros */}
               <div className="grid grid-cols-4 gap-2 text-center">
                 <div className="bg-gray-50 rounded-lg p-2">
                   <p className="text-lg font-bold text-gray-800">{plan.calories}</p>
@@ -85,19 +75,18 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
                   <p className="text-lg font-bold text-[var(--corevia-primary)]">{plan.protein}g</p>
-                  <p className="text-xs text-gray-500">단백질</p>
+                  <p className="text-xs text-gray-500">{t.protein}</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
                   <p className="text-lg font-bold text-gray-700">{plan.carbs}g</p>
-                  <p className="text-xs text-gray-500">탄수화물</p>
+                  <p className="text-xs text-gray-500">{t.carbs}</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
                   <p className="text-lg font-bold text-gray-700">{plan.fat}g</p>
-                  <p className="text-xs text-gray-500">지방</p>
+                  <p className="text-xs text-gray-500">{t.fat}</p>
                 </div>
               </div>
 
-              {/* Tags */}
               {plan.tags && (
                 <div className="flex flex-wrap gap-1 mt-3">
                   {plan.tags.map((tag) => (
@@ -137,7 +126,6 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
 
               <p className="text-gray-500 mb-6">{selectedPlan.description}</p>
 
-              {/* Macros Summary */}
               <div className="grid grid-cols-4 gap-3 mb-6">
                 <div className="bg-[var(--corevia-primary)]/10 border border-[var(--corevia-primary)]/20 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold text-gray-800">{selectedPlan.calories}</p>
@@ -145,19 +133,18 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
                 </div>
                 <div className="bg-[var(--corevia-primary)]/10 border border-blue-500/30 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold text-[var(--corevia-primary)]">{selectedPlan.protein}g</p>
-                  <p className="text-xs text-gray-500">단백질</p>
+                  <p className="text-xs text-gray-500">{t.protein}</p>
                 </div>
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold text-gray-700">{selectedPlan.carbs}g</p>
-                  <p className="text-xs text-gray-500">탄수화물</p>
+                  <p className="text-xs text-gray-500">{t.carbs}</p>
                 </div>
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold text-gray-700">{selectedPlan.fat}g</p>
-                  <p className="text-xs text-gray-500">지방</p>
+                  <p className="text-xs text-gray-500">{t.fat}</p>
                 </div>
               </div>
 
-              {/* Meals */}
               <div className="space-y-4">
                 {selectedPlan.meals.map((meal, idx) => (
                   <div key={idx} className="bg-gray-50 rounded-xl p-4">
@@ -174,7 +161,6 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
                 ))}
               </div>
 
-              {/* Tags */}
               {selectedPlan.tags && (
                 <div className="flex flex-wrap gap-2 mt-6">
                   {selectedPlan.tags.map((tag) => (
