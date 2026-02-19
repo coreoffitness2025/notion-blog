@@ -82,23 +82,23 @@ export default function GuidePage() {
 
       {/* Ebook Promotion */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
-        <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-center">
-          <span className="inline-block px-3 py-1 bg-white/10 text-white/80 rounded-full text-xs font-medium mb-4">
+        <div className="bg-gradient-to-br from-[var(--corevia-primary)]/5 to-[var(--corevia-accent)]/5 border border-[var(--corevia-primary)]/15 rounded-3xl p-8 md:p-12 text-center">
+          <span className="inline-block px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-xs font-semibold mb-4">
             전자책
           </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
             좀 더 자세한 이론이 궁금하신가요?
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto mb-6 leading-relaxed">
-            <span className="text-white font-semibold">Core of Fitness</span>는
-            가장 핵심적이고 직관적인 피트니스의 핵심을 130페이지에 담았습니다.
+          <p className="text-gray-500 max-w-xl mx-auto mb-6 leading-relaxed">
+            <span className="text-gray-800 font-semibold">Core of Fitness</span>는
+            가장 핵심적이고 직관적인 피트니스의 핵심을 담았습니다.
             <br className="hidden sm:block" />
-            생체 2급 자격과 대회 경험을 바탕으로 쓴 실전 가이드입니다.
+            알아두면 유용한 운동/영양 지식과 실전 노하우를 수록했습니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="/ebook"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-gray-900 font-semibold rounded-xl hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
             >
               자세히 보기
             </a>

@@ -1,57 +1,115 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 const chapters = [
-  { icon: "🏋️", title: "운동 원리", desc: "점진적 과부하, 복합 운동, 분할 프로그래밍" },
-  { icon: "🔬", title: "근비대의 과학", desc: "반복 범위, 볼륨, 주간 빈도 최적화" },
-  { icon: "🥩", title: "영양과 매크로", desc: "단백질 타이밍, 칼로리 설계, 식단 구성" },
-  { icon: "🔥", title: "다이어트 전략", desc: "체지방 감량의 실전 원칙과 유지법" },
-  { icon: "💊", title: "보충제 가이드", desc: "필수 vs 불필요, 근거 기반 보충제 선택" },
-  { icon: "🛡️", title: "부상 방지", desc: "관절 보호, 워밍업, 오버트레이닝 예방" },
-  { icon: "🎯", title: "부위별 운동", desc: "가슴, 등, 어깨, 팔, 하체 완벽 가이드" },
-  { icon: "🌱", title: "초보자 로드맵", desc: "첫 3개월 프로그램과 습관 형성" },
-  { icon: "🧠", title: "마인드셋", desc: "꾸준함의 기술, 정체기 돌파법" },
+  {
+    num: "0",
+    title: "들어가기에 앞서서",
+    items: ["책에서 전하고자 하는 메시지", "피트니스, 단순하지만 강력한 원칙"],
+  },
+  {
+    num: "1",
+    title: "식단",
+    items: [
+      "식단의 원칙",
+      "목표 칼로리와 매크로 설정",
+      "다이어트 식단 추천",
+      "피해야 하는 음식들",
+      "효과적인 단백질 섭취",
+      "운동 후 탄수화물을 먹어야 하는 이유",
+      "GI 지수의 진실",
+      "다이어트 중에도 지방을 섭취해야 하는 이유",
+      "다이어트 정체기를 뚫는 방법",
+      "탄수화물 싸이클링",
+      "간헐적 단식 / 키토제닉",
+      "그 외 21개 주제",
+    ],
+  },
+  {
+    num: "2",
+    title: "운동",
+    items: [
+      "운동의 원칙",
+      "근육 운동의 중요성",
+      "운동 방법과 루틴 구성",
+      "부위별 운동 (하체/등/가슴/어깨/팔)",
+    ],
+  },
+  {
+    num: "3",
+    title: "대회 / 바디프로필",
+    items: ["대회 & 바디프로필 준비", "피크위크 전략"],
+  },
+  {
+    num: "4",
+    title: "부록 (음식 정보)",
+    items: [
+      "탄수화물 · 단백질 · 지방",
+      "술안주 · 과일 · 외식",
+      "양념/소스 · 보충제",
+    ],
+  },
 ];
 
 const highlights = [
-  { number: "130+", label: "페이지" },
-  { number: "27", label: "심층 아티클" },
-  { number: "9", label: "카테고리" },
+  { number: "104+", label: "페이지" },
+  { number: "5", label: "챕터" },
+  { number: "40+", label: "주제" },
 ];
 
 export default function EbookPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[var(--corevia-bg)]">
       {/* Hero */}
-      <section className="pt-20 pb-16 px-4">
-        <div className="max-w-[800px] mx-auto text-center">
+      <section className="pt-20 pb-12 px-4">
+        <div className="max-w-[900px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row items-center gap-10"
           >
-            <span className="inline-block px-4 py-2 bg-gray-900 text-white rounded-full text-sm font-medium mb-6">
-              전자책
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-4">
-              Core of Fitness
-            </h1>
-            <p className="text-lg text-gray-500 max-w-xl mx-auto leading-relaxed mb-3">
-              가장 핵심적이고 직관적인 피트니스의 핵심을
-              <br className="hidden sm:block" />
-              130페이지에 담았습니다.
-            </p>
-            <p className="text-sm text-gray-400">
-              생체 2급 + 네추럴 보디빌딩 대회 수상 경력의 저자가 직접 집필
-            </p>
+            {/* Cover Image */}
+            <div className="flex-shrink-0">
+              <div className="w-[260px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                <Image
+                  src="/ebook-cover.png"
+                  alt="Core of Fitness 표지"
+                  width={260}
+                  height={368}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Info */}
+            <div className="text-center md:text-left">
+              <span className="inline-block px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-xs font-semibold mb-4">
+                전자책
+              </span>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight mb-3">
+                Core of Fitness
+              </h1>
+              <p className="text-lg text-gray-500 mb-2">피트니스의 핵심</p>
+              <p className="text-sm text-gray-500 leading-relaxed max-w-md mb-6">
+                알아두면 유용한 포인트들과 근본에 살을 붙여나갈 운동/영양 지식들을
+                수록했습니다. 이 책이 여러분들의 건강한 일상을 설계하는 데에 기여할
+                수 있기를 희망합니다.
+              </p>
+              <p className="text-xs text-gray-400">
+                저자: James (생활스포츠지도자 2급 · 네추럴 보디빌딩 대회 수상)
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Numbers */}
-      <section className="pb-16 px-4">
+      <section className="pb-12 px-4">
         <div className="max-w-[600px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -62,9 +120,11 @@ export default function EbookPage() {
             {highlights.map((h) => (
               <div
                 key={h.label}
-                className="bg-gray-50 rounded-2xl p-5 text-center"
+                className="bg-white rounded-2xl p-5 text-center border border-gray-100"
               >
-                <p className="text-2xl font-bold text-gray-800">{h.number}</p>
+                <p className="text-2xl font-bold text-[var(--corevia-primary)]">
+                  {h.number}
+                </p>
                 <p className="text-xs text-gray-400 mt-1">{h.label}</p>
               </div>
             ))}
@@ -72,9 +132,9 @@ export default function EbookPage() {
         </div>
       </section>
 
-      {/* Table of Contents */}
-      <section className="pb-20 px-4">
-        <div className="max-w-[800px] mx-auto">
+      {/* TOC Preview Images */}
+      <section className="pb-16 px-4">
+        <div className="max-w-[900px] mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -83,22 +143,62 @@ export default function EbookPage() {
           >
             목차
           </motion.h2>
-          <div className="grid md:grid-cols-3 gap-3">
+
+          {/* TOC Images */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="flex flex-col md:flex-row gap-4 justify-center mb-10"
+          >
+            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-200 max-w-[380px] mx-auto md:mx-0">
+              <Image
+                src="/ebook-toc1.png"
+                alt="목차 1"
+                width={380}
+                height={536}
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-200 max-w-[380px] mx-auto md:mx-0">
+              <Image
+                src="/ebook-toc2.png"
+                alt="목차 2"
+                width={380}
+                height={536}
+                className="w-full h-auto"
+              />
+            </div>
+          </motion.div>
+
+          {/* TOC Text */}
+          <div className="space-y-4 max-w-[700px] mx-auto">
             {chapters.map((ch, i) => (
               <motion.div
-                key={ch.title}
+                key={ch.num}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 + i * 0.04 }}
-                className="bg-gray-50 rounded-xl p-5"
+                transition={{ duration: 0.3, delay: 0.25 + i * 0.05 }}
+                className="bg-white rounded-2xl p-6 border border-gray-100"
               >
-                <span className="text-xl mb-2 block">{ch.icon}</span>
-                <h3 className="text-sm font-semibold text-gray-800 mb-1">
-                  {ch.title}
-                </h3>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {ch.desc}
-                </p>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="text-sm font-bold text-[var(--corevia-primary)]">
+                    {ch.num}.
+                  </span>
+                  <h3 className="text-base font-semibold text-gray-800">
+                    {ch.title}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {ch.items.map((item) => (
+                    <span
+                      key={item}
+                      className="text-xs text-gray-500 bg-gray-50 px-2.5 py-1 rounded-lg"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -106,7 +206,7 @@ export default function EbookPage() {
       </section>
 
       {/* Who is this for */}
-      <section className="bg-gray-50 py-16 px-4">
+      <section className="bg-white py-16 px-4 border-t border-gray-100">
         <div className="max-w-[600px] mx-auto">
           <h2 className="text-xl font-bold text-gray-800 text-center mb-8">
             이런 분께 추천합니다
@@ -116,11 +216,11 @@ export default function EbookPage() {
               "운동을 시작했지만 뭘 먹어야 할지 모르겠는 분",
               "식단은 관리하는데 운동 프로그래밍이 막막한 분",
               "유튜브 정보가 너무 많아서 핵심만 정리해서 보고 싶은 분",
-              "PT 없이도 혼자 체계적으로 운동하고 싶은 분",
+              "대회나 바디프로필을 준비하고 있는 분",
             ].map((text) => (
               <div
                 key={text}
-                className="flex items-start gap-3 bg-white rounded-xl p-4"
+                className="flex items-start gap-3 bg-[var(--corevia-bg)] rounded-xl p-4"
               >
                 <svg
                   className="w-5 h-5 text-[var(--corevia-primary)] flex-shrink-0 mt-0.5"
@@ -154,7 +254,7 @@ export default function EbookPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
             >
               출시 알림 받기
             </Link>
