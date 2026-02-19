@@ -72,7 +72,7 @@ export default function AppDownloadCTA({ locale }: { locale: string }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="relative w-36 h-72 md:w-44 md:h-88"
+            className="relative w-36 h-72 md:w-44 md:h-88 origin-bottom scale-[1.18]"
           >
             <Image
               src="/coach/male_3_full.png"

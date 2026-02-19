@@ -14,7 +14,7 @@ const images = [
 
 export default function CoachShowcase({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
-  const [active, setActive] = useState<string>(dict.coach.personalities[0].id);
+  const [active, setActive] = useState<string>("warm");
   const activeIdx = dict.coach.personalities.findIndex((p) => p.id === active);
   const current = dict.coach.personalities[activeIdx];
 
