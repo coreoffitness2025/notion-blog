@@ -217,25 +217,9 @@ const ko = {
   team: {
     title: "CoreVia",
     subtitle: "진짜 PT 에이전트를 만듭니다",
-    vision: "AI와 피트니스의 가장 완벽한 접목, CoreVia가 만들어나갑니다.",
     missionTitle: "Our Mission",
-    missionValues: [
-      {
-        title: "운동과 식단, 둘 다 진심입니다",
-        description:
-          "대부분의 피트니스 앱은 운동이면 운동, 식단이면 식단만 다룹니다. CoreVia는 처음부터 둘 다 제대로 다루겠다는 원칙으로 만들었습니다.",
-      },
-      {
-        title: "기록이 쌓이면, AI가 진짜 코치가 됩니다",
-        description:
-          "CoreVia의 AI 코치는 운동 기록과 식단 데이터를 함께 분석해서 크로스 피드백을 해줍니다. 기록이 많을수록 더 정확한 온라인 PT가 가능해집니다.",
-      },
-      {
-        title: "직접 경험한 사람이 만듭니다",
-        description:
-          "직접 대회를 뛰면서 얻은 다이어트와 벌크업 노하우를 앱에 풀었습니다. 운동 기록의 어떤 숫자가 중요한지, 식단 분석에서 뭘 봐야 하는지를 체감으로 알고 있습니다.",
-      },
-    ],
+    missionDesc: "AI와 피트니스의 가장 완벽한 접목을 그려나갑니다.",
+    missionBody: "운동과 식단을 모두 제대로 기록하게 하고, 이를 기반으로 실제와 같은 온라인 PT 에이전트를 제공합니다.",
     aboutTitle: "About Team",
     aboutDesc: "기술과 피트니스를 모두 이해하는 팀이 만듭니다",
     careers: [

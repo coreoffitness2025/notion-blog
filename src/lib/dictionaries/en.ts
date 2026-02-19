@@ -240,25 +240,9 @@ const en = {
   team: {
     title: "CoreVia",
     subtitle: "Building the real PT agent",
-    vision: "The most seamless fusion of AI and fitness — built by CoreVia.",
     missionTitle: "Our Mission",
-    missionValues: [
-      {
-        title: "Serious About Both Workout and Diet",
-        description:
-          "Most fitness apps focus on either workouts or diet. CoreVia was built from day one with the principle of doing both properly.",
-      },
-      {
-        title: "When Records Build Up, AI Becomes a Real Coach",
-        description:
-          "CoreVia's AI coach analyzes both workout and diet data to provide cross-feedback. The more you record, the more accurate your online PT becomes.",
-      },
-      {
-        title: "Built by Someone Who's Been There",
-        description:
-          "Real dieting and bulking know-how from competing on stage is built into the app. We know from experience which numbers matter in workout logs and what to look for in diet analysis.",
-      },
-    ],
+    missionDesc: "Crafting the most seamless fusion of AI and fitness.",
+    missionBody: "We help you properly track both workouts and diet, then deliver an online PT agent that feels like the real thing.",
     aboutTitle: "About Team",
     aboutDesc: "Built by a team that understands both technology and fitness",
     careers: [

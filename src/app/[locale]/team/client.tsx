@@ -29,21 +29,16 @@ export default function TeamPageClient({
       <div className="max-w-[800px] mx-auto">
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-3">{dict.team.title}</h1>
-          <p className="text-lg text-gray-500 mb-3">{dict.team.subtitle}</p>
-          <p className="text-sm text-gray-400">{dict.team.vision}</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-4">{dict.team.title}</h1>
+          <p className="text-lg text-gray-500">{dict.team.subtitle}</p>
         </motion.div>
 
         {/* Our Mission */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-          <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">{dict.team.missionTitle}</h2>
-          <div className="space-y-4 mb-16">
-            {dict.team.missionValues.map((v, i) => (
-              <motion.div key={v.title} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }} className="bg-gray-50 rounded-2xl p-6">
-                <h3 className="text-base font-semibold text-gray-800 mb-2">{v.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{v.description}</p>
-              </motion.div>
-            ))}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mb-16">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">{dict.team.missionTitle}</h2>
+          <div className="bg-gray-50 rounded-2xl p-8 text-center">
+            <p className="text-lg font-medium text-gray-800 mb-3">{dict.team.missionDesc}</p>
+            <p className="text-sm text-gray-500 leading-relaxed">{dict.team.missionBody}</p>
           </div>
         </motion.div>
 
