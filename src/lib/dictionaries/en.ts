@@ -242,7 +242,20 @@ const en = {
     subtitle: "Building the real PT agent",
     missionTitle: "Our Mission",
     missionDesc: "Crafting the most seamless fusion of AI and fitness.",
-    missionBody: "We help you properly track both workouts and diet, then deliver an online PT agent that feels like the real thing.",
+    missionSteps: [
+      {
+        title: "Recording is the foundation",
+        desc: "Most fitness apps handle either workouts or diet — never both. But real personal training requires seeing the full picture. CoreVia is designed to make tracking both workouts and diet easy and thorough.",
+      },
+      {
+        title: "As records build, AI becomes a real coach",
+        desc: "Records aren't the end goal — they're the fuel. As workout volume, diet photos, and nutrition data accumulate, the AI coach understands you deeper, delivering cross-feedback on both exercise and diet just like a real PT would.",
+      },
+      {
+        title: "The ultimate goal: a true online PT agent",
+        desc: "This isn't a simple chatbot. It's an AI agent that queries your workout logs, analyzes your meals, and tracks your body changes — an agent that knows how to use tools. A PT that sharpens with every record you make. That's the future CoreVia is building.",
+      },
+    ],
     aboutTitle: "About Team",
     aboutDesc: "Built by a team that understands both technology and fitness",
     careers: [

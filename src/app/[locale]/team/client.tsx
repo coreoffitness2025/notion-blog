@@ -35,10 +35,18 @@ export default function TeamPageClient({
 
         {/* Our Mission */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mb-16">
-          <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">{dict.team.missionTitle}</h2>
-          <div className="bg-gray-50 rounded-2xl p-8 text-center">
-            <p className="text-lg font-medium text-gray-800 mb-3">{dict.team.missionDesc}</p>
-            <p className="text-sm text-gray-500 leading-relaxed">{dict.team.missionBody}</p>
+          <h2 className="text-xl font-bold text-gray-800 mb-2 text-center">{dict.team.missionTitle}</h2>
+          <p className="text-sm text-gray-400 text-center mb-8">{dict.team.missionDesc}</p>
+          <div className="space-y-5">
+            {dict.team.missionSteps.map((step, i) => (
+              <motion.div key={step.title} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }} className="bg-gray-50 rounded-2xl p-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-bold text-gray-300">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-base font-semibold text-gray-800">{step.title}</h3>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed pl-8">{step.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
