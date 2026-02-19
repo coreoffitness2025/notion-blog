@@ -75,8 +75,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   verification: {
-    // Google Search Console 인증 후 여기에 추가
-    // google: "YOUR_GOOGLE_VERIFICATION_CODE",
+    google: "y8H_9PlpPjFc0uOo0TSUmPgHc-70MAbP-W3NGiVzLaI",
   },
 };
 
