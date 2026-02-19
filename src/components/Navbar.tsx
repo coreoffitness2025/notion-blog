@@ -8,7 +8,7 @@ import { useState } from "react";
 const nav = [
   { href: "/#features", label: "기능 소개" },
   { href: "/team", label: "팀 소개" },
-  { href: "/guide", label: "무료 도구" },
+  { href: "/guide", label: "피트니스 가이드" },
   { href: "/posts", label: "블로그" },
   { href: "/contact", label: "문의" },
 ];

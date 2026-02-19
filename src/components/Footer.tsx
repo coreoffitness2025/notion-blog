@@ -10,7 +10,7 @@ const footerLinks = {
       external: true,
     },
   ],
-  "무료 도구": [
+  "피트니스 가이드": [
     { href: "/guide/calorie", label: "칼로리 계산기" },
     { href: "/guide/1rm", label: "1RM 계산기" },
     { href: "/guide/exercises", label: "운동 도감" },
