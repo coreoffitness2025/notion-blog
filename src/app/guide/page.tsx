@@ -82,28 +82,46 @@ export default function GuidePage() {
 
       {/* Ebook Promotion */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
-        <div className="bg-gradient-to-br from-[var(--corevia-primary)]/5 to-[var(--corevia-accent)]/5 border border-[var(--corevia-primary)]/15 rounded-3xl p-8 md:p-12 text-center">
-          <span className="inline-block px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-xs font-semibold mb-4">
-            전자책
-          </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
-            좀 더 자세한 이론이 궁금하신가요?
-          </h2>
-          <p className="text-gray-500 max-w-xl mx-auto mb-6 leading-relaxed">
-            <span className="text-gray-800 font-semibold">Core of Fitness</span>는
-            가장 핵심적이고 직관적인 피트니스의 핵심을 담았습니다.
-            <br className="hidden sm:block" />
-            알아두면 유용한 운동/영양 지식과 실전 노하우를 수록했습니다.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="/ebook"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
+        <Link
+          href="/ebook"
+          className="block border border-gray-200 rounded-3xl p-8 md:p-10 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all group"
+        >
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Cover Image */}
+            <div className="flex-shrink-0 w-[140px] rounded-xl overflow-hidden shadow-sm border border-gray-100">
+              <img
+                src="/ebook-cover.png"
+                alt="Core of Fitness 표지"
+                className="w-full h-auto"
+              />
+            </div>
+
+            {/* Text */}
+            <div className="text-center md:text-left flex-1">
+              <span className="inline-block px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-xs font-semibold mb-3">
+                전자책
+              </span>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors">
+                좀 더 자세한 이론이 궁금하신가요?
+              </h2>
+              <p className="text-sm text-gray-500 leading-relaxed max-w-lg">
+                <span className="text-gray-800 font-semibold">Core of Fitness</span>는
+                가장 핵심적이고 직관적인 피트니스의 핵심을 담았습니다.
+                알아두면 유용한 운동/영양 지식과 실전 노하우를 수록했습니다.
+              </p>
+            </div>
+
+            {/* Arrow */}
+            <svg
+              className="w-6 h-6 text-gray-300 group-hover:text-[var(--corevia-primary)] transition-colors flex-shrink-0 hidden md:block"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              자세히 보기
-            </a>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </div>
-        </div>
+        </Link>
       </section>
 
       {/* CTA Section */}
