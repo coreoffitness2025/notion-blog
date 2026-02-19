@@ -9,6 +9,7 @@ import ReactMarkdown from "react-markdown";
 export default function HandbookClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
   const t = dict.guideSubpages.handbook;
+  const isEn = locale === "en";
 
   const [selectedArticle, setSelectedArticle] = useState<HandbookArticle | null>(null);
 
@@ -43,10 +44,10 @@ export default function HandbookClient({ dict, locale }: { dict: Dictionary; loc
               className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-[var(--corevia-primary)]/30 hover:bg-gray-50 transition-all group"
             >
               <h3 className="font-bold text-gray-800 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors">
-                {article.title}
+                {isEn ? article.titleEn : article.title}
               </h3>
               <p className="text-sm text-gray-500 line-clamp-3">
-                {article.summary}
+                {isEn ? article.summaryEn : article.summary}
               </p>
             </button>
           ))}
@@ -65,8 +66,8 @@ export default function HandbookClient({ dict, locale }: { dict: Dictionary; loc
           >
             <div className="p-6 border-b border-gray-200 flex items-start justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-gray-800">{selectedArticle.title}</h2>
-                <p className="text-gray-500 mt-1">{selectedArticle.summary}</p>
+                <h2 className="text-2xl font-bold text-gray-800">{isEn ? selectedArticle.titleEn : selectedArticle.title}</h2>
+                <p className="text-gray-500 mt-1">{isEn ? selectedArticle.summaryEn : selectedArticle.summary}</p>
               </div>
               <button
                 onClick={() => setSelectedArticle(null)}
@@ -96,7 +97,7 @@ export default function HandbookClient({ dict, locale }: { dict: Dictionary; loc
                   ),
                 }}
               >
-                {selectedArticle.content}
+                {isEn ? selectedArticle.contentEn : selectedArticle.content}
               </ReactMarkdown>
             </div>
           </div>

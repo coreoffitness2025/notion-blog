@@ -8,6 +8,7 @@ import { MEAL_PLAN_DATA, MealPlan } from "@/data/mealPlanData";
 export default function MealPlansClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
   const t = dict.guideSubpages.mealPlans;
+  const isEn = locale === "en";
 
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPlan, setSelectedPlan] = useState<MealPlan | null>(null);
@@ -65,8 +66,8 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
               onClick={() => setSelectedPlan(plan)}
               className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-[var(--corevia-primary)]/30 transition-all shadow-sm"
             >
-              <h3 className="font-bold text-gray-800 mb-2">{plan.title}</h3>
-              <p className="text-sm text-gray-500 mb-4 line-clamp-2">{plan.description}</p>
+              <h3 className="font-bold text-gray-800 mb-2">{isEn ? plan.titleEn : plan.title}</h3>
+              <p className="text-sm text-gray-500 mb-4 line-clamp-2">{isEn ? plan.descriptionEn : plan.description}</p>
 
               <div className="grid grid-cols-4 gap-2 text-center">
                 <div className="bg-gray-50 rounded-lg p-2">
@@ -89,7 +90,7 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
 
               {plan.tags && (
                 <div className="flex flex-wrap gap-1 mt-3">
-                  {plan.tags.map((tag) => (
+                  {(isEn ? plan.tagsEn ?? plan.tags : plan.tags).map((tag) => (
                     <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs">
                       #{tag}
                     </span>
@@ -113,7 +114,7 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
           >
             <div className="p-6">
               <div className="flex items-start justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">{selectedPlan.title}</h2>
+                <h2 className="text-2xl font-bold text-gray-800">{isEn ? selectedPlan.titleEn : selectedPlan.title}</h2>
                 <button
                   onClick={() => setSelectedPlan(null)}
                   className="p-2 hover:bg-gray-50 rounded-full transition-colors"
@@ -124,7 +125,7 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
                 </button>
               </div>
 
-              <p className="text-gray-500 mb-6">{selectedPlan.description}</p>
+              <p className="text-gray-500 mb-6">{isEn ? selectedPlan.descriptionEn : selectedPlan.description}</p>
 
               <div className="grid grid-cols-4 gap-3 mb-6">
                 <div className="bg-[var(--corevia-primary)]/10 border border-[var(--corevia-primary)]/20 rounded-xl p-3 text-center">
@@ -148,9 +149,9 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
               <div className="space-y-4">
                 {selectedPlan.meals.map((meal, idx) => (
                   <div key={idx} className="bg-gray-50 rounded-xl p-4">
-                    <h3 className="font-bold text-gray-800 mb-2">{meal.name}</h3>
+                    <h3 className="font-bold text-gray-800 mb-2">{isEn ? meal.nameEn : meal.name}</h3>
                     <ul className="space-y-1">
-                      {meal.items.map((item, itemIdx) => (
+                      {(isEn ? meal.itemsEn : meal.items).map((item, itemIdx) => (
                         <li key={itemIdx} className="text-gray-600 text-sm flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-[var(--corevia-primary)]/40 rounded-full" />
                           {item}
@@ -163,7 +164,7 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
 
               {selectedPlan.tags && (
                 <div className="flex flex-wrap gap-2 mt-6">
-                  {selectedPlan.tags.map((tag) => (
+                  {(isEn ? selectedPlan.tagsEn ?? selectedPlan.tags : selectedPlan.tags).map((tag) => (
                     <span key={tag} className="px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-sm">
                       #{tag}
                     </span>

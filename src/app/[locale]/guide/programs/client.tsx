@@ -8,6 +8,7 @@ import { RECOMMENDED_PROGRAMS, PROGRAM_GOALS, PROGRAM_LEVELS, RecommendedProgram
 export default function ProgramsClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
   const t = dict.guideSubpages.programs;
+  const isEn = locale === "en";
 
   const [selectedGoal, setSelectedGoal] = useState<string>("all");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
@@ -135,8 +136,8 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
               className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-pink-500/50 transition-all shadow-sm"
             >
               <div className="flex items-start justify-between mb-2">
-                <h3 className="font-bold text-gray-800">{program.name}</h3>
-                <span className="text-sm text-gray-500">{program.duration}</span>
+                <h3 className="font-bold text-gray-800">{isEn ? program.nameEn : program.name}</h3>
+                <span className="text-sm text-gray-500">{isEn ? program.durationEn : program.duration}</span>
               </div>
 
               <div className="flex flex-wrap gap-2 mb-3">
@@ -148,7 +149,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                 </span>
               </div>
 
-              <p className="text-sm text-gray-500 line-clamp-2">{program.description}</p>
+              <p className="text-sm text-gray-500 line-clamp-2">{isEn ? program.descriptionEn : program.description}</p>
 
               <p className="text-xs text-gray-500 mt-3">
                 {t.exerciseCount.replace("{count}", String(program.exercises.length))}
@@ -177,7 +178,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
             <div className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-800">{selectedProgram.name}</h2>
+                  <h2 className="text-2xl font-bold text-gray-800">{isEn ? selectedProgram.nameEn : selectedProgram.name}</h2>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <span className={`px-3 py-1 rounded-full text-sm ${goalColor(selectedProgram.goal)}`}>
                       {translateGoal(selectedProgram.goal)}
@@ -186,7 +187,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                       {translateLevel(selectedProgram.level)}
                     </span>
                     <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm">
-                      {selectedProgram.duration}
+                      {isEn ? selectedProgram.durationEn : selectedProgram.duration}
                     </span>
                   </div>
                 </div>
@@ -200,7 +201,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                 </button>
               </div>
 
-              <p className="text-gray-500 mb-6">{selectedProgram.description}</p>
+              <p className="text-gray-500 mb-6">{isEn ? selectedProgram.descriptionEn : selectedProgram.description}</p>
 
               <div className="space-y-3">
                 <h3 className="text-lg font-bold text-gray-800">{t.exerciseList}</h3>
@@ -224,9 +225,9 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                           {idx + 1}
                         </span>
                         <div>
-                          <p className="font-medium text-gray-800">{exercise.name}</p>
-                          {exercise.notes && (
-                            <p className="text-xs text-gray-500">{exercise.notes}</p>
+                          <p className="font-medium text-gray-800">{isEn ? exercise.nameEn : exercise.name}</p>
+                          {(isEn ? exercise.notesEn : exercise.notes) && (
+                            <p className="text-xs text-gray-500">{isEn ? exercise.notesEn : exercise.notes}</p>
                           )}
                         </div>
                       </div>

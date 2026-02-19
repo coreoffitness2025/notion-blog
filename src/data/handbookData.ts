@@ -1,9 +1,13 @@
 export interface HandbookArticle {
   id: string;
   category: '운동' | '영양' | '부상 방지' | '마인드셋' | '근비대' | '다이어트' | '보충제' | '부위별 운동' | '초보자';
+  categoryEn: 'Exercise' | 'Nutrition' | 'Injury Prevention' | 'Mindset' | 'Hypertrophy' | 'Diet' | 'Supplements' | 'Body Part Training' | 'Beginner';
   title: string;
+  titleEn: string;
   summary: string;
+  summaryEn: string;
   content: string; // 마크다운 형식으로 작성될 수 있음
+  contentEn: string;
   author: string;
   publishedDate: string;
 }
@@ -12,8 +16,11 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
   {
     id: 'progressive-overload',
     category: '운동',
+    categoryEn: 'Exercise',
     title: '점진적 과부하의 모든 것',
+    titleEn: 'Everything About Progressive Overload',
     summary: '근성장을 위한 핵심 원리, 점진적 과부하를 어떻게 적용해야 할까요?',
+    summaryEn: 'The fundamental principle behind muscle growth — how should you apply progressive overload?',
     content: `
 # 점진적 과부하의 모든 것
 
@@ -31,14 +38,34 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 점진적 과부하는 무작정 무겁게 드는 것만을 의미하지 않습니다. 항상 **올바른 자세**를 유지하는 것이 최우선이며, 부상의 위험이 없는 선에서 점진적으로 도전해야 합니다. 몸의 소리를 듣고 충분한 휴식과 영양을 공급하는 것을 잊지 마세요.
     `,
+    contentEn: `
+# Everything About Progressive Overload
+
+The most fundamental principle for building muscle and increasing strength is **Progressive Overload**. Our bodies adapt remarkably well, which means if you don't provide a slightly greater stimulus than the day before, your body has no reason to grow.
+
+## 5 Ways to Apply Progressive Overload
+
+1.  **Increase the weight:** The most common method. If you completed 8 reps of bench press at 60 kg last week, challenge yourself with 62.5 kg this week.
+2.  **Increase the reps:** Performing more repetitions with the same weight is also excellent overload. Instead of 8 reps at 60 kg, aim for 9 or 10.
+3.  **Increase the sets:** If you successfully completed 3 sets, try 4 sets next time to increase your total volume.
+4.  **Decrease rest time:** Shortening your rest between sets from 90 seconds to 75 seconds places greater demand on muscular endurance and your cardiovascular system.
+5.  **Increase training frequency:** Going from one back session per week to two is a great way to increase total training volume.
+
+## Important Notes
+
+Progressive overload does not simply mean lifting heavier at all costs. Maintaining **proper form** is always the top priority — challenge yourself progressively within a safe range. Listen to your body and never forget adequate rest and nutrition.
+    `,
     author: 'Corevia Fitness',
     publishedDate: '2025-09-16',
   },
   {
     id: 'muscle-building-fundamentals',
     category: '근비대',
+    categoryEn: 'Hypertrophy',
     title: '근비대를 위한 핵심 원칙',
+    titleEn: 'Core Principles of Muscle Hypertrophy',
     summary: '근육량 증가를 위해 반드시 알아야 할 운동, 영양, 휴식의 3대 원칙',
+    summaryEn: 'The three essential pillars — training, nutrition, and rest — you must understand to build muscle mass.',
     content: `
 # 근비대를 위한 핵심 원칙
 
@@ -96,14 +123,74 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 꾸준함이 가장 중요합니다. 완벽하지 않아도 꾸준히 하는 것이 완벽하게 한 번 하는 것보다 낫습니다.
     `,
+    contentEn: `
+# Core Principles of Muscle Hypertrophy
+
+Building muscle mass requires more than just exercise. **Training, nutrition, and rest** — all three must work together for hypertrophy to occur.
+
+## 1. Training: Optimized for Hypertrophy
+
+### Rep Range
+- **8–12 reps**: The most effective range for hypertrophy
+- **6–8 reps**: Develops both strength and hypertrophy simultaneously
+- **12–15 reps**: Promotes hypertrophy alongside muscular endurance
+
+### Sets and Frequency
+- **2–3 sessions per muscle group per week** is optimal
+- **10–20 sets per muscle group** (weekly total volume)
+- Allow **48–72 hours** of rest before training the same muscle group again
+
+### Exercise Priority
+1. **Compound movements**: Squats, deadlifts, bench press, rows
+2. **Accessory movements**: Target lagging muscle groups
+3. **Isolation movements**: Finishing and detail work
+
+## 2. Nutrition: Fuel for Muscle Growth
+
+### Caloric Surplus
+- Consume **300–500 kcal above** your basal metabolic rate
+- Too much leads to fat gain; too little limits muscle growth
+
+### Protein Intake
+- **1.6–2.2 g per kg of bodyweight**
+- Distribute **20–40 g evenly across each meal**
+- Prioritize **complete proteins high in leucine**
+
+### Carbohydrates and Fats
+- **Carbohydrates**: Primary exercise fuel, 4–7 g per kg of bodyweight
+- **Fats**: Essential for hormone production, 20–30% of total calories
+
+## 3. Rest: When Growth Actually Happens
+
+### The Importance of Sleep
+- **7–9 hours** of quality sleep
+- Optimizes **growth hormone** secretion
+- Accelerates **muscle recovery**
+
+### Making the Most of Rest Days
+- Choose between **full rest** vs. **light activity**
+- Manage **stress** to regulate cortisol
+- Stay **well hydrated** (2–3 L per day)
+
+## Realistic Expectations
+
+- **Beginners**: 1–2 kg of muscle gain per month possible
+- **Intermediate**: 0.5–1 kg of muscle gain per month
+- **Advanced**: 0.25–0.5 kg of muscle gain per month
+
+Consistency is everything. Showing up imperfectly every day beats executing one perfect session.
+    `,
     author: 'Corevia Fitness',
     publishedDate: '2025-09-16',
   },
   {
     id: 'fat-loss-science',
     category: '다이어트',
+    categoryEn: 'Diet',
     title: '체지방 감량의 과학적 접근',
+    titleEn: 'The Science of Fat Loss',
     summary: '다이어트의 핵심은 칼로리 적자. 건강하고 지속가능한 체지방 감량 전략',
+    summaryEn: 'The key to any diet is a caloric deficit. Healthy and sustainable strategies for losing body fat.',
     content: `
 # 체지방 감량의 과학적 접근
 
@@ -165,14 +252,78 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 기억하세요. 빠른 다이어트는 빠른 요요를 부릅니다. 천천히, 꾸준히 가는 것이 결국 승리합니다.
     `,
+    contentEn: `
+# The Science of Fat Loss
+
+There are countless diet methodologies out there, but the core principle is just one: **Caloric Deficit**.
+
+## The Basic Principle of a Caloric Deficit
+
+### 1. Energy Balance
+- **Calories in < Calories out** = Weight loss
+- **1 kg of body fat** ≈ 7,700 kcal
+- **Losing 0.5 kg per week** requires a daily deficit of ~550 kcal
+
+### 2. Appropriate Deficit Range
+- **Conservative**: 300–500 kcal/day deficit (0.3–0.7 kg/week loss)
+- **Aggressive**: 500–750 kcal/day deficit (0.7–1 kg/week loss)
+- **Dangerous**: 1,000+ kcal/day deficit (risk of muscle loss)
+
+## Preventing Muscle Loss During a Diet
+
+### Increase Protein Intake
+- **2.0–2.5 g per kg of bodyweight** (more than during a bulk)
+- Prioritize **animal protein rich in leucine**
+- Distribute **25–35 g evenly across each meal**
+
+### Maintain Strength Training
+- Focus on **maintaining weights** (don't try to increase them)
+- Center your program around **compound movements**
+- Train consistently **3–4 times per week**
+
+### Utilize Cardio
+- **Low-intensity steady-state** (heart rate 120–140 bpm, 30–60 min)
+- **High-intensity interval training** (HIIT, 15–20 min)
+- Increase **daily non-exercise activity** (walking, taking stairs)
+
+## Breaking Through a Diet Plateau
+
+### Combating Metabolic Adaptation
+- **Recalculate calories every 2 weeks**
+- **Refeed day** once per week (increase carbohydrates)
+- **Diet break** for 1–2 weeks (eat at maintenance calories)
+
+### Diversify Your Measurements
+- **Weight**: Same time daily, track weekly average
+- **Circumference**: Measure waist, arms, and thighs
+- **Body fat %**: Use InBody scanner or calipers
+- **Photos**: Weekly photos under identical conditions
+
+## Tips for Sustainable Dieting
+
+### Diet Management
+- **80/20 rule**: 80% whole foods, 20% foods you enjoy
+- **High-satiety foods**: Protein, fiber, and water
+- **Limit processed foods**: Minimize sugar and trans fats
+
+### Psychological Approach
+- **Drop perfectionism**: One bad day is fine
+- **Long-term perspective**: Plan for 6 months to 1 year
+- **Celebrate small wins**: Reward yourself for weekly goals
+
+Remember — rapid dieting leads to rapid rebound. Slow and steady wins in the end.
+    `,
     author: 'Corevia Nutrition',
     publishedDate: '2025-09-16',
   },
   {
     id: 'compound-vs-isolation',
     category: '운동',
+    categoryEn: 'Exercise',
     title: '복합운동 vs 고립운동: 언제 무엇을?',
+    titleEn: 'Compound vs. Isolation Exercises: When to Use Each',
     summary: '효율적인 운동을 위한 복합운동과 고립운동의 올바른 활용법',
+    summaryEn: 'How to correctly use compound and isolation exercises for a more efficient training program.',
     content: `
 # 복합운동 vs 고립운동: 언제 무엇을?
 
@@ -244,14 +395,88 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 기억하세요. 복합운동이 근력과 근량의 기초를 만들고, 고립운동이 세밀한 완성도를 높입니다.
     `,
+    contentEn: `
+# Compound vs. Isolation Exercises: When to Use Each
+
+To use your gym time efficiently, you need to know when and how to use compound and isolation exercises.
+
+## Compound Exercises
+
+### Definition and Characteristics
+- Involve **multiple joints** moving simultaneously
+- Engage **multiple muscle groups** at once
+- Mimic **functional movement** patterns
+
+### Classic Compound Exercises
+1. **Squat**: Entire lower body + core
+2. **Deadlift**: Entire posterior chain
+3. **Bench Press**: Chest, shoulders, triceps
+4. **Row**: Back, biceps, rear delts
+5. **Overhead Press**: Shoulders, triceps, core
+
+### Advantages of Compound Exercises
+- **Time efficiency**: Train multiple muscles at once
+- **Functional strength**: Improves real-world movement
+- **Calorie burn**: High energy expenditure
+- **Hormonal response**: Stimulates growth hormone and testosterone release
+
+## Isolation Exercises
+
+### Definition and Characteristics
+- **Single-joint** movement
+- Target a **specific muscle**
+- Allow for **detailed sculpting**
+
+### Classic Isolation Exercises
+1. **Bicep Curl**: Focuses on biceps
+2. **Lateral Raise**: Focuses on lateral deltoid
+3. **Leg Extension**: Focuses on quadriceps
+4. **Leg Curl**: Focuses on hamstrings
+5. **Cable Fly**: Focuses on chest
+
+### Advantages of Isolation Exercises
+- **Address weak points**: Develop lagging muscle groups
+- **Injury rehabilitation**: Strengthen specific muscles
+- **Fine-tuning**: Refine muscle shape
+- **Finishing work**: Add extra stimulus after compounds
+
+## Effective Combination Strategy
+
+### Beginners (0–1 year)
+- **80% compound + 20% isolation**
+- Focus on building foundational movement patterns
+- Prioritize balanced, full-body development
+
+### Intermediate (1–3 years)
+- **60% compound + 40% isolation**
+- Begin addressing weak points
+- Introduce more structured programming
+
+### Advanced (3+ years)
+- **50% compound + 50% isolation**
+- Detailed muscle sculpting
+- Highly individualized specialty training
+
+## Principles of Exercise Order
+
+1. **Compound exercises first**: When energy levels are highest
+2. **Isolation exercises last**: For finishing and supplemental work
+3. **Large muscle groups → small muscle groups**
+4. **Harder exercises → easier exercises**
+
+Remember — compound exercises build the foundation of strength and mass, while isolation exercises refine the details.
+    `,
     author: 'Corevia Fitness',
     publishedDate: '2025-09-16',
   },
   {
     id: 'diet-macros-guide',
     category: '다이어트',
+    categoryEn: 'Diet',
     title: '다이어트 매크로 설정 가이드',
+    titleEn: 'A Guide to Setting Your Diet Macros',
     summary: '탄단지 비율을 어떻게 설정해야 효과적인 다이어트가 될까요?',
+    summaryEn: 'How should you set your carbohydrate, protein, and fat ratios for an effective diet?',
     content: `
 # 다이어트 매크로 설정 가이드
 
@@ -325,14 +550,90 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 다이어트는 마라톤입니다. 빠른 결과보다는 지속가능한 변화에 집중하세요.
     `,
+    contentEn: `
+# A Guide to Setting Your Diet Macros
+
+Diet success isn't just about calories. **How you distribute carbohydrates, protein, and fat** determines the quality of your diet.
+
+## Recommended Macro Ratios for Dieting
+
+### Base Recommendations
+- **Protein**: 30–35% (2.0–2.5 g per kg of bodyweight)
+- **Fat**: 25–30% of total calories
+- **Carbohydrates**: 35–45% (the remainder)
+
+### Adjusting by Activity Level
+**High activity** (5+ workouts per week)
+- Carbohydrates 40–45% (secure energy for training)
+
+**Moderate activity** (3–4 workouts per week)
+- Carbohydrates 35–40% (standard recommendation)
+
+**Low activity** (2 or fewer workouts per week)
+- Carbohydrates 30–35% (increase fat proportion)
+
+## Protein: The Key to Preventing Muscle Loss
+
+### Why Do You Need More?
+- **Muscle protection**: Prevents muscle loss during a caloric deficit
+- **Satiety**: Suppresses appetite
+- **Thermic effect**: Burns more calories during digestion
+
+### Quality Protein Sources
+**Animal**: Chicken breast, eggs, fish, low-fat dairy
+**Plant-based**: Tofu, legumes, quinoa, nuts
+**Supplements**: Whey protein, casein protein
+
+## Carbohydrates: Choose Wisely
+
+### Good Carbohydrates
+- **Complex carbs**: Brown rice, sweet potato, oats, quinoa
+- **High in fiber**: Promotes satiety and digestive health
+- **Low GI**: Prevents blood sugar spikes
+
+### Carbohydrates to Avoid
+- **Simple sugars**: Refined sugar, sweets, sugary drinks
+- **Refined carbs**: White rice, white bread, refined noodles
+- **High-GI foods**: Cause rapid blood glucose spikes
+
+## Fat: An Essential Nutrient
+
+### Healthy Fats
+- **Unsaturated fats**: Olive oil, avocado, nuts
+- **Omega-3**: Salmon, mackerel, flaxseed
+- **MCT**: Coconut oil (rapidly converted to energy)
+
+### Fats to Limit
+- **Trans fats**: Margarine, processed foods
+- **Excessive saturated fat**: Fried foods, butter
+
+## Practical Application Tips
+
+### Macro Calculation Order
+1. Set **total calories** (BMR minus 300–500 kcal)
+2. Calculate **protein** first (bodyweight × 2.2 g)
+3. Calculate **fat** next (25% of total calories)
+4. Assign **carbohydrates** last (remaining calories)
+
+### A Diet You Won't Fail
+- **80% adherence** is enough to succeed
+- Allow **one cheat meal** per week
+- Handle **social situations** with flexibility
+- Maintain a **long-term perspective**
+
+Dieting is a marathon. Focus on sustainable change rather than quick results.
+    `,
     author: 'Corevia Nutrition',
     publishedDate: '2025-09-16',
   },
   {
     id: 'sleep-and-recovery',
     category: '부상 방지',
+    categoryEn: 'Injury Prevention',
     title: '수면과 회복: 숨겨진 근성장 비밀',
+    titleEn: 'Sleep and Recovery: The Hidden Secret to Muscle Growth',
     summary: '운동만큼 중요한 수면과 회복. 성장호르몬 분비를 최대화하는 방법',
+    summaryEn: 'Sleep and recovery are just as important as training. How to maximize growth hormone secretion.',
     content: `
 # 수면과 회복: 숨겨진 근성장 비밀
 
@@ -422,14 +723,106 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 회복은 게으름이 아닙니다. 더 강해지기 위한 필수 과정입니다.
     `,
+    contentEn: `
+# Sleep and Recovery: The Hidden Secret to Muscle Growth
+
+Many people focus solely on training and diet, but **sleep and recovery** are truly the hidden keys to muscle growth.
+
+## How Sleep Affects Muscle Growth
+
+### Growth Hormone Secretion
+- **80% of growth hormone** is released during deep sleep
+- Peak secretion occurs between **10 PM and 2 AM**
+- **7–9 hours** of sleep is optimal
+
+### Muscle Recovery Process
+- **Protein synthesis** is highly active during sleep
+- **Inflammation decreases** and damaged tissue is repaired
+- **Glycogen resynthesis** restores energy stores
+
+### Hormonal Balance
+- **Testosterone** secretion increases
+- **Cortisol** (stress hormone) decreases
+- **Insulin sensitivity** improves
+
+## Strategies for Quality Sleep
+
+### Optimizing Your Sleep Environment
+- **Temperature**: Cool room at 18–20°C (64–68°F)
+- **Light**: Complete darkness (blackout curtains, eye mask)
+- **Sound**: Minimize noise (earplugs, white noise)
+- **Bedding**: Comfortable mattress and pillow
+
+### Building a Sleep Routine
+- Go to bed at a **fixed time** each night
+- Avoid **caffeine** after 2 PM
+- Avoid **screens** 1 hour before bed
+- Light **stretching or meditation** before sleep
+
+### Considering Exercise Timing
+- **High-intensity training**: Finish at least 3 hours before bed
+- **Light exercise**: Finish at least 1 hour before bed
+- If training late, do a **thorough cool-down**
+
+## Methods to Promote Recovery
+
+### Active Recovery
+- **Light walking** for 20–30 minutes
+- **Yoga or stretching** for 15–20 minutes
+- **Foam rolling** for myofascial release
+- **Light swimming** or cycling
+
+### Nutritional Recovery Support
+- **Anti-inflammatory foods**: Ginger, turmeric, cherries, blueberries
+- **Magnesium**: Promotes muscle relaxation and better sleep quality
+- **Omega-3**: Reduces inflammation and accelerates recovery
+- **Adequate hydration**: 2–3 L per day
+
+### Stress Management
+- **Meditation**: 10–15 minutes daily
+- **Breathing techniques**: 4-7-8 breathing method
+- **Nature exposure**: Sunlight and outdoor walks
+- **Social connection**: Time with family and friends
+
+## Warning Signs of Insufficient Recovery
+
+### Physical Signals
+- Persistent muscle soreness
+- Declining exercise performance
+- Frequent illnesses
+- Increased injury occurrence
+
+### Mental Signals
+- Loss of motivation to train
+- Decreased concentration
+- Increased irritability and sensitivity
+- Changes in appetite
+
+If these signs appear, take a bold rest. Taking a day or two off is far better than being sidelined for weeks with an injury.
+
+## Recovery Optimization Checklist
+
+- [ ] 7–9 hours of sleep every night
+- [ ] Consistent sleep schedule
+- [ ] Active stress management
+- [ ] Adequate daily hydration
+- [ ] Anti-inflammatory foods in your diet
+- [ ] 1–2 complete rest days per week
+- [ ] Light activity for active recovery
+
+Recovery is not laziness. It is an essential step toward becoming stronger.
+    `,
     author: 'Corevia Fitness',
     publishedDate: '2025-09-16',
   },
   {
     id: 'plateau-breaking',
     category: '운동',
+    categoryEn: 'Exercise',
     title: '정체기 극복 전략',
+    titleEn: 'Strategies for Breaking Through Plateaus',
     summary: '운동 효과가 멈췄을 때, 정체기를 돌파하는 과학적 방법들',
+    summaryEn: 'Scientific methods for breaking through a plateau when your training progress has stalled.',
     content: `
 # 정체기 극복 전략
 
@@ -538,14 +931,125 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 조급해하지 말고, 체계적으로 하나씩 점검하며 극복해나가면 반드시 돌파할 수 있습니다.
     `,
+    contentEn: `
+# Strategies for Breaking Through Plateaus
+
+Anyone who trains consistently will eventually hit a plateau. Weights stop going up, muscles seem to stop growing — it's a frustrating period. But a plateau can also be a signal of growth.
+
+## Why Plateaus Happen
+
+### Neural Adaptation
+- Your nervous system has **fully adapted** to the movement pattern
+- **Increased efficiency** means less stimulus
+- Your body needs **new stimulation**
+
+### Muscular Adaptation
+- Muscles have adapted to the **same rep range**
+- Repetition of the **same exercises** reduces the training stimulus
+- A signal that **change is needed**
+
+### Insufficient Recovery
+- **Overtraining** syndrome
+- **Sleep deprivation**
+- **Inadequate nutrition**
+- **Excessive stress**
+
+## Methods to Break Through a Plateau
+
+### 1. Manipulate Training Variables
+
+**Intensity Change**
+- Heavy/low-rep (3–5 reps) for 2 weeks
+- Moderate/moderate-rep (8–12 reps) for 2 weeks
+- Light/high-rep (15–20 reps) for 2 weeks
+
+**Volume Change**
+- Increase or decrease number of sets
+- Adjust number of exercises
+- Modify training frequency
+
+**Exercise Variation**
+- Switch from barbell to dumbbell
+- Switch from machines to free weights
+- Introduce new exercises
+
+### 2. Deload Week
+
+**Purpose**: Clear accumulated fatigue and allow nervous system recovery
+
+**Method**:
+- Train at **60–70%** of your normal weight
+- Reduce sets by **30%**
+- Try **new exercises** at a light intensity
+- Focus on **stretching and relaxation**
+
+### 3. Reassess Nutrition
+
+**Recalculate Calories**
+- Adjust BMR based on body weight changes
+- Account for changes in activity level
+- Reset your surplus or deficit
+
+**Adjust Macros**
+- Verify protein intake (at least bodyweight × 2.0 g)
+- Optimize carbohydrate timing
+- Supplement micronutrients
+
+### 4. Optimize Recovery
+
+**Improve Sleep Quality**
+- 7–9 hours of adequate sleep
+- Optimize your sleep environment
+- Maintain a consistent sleep schedule
+
+**Manage Stress**
+- Relaxation activities such as meditation and yoga
+- Mental rest through hobbies
+- Utilize your social support network
+
+## Plateau-Specific Strategies
+
+### Strength Plateau
+- **Neural adaptation**: Introduce new movement patterns
+- **1RM test**: Re-evaluate your current capacity
+- **Strengthen accessory muscles**: Focus on weak links
+
+### Hypertrophy Plateau
+- **Increase volume**: More sets and exercises
+- **Change rep range**: 8–12 → 12–15 reps
+- **Add isolation work**: Target specific muscles
+
+### Weight Loss Plateau
+- **Recalculate calories**: Reflect your reduced bodyweight
+- **Increase exercise intensity**: Add or intensify cardio
+- **Refeed day**: One high-carb day per week
+
+## Plateau Breakthrough Checklist
+
+- [ ] Has there been no progress for 4+ weeks?
+- [ ] Are you logging your training intensity and volume?
+- [ ] Is your sleep quality good?
+- [ ] What is your stress level?
+- [ ] Is your nutrition aligned with your goals?
+- [ ] Are you providing new stimulus?
+
+## Mindset
+
+A plateau is **not failure — it's part of the growth process**. Think of it as your body pausing to prepare before getting stronger.
+
+Don't rush. Check each variable systematically and you will always find a way through.
+    `,
     author: 'Corevia Fitness',
     publishedDate: '2025-09-16',
   },
   {
     id: 'intermittent-fasting',
     category: '다이어트',
+    categoryEn: 'Diet',
     title: '간헐적 단식: 다이어트 도구인가 라이프스타일인가?',
+    titleEn: 'Intermittent Fasting: Diet Tool or Lifestyle?',
     summary: '16:8, 5:2 등 간헐적 단식의 실제 효과와 올바른 실천 방법',
+    summaryEn: 'The real effects of intermittent fasting protocols like 16:8 and 5:2, and how to do them correctly.',
     content: `
 # 간헐적 단식: 다이어트 도구인가 라이프스타일인가?
 
@@ -650,14 +1154,121 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 자신에게 맞는 방법을 찾는 것이 가장 중요합니다.
     `,
+    contentEn: `
+# Intermittent Fasting: Diet Tool or Lifestyle?
+
+Intermittent Fasting (IF) has been a hot topic in the diet world for years. Does it actually work?
+
+## Types of Intermittent Fasting
+
+### 16:8 Method (Most Popular)
+- **16 hours fasting** + **8 hours eating window**
+- Example: Fast from 8 PM to 12 PM the next day
+- **Beginner-friendly** and easy to maintain
+
+### 5:2 Method
+- **5 days of normal eating** + **2 days of calorie restriction** (500–600 kcal)
+- Fast days are non-consecutive
+- Allows you to **maintain a normal social life**
+
+### 24-Hour Fast
+- **Full 24-hour fast** 1–2 times per week
+- An **advanced method**
+- Medical consultation recommended
+
+### OMAD (One Meal A Day)
+- Only **one meal per day**
+- An **extreme approach** — use with caution
+- Risk of nutritional imbalance
+
+## The Real Effects of Intermittent Fasting
+
+### Scientifically Supported Effects
+- **Reduced calorie intake**: Time-restricted eating naturally limits total calories
+- **Improved insulin sensitivity**: Better blood glucose regulation
+- **Cellular renewal**: Activation of autophagy
+- **Reduced inflammation**: Improvement in chronic inflammation markers
+
+### Weight Loss Effects
+- **Direct effect**: Weight loss through calorie restriction
+- **Indirect effect**: Improved eating habits, prevention of late-night snacking
+- **Individual variation**: Not effective for everyone
+
+## Intermittent Fasting vs. Standard Calorie Restriction
+
+### Research Findings
+- **Weight loss**: No significant difference (if calories are equal)
+- **Muscle loss**: No significant difference when protein is adequate
+- **Adherence**: Depends on personal preference
+- **Convenience**: IF can be simpler to follow
+
+### Advantages of IF
+- **Simplicity**: Just decide when to eat
+- **Social convenience**: Can center eating around dinner
+- **Appetite regulation**: Manages ghrelin (hunger hormone) patterns
+
+### Disadvantages of IF
+- **Social limitations**: Difficult to accommodate morning/lunch plans
+- **Exercise timing**: Fasted training may impair performance
+- **Nutrient density**: Challenging to get all nutrients in a short window
+
+## Successful Intermittent Fasting Guide
+
+### Starting Phase (1–2 weeks)
+- Begin with **12:12** (12-hour fast)
+- Allow your body time to adapt
+- Stay well hydrated
+
+### Adaptation Phase (3–4 weeks)
+- Extend to **14:10** or **16:8**
+- **Black coffee and tea** are permitted during the fast
+- **Replenish electrolytes** (sodium, potassium, magnesium)
+
+### Maintenance Phase (1 month+)
+- Establish the pattern that suits you best
+- Build in **flexibility** for social situations
+- Evaluate **long-term sustainability**
+
+## Precautions and Contraindications
+
+### Who Should Avoid It
+- People with **diabetes** (mandatory medical consultation)
+- People with a history of **eating disorders**
+- **Pregnant or breastfeeding** women
+- **Adolescents** in growth stages
+- Anyone who is **underweight**
+
+### Managing Side Effects
+- **Headaches**: Increase fluids and electrolytes
+- **Dizziness**: Adapt gradually, don't push too hard
+- **Constipation**: Increase fiber and fluid intake
+- **Brain fog**: Typically improves after the adaptation period
+
+## Conclusion: A Tool, Not a Magic Solution
+
+Intermittent fasting is one **effective dieting tool** among many. But it is not magic.
+
+**The real keys to success** remain:
+1. Maintaining a **caloric deficit**
+2. Eating **sufficient protein**
+3. **Consistent exercise**
+4. **Quality sleep**
+
+If intermittent fasting makes these four things easier to achieve, it's worth trying. But if it causes stress, there's no reason to force it.
+
+Finding what works for you is what matters most.
+    `,
     author: 'Corevia Nutrition',
     publishedDate: '2025-09-16',
   },
   {
     id: 'motivation-psychology',
     category: '마인드셋',
+    categoryEn: 'Mindset',
     title: '운동 동기부여의 심리학',
+    titleEn: 'The Psychology of Exercise Motivation',
     summary: '의지력에만 의존하지 마세요. 과학적인 동기부여 유지 전략',
+    summaryEn: "Don't rely on willpower alone. Science-backed strategies for sustaining your motivation to train.",
     content: `
 # 운동 동기부여의 심리학
 
@@ -762,14 +1373,121 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 완벽한 동기가 생길 때까지 기다리지 말고, 작은 행동부터 시작하세요.
     `,
+    contentEn: `
+# The Psychology of Exercise Motivation
+
+"I'll start again tomorrow..." How many times have you said that? Willpower alone has its limits. A scientific approach is what you need.
+
+## Why Motivation Fails
+
+### The Limits of Willpower
+- **Willpower is a finite resource**: It depletes throughout the day
+- It's the **first thing to collapse** under stress
+- Heavily influenced by **emotional state**
+
+### Unrealistic Expectations
+- Expecting **quick results** → disappointment → quitting
+- **Perfectionism**: Missing one day means abandoning everything
+- **Comparing yourself to others**: Measuring against idealized bodies on social media
+
+### Environmental Factors
+- **Lack of accessibility** to exercise
+- **Insufficient social support**
+- **Poor time management**
+
+## Sustainable Motivation Strategies
+
+### 1. Build Systems (Create Habits)
+
+**Environmental Design**
+- **Lay out your workout clothes the night before**: Reduce decision fatigue
+- **Gym close to home**: Maximize accessibility
+- **Secure a home workout space**: Eliminate weather and time barriers
+
+**Automate Your Routine**
+- Exercise at the **same time every day** (your brain will recognize it as automatic)
+- **Same days, same workout**
+- **Pre-workout ritual**: Music, coffee, etc.
+
+### 2. The Science of Goal Setting
+
+**SMART Goals**
+- **Specific**: "Lose weight" → "Lose 5 kg in 3 months"
+- **Measurable**: Body weight, circumference, workout logs
+- **Achievable**: Within realistic reach
+- **Relevant**: Connected to your personal values
+- **Time-bound**: A clear deadline
+
+**Process Goals vs. Outcome Goals**
+- **Process goal**: "Work out 3 times a week" (within your control)
+- **Outcome goal**: "Lose 5 kg" (harder to control directly)
+- Focus **more on process goals**
+
+### 3. Psychological Strategies
+
+**Stack Small Wins**
+- Start with **just 2 minutes of exercise**
+- Track your **streak of consecutive days**
+- Build a **milestone reward system**
+
+**Identity Shift**
+- Form the identity of "someone who exercises"
+- Shift from "I have to work out" → "I am a person who works out"
+- Behavior reinforces identity
+
+**Leverage Social Support**
+- Find a **workout partner**
+- **Post on social media**: Receive positive feedback
+- **Join a community**: Connect with people sharing the same goals
+
+## Overcoming Slumps
+
+### When Motivation Drops
+1. **Return to basics**: Remember why you started
+2. **Start small**: Even 10 minutes of movement counts
+3. **Change your environment**: New exercise, new location
+4. **Seek professional help**: Personal trainer, online coaching
+
+### When Injured or Sick
+- **Complete rest** is also part of the process
+- **Find alternative activities** (stretching, walking)
+- **Plan your return** in advance
+- **Don't blame yourself**
+
+### When Results Aren't Coming
+- **Focus on the process**: Results will follow
+- **Diversify measurements**: Look beyond the scale
+- **Consult a professional**: Review your program
+- **Long-term perspective**: Think in 6-month to 1-year increments
+
+## Practical Tips
+
+### Motivation Tools
+- **Training journal**: Build a sense of achievement and track progress
+- **Photo log**: Track visual changes over time
+- **Music playlist**: Elevate your emotional state
+- **Collection of quotes**: Read them when things get hard
+
+### Environmental Optimization
+- **Keep workout gear visible**: Visual reminder
+- **Keep healthy food accessible**: Front of the fridge
+- **Remove distractions**: Keep your phone away from your bed
+
+Remember — motivation gets you started, but **habits get you to the finish line**.
+
+Don't wait for perfect motivation. Start with a small action right now.
+    `,
     author: 'Corevia Mindset',
     publishedDate: '2025-09-16',
   },
   {
     id: 'injury-prevention',
     category: '부상 방지',
+    categoryEn: 'Injury Prevention',
     title: '부상 예방: 평생 운동하기 위한 필수 가이드',
+    titleEn: 'Injury Prevention: An Essential Guide to Training for Life',
     summary: '부상은 예방이 최고의 치료. 안전하고 지속가능한 운동을 위한 핵심 원칙들',
+    summaryEn: 'Prevention is the best cure. Core principles for safe and sustainable training throughout your life.',
     content: `
 # 부상 예방: 평생 운동하기 위한 필수 가이드
 
@@ -871,14 +1589,118 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 부상은 예방이 최고의 치료입니다. 조금 느려도, 조금 가벼워도, 안전하게 꾸준히 하는 것이 결국 가장 빠른 길입니다.
     `,
+    contentEn: `
+# Injury Prevention: An Essential Guide to Training for Life
+
+A training injury doesn't just mean a few weeks of rest. It can lead to a loss of confidence, training interruption, and long-term complications.
+
+## The Most Common Training Injuries
+
+### 1. Lower Back Injury
+**Cause**: Improper deadlift or squat form, weakened core
+**Prevention**: Core strengthening, gradual weight increases, prioritizing perfect form
+
+### 2. Shoulder Impingement Syndrome
+**Cause**: Excessive overhead pressing, rounded shoulders
+**Prevention**: Strengthen the rear delts, chest stretching, adjust exercise order
+
+### 3. Knee Injury
+**Cause**: Improper squat mechanics, sudden changes of direction
+**Prevention**: Improve hip mobility, establish correct squat movement pattern
+
+### 4. Wrist/Elbow Injury
+**Cause**: Excessive repetition, improper grip
+**Prevention**: Wrist stretching, vary your grip, take adequate rest
+
+## Core Principles of Injury Prevention
+
+### 1. The Importance of Warming Up
+
+**Dynamic Warm-Up (5–10 minutes)**
+- Establish full range of motion in the joints
+- Gradually increase heart rate
+- Activate the nervous system
+
+**Exercise-Specific Warm-Up**
+- **Before squats**: Hip circles, leg swings
+- **Before bench press**: Shoulder circles, band pull-aparts
+- **Before deadlifts**: Hip hinge practice, hamstring stretching
+
+### 2. Progressive Load Increases
+
+**The 10% Rule**
+- Never increase weekly training volume by **more than 10%**
+- Applies to weight, volume, and frequency
+- Allow your body time to adapt
+
+**Detecting Warning Signals**
+- **Good fatigue**: Recovered within 2–3 days post-workout
+- **Bad fatigue**: Persistent pain, declining performance
+- **Early warnings**: Joint discomfort, sleep disturbances
+
+### 3. The Supremacy of Form
+
+**Form Over Weight**
+- Perfect form at a light weight > sloppy form at a heavy weight
+- **Use a mirror**: Check your form in real time
+- **Record yourself**: Objective form analysis
+
+**Establishing Range of Motion (ROM)**
+- Utilize the **full range of motion**
+- **Stretching**: Essential before and after training
+- **Mobility work**: Supplement with yoga or Pilates
+
+### 4. Balanced Training
+
+**Preventing Muscle Imbalances**
+- Maintain a **push-to-pull ratio of 1:1**
+- Balance **anterior and posterior** (chest-to-back, front-to-rear delt)
+- Confirm **left-right symmetry**
+
+**Strengthen Your Weak Links**
+- **Core**: The foundation of all movement
+- **Glutes**: The cornerstone of lower body training
+- **Rear delts**: A common weakness in modern lifters
+
+## What to Do When Injury Occurs
+
+### Immediate Response (RICE Principle)
+- **Rest**: Stop exercising immediately
+- **Ice**: Apply cold pack for 15–20 minutes
+- **Compression**: Apply compression bandage
+- **Elevation**: Elevate the injured area
+
+### Return-to-Training Strategy
+1. Confirm **full recovery** (pain level 0/10)
+2. Restart with **light weight** (50% of previous)
+3. **Gradually increase** (within 10% per week)
+4. **Consult a professional** if discomfort persists
+
+## The Mindset for Training for Life
+
+### Long-Term Perspective
+- Build a body that can train **until age 80**
+- **Future health** matters more than today's numbers
+- **Injury-free training** is the best training
+
+### A Realistic Approach
+- **One perfect workout per month** < **decent workouts three times per week**
+- Drop **ego lifting**
+- **Consistency** matters more than intensity
+
+Prevention is the best cure. Moving a little slower or lifting a little lighter — done safely and consistently — is ultimately the fastest path forward.
+    `,
     author: 'Corevia Safety',
     publishedDate: '2025-09-16',
   },
   {
     id: 'protein-timing',
     category: '영양',
+    categoryEn: 'Nutrition',
     title: '단백질, 언제 먹어야 가장 효과적일까?',
+    titleEn: 'When Is the Best Time to Eat Protein?',
     summary: '운동 직후? 자기 전? 단백질 섭취의 골든 타임에 대한 진실을 알려드립니다.',
+    summaryEn: 'Right after training? Before bed? The truth about protein timing and the so-called anabolic window.',
     content: `
 # 단백질, 언제 먹어야 가장 효과적일까?
 
@@ -916,14 +1738,54 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 기억하세요. 타이밍보다 **총량**이 더 중요합니다.
     `,
+    contentEn: `
+# When Is the Best Time to Eat Protein?
+
+Many people believe there is an "anabolic window" — a critical 30-minute period right after training when you must consume protein. Is this actually true?
+
+## What Research Actually Says
+
+The short answer: the anabolic window is much wider than you think. Recent studies show that as long as you consume sufficient protein within a few hours of training, there is no significant difference in muscle protein synthesis.
+
+What matters far more is your **total daily protein intake** and **consistency**.
+
+## Effective Protein Intake Strategy
+
+1.  **Hit your total intake:** Aim for 1.6–2.2 g of protein per kg of bodyweight per day.
+2.  **Distribute it evenly:** Rather than consuming it all in one sitting, spreading 20–40 g of protein across 3–5 meals throughout the day optimizes muscle protein synthesis efficiency.
+3.  **Utilize the pre- and post-workout window:** While not absolute, having a protein-containing meal before and after training clearly supports muscle recovery and growth.
+
+## Protein Strategy by Time of Day
+
+### Morning (Upon Waking)
+- **Casein or Greek yogurt**: Replenish muscle protein broken down overnight
+- **Eggs**: Start the day with a complete protein source
+
+### Pre-Workout (1–2 Hours Before)
+- **Fast-digesting protein**: Whey protein, banana with peanut butter
+- **Moderate carbohydrates**: Secure energy for your training session
+
+### Post-Workout (Within 2 Hours)
+- **Fast absorption**: Whey protein + simple carbohydrates
+- **Optimize muscle protein synthesis**: Protein high in leucine
+
+### Before Bed
+- **Casein protein**: Provides a sustained supply of amino acids throughout the night
+- **Greek yogurt**: A natural source of casein
+
+Remember — **total daily intake** matters more than timing.
+    `,
     author: 'Corevia Nutrition',
     publishedDate: '2025-09-15',
   },
   {
     id: 'cardio-vs-weights',
     category: '운동',
+    categoryEn: 'Exercise',
     title: '유산소 vs 근력운동: 다이어트에 더 효과적인 것은?',
+    titleEn: 'Cardio vs. Weight Training: Which Is Better for Fat Loss?',
     summary: '체지방 감량을 위해서는 유산소와 근력운동 중 무엇이 더 중요할까요?',
+    summaryEn: 'Between cardio and strength training, which is more important for losing body fat?',
     content: `
 # 유산소 vs 근력운동: 다이어트에 더 효과적인 것은?
 
@@ -1036,14 +1898,129 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 하지만 개인의 상황, 선호도, 시간적 제약을 고려해서 자신만의 최적 조합을 찾는 것이 가장 중요합니다.
     `,
+    contentEn: `
+# Cardio vs. Weight Training: Which Is Better for Fat Loss?
+
+When starting a diet, one of the first questions is "Should I do cardio or lift weights?" The answer is **both**, but there is a priority order.
+
+## Why Weight Training Is More Important for Fat Loss
+
+### 1. Increased Basal Metabolic Rate
+- **1 kg of muscle gained** = 13–15 additional kcal burned daily at rest
+- **24-hour effect**: Burns calories even while you sleep
+- **Long-term investment**: An effect that lasts for years
+
+### 2. Afterburn Effect (EPOC)
+- Elevated metabolism for **12–24 hours after training**
+- **High-intensity strength training** produces a greater afterburn than cardio
+- **Additional calorie burn**: 50–200 kcal
+
+### 3. Preventing Muscle Loss
+- Prevents **muscle loss during a diet**
+- **Preserves basal metabolic rate**: Prevents rebound weight gain
+- **Builds shape**: Creates a toned, defined physique
+
+## The Role of Cardio
+
+### Immediate Calorie Burn
+- **During exercise**: Burns 5–15 kcal per minute
+- **Immediate effect**: Increases your caloric deficit on the day
+- **Cardiovascular health**: Improves overall health markers
+
+### Types of Cardio and Their Effects
+**Low-Intensity Steady State (LISS)**
+- Heart rate 120–140 bpm, 30–60 minutes
+- Higher proportion of fat used as fuel
+- Low recovery burden
+
+**High-Intensity Interval Training (HIIT)**
+- Heart rate at 80–90% of max, 15–25 minutes
+- Maximizes afterburn effect
+- High time efficiency
+
+## Optimal Combination Strategy
+
+### Beginners (0–6 months)
+- **70% strength + 30% cardio**
+- 3 strength sessions + 2 cardio sessions per week
+- Priority: building foundational muscle mass
+
+### Intermediate (6 months–2 years)
+- **60% strength + 40% cardio**
+- 4 strength sessions + 3 cardio sessions per week
+- Reduce body fat while maintaining muscle
+
+### Advanced (2+ years)
+- **Adjust based on individual goals**
+- Increase cardio proportion when preparing for a contest
+- Minimize cardio during a bulk
+
+## Practical Application Guide
+
+### When Time Is Limited
+**30 minutes available**: Prioritize strength training
+**45 minutes available**: 30 min strength + 15 min cardio
+**60 minutes available**: 40 min strength + 20 min cardio
+
+### Exercise Order
+1. **Strength training first**: High intensity when energy is high
+2. **Cardio after**: Maximize fat burning after glycogen is depleted by strength training
+
+### Same Day vs. Different Days
+**Same day**: Strength → Cardio (at least 2–3 hours apart)
+**Different days**: 3 strength days + 2 cardio days separated
+
+## Phase-Based Fat Loss Strategy
+
+### Early Phase (Body fat 25%+)
+- **Strength training focus**: Elevate basal metabolic rate
+- **Light cardio**: Walking, cycling
+- **Diet is 80%**: Calorie restriction matters more than exercise volume
+
+### Middle Phase (Body fat 15–25%)
+- **Balance strength + cardio**: Both are important
+- **Introduce HIIT**: Maximize efficiency
+- **Periodization**: 2 weeks strength-focused → 1 week cardio-focused
+
+### Late Phase (Body fat under 15%)
+- **Increase cardio proportion**: Remove the last layer of fat
+- **Maintain strength training**: Prevent muscle loss
+- **Precise calorie management**: Daily weigh-ins
+
+## Common Mistakes
+
+### Doing Only Cardio
+- **Muscle loss**: Basal metabolic rate decreases
+- **Rebound weight gain**: Rapid regain after diet ends
+- **Skinny-fat**: Lower weight but high body fat percentage
+
+### Doing Only Strength Training
+- **Slow fat loss**: Insufficient caloric deficit
+- **Cardiovascular health**: Missing the benefits of aerobic exercise
+- **Plateau**: Lack of variety leads to stagnation
+
+## Conclusion
+
+**Strength training is more important** for fat loss, but **cardio is also necessary**.
+
+**Priority order**:
+1. **Diet management** (70%)
+2. **Strength training** (20%)
+3. **Cardio** (10%)
+
+That said, finding your own optimal combination based on your individual situation, preferences, and time constraints is what matters most.
+    `,
     author: 'Corevia Fitness',
     publishedDate: '2025-09-14',
   },
   {
     id: 'metabolism-myths',
     category: '영양',
+    categoryEn: 'Nutrition',
     title: '신진대사에 대한 오해와 진실',
+    titleEn: 'Metabolism Myths and Facts',
     summary: '신진대사를 높이는 마법의 음식은 없습니다. 과학적 사실만 알려드려요.',
+    summaryEn: "There's no magic food that boosts your metabolism. Here are the scientific facts.",
     content: `
 # 신진대사에 대한 오해와 진실
 
@@ -1154,14 +2131,127 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 꾸준함이 핵심입니다.
     `,
+    contentEn: `
+# Metabolism Myths and Facts
+
+You've probably seen ads for "metabolism-boosting foods" and "secrets to increasing your metabolic rate." Can you really dramatically raise your metabolism?
+
+## The Components of Metabolism
+
+### Basal Metabolic Rate (BMR) — 60–70%
+- The minimum energy needed to **sustain life**
+- Increases **proportionally with muscle mass**
+- Heavily influenced by **age, sex, and genetics**
+
+### Activity Energy Expenditure — 15–25%
+- Energy burned through **deliberate exercise**
+- The **most controllable** component
+- **Strength training > cardio** in terms of effect
+
+### Thermic Effect of Food (TEF) — 8–12%
+- Energy used to **digest food**
+- **Protein > carbohydrates > fat** in thermic effect
+- Accounts for **roughly 10% of total metabolism**
+
+### Non-Exercise Activity Thermogenesis (NEAT) — 15–30%
+- Calories burned through **daily non-exercise movement** (walking, standing, fidgeting)
+- **Enormous individual variation** (350–800 kcal difference per day)
+- A **surprisingly significant** factor
+
+## Metabolism Myths
+
+### Myth 1: "Certain foods boost your metabolism"
+**Truth**: The effect of chili peppers, green tea, cinnamon, etc., is **negligible** (under 50 kcal/day)
+**Reality**: It's mostly marketing — don't get your hopes up
+
+### Myth 2: "Eating small, frequent meals boosts your metabolism"
+**Truth**: Meal frequency has no effect on metabolism **if total calories are equal**
+**Reality**: Whether you eat 2 meals or 6 meals doesn't matter
+
+### Myth 3: "Skipping breakfast slows your metabolism"
+**Truth**: **No change in metabolic rate** from a 12–24 hour fast
+**Reality**: Intermittent fasting is perfectly fine
+
+### Myth 4: "Muscle burns 10 times more calories than fat"
+**Truth**: 1 kg of muscle = 13 kcal/day; 1 kg of fat = 4 kcal/day (**3x difference**)
+**Reality**: The common claim is exaggerated, but the effect is still meaningful
+
+## What Actually Raises Your Metabolism
+
+### 1. Build Muscle (Most Effective)
+- **Strength training**: 3–4 sessions per week consistently
+- **Protein**: Bodyweight × 1.6–2.2 g
+- **Progressive overload**: Continual stimulus
+
+### 2. Increase NEAT (Surprisingly Important)
+- **Stand while working**: Sitting vs. standing (~50 kcal/hour difference)
+- **Take the stairs**: Skip the elevator
+- **Walk short distances**: Go on foot when possible
+- **Fidgeting**: Even small movements add up
+
+### 3. Increase Exercise Intensity
+- **High-intensity intervals**: HIIT effect
+- **Compound movements**: Multiple muscles engaged simultaneously
+- **Shorter rest periods**: Reduce rest between sets
+
+### 4. Get Adequate Sleep
+- **Sleep deprivation** = reduced metabolic rate
+- **7–9 hours** of appropriate sleep
+- Improve **sleep quality**
+
+## Preventing Metabolic Slowdown
+
+### Cautions During Dieting
+- Avoid **drastic calorie restriction** (aim for 0.5–1 kg/week loss)
+- **Maintain strength training**: Prevent muscle loss
+- **Sufficient protein**: Bodyweight × 2.0–2.5 g
+- **Refeed day**: One high-carb day per week
+
+### Age-Related Metabolic Changes
+- **After age 20**: 2–3% decrease per decade
+- **Primary cause**: Loss of muscle mass, decreased activity
+- **Response**: Maintain muscle through strength training
+
+## Realistic Expectations
+
+### Metabolic Improvement Effects
+- **5 kg of muscle gained**: 65–75 additional kcal burned daily
+- **NEAT improvement**: 100–300 additional kcal burned daily
+- **Total effect**: ~0.5–1 kg of additional weight loss per month
+
+### Time Investment
+- **Immediate effect**: NEAT, exercise intensity
+- **Short-term effect** (1–3 months): Exercise habit, activity level
+- **Long-term effect** (6 months+): Muscle mass increase
+
+## Practical Tips
+
+### Increasing NEAT in Daily Life
+- **Set alarms**: 5 minutes of walking every hour
+- **Phone calls**: Take them standing up
+- **TV time**: Do squats during commercial breaks
+- **Public transit**: Get off one stop early
+
+### Tracking Your Metabolic Rate
+- **Activity tracker**: Estimate daily calorie expenditure
+- **Body composition analysis**: Track muscle mass changes
+- **Training journal**: Log intensity and volume
+
+Conclusion: There is no magic to dramatically raising your metabolism. However, meaningful improvement is absolutely possible through **building muscle, increasing daily activity, and intensifying your workouts**.
+
+Consistency is the key.
+    `,
     author: 'Corevia Science',
     publishedDate: '2025-09-13',
   },
   {
     id: 'supplements-guide',
     category: '보충제',
+    categoryEn: 'Supplements',
     title: '보충제 가이드: 정말 필요한 것들만',
+    titleEn: 'Supplement Guide: Only What You Actually Need',
     summary: '수많은 보충제 중에서 정말 효과가 입증된 것들만 골라드립니다.',
+    summaryEn: 'From the vast world of supplements, we select only those with real, proven scientific evidence.',
     content: `
 # 보충제 가이드: 정말 필요한 것들만
 
@@ -1269,14 +2359,123 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 나머지는 여유가 있을 때 고려하세요. 보충제에 쓸 돈이 있다면 **좋은 음식**을 사는 것이 더 현명할 수 있습니다.
     `,
+    contentEn: `
+# Supplement Guide: Only What You Actually Need
+
+The supplement market grows by hundreds of billions of dollars every year. But most of it is just marketing — very few products have genuine scientific backing.
+
+## Scientifically Proven Supplements
+
+### Tier 1: Essential Supplements
+
+**1. Whey Protein**
+- **Effect**: Stimulates muscle protein synthesis, convenient
+- **How to use**: 20–40 g post-workout
+- **Note**: Unnecessary if you're hitting your protein target through food alone
+
+**2. Creatine Monohydrate**
+- **Effect**: 3–15% increase in strength, promotes muscle gain
+- **How to use**: 3–5 g daily (timing doesn't matter)
+- **Side effect**: Water retention (1–3 kg temporary weight increase)
+
+**3. Vitamin D**
+- **Effect**: Bone health, immune function, testosterone
+- **How to use**: 1,000–4,000 IU per day
+- **Relevance**: The majority of people are deficient
+
+### Tier 2: Situationally Useful
+
+**4. Caffeine**
+- **Effect**: Improves exercise performance, supports fat oxidation
+- **How to use**: 100–400 mg, 30 minutes before training
+- **Note**: Tolerance builds over time; can disrupt sleep
+
+**5. Beta-Alanine**
+- **Effect**: Improves muscular endurance (1–4 minute efforts)
+- **How to use**: 3–5 g daily (split into multiple doses)
+- **Side effect**: Tingling sensation on skin (harmless)
+
+**6. Omega-3**
+- **Effect**: Reduces inflammation, supports cardiovascular health
+- **How to use**: 1–3 g EPA+DHA combined
+- **Relevance**: Especially if your fish intake is low
+
+### Tier 3: Special Circumstances
+
+**7. ZMA (Zinc, Magnesium, Vitamin B6)**
+- **Effect**: Improves sleep quality, promotes recovery
+- **How to use**: 30 minutes before bed
+- **For**: Those experiencing poor sleep quality
+
+**8. HMB**
+- **Effect**: Prevents muscle loss (during a caloric deficit)
+- **How to use**: 3 g daily with meals
+- **For**: Only during extreme dieting phases
+
+## Supplements You Don't Need
+
+### Over-Hyped Products
+**Testosterone boosters**: Most are ineffective
+**Fat burners**: Effects beyond caffeine are negligible
+**Amino acid supplements**: Unnecessary if protein intake is sufficient
+**Glutamine**: No meaningful effect in healthy individuals
+
+### Expensive but Unnecessary
+**Brand premiums**: Same ingredients at a fraction of the cost elsewhere
+**Combination products**: Buying individual supplements is more economical
+**"Natural" products**: Chemically identical to standard supplements
+
+## Supplement Priority by Budget
+
+### ~$25/month: Whey protein + creatine
+### ~$40/month: Above + Vitamin D + omega-3
+### ~$80/month: Above + caffeine + beta-alanine
+
+## Supplement Priority by Goal
+**Hypertrophy**: Whey protein, creatine, Vitamin D
+**Fat loss**: Caffeine, whey protein, HMB
+**Performance**: Creatine, caffeine, beta-alanine
+**Recovery**: ZMA, omega-3, Vitamin D
+
+## Safety Guidelines
+
+### Fundamental Principles
+- **Food first**: Supplements are literally supplemental
+- **Single ingredients**: Buy individual products over blends
+- **Reputable brands**: Look for third-party tested products
+
+### Safety Rules
+- **Follow recommended doses**: More is not better
+- **Consult a physician**: If you have medical conditions or take medications
+- **Introduce gradually**: Don't start multiple new supplements simultaneously
+
+### Evaluating Effectiveness
+- Take for a **minimum of 4–6 weeks** before judging results
+- Use **objective metrics**: Training records, body composition changes
+- Track **subjective feel**: Energy levels, recovery speed
+
+## Conclusion
+
+Supplements are **not magic**. Proper training and diet account for 95%; supplements fill the remaining 5%.
+
+**What you actually need**:
+1. Whey protein (convenience)
+2. Creatine (proven effectiveness)
+3. Vitamin D (easy to be deficient)
+
+Consider the rest only when budget allows. If you have money to spend on supplements, **buying better quality food** might be the wiser choice.
+    `,
     author: 'Corevia Science',
     publishedDate: '2025-09-12',
   },
   {
     id: 'form-technique',
     category: '운동',
+    categoryEn: 'Exercise',
     title: '운동 폼의 중요성: 무게보다 자세',
+    titleEn: 'The Importance of Exercise Form: Technique Over Weight',
     summary: '완벽한 자세로 50kg 드는 것이 엉성한 자세로 100kg 드는 것보다 낫습니다.',
+    summaryEn: 'Lifting 50 kg with perfect form is better than lifting 100 kg with sloppy technique.',
     content: `
 # 운동 폼의 중요성: 무게보다 자세
 
@@ -1404,14 +2603,144 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 폼을 완벽하게 하세요. 무게는 자연스럽게 따라옵니다.
     `,
+    contentEn: `
+# The Importance of Exercise Form: Technique Over Weight
+
+The most common mistake in the gym is an **obsession with heavy weights**. But in training, the most important thing is not the weight — it's **correct form**.
+
+## Why Form Matters
+
+### 1. Injury Prevention
+- **Joint protection**: Proper movement patterns
+- **Ligament/tendon protection**: Prevents excessive stress
+- **Long-term health**: A body that can train for life
+
+### 2. Maximizing Efficiency
+- **Target muscle activation**: Precise stimulus to the intended muscle
+- **Energy efficiency**: Prevents unnecessary compensatory movements
+- **Faster development**: Accurate stimulus leads to faster growth
+
+### 3. True Strength
+- **Functional strength**: Translates to real-world capability
+- **Balanced development**: Overall harmony
+- **Confidence**: Conviction that comes from correct execution
+
+## Form Checkpoints for Key Exercises
+
+### Squat
+**Correct form**:
+- Toes slightly outward (15–30 degrees)
+- Knees track in the direction of the toes
+- Chest up, back straight
+- Initiate the descent by sitting back at the hips
+
+**Common mistakes**:
+- Knees caving inward
+- Excessive forward lean of the torso
+- Heels rising off the floor
+- Insufficient depth
+
+### Deadlift
+**Correct form**:
+- Bar close to the shins
+- Shoulders directly over or slightly in front of the bar
+- Neutral spine throughout
+- Hip hinge movement pattern
+
+**Common mistakes**:
+- Rounding the back
+- Bar drifting away from the body
+- Starting the pull by bending the knees first
+- Hyperextending at the top
+
+### Bench Press
+**Correct form**:
+- Scapulae retracted and depressed
+- Natural arch in the lower back
+- Wrists stacked straight above elbows
+- Lower the bar fully to the chest
+
+**Common mistakes**:
+- Shoulders rolling forward
+- Bouncing the bar off the chest
+- Partial range of motion
+- Excessive arch
+
+## How to Develop Correct Form
+
+### 1. Start with the Basics
+- Master the **bodyweight version** of the movement first
+- Learn the pattern **with light weight**
+- **Use a mirror**: Check your form in real time
+- **Record yourself**: Objective analysis
+
+### 2. Gradual Progression
+- Increase **reps before weight**
+- **10 perfect reps** > **15 sloppy reps**
+- **Controlled tempo**: Lift and lower with intention
+- **Full range**: Utilize the complete range of motion
+
+### 3. Seek Expert Guidance
+- **Personal training sessions**: Early-stage form correction
+- **Online coaching**: Video feedback
+- **Training partner**: Spot each other's form
+- **Continuous learning**: YouTube, books, reputable resources
+
+## Balancing Form and Weight
+
+### When Should You Increase the Weight?
+- When you can complete the target reps **with perfect form**
+- When you have **2–3 reps left in the tank**
+- When you can maintain **full control** throughout the movement
+- When your **next-day recovery** feels good
+
+### When Should You Reduce the Weight?
+- **Immediately** when your form breaks down
+- When you feel **joint discomfort**
+- When the weight is **uncontrollable**
+- When **accumulated fatigue** compromises your focus
+
+## The Danger of Ego Lifting
+
+### The Psychological Trap
+- **Caring what others think**
+- **Fixation on numbers**
+- **Desire for rapid progress**
+- **Tying self-worth to how much you lift**
+
+### The Real Consequences
+- **Dramatically increased injury risk**
+- **Slower actual progress**
+- **Long-term regression**
+- **Loss of confidence**
+
+## Mindset
+
+### True Strength
+- **50 kg with perfect form** > **100 kg with sloppy form**
+- **Consistent progress** > **one-off records**
+- **Injury-free training** = **the best training**
+
+### Long-Term View
+- A body that can still train **10 years from now**
+- **Lifelong health** is the goal
+- **Sustainability** is the core principle
+
+Remember — the gym is not a place for competition. It is a place to become a better version of yourself than you were yesterday.
+
+Perfect your form. The weight will follow naturally.
+    `,
     author: 'Corevia Technique',
     publishedDate: '2025-09-11',
   },
   {
     id: 'hydration-importance',
     category: '영양',
+    categoryEn: 'Nutrition',
     title: '수분 섭취의 숨겨진 중요성',
+    titleEn: 'The Hidden Importance of Hydration',
     summary: '물만 충분히 마셔도 운동 능력이 20% 향상됩니다. 수분의 과학적 효과',
+    summaryEn: 'Simply drinking enough water can improve exercise performance by 20%. The science of hydration.',
     content: `
 # 수분 섭취의 숨겨진 중요성
 
@@ -1552,14 +2881,157 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 물은 가장 저렴하고 효과적인 '보충제'입니다.
     `,
+    contentEn: `
+# The Hidden Importance of Hydration
+
+Water is the foundation of life, but for those who train, it is also a **secret weapon for performance enhancement**.
+
+## The Effects of Dehydration on Exercise
+
+### At 2% Bodyweight Dehydration
+- **Strength loss**: 10–15%
+- **Muscular endurance loss**: 20–30%
+- **Reduced concentration**: Impaired judgment
+- **Impaired thermoregulation**: Risk of heat stroke
+
+### At 3–4% Bodyweight Dehydration
+- **Exercise capacity**: 25–30% decrease
+- **Elevated heart rate**: Increased cardiovascular strain
+- **Dizziness and nausea**
+- **Increased risk of muscle cramps**
+
+## The Exercise Physiology Role of Water
+
+### 1. Nutrient Transport
+- **90% of blood** is water
+- Transports **oxygen and nutrients** to muscles
+- **Removes waste**: Excretes lactic acid, urea
+
+### 2. Thermoregulation
+- **Sweating**: ~500 ml needed to prevent a 1°C temperature rise
+- **Vasodilation**: Promotes heat dissipation
+- **Exercise sustainability**: Prevents overheating
+
+### 3. Joint Lubrication
+- **Synovial fluid**: Over 90% water
+- **Cartilage protection**: Absorbs shock
+- **Injury prevention**: Maintains joint health
+
+### 4. Muscle Function
+- **Muscle contraction**: Requires electrolyte balance
+- **Energy production**: Water required for all metabolic processes
+- **Protein synthesis**: Functions optimally when well hydrated
+
+## Proper Hydration Strategy
+
+### Daily Baseline
+- **Base**: Bodyweight × 30–35 ml (70 kg = 2.1–2.5 L)
+- **During exercise**: Add 500–750 ml per hour of training
+- **Hot weather**: Add another 500 ml
+
+### Pre- and Post-Workout Hydration Management
+
+**2–3 Hours Before Exercise**
+- Drink 500 ml
+- Check urine color (pale yellow is ideal)
+
+**During Exercise**
+- **150–200 ml every 15–20 minutes**
+- Drink **before you feel thirsty**
+- **Replenish electrolytes**: For sessions over 1 hour
+
+**After Exercise**
+- Replace **150% of bodyweight lost**
+- Example: If you lost 1 kg, drink 1.5 L
+- **Rehydrate gradually**: Don't chug it all at once
+
+## Tips to Optimize Hydration
+
+### Improving Absorption
+- **Room temperature or slightly warm water**: Absorbs faster than cold water
+- **Small sips, frequently**: Better than large amounts at once
+- **Add electrolytes**: Sodium and potassium enhance absorption
+
+### Making It Enjoyable
+- **Lemon or lime**: Adds Vitamin C
+- **Cucumber or mint**: Refreshing flavor
+- **Berries**: Antioxidant boost
+- **Sparkling water**: Mix things up
+
+### Building the Habit
+- **Carry a water bottle at all times**: Visual reminder
+- **Set alarms**: Drink water every 2 hours
+- **Before meals**: One glass of water 30 minutes before eating
+- **Upon waking**: 500 ml of water on an empty stomach
+
+## The Importance of Electrolytes
+
+### Key Electrolytes
+**Sodium**: Fluid balance, muscle contraction
+**Potassium**: Muscle function, blood pressure regulation
+**Magnesium**: Muscle relaxation, energy production
+**Calcium**: Muscle contraction, bone health
+
+### Symptoms of Electrolyte Deficiency
+- Muscle cramps and twitching
+- Dizziness and headaches
+- Irregular heartbeat
+- Extreme fatigue
+
+### Natural Electrolyte Sources
+- **Banana**: Rich in potassium
+- **Coconut water**: Natural sports drink
+- **Salt**: Sodium replenishment
+- **Nuts**: Magnesium
+
+## Hydration Checklist
+
+### Signs of Adequate Hydration
+- [ ] Urine is pale yellow in color
+- [ ] Rarely feeling thirsty
+- [ ] Good skin elasticity (pinch test on back of hand)
+- [ ] Lips and mouth feel moist
+- [ ] Sweating appropriately during exercise
+
+### Dehydration Warning Signs
+- [ ] Dark yellow urine
+- [ ] Persistent thirst
+- [ ] Headaches and dizziness
+- [ ] Fatigue and reduced concentration
+- [ ] Frequent muscle cramps
+
+## Hydration Management for Specific Situations
+
+### During a Diet
+- **More fluids needed** (increased metabolic activity)
+- **Satiety effect**: Drink a glass of water 30 minutes before meals
+- **Flush waste**: Helps excrete ketone bodies and other byproducts
+
+### During a Muscle-Building Phase
+- **Protein metabolism**: Requires adequate hydration
+- **When taking creatine**: Add another 500 ml
+- **Muscle volume**: Hydration directly influences muscle size
+
+### Summer Training
+- **Pre-hydrate**: Start drinking 2 hours before training
+- **Cool environment**: Use air conditioning or fans
+- **Increase rest**: Take longer breaks between sets
+
+Remember — by the time you feel thirsty, it's already too late. **Staying ahead of thirst with consistent hydration** is the best performance strategy available.
+
+Water is the cheapest and most effective "supplement" there is.
+    `,
     author: 'Corevia Health',
     publishedDate: '2025-09-10',
   },
   {
     id: 'mindful-eating',
     category: '마인드셋',
+    categoryEn: 'Mindset',
     title: '마음챙김 식사법: 다이어트의 새로운 접근',
+    titleEn: 'Mindful Eating: A New Approach to Dieting',
     summary: '칼로리 계산보다 중요할 수 있는 것. 어떻게 먹느냐가 무엇을 먹느냐만큼 중요합니다.',
+    summaryEn: 'Something that might matter more than counting calories. How you eat is just as important as what you eat.',
     content: `
 # 마음챙김 식사법: 다이어트의 새로운 접근
 
@@ -1708,14 +3180,165 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 천천히, 의식적으로, 감사하며 먹는 습관을 기르세요. 몸과 마음이 모두 건강해집니다.
     `,
+    contentEn: `
+# Mindful Eating: A New Approach to Dieting
+
+The biggest causes of diet failure are **binge eating** and **emotional eating**. Counting calories alone won't solve these problems. **How you eat** is what matters.
+
+## What Is Mindful Eating?
+
+### Definition
+- Eating with full attention in the **present moment**
+- Recognizing signals of **hunger and fullness**
+- Fully experiencing the **taste, aroma, and texture** of food
+- Separating **emotions from eating**
+
+### Modern Eating Problems
+- **Multitasking**: Eating while watching TV or scrolling your phone
+- **Eating too fast**: Missing the fullness signal
+- **Emotional eating**: Eating in response to feelings
+- **Habitual overeating**: Continuing to eat when already full
+
+## The Science Behind Mindful Eating
+
+### Weight Management
+- **Natural calorie reduction**: 20–30% fewer calories consumed
+- **Increased satiety**: Greater satisfaction from the same amount of food
+- **Reduced binge eating**: Over 90% improvement
+- **Prevents rebound**: Supports sustainable eating habits
+
+### Improved Digestion
+- **Increased saliva production**: Activates digestive enzymes
+- **Normalized stomach acid**: Reduces indigestion
+- **Gut health**: Improved gut environment through stress reduction
+
+### Psychological Benefits
+- **Healthy relationship with food**: Eating without guilt
+- **Reduced stress**: Improved cortisol levels
+- **Better self-awareness**: Distinguishing true hunger from false hunger
+
+## How to Practice
+
+### 1. Set the Environment
+- **Turn off devices**: TV, phone, computer OFF
+- **Quiet space**: Free from interruptions
+- **Tidy table**: Remove visual clutter
+- **Appropriate lighting**: Not too bright or too dim
+
+### 2. Before Eating
+- **3 deep breaths**: Settle the mind
+- **Check hunger level**: On a 1–10 scale
+- **Express gratitude**: For the food and whoever prepared it
+- **Set an intention**: Nourishment is the purpose
+
+### 3. During the Meal
+- **Focus on the first bite**: Fully experience taste, aroma, and texture
+- **Chew slowly**: 20–30 chews per bite
+- **Put your utensils down**: Brief pause after swallowing
+- **Mid-meal check**: Assess your level of fullness
+
+### 4. After the Meal
+- **Evaluate fullness**: On a 1–10 scale
+- **Check satisfaction**: Did the food satisfy you?
+- **Assess emotions**: Do you feel satisfied without guilt?
+- **Plan next meal**: Anticipate when you'll next be hungry
+
+## Overcoming Emotional Eating
+
+### Distinguishing Emotion from Hunger
+**True hunger**:
+- Builds gradually
+- Various foods sound appealing
+- Felt in the stomach
+- Followed by satisfaction after eating
+
+**Emotional hunger**:
+- Appears suddenly
+- Craving specific foods (sweet, salty)
+- Felt in the head
+- Followed by guilt after eating
+
+### Coping Strategies
+**The Pause Technique**
+1. **Wait 10 minutes**: Prevent impulsive eating
+2. **Drink a glass of water**: Distinguish thirst from hunger
+3. **Check your emotions**: Stressed, bored, or sad?
+4. **Find an alternative activity**: Walk, music, phone a friend
+
+**Stress Management**
+- **Exercise**: The best stress reliever
+- **Meditation**: 10 minutes a day
+- **Hobbies**: Find enjoyment outside of food
+- **Adequate sleep**: Regulates stress hormones
+
+## Practical Tips
+
+### Mindful Eating When Dining Out
+- **Choose your meal in advance**: Avoid impulsive decisions
+- **Skip appetizers**: Confirm whether you're truly hungry
+- **Focus on conversation**: The people matter more than the food
+- **Practice leaving food**: Stop when you feel full
+
+### At Home
+- **Use smaller plates**: Create visual fullness
+- **Meal prep in advance**: Make healthy choices easier
+- **Hide snacks**: Keep them out of sight
+- **Food journal**: Identify emotional eating patterns
+
+### At Work
+- **Secure lunch time**: At least 20 minutes
+- **Eat with colleagues**: Social dining
+- **Prepare healthy snacks**: Nuts, fruit
+- **Manage stress**: Short breaks during the workday
+
+## Mindful Eating Checklist
+
+### Before the Meal
+- [ ] Turn off all devices
+- [ ] Check hunger level (1–10)
+- [ ] Take 3 deep breaths
+- [ ] Express gratitude for the food
+
+### During the Meal
+- [ ] Focus on the first bite
+- [ ] Chew slowly (20–30 times)
+- [ ] Put utensils down and pause
+- [ ] Mid-meal fullness check
+
+### After the Meal
+- [ ] Evaluate fullness (1–10)
+- [ ] Assess satisfaction
+- [ ] Check emotional state
+- [ ] Estimate time until next hunger
+
+## Long-Term Benefits
+
+### Weight Management
+- Natural calorie reduction
+- Sustained weight maintenance without rebound
+- Healthy eating habits established for life
+
+### Overall Wellbeing
+- Reduced stress
+- Improved digestive function
+- A healthy relationship with food
+- Enhanced self-awareness
+
+Mindful eating is **not a temporary diet method — it is a lifelong lifestyle**.
+
+Cultivate the habit of eating slowly, consciously, and with gratitude. Both your body and mind will thrive.
+    `,
     author: 'Corevia Mindset',
     publishedDate: '2025-09-09',
   },
   {
     id: 'beginner-workout-plan',
     category: '초보자',
+    categoryEn: 'Beginner',
     title: '초보자를 위한 12주 운동 계획',
+    titleEn: 'A 12-Week Workout Plan for Beginners',
     summary: '헬스장에 처음 가는 사람들을 위한 단계별 운동 프로그램',
+    summaryEn: 'A step-by-step training program for people walking into the gym for the first time.',
     content: `
 # 초보자를 위한 12주 운동 계획
 
@@ -1851,14 +3474,152 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 12주 후에는 중급자 프로그램으로 진행하거나, 개인 목표에 맞는 전문 프로그램을 선택하세요.
     `,
+    contentEn: `
+# A 12-Week Workout Plan for Beginners
+
+Walking into the gym for the first time can feel overwhelming — where do you even start? Follow this structured 12-week plan to get started safely and effectively.
+
+## Weeks 1–4: Adaptation Phase
+
+### Goals
+- Learn fundamental movement patterns
+- Allow muscles and joints to adapt
+- Build the habit of regular training
+
+### Program Design
+**3 days per week (Monday, Wednesday, Friday)**
+- Full body training
+- 12–15 reps per set
+- 60–90 seconds rest between sets
+
+**Day 1 & 3: Upper Body Focus**
+1. Knee push-ups 3x10–12
+2. Lat pulldown 3x12–15
+3. Shoulder press machine 3x10–12
+4. Seated cable row 3x12–15
+5. Plank 3x20–30 seconds
+
+**Day 2: Lower Body Focus**
+1. Bodyweight squat 3x10–12
+2. Leg press 3x12–15
+3. Leg curl 3x10–12
+4. Calf raise 3x15–20
+5. Glute bridge 3x12–15
+
+## Weeks 5–8: Development Phase
+
+### Goals
+- Gradually increase weights
+- Improve movement quality
+- Build a strength foundation
+
+### Program Design
+**4 days per week (Monday, Tuesday, Thursday, Friday)**
+- Upper/lower body split
+- 8–12 reps per set
+- 90–120 seconds rest between sets
+
+**Upper Body (Monday, Thursday)**
+1. Bench press 3x8–10
+2. Barbell row 3x8–10
+3. Shoulder press 3x10–12
+4. Lat pulldown 3x10–12
+5. Bicep curl 3x12–15
+6. Tricep pushdown 3x12–15
+
+**Lower Body (Tuesday, Friday)**
+1. Squat 3x8–10
+2. Romanian deadlift 3x8–10
+3. Leg press 3x10–12
+4. Leg curl 3x12–15
+5. Calf raise 4x15–20
+6. Plank 3x30–45 seconds
+
+## Weeks 9–12: Intensification Phase
+
+### Goals
+- Increase hypertrophy stimulus
+- Add exercise variety
+- Address individual weak points
+
+### Program Design
+**5 days per week (Monday–Friday)**
+- Body-part split training
+- 6–12 reps per set (varies by intensity)
+- 120–180 seconds rest between sets
+
+**Monday: Chest + Triceps**
+1. Bench press 4x6–8
+2. Incline dumbbell press 3x8–10
+3. Dips 3x8–12
+4. Cable fly 3x10–12
+5. Tricep dips 3x10–12
+6. Overhead extension 3x12–15
+
+**Tuesday: Back + Biceps**
+1. Deadlift 4x6–8
+2. Barbell row 3x8–10
+3. Lat pulldown 3x8–10
+4. Seated row 3x10–12
+5. Barbell curl 3x10–12
+6. Hammer curl 3x12–15
+
+**Wednesday: Legs**
+1. Squat 4x6–8
+2. Romanian deadlift 3x8–10
+3. Leg press 3x12–15
+4. Leg curl 3x12–15
+5. Leg extension 3x12–15
+6. Calf raise 4x15–20
+
+**Thursday: Shoulders**
+1. Shoulder press 4x8–10
+2. Side lateral raise 3x10–12
+3. Rear delt fly 3x12–15
+4. Upright row 3x10–12
+5. Face pull 3x12–15
+6. Shrugs 3x12–15
+
+**Friday: Arms + Core**
+1. Close-grip bench press 3x8–10
+2. Barbell curl 3x8–10
+3. Tricep dips 3x10–12
+4. Hammer curl 3x10–12
+5. Plank 3x45–60 seconds
+6. Russian twist 3x20
+
+## Progress Guidelines
+
+### Weight Progression Rules
+- **Increase by 2.5–5 kg** the following week when you achieve the target reps
+- **Immediately reduce weight** if your form breaks down
+- **Rest** when you feel joint discomfort
+
+### Important Notes
+- **Warm-up is mandatory**: 5–10 minutes of light cardio
+- **Cool-down**: 10 minutes of stretching after training
+- **Respect rest days**: Never train the same muscle group 3 days in a row
+- **Sleep and nutrition**: Just as important as training
+
+### Tracking Progress
+- **Training log**: Record weights, reps, and sets
+- **Weekly weigh-in**: Same time, same conditions
+- **Progress photos**: Every 2 weeks under identical conditions
+- **How you feel**: Notice when daily activities feel easier
+
+After 12 weeks, move on to an intermediate program or choose a specialized program aligned with your personal goals.
+    `,
     author: 'Corevia Program',
     publishedDate: '2025-09-08',
   },
   {
     id: 'home-workout-guide',
     category: '운동',
+    categoryEn: 'Exercise',
     title: '홈트레이닝 완전 가이드',
+    titleEn: 'The Complete Home Workout Guide',
     summary: '집에서도 충분히 효과적인 운동이 가능합니다. 장비 없이 할 수 있는 운동들',
+    summaryEn: 'Effective workouts are absolutely possible at home. Exercises you can do without any equipment.',
     content: `
 # 홈트레이닝 완전 가이드
 
@@ -2015,14 +3776,175 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 홈트도 충분히 효과적입니다. 꾸준함이 장소보다 중요합니다.
     `,
+    contentEn: `
+# The Complete Home Workout Guide
+
+Don't worry if you can't make it to the gym. Effective workouts are absolutely possible at home.
+
+## Advantages of Home Workouts
+
+### Convenience
+- **Time savings**: No commute required
+- **24/7 access**: Train whenever you want
+- **Privacy**: No one watching you
+- **Cost savings**: No gym membership needed
+
+### Consistency
+- **Weather-proof**: Rain or snow won't stop you
+- **Dress code**: Work out in whatever feels comfortable
+- **Hygienic**: Your personal space is safe and clean
+
+## Full-Body Workouts Without Equipment
+
+### Upper Body
+
+**Push-Up Variations**
+1. **Standard push-up**: Chest, shoulders, triceps
+2. **Diamond push-up**: Triceps focus
+3. **Wide push-up**: Outer chest focus
+4. **Incline push-up**: Beginner-friendly (using a chair)
+5. **Decline push-up**: Advanced (feet elevated)
+
+**Back Exercises**
+1. **Superman**: Erector spinae strengthening
+2. **Reverse fly**: Rear deltoids
+3. **Plank row**: Core and back simultaneously
+4. **Wall handstand**: Shoulders and upper back
+
+### Lower Body
+
+**Squat Variations**
+1. **Air squat**: Foundational lower body exercise
+2. **Jump squat**: Develops explosive power
+3. **Single-leg squat**: Balance and strength
+4. **Cossack squat**: Hip mobility and inner thigh
+
+**Lunge Variations**
+1. **Forward lunge**: Quadriceps emphasis
+2. **Reverse lunge**: Glute emphasis
+3. **Side lunge**: Adductor strengthening
+4. **Walking lunge**: Functional movement
+
+### Core
+
+**Plank Variations**
+1. **Standard plank**: 30 seconds–2 minutes
+2. **Side plank**: Oblique strengthening
+3. **Plank up-down**: Dynamic core
+4. **Mountain climber**: Cardio + core
+
+**Abdominal Exercises**
+1. **Crunch**: Upper abs
+2. **Leg raise**: Lower abs
+3. **Russian twist**: Obliques
+4. **Dead bug**: Core stability
+
+## Maximizing Results with Minimal Equipment
+
+### Resistance Bands
+
+**Upper Body**
+- Band pull-apart (rear delts)
+- Band row (back)
+- Band press (chest)
+
+**Lower Body**
+- Band squat (glute activation)
+- Band side step (gluteus medius)
+- Band kickback (glutes)
+
+### 1–2 Dumbbells
+
+**Full-Body Exercises**
+- Dumbbell thruster (full body)
+- Dumbbell swing (posterior chain)
+- Dumbbell complex (continuous movements)
+
+## Sample Home Workout Programs
+
+### Beginner (3x/week, 30 minutes)
+**Day 1: Upper Body**
+1. Push-ups 3x8–12
+2. Pike push-ups 3x5–8
+3. Plank 3x30 seconds
+4. Mountain climbers 3x30 seconds
+
+**Day 2: Lower Body**
+1. Squat 3x12–15
+2. Lunge 3x10 (each leg)
+3. Glute bridge 3x12–15
+4. Wall sit 3x30 seconds
+
+**Day 3: Full Body**
+1. Burpee 3x5–8
+2. Plank to push-up 3x5–8
+3. Jump squat 3x8–10
+4. Mountain climbers 3x30 seconds
+
+### Intermediate (4–5x/week, 45 minutes)
+**Upper/lower split + HIIT added**
+
+### Advanced (5–6x/week, 60 minutes)
+**Body-part split + high-intensity training**
+
+## Home Workout Success Tips
+
+### Setting Up Your Space
+- **Secure a workout area**: Approximately 2m x 2m
+- **Get a mat**: Protects the floor and ensures safety
+- **Install a mirror**: For form checks
+- **Set up music**: For motivation
+
+### Maintaining Motivation
+- **Fix a training time**: Work out at the same time every day
+- **Put on workout clothes**: A conscious preparation ritual
+- **Set goals**: Weekly and monthly targets
+- **Keep records**: Maintain a training journal
+
+### Overcoming Limitations
+- **Adjust intensity**: Change speed, angle, or duration
+- **Combine exercises**: Circuit training style
+- **Control rest time**: Shorter rests for higher intensity
+- **Creative variations**: Explore new movements
+
+## Gym vs. Home Workout
+
+### Limitations of Home Training
+- **Weight ceiling**: Progressive overload is harder
+- **Limited equipment**: Restricts exercise variety
+- **Motivation**: The challenge of training solo
+
+### How to Overcome Home Limitations
+- **High rep ranges**: Build muscular endurance and hypertrophy simultaneously
+- **Time under tension (TUT)**: Make lighter exercises harder
+- **Compound movements**: Stimulate multiple muscles at once
+- **Use online resources**: YouTube, apps, virtual classes
+
+## Transitioning Between Home and Gym
+
+### Home Workout → Gym
+- **Build a foundation**: Use home training to develop base fitness
+- **Build confidence**: Learn the basics before stepping in
+- **Set bigger goals**: A more ambitious target motivates the switch
+
+### Gym → Home Workout
+- **Maintenance purpose**: Preserve existing strength
+- **Supplementary training**: Complement gym sessions
+- **Rest day activity**: Light movement on off days
+
+Home workouts are fully effective. Consistency matters more than location.
+    `,
     author: 'Corevia Home',
     publishedDate: '2025-09-07',
   },
   {
     id: 'nutrition-timing',
     category: '영양',
+    categoryEn: 'Nutrition',
     title: '운동 전후 영양 섭취 타이밍',
+    titleEn: 'Pre- and Post-Workout Nutrition Timing',
     summary: '언제 무엇을 먹어야 운동 효과를 극대화할 수 있을까요?',
+    summaryEn: 'What should you eat, and when, to maximize your training results?',
     content: `
 # 운동 전후 영양 섭취 타이밍
 
@@ -2167,14 +4089,161 @@ export const HANDBOOK_DATA: HandbookArticle[] = [
 
 기본기가 중요합니다.
     `,
+    contentEn: `
+# Pre- and Post-Workout Nutrition Timing
+
+To maximize training results, **when you eat** matters just as much as **what you eat**.
+
+## Pre-Workout Nutrition Strategy
+
+### 2–3 Hours Before (Full Meal)
+**Goal**: Store energy and complete digestion
+
+**Recommended foods**:
+- **Carbohydrates**: Brown rice, sweet potato, oatmeal
+- **Protein**: Chicken breast, fish, eggs
+- **Fat**: Moderate amounts (nuts, avocado)
+- **Fluids**: 500 ml or more
+
+**What to avoid**:
+- Fatty foods (digestive burden)
+- Excessive fiber (abdominal discomfort)
+- Eating too much (indigestion)
+
+### 30 Minutes to 1 Hour Before (Snack)
+**Goal**: Provide immediately usable energy
+
+**Recommended snacks**:
+- Banana + peanut butter
+- Oatmeal + berries
+- Greek yogurt + honey
+- Toast + jam
+
+**What to avoid**:
+- High-fat foods
+- Excessive protein
+- Unfamiliar foods (allergy risk)
+
+### 15 Minutes Before Training
+**Goal**: Maintain blood glucose and hydrate
+
+**Recommended**:
+- 200–300 ml of water
+- Sports drink (for sessions over 1 hour)
+- Half a banana
+- 2–3 dates (jujubes)
+
+## Mid-Workout Nutrition Management
+
+### Fluid Replacement
+- **150–200 ml every 15–20 minutes**
+- Drink **before you feel thirsty**
+- **Electrolyte replenishment**: For sessions over 1 hour
+
+### Energy Replenishment (Extended Sessions)
+- Necessary for **sessions over 90 minutes**
+- **Sports drink**: 6–8% carbohydrate solution
+- **Banana or dates**: Natural sugars
+
+## Post-Workout Nutrition Strategy
+
+### Within 30 Minutes After Training
+**Goal**: Initiate muscle recovery and replenish glycogen
+
+**Golden ratio**: Carbohydrates 3–4 : Protein 1
+
+**Recommended combinations**:
+- Chocolate milk (near-perfect ratio)
+- Banana + whey protein
+- Toast + eggs
+- Sweet potato + chicken breast
+
+### Within 2 Hours After Training (Full Meal)
+**Goal**: Complete recovery and optimize muscle protein synthesis
+
+**Meal composition**:
+- **Protein**: Bodyweight × 0.3–0.5 g
+- **Carbohydrates**: Bodyweight × 0.5–1.0 g
+- **Fat**: Moderate amount
+- **Antioxidants**: Berries, leafy greens
+
+## Goal-Specific Nutrition Timing
+
+### For Muscle Building
+**Pre-workout**:
+- Ample carbohydrates (secure energy)
+- Adequate protein (prevent muscle breakdown)
+
+**Post-workout**:
+- Fast-digesting carbs + protein
+- Maintain caloric surplus
+
+### For Fat Loss
+**Pre-workout**:
+- Minimal carbohydrates (energy only)
+- Utilize caffeine (fat oxidation)
+
+**Post-workout**:
+- Protein first (prevent muscle loss)
+- Moderate carbohydrates (maintain caloric deficit)
+
+### For Endurance
+**Pre-workout**:
+- Ample carbohydrates (fill glycogen stores)
+- Hydrate well
+
+**During workout**:
+- Continuous energy supply
+- Electrolyte replenishment
+
+**Post-workout**:
+- Rapid recovery (carbohydrates first)
+
+## Real-World Examples
+
+### Morning Training (6–7 AM)
+**Night before**: Adequate sleep + hydration
+**Upon waking**: Water + half a banana
+**After training**: Protein shake + breakfast
+
+### Lunchtime Training (12–1 PM)
+**Pre-workout**: Light snack around 11 AM
+**After training**: Normal lunch
+**Afternoon**: Maintain adequate fluid intake
+
+### Evening Training (6–8 PM)
+**Pre-workout**: Afternoon snack to secure energy
+**After training**: Protein-centered dinner
+**Before bed**: Casein or Greek yogurt
+
+## Important Notes
+
+### Individual Variation
+- **Digestion rate**: Varies from person to person
+- **Preferences**: Avoid foods that don't agree with you
+- **Allergies**: Be cautious with unfamiliar foods
+- **Current condition**: Adjust based on how your body feels
+
+### Experimentation and Adaptation
+- **2-week trial**: Allow time to adapt to a new timing approach
+- **Keep records**: Observe changes in how you feel
+- **Gradual adjustments**: Avoid drastic changes
+
+Remember — nutrition timing is a **fine detail to consider after the fundamentals of training and diet are in place**.
+
+The basics always come first.
+    `,
     author: 'Corevia Nutrition',
     publishedDate: '2025-09-06',
   },
   {
     id: 'female-fitness-guide',
     category: '운동',
+    categoryEn: 'Exercise',
     title: '여성을 위한 피트니스 가이드',
+    titleEn: "A Fitness Guide for Women",
     summary: '여성의 생리적 특성을 고려한 운동과 영양 전략',
+    summaryEn: "Exercise and nutrition strategies that account for women's unique physiological characteristics.",
     content: `
 # 여성을 위한 피트니스 가이드
 
@@ -2308,6 +4377,139 @@ A: 단백질은 포만감이 높고 열효과가 커서 오히려 다이어트�
 
 여성도 충분히 강해질 수 있습니다. 자신의 몸을 이해하고 존중하며 운동하세요.
     `,
+    contentEn: `
+# A Fitness Guide for Women
+
+The female body has distinct physiological characteristics compared to the male body. Understanding and working with these differences leads to more effective training.
+
+## Female Physiological Characteristics
+
+### Hormonal Differences
+- **Testosterone**: 1/10 to 1/15 of male levels
+- **Estrogen**: Promotes fat storage, increases ligament flexibility
+- **Progesterone**: Causes fluctuations in basal metabolic rate
+
+### Structural Differences
+- **Muscle mass**: Approximately 60–80% of male levels
+- **Body fat percentage**: 5–10% higher than men on average
+- **Bone density**: Lower, raising the risk of osteoporosis
+- **Joints**: More flexible but also less stable
+
+## Special Considerations for Women's Training
+
+### The Importance of Strength Training
+**Myth**: "Lifting weights will make me bulky"
+**Truth**: With low testosterone levels, significant bulk is **virtually impossible**
+
+**Benefits of strength training for women**:
+- **Increased BMR**: More effective fat loss
+- **Improved bone density**: Prevention of osteoporosis
+- **Functional strength**: Easier daily life
+- **Body composition**: A toned, healthy physique
+
+### Recommended Training Structure
+**Lower body focus** (leveraging women's natural strengths)
+- Squats, deadlifts, lunges
+- Glute-specific exercises
+- Women tend to have proportionally stronger lower bodies
+
+**Core strengthening** (women-specific focus)
+- Pelvic floor strengthening
+- Prevention of diastasis recti
+- Lower back health
+
+## The Menstrual Cycle and Training
+
+### Characteristics by Cycle Phase
+
+**Menstruation (Days 1–5)**
+- **How you feel**: Fatigue, abdominal discomfort
+- **Training**: Light cardio, stretching
+- **Nutrition**: Iron supplementation, stay well hydrated
+
+**Follicular Phase (Days 6–14)**
+- **How you feel**: Rising energy, good condition
+- **Training**: Optimal for high-intensity strength work
+- **Nutrition**: Better carbohydrate utilization capacity
+
+**Ovulation (Days 14–16)**
+- **How you feel**: Peak condition
+- **Training**: 1RM testing, high-intensity sessions
+- **Nutrition**: High protein synthesis efficiency
+
+**Luteal Phase (Days 17–28)**
+- **How you feel**: Gradual decline, PMS symptoms
+- **Training**: Moderate intensity, recovery-focused
+- **Nutrition**: Higher fat-burning efficiency
+
+### Cycle-Aligned Training Plan
+**Weeks 1–2**: High-intensity strength + moderate cardio
+**Weeks 3–4**: Moderate-intensity strength + more cardio
+
+## Women-Specific Nutrition Strategy
+
+### Iron Management
+- **Requirement**: Twice that of men (18 mg vs. 8 mg)
+- **Enhance absorption**: Take with Vitamin C
+- **Inhibitors**: Separate from caffeine and calcium
+
+### Calcium and Vitamin D
+- **Bone health**: Especially critical after age 30
+- **Muscle function**: Calcium deficiency can cause cramps
+- **Recommended**: 1,000 mg calcium, 1,000 IU Vitamin D
+
+### Folate and B Vitamins
+- **Energy metabolism**: B-group vitamins are important
+- **Childbearing age**: 400–800 mcg of folate
+- **Stress**: B-group supports the nervous system
+
+## Pre- and Post-Pregnancy Exercise
+
+### Before Pregnancy
+- **Core strengthening**: Protect the lower back during pregnancy
+- **Bone density**: Maximize calcium stores
+- **Cardiovascular fitness**: Build stamina for pregnancy
+
+### During Pregnancy (Medical consultation required)
+- **Low-intensity cardio**: Walking, swimming
+- **Maintain strength**: With lighter weights
+- **Core caution**: Prevent diastasis recti
+
+### Postpartum Recovery
+- **Gradual return**: Starting after 6 weeks
+- **Core rehabilitation**: Recovery from diastasis recti
+- **Pelvic floor**: Prevention of urinary incontinence
+
+## Tips for Women's Fitness Success
+
+### Realistic Expectations
+- **Body weight**: May increase as muscle is gained
+- **Body fat %**: 18–25% is a healthy range
+- **Strength**: Focus on personal records
+
+### Social Support
+- **Training partner**: Someone with similar goals
+- **Online communities**: Share information and encouragement
+- **Family support**: Carve out dedicated training time
+
+### Sustainability
+- **Drop perfectionism**: 80% adherence still equals success
+- **Lifestyle approach**: Exercise you can do for life
+- **Enjoyment**: Something that brings joy, not stress
+
+## Women's Fitness Q&A
+
+**Q: I'm not losing weight even though I'm strength training.**
+A: Gaining muscle may cause the scale to rise, but body fat is decreasing. Focus on body composition and how your clothes fit rather than the number on the scale.
+
+**Q: Should I exercise during my period?**
+A: If you're feeling okay, light exercise can actually help. Listen to your body's signals and don't push too hard.
+
+**Q: Will eating a lot of protein make me gain weight?**
+A: Protein has a high satiety factor and a strong thermic effect, meaning it actually supports fat loss. Don't worry about it.
+
+Women are fully capable of becoming strong. Train with an understanding and respect for your own body.
+    `,
     author: 'Corevia Women',
     publishedDate: '2025-09-05',
   },
@@ -2315,8 +4517,11 @@ A: 단백질은 포만감이 높고 열효과가 커서 오히려 다이어트�
   {
     id: 'squat-master-guide',
     category: '부위별 운동',
+    categoryEn: 'Body Part Training',
     title: '스쿼트 마스터 가이드: 하체의 왕',
+    titleEn: 'The Squat Master Guide: King of Lower Body Training',
     summary: '올바른 스쿼트 자세부터 고급 변형까지, 하체 근력의 핵심 운동',
+    summaryEn: 'From proper squat technique to advanced variations — the definitive guide to the king of lower body exercises.',
     content: `
 # 스쿼트 마스터 가이드: 하체의 왕
 
@@ -2475,6 +4680,164 @@ A: 단백질은 포만감이 높고 열효과가 커서 오히려 다이어트�
 
 스쿼트는 평생 함께할 운동입니다. 완벽한 자세를 만드는 데 시간을 투자하세요. 그 투자는 반드시 보답받을 것입니다.
     `,
+    contentEn: `
+# The Squat Master Guide: King of Lower Body Training
+
+The squat is called **the king of lower body exercises** for good reason. Done correctly, it is the cornerstone of full-body strength development; done incorrectly, it becomes a source of injury.
+
+## Why the Squat Is Special
+
+### Multi-Joint Compound Movement
+- **Quadriceps**: Knee extension
+- **Glutes**: Hip extension
+- **Hamstrings**: Support hip flexion
+- **Core**: Spinal stability
+- **Calves**: Ankle stability
+
+### Functional Movement
+- **Daily life**: The foundation of sitting down and standing up
+- **Sports**: The basis of jumping and change of direction
+- **Anti-aging**: Preserves lower body strength over time
+
+## The Perfect Squat Technique
+
+### 1. Starting Position
+- **Foot placement**: Shoulder-width apart, toes 15–30 degrees outward
+- **Bar position**: Upper trapezius (high bar) or rear delts (low bar)
+- **Grip**: Wider than shoulder width, symmetrical left and right
+- **Core**: Brace the abs to maintain a neutral spine
+
+### 2. Descent
+- **Hips first**: Begin by pushing your hips back
+- **Knee direction**: Track in line with the toes
+- **Depth**: Hip crease below the knee
+- **Upper body**: Chest up, back flat
+
+### 3. Ascent
+- **Full foot contact**: Push evenly through the entire foot
+- **Knees and hips**: Extend simultaneously
+- **Gaze**: Forward or slightly upward
+- **Breathing**: Exhale as you rise
+
+## Common Mistakes and Corrections
+
+### Knee Valgus (Knees Caving Inward)
+**Cause**: Weak glutes, tight adductors
+**Correction**:
+- Band squats to strengthen the abductors
+- Foam roll the adductors to release tightness
+- Practice consciously tracking knees over toes
+
+### Heel Rise
+**Cause**: Limited ankle mobility, tight calves
+**Correction**:
+- Calf stretching (wall push)
+- Ankle mobility drills
+- Temporarily use heel elevation
+
+### Excessive Forward Lean
+**Cause**: Weak core, limited thoracic mobility
+**Correction**:
+- Core strengthening (plank, dead bug)
+- Thoracic mobility exercises
+- Practice front squats
+
+### Insufficient Depth
+**Cause**: Limited hip mobility, fear
+**Correction**:
+- Hip stretching (90/90 stretch)
+- Box squats to practice depth
+- Gradually increase depth over time
+
+## Squat Variations
+
+### Beginner
+**Goblet Squat**
+- Hold a dumbbell or kettlebell at chest height
+- Excellent for form correction
+- Improves balance
+
+**Box Squat**
+- Sit to a box and stand up
+- Great for practicing depth
+- Provides added safety
+
+### Intermediate
+**Front Squat**
+- Barbell positioned in front
+- Maximizes core strengthening effect
+- Corrects upper body positioning
+
+**Bulgarian Split Squat**
+- Rear foot elevated on a bench
+- Develops unilateral leg strength
+- Corrects left-right imbalances
+
+### Advanced
+**Overhead Squat**
+- Barbell held overhead
+- Demands total-body stability
+- Maximizes mobility demands
+
+**Jump Squat**
+- Develops explosive power
+- Plyometric training effect
+- Enhances athletic performance
+
+## Programming Guide
+
+### Beginner (0–6 months)
+- **Frequency**: 2–3 sessions per week
+- **Sets**: 3–4 sets
+- **Reps**: 8–12
+- **Weight**: Bodyweight → 0.5x bodyweight
+
+### Intermediate (6 months–2 years)
+- **Frequency**: 2–3 sessions per week
+- **Sets**: 4–5 sets
+- **Reps**: 5–8 (strength) or 8–12 (hypertrophy)
+- **Weight**: 0.5x–1.5x bodyweight
+
+### Advanced (2+ years)
+- **Frequency**: 2–4 sessions per week
+- **Sets**: 5–8 sets
+- **Reps**: 1–5 (strength) or 6–12 (hypertrophy)
+- **Weight**: 1.5x bodyweight and above
+
+## Squat Accessory Exercises
+
+### Addressing Weak Points
+**Glutes**: Hip thrust, clamshell
+**Quadriceps**: Leg press, leg extension
+**Hamstrings**: Romanian deadlift, leg curl
+**Calves**: Calf raise
+
+### Improving Mobility
+**Hips**: 90/90 stretch, pigeon pose
+**Ankles**: Wall ankle stretch, calf stretch
+**Thoracic spine**: Cat-cow, thoracic extension
+
+## Safety Guidelines
+
+### Warm-Up (10–15 minutes)
+1. **General warm-up**: 5 minutes of light cardio
+2. **Dynamic stretching**: Leg swings, high knees
+3. **Specific warm-up**: 10–15 bodyweight squats
+4. **Progressive loading**: Empty bar → 50% → 80% of working weight
+
+### Safety Equipment Setup
+- **Safety bars**: Set 5 cm below your lowest point
+- **Spotter**: Essential for heavy singles
+- **Emergency exit**: Know how to safely dump the barbell
+
+### Injury Prevention
+- **Progressive increases**: 2.5–5 kg per week
+- **Form first**: Technique over load
+- **Adequate rest**: 48–72 hours between squat sessions
+- **Check your joints**: Monitor for any discomfort
+
+The squat is a lifetime exercise. Invest time in building perfect technique. That investment will always pay off.
+    `,
     author: 'Corevia Technique',
     publishedDate: '2025-09-17',
   },
@@ -2482,8 +4845,11 @@ A: 단백질은 포만감이 높고 열효과가 커서 오히려 다이어트�
   {
     id: 'deadlift-complete-guide',
     category: '부위별 운동',
+    categoryEn: 'Body Part Training',
     title: '데드리프트 완전 정복: 후면 사슬의 제왕',
+    titleEn: 'The Complete Deadlift Guide: King of the Posterior Chain',
     summary: '가장 기능적인 운동 데드리프트의 모든 것. 올바른 자세와 안전한 수행법',
+    summaryEn: 'Everything about the deadlift — the most functional of all exercises. Proper technique and safe execution.',
     content: `
 # 데드리프트 완전 정복: 후면 사슬의 제왕
 
@@ -2678,6 +5044,201 @@ A: 단백질은 포만감이 높고 열효과가 커서 오히려 다이어트�
 
 데드리프트는 **진짜 힘**을 기르는 운동입니다. 조급해하지 말고 기본기부터 탄탄히 다져나가세요.
     `,
+    contentEn: `
+# The Complete Deadlift Guide: King of the Posterior Chain
+
+The deadlift is one of the **most functional exercises** in existence. Picking something heavy up off the ground is a fundamental movement of everyday life.
+
+## The Benefits of Deadlifts
+
+### Primary Movers
+- **Erector spinae**: Spinal stability
+- **Glutes**: Primary hip extensors
+- **Hamstrings**: Hip flexion assistance
+- **Trapezius**: Scapular stability
+
+### Secondary Movers
+- **Lats**: Keep the bar close to the body
+- **Rhomboids**: Scapular retraction
+- **Forearms**: Grip maintenance
+- **Core**: Total-body stability
+
+## Conventional Deadlift Technique
+
+### 1. Setup
+- **Foot position**: Under the bar, shoulder-width apart
+- **Bar position**: Mid-shin, over the mid-foot
+- **Grip**: Shoulder-width, mixed or double overhand
+- **Eyes**: Looking forward or at a point 2–3 m ahead on the floor
+
+### 2. Starting Position
+- **Hip hinge**: Push hips back and bend into the bar
+- **Neutral spine**: Maintain the natural S-curve of the spine
+- **Shoulders**: Directly over or slightly in front of the bar
+- **Arms**: Hanging naturally straight
+
+### 3. The Pull
+
+**Phase 1: Floor to Knee**
+- Push the floor away with your legs
+- Keep the bar against your shins
+- Extend knees and hips simultaneously
+
+**Phase 2: Knee to Lockout**
+- Drive hips through to complete extension
+- Squeeze the glutes at the top
+- Shoulders back, chest up
+
+### 4. The Descent
+- Begin the descent by hinging at the hips
+- Slide the bar down the thighs
+- Bend the knees once the bar passes them
+- Lower with control until it touches the floor
+
+## Deadlift Variations
+
+### Sumo Deadlift
+**Characteristics**:
+- Wide stance (1.5–2x shoulder width)
+- Toes angled 45 degrees outward
+- Hands inside the legs
+
+**Advantages**:
+- Shorter range of motion
+- Higher glute activation
+- Less lower back stress
+
+**Disadvantages**:
+- Requires hip mobility
+- Demands adductor flexibility
+
+### Romanian Deadlift (RDL)
+**Characteristics**:
+- Bar never returns to the floor
+- Fixed knee angle throughout
+- Hamstring-dominant
+
+**Advantages**:
+- Targeted hamstring development
+- Teaches the hip hinge pattern
+- Lower injury risk
+
+**Disadvantages**:
+- Weight is limited compared to conventional
+- Less total-body stimulus
+
+### Trap Bar Deadlift
+**Characteristics**:
+- Uses a hexagonal bar
+- Grip is on either side of the body
+- A hybrid of squat and deadlift mechanics
+
+**Advantages**:
+- Minimizes lower back stress
+- Beginner-friendly
+- High safety margin
+
+**Disadvantages**:
+- Requires specialized equipment
+- Limits transfer of conventional deadlift skill
+
+## Common Mistakes and Corrections
+
+### Rounding the Back
+**Cause**: Weak core, excessive weight
+**Risk**: Spinal injury
+**Correction**:
+- Reduce the weight
+- Core strengthening exercises
+- Add dead bugs and planks
+
+### Bar Drifting Away from the Body
+**Cause**: Weak lats, grip issues
+**Risk**: Increased lower back strain
+**Correction**:
+- Lat strengthening (pull-ups, rows)
+- Grip training
+- Keep the bar dragging against the shins
+
+### Hyperextending at the Top
+**Cause**: Incorrect lockout mechanics
+**Risk**: Lumbar hyperextension
+**Correction**:
+- Finish with glute squeeze, not a back bend
+- The torso should only reach vertical
+- Avoid any lean back beyond vertical
+
+### Squatting Instead of Hinging
+**Cause**: Confusing it with a squat pattern
+**Risk**: Bar catching on the knees
+**Correction**:
+- Practice the hip hinge in isolation
+- Use RDLs to groove the pattern
+- Practice in front of a mirror
+
+## Grip Types and Selection
+
+### Double Overhand
+- **Advantage**: Balanced development, improves grip strength
+- **Disadvantage**: Limits maximum weight
+- **Recommended for**: Beginners/intermediate, warm-up sets
+
+### Mixed Grip
+- **Advantage**: Allows heavier weights
+- **Disadvantage**: Asymmetrical stress, bicep injury risk
+- **Recommended for**: Advanced lifters, max effort sets
+
+### Hook Grip
+- **Advantage**: Safe and allows heavy weights
+- **Disadvantage**: Initially uncomfortable, requires practice
+- **Recommended for**: All levels as a long-term goal
+
+### Straps
+- **Advantage**: Solves grip limitations
+- **Disadvantage**: Reduces grip development
+- **Recommended for**: Accessory work, high-rep sets
+
+## Programming Examples
+
+### Beginner
+**1–2 times per week**
+- Warm-up: 5 progressively heavier sets (empty bar → 50% → 70% → 80% → 90%)
+- Main: 3x5 @ 85–90%
+- Accessory: RDL 3x8–10
+
+### Intermediate
+**1–2 times per week**
+- Main: 5x3 @ 90–95%
+- Back-off: 2x5 @ 80%
+- Accessory: Good morning, hyperextension
+
+### Advanced
+**1–2 times per week**
+- Main: 8x1 @ 95–105%
+- Variations: Sumo, deficit, block pulls
+- Accessory: Exercises targeting weak links
+
+## Safety Guidelines
+
+### The Importance of Warm-Up
+1. **General warm-up**: 5–10 minutes of cardio
+2. **Dynamic stretching**: Leg swings, hip circles
+3. **Activation**: Glute bridge, band pull-apart
+4. **Progressive loading**: 10–15 sets of gradually increasing weight
+
+### Injury Prevention
+- **Gradual increases**: 2.5–5 kg per week
+- **Form first**: Technique over load
+- **Adequate rest**: Minimum 48 hours between sessions
+- **Accessory work**: Address weak points
+
+### Emergency Response
+- **Lower back pain**: Stop immediately, consult a physician
+- **Grip failure**: Consider using straps
+- **Form breakdown**: Reduce weight and correct technique
+
+The deadlift builds **real strength**. Don't rush — build your fundamentals from the ground up.
+    `,
     author: 'Corevia Technique',
     publishedDate: '2025-09-17',
   },
@@ -2685,8 +5246,11 @@ A: 단백질은 포만감이 높고 열효과가 커서 오히려 다이어트�
   {
     id: 'creatine-complete-guide',
     category: '보충제',
+    categoryEn: 'Supplements',
     title: '크레아틴 완전 가이드: 가장 검증된 보충제',
+    titleEn: 'The Complete Creatine Guide: The Most Proven Supplement',
     summary: '가장 많은 연구로 입증된 보충제 크레아틴의 모든 것',
+    summaryEn: 'Everything about creatine — the supplement with the most research-backed evidence of any product on the market.',
     content: `
 # 크레아틴 완전 가이드: 가장 검증된 보충제
 
@@ -2861,6 +5425,180 @@ A: 장기 복용 연구에서 안전성이 확인되었습니다. 평생 복용�
 
 크레아틴은 **가성비 최고의 보충제**입니다. 복잡하게 생각하지 말고, 모노하이드레이트 형태로 꾸준히 복용하세요.
     `,
+    contentEn: `
+# The Complete Creatine Guide: The Most Proven Supplement
+
+Creatine is the supplement with the **most research** supporting its effectiveness. Over 30 years of studies confirm both its safety and results.
+
+## What Is Creatine?
+
+### Definition
+- **Naturally occurring compound**: Stored in muscles and the brain
+- **Energy system**: The core of the ATP-PC energy system
+- **Derived from amino acids**: Arginine, glycine, and methionine
+
+### Role in the Body
+- **Immediate energy**: Resynthesizes ATP during high-intensity exercise
+- **Muscle contraction**: Provides explosive power
+- **Brain function**: Supplies energy to the nervous system
+
+## The Effects of Creatine
+
+### Scientifically Proven Effects
+
+**Strength Gains**
+- **3–15% increase**: In 1–5 rep max efforts
+- **Explosive power**: Jumps, sprints
+- **Increased rep capacity**: More reps at the same weight
+
+**Hypertrophy Enhancement**
+- **Muscle mass increase**: 1–2 kg within 4–8 weeks
+- **Cell volumization**: Muscle swelling from water retention
+- **Protein synthesis**: Increased anabolic signaling
+
+**Improved Recovery**
+- **Reduced muscle damage**: Better inflammation markers
+- **Faster glycogen resynthesis**: When taken with carbohydrates
+- **Less fatigue**: Faster inter-set recovery
+
+### Additional Benefits
+
+**Cognitive Function**
+- **Brain energy**: Reduced mental fatigue
+- **Focus**: Especially during sleep deprivation
+- **Memory**: Short-term memory enhancement
+
+**Anti-Aging**
+- **Sarcopenia**: Helps maintain muscle mass in older adults
+- **Bone density**: Indirect support for bone health
+- **Neuroprotection**: Supports brain health
+
+## Types of Creatine
+
+### Creatine Monohydrate
+**Advantages**:
+- The most researched form
+- Affordable price
+- High safety profile
+
+**Disadvantages**:
+- Mild digestive discomfort for some
+- Doesn't dissolve as easily in water
+
+### Creatine HCl
+**Advantages**:
+- High solubility
+- Easier on digestion
+- Smaller dose required
+
+**Disadvantages**:
+- More expensive
+- Less research available
+
+### Other Forms
+**Creatine ethyl ester**: Insufficient research, effectiveness questionable
+**Buffered creatine**: Similar to monohydrate
+**Creatine nitrate**: Primarily marketing-driven
+
+**Conclusion**: **Creatine monohydrate** remains the best choice
+
+## How to Take It
+
+### Loading Protocol
+**Week 1 (Loading)**:
+- 20 g per day (5 g x 4 doses)
+- Take with meals
+- Drink plenty of water (3–4 L per day)
+
+**Week 2 onwards (Maintenance)**:
+- 3–5 g per day
+- Timing doesn't matter
+- Take consistently
+
+### No-Loading Protocol
+**Throughout**:
+- 3–5 g per day
+- Reach full saturation after 3–4 weeks
+- A more comfortable approach for most people
+
+### Dosing Timing
+**Anytime works**: With creatine, consistency matters more than timing
+**Post-workout recommended**: Taking with carbohydrates improves uptake
+**Split dosing**: If you experience digestive issues, divide into 2–3 doses
+
+## What Pairs Well with Creatine
+
+### Carbohydrates
+- **Enhanced absorption**: Utilizes the insulin response
+- **Recommended**: 30–50 g of simple carbohydrates
+- **Timing**: Together post-workout
+
+### Protein
+- **Muscle-building synergy**: Complementary effects
+- **Recommended**: 20–40 g of whey protein
+- **Timing**: Together post-workout
+
+### Beta-Alanine
+- **Different energy system**: Complementary mechanism
+- **Endurance boost**: Effective for 1–4 minute efforts
+- **How to take**: 3–5 g per day, split doses
+
+## Side Effects and Precautions
+
+### Common Side Effects
+**Water Retention**:
+- Increased intramuscular water content
+- 1–3 kg temporary weight increase
+- A normal and expected response
+
+**Digestive Discomfort**:
+- Possible bloating or loose stool
+- Reduce dose or split into smaller portions
+- Take with food
+
+### Rare Side Effects
+**Muscle cramps**: Related to dehydration — prevent by drinking adequate water
+**Kidney stress**: No concern in healthy individuals
+**Hair loss**: Insufficient scientific evidence
+
+### Who Should Use Caution
+- **Kidney disease**: Mandatory physician consultation
+- **Diabetes**: Monitor blood glucose levels
+- **Under 18**: Necessity is questionable
+
+## Creatine Q&A
+
+**Q: Will I lose muscle if I stop taking creatine?**
+A: The water retention effect disappears, but actual muscle mass is retained.
+
+**Q: Is it safe for women to take?**
+A: Yes, it is safe and effective for both men and women.
+
+**Q: Can I take it with caffeine?**
+A: Yes, there is no negative interaction. You can take them together.
+
+**Q: Do I need to drink more water while taking creatine?**
+A: Yes, a minimum of 3 L of water per day is recommended.
+
+**Q: How long can I take it?**
+A: Long-term studies have confirmed its safety. Lifelong use presents no known issues.
+
+## Buying Guide
+
+### Selection Criteria
+1. Confirm it is **creatine monohydrate**
+2. **Purity**: 99% or higher
+3. **Third-party testing**: NSF, Informed Choice, etc.
+4. **Price**: $20–40 per kg is reasonable
+
+### Products to Avoid
+- Proprietary blends (mixed with other ingredients)
+- Overly hyped products
+- Suspiciously cheap products
+- Products with unknown sourcing
+
+Creatine is **the best value-for-money supplement** available. Don't overthink it — just get the monohydrate form and take it consistently.
+    `,
     author: 'Corevia Science',
     publishedDate: '2025-09-17',
   },
@@ -2868,8 +5606,11 @@ A: 장기 복용 연구에서 안전성이 확인되었습니다. 평생 복용�
   {
     id: 'bulking-complete-guide',
     category: '근비대',
+    categoryEn: 'Hypertrophy',
     title: '벌크업 완전 가이드: 근육량 극대화 전략',
+    titleEn: 'The Complete Bulking Guide: Strategies to Maximize Muscle Mass',
     summary: '효과적인 벌크업을 위한 운동, 식단, 라이프스타일 전략',
+    summaryEn: 'Training, nutrition, and lifestyle strategies for an effective muscle-building phase.',
     content: `
 # 벌크업 완전 가이드: 근육량 극대화 전략
 
@@ -3097,6 +5838,233 @@ A: 장기 복용 연구에서 안전성이 확인되었습니다. 평생 복용�
 
 벌크업은 **마라톤**입니다. 조급해하지 말고 꾸준히 진행하세요. 1년 후의 몸을 상상하며 오늘 한 끼, 오늘 한 세트에 집중하세요.
     `,
+    contentEn: `
+# The Complete Bulking Guide: Strategies to Maximize Muscle Mass
+
+A bulk is a phase where **increasing muscle mass** is the primary objective. With a proper approach, gaining 5–10 kg of lean muscle in a year is achievable.
+
+## The Basic Principles of Bulking
+
+### Caloric Surplus
+- **Core principle**: Intake > Expenditure
+- **Recommended range**: BMR + 300–500 kcal
+- **Individual variation**: Adjust for body type, age, and sex
+
+### Progressive Overload
+- **Weight increases**: 2.5–5 kg per week
+- **Volume increases**: More sets, reps, and frequency
+- **Intensity**: Maintain RPE 8–9 during working sets
+
+## Bulking Nutrition Strategy
+
+### Macronutrient Ratios
+
+**Protein**: Bodyweight × 1.6–2.2 g
+- **Muscle protein synthesis**: Adequate amino acid supply
+- **Distribution**: 20–40 g per meal
+- **Sources**: Chicken breast, eggs, fish, dairy
+
+**Carbohydrates**: Bodyweight × 4–7 g
+- **Energy**: Fuel for high-intensity training
+- **Timing**: Concentrate around workouts
+- **Sources**: Brown rice, sweet potato, oats, banana
+
+**Fat**: 25–35% of total calories
+- **Hormones**: Testosterone production
+- **Satiety**: Appetite regulation
+- **Sources**: Nuts, olive oil, avocado
+
+### Meal Timing
+
+**Morning (After Waking)**
+- Large carbohydrates + protein
+- Replenish glycogen depleted overnight
+- Example: Oatmeal + banana + protein shake
+
+**Pre-Workout (1–2 Hours Before)**
+- Easy-to-digest carbs + moderate protein
+- Secure training energy
+- Example: Toast + jam + milk
+
+**Post-Workout (Within 30 Minutes)**
+- Fast carbs + protein (3:1 ratio)
+- Optimize muscle protein synthesis
+- Example: Banana + whey protein
+
+**Evening (2 Hours Before Bed)**
+- Casein protein + healthy fats
+- Support overnight muscle protein synthesis
+- Example: Greek yogurt + nuts
+
+### Sample Bulking Diet (70 kg Male)
+
+**Target Calories**: 3,200 kcal
+**Protein**: 140 g (560 kcal)
+**Carbohydrates**: 400 g (1,600 kcal)
+**Fat**: 115 g (1,040 kcal)
+
+**Breakfast**:
+- Oatmeal 80 g + banana + almonds 20 g
+- 3 eggs + 2 slices toast
+
+**Snack 1**:
+- Whey protein 30 g + milk 300 ml
+
+**Lunch**:
+- Chicken breast 150 g + brown rice 150 g + vegetables
+
+**Snack 2**:
+- Sweet potato 200 g + peanut butter 20 g
+
+**Dinner**:
+- Salmon 120 g + quinoa 100 g + half avocado
+
+**Snack 3**:
+- Greek yogurt 200 g + nuts 30 g
+
+## Bulking Training Program
+
+### Basic Principles
+- **Frequency**: Each muscle group 2–3 times per week
+- **Volume**: 10–20 sets per muscle group per week
+- **Intensity**: Focus on 6–12 RM range
+- **Rest**: 2–4 minutes between sets
+
+### Upper/Lower Split (4 days/week)
+
+**Upper Body A (Monday, Thursday)**
+1. Bench press 4x6–8
+2. Barbell row 4x6–8
+3. Incline dumbbell press 3x8–10
+4. Lat pulldown 3x8–10
+5. Dips 3x8–12
+6. Bicep curl 3x10–12
+7. Tricep extension 3x10–12
+
+**Lower Body (Tuesday, Friday)**
+1. Squat 4x6–8
+2. Romanian deadlift 4x6–8
+3. Leg press 3x10–12
+4. Leg curl 3x10–12
+5. Bulgarian split squat 3x8–10
+6. Calf raise 4x12–15
+7. Plank 3x45–60 seconds
+
+### Push/Pull/Legs (6 days/week)
+
+**Push (Monday, Thursday)**
+1. Bench press 4x6–8
+2. Shoulder press 4x8–10
+3. Incline dumbbell press 3x8–10
+4. Dips 3x8–12
+5. Side lateral raise 3x12–15
+6. Tricep pushdown 3x10–12
+
+**Pull (Tuesday, Friday)**
+1. Deadlift 4x5–6
+2. Pull-up/Lat pulldown 4x6–8
+3. Barbell row 3x8–10
+4. Seated row 3x8–10
+5. Face pull 3x12–15
+6. Barbell curl 3x10–12
+
+**Legs (Wednesday, Saturday)**
+1. Squat 4x6–8
+2. Romanian deadlift 3x8–10
+3. Leg press 3x10–12
+4. Leg curl 3x10–12
+5. Leg extension 3x12–15
+6. Calf raise 4x12–15
+
+## Cardio During a Bulk
+
+### Keep It Minimal
+- **Purpose**: Maintain cardiovascular health
+- **Frequency**: 2–3 times per week
+- **Intensity**: Low (heart rate 120–140 bpm)
+- **Duration**: 20–30 minutes
+
+### Recommended Cardio
+- **Walking**: Safest and easiest option
+- **Cycling**: Low joint impact
+- **Swimming**: Full-body, recovery-enhancing
+
+### Cardio to Avoid
+- **Long-distance running**: Risk of muscle loss
+- **High-intensity intervals**: Interferes with recovery
+- **Excessive frequency**: Burns too many calories
+
+## Bulking Success Tips
+
+### Body Weight Monitoring
+- **Daily weigh-in**: Same time, same conditions
+- **Weekly average**: Ignore daily fluctuations
+- **Target**: 0.2–0.5 kg gain per week
+
+### Tracking Progress
+- **Training log**: Record weights, reps, and sets
+- **Progress photos**: Every 2 weeks under identical conditions
+- **Circumference measurements**: Arms, chest, thighs
+- **Body composition**: Monthly InBody or caliper assessment
+
+### Sleep and Recovery
+- **Sleep duration**: 7–9 hours
+- **Sleep quality**: Deep, restful, consistent schedule
+- **Stress management**: Meditation, hobbies
+- **Rest days**: 1–2 complete rest days per week
+
+## Clean Bulk vs. Dirty Bulk
+
+### Clean Bulk (Recommended)
+**Characteristics**:
+- 300–500 kcal surplus
+- Whole food-focused diet
+- Minimizes fat gain
+
+**Advantages**:
+- Better muscle-to-fat ratio
+- Health preserved
+- Easier subsequent cut
+
+**Disadvantages**:
+- Slower weight gain
+- Requires disciplined diet management
+
+### Dirty Bulk (Not Recommended)
+**Characteristics**:
+- 1,000+ kcal surplus
+- No restrictions on food types
+- Rapid weight gain
+
+**Advantages**:
+- Faster muscle gain
+- Easier diet management
+- Psychological satisfaction
+
+**Disadvantages**:
+- Excessive fat accumulation
+- Health risks
+- Prolonged cutting phase required
+
+## Cautions During a Bulk
+
+### Excessive Fat Gain
+- **Monitoring**: Waist circumference, body fat percentage
+- **Adjustment**: Reduce caloric surplus
+- **Target**: Keep men under 15%, women under 25% body fat
+
+### Loss of Training Intensity
+- **Cause**: Too many calories, complacency
+- **Solution**: Maintain progressive overload principles
+- **Goal**: Continuously break personal records
+
+### Digestive Issues
+- **Cause**: Sudden increase in food volume
+- **Solution**: Increase gradually, use digestive enzymes
+- **Prevention**: Adequate hydration and fiber
+
+Bulking is a **marathon**. Don't rush — stay consistent. Visualize the body you'll have in a year and focus on each meal and each set today.
+    `,
     author: 'Corevia Bulk',
     publishedDate: '2025-09-17',
   },
@@ -3104,8 +6072,11 @@ A: 장기 복용 연구에서 안전성이 확인되었습니다. 평생 복용�
   {
     id: 'cutting-complete-guide',
     category: '다이어트',
+    categoryEn: 'Diet',
     title: '컷팅 완전 가이드: 근육 보존하며 체지방 태우기',
+    titleEn: 'The Complete Cutting Guide: Burn Fat While Preserving Muscle',
     summary: '근손실 없이 체지방만 제거하는 과학적 컷팅 전략',
+    summaryEn: 'A science-based cutting strategy that eliminates body fat while protecting muscle mass.',
     content: `
 # 컷팅 완전 가이드: 근육 보존하며 체지방 태우기
 
@@ -3330,6 +6301,231 @@ A: 장기 복용 연구에서 안전성이 확인되었습니다. 평생 복용�
 **목표**: 유지 칼로리까지 점진적 증가
 
 컷팅은 **인내의 게임**입니다. 단기간에 극적인 변화를 기대하지 말고, 꾸준히 원칙을 지켜나가세요. 몸은 거짓말하지 않습니다.
+    `,
+    contentEn: `
+# The Complete Cutting Guide: Burn Fat While Preserving Muscle
+
+A cut is a high-difficulty process that demands **reducing body fat** and **preserving muscle** simultaneously. The right strategy lets you reveal a defined physique without sacrificing hard-earned muscle.
+
+## The Core Principles of Cutting
+
+### Caloric Deficit
+- **Basic formula**: Intake < Expenditure
+- **Recommended deficit**: 300–750 kcal per day
+- **Rate**: 0.5–1 kg per week (varies by current body fat level)
+
+### Preventing Muscle Loss
+- **Sufficient protein**: Bodyweight × 2.0–2.5 g
+- **Maintain strength training**: Preserve as much weight and volume as possible
+- **Appropriate pace**: Too-fast weight loss triggers muscle loss
+
+## Cutting Nutrition Strategy
+
+### Macronutrient Setup
+
+**Protein**: Bodyweight × 2.0–2.5 g (top priority)
+- **Muscle preservation**: Adequate amino acid supply
+- **Satiety**: High thermic effect reduces overall intake
+- **Sources**: Chicken breast, white fish, egg whites, protein powder
+
+**Fat**: Bodyweight × 0.8–1.2 g (secure the minimum)
+- **Hormones**: Maintain testosterone and growth hormone levels
+- **Essential fatty acids**: Omega-3, Omega-6
+- **Sources**: Nuts, olive oil, salmon, avocado
+
+**Carbohydrates**: Remaining calories (the adjustable variable)
+- **Training energy**: Supports high-intensity workouts
+- **Timing**: Concentrate around training sessions
+- **Sources**: Brown rice, sweet potato, oats, fruit
+
+### Phased Cutting Approach
+
+**Phase 1: Conservative Cut (Body fat 20%+)**
+- Caloric deficit: 300–500 kcal
+- Rate: 0.3–0.7 kg per week
+- Duration: 3–6 months
+
+**Phase 2: Aggressive Cut (Body fat 15–20%)**
+- Caloric deficit: 500–750 kcal
+- Rate: 0.5–1 kg per week
+- Duration: 2–4 months
+
+**Phase 3: Finishing Cut (Body fat under 15%)**
+- Caloric deficit: 300–500 kcal
+- Rate: 0.2–0.5 kg per week
+- Duration: 2–3 months
+
+### Sample Cutting Diet (70 kg Male, 2,000 kcal)
+
+**Protein**: 150 g (600 kcal)
+**Fat**: 65 g (585 kcal)
+**Carbohydrates**: 200 g (800 kcal)
+
+**Breakfast**:
+- 4 egg whites + 1 whole egg
+- Oatmeal 40 g + blueberries 50 g
+
+**Snack 1**:
+- Whey protein 30 g + water
+
+**Lunch**:
+- Chicken breast 120 g + brown rice 80 g + unlimited vegetables
+
+**Snack 2**:
+- Greek yogurt 150 g (non-fat)
+
+**Dinner**:
+- White fish 150 g + broccoli + sweet potato 100 g
+
+**Snack 3** (post-workout):
+- Banana + whey protein 20 g
+
+## Cutting Training Strategy
+
+### Strength Training (Top Priority)
+
+**Goal**: Preserve as much muscle mass and strength as possible
+**Frequency**: Each muscle group 2 times per week
+**Intensity**: Maintain 85–95% of pre-cut weights
+**Volume**: 80–90% of pre-cut volume
+
+**Sample Upper/Lower Split**:
+
+**Upper Body (Monday, Thursday)**
+1. Bench press 4x6–8 (maintain weight)
+2. Barbell row 4x6–8
+3. Shoulder press 3x8–10
+4. Lat pulldown 3x8–10
+5. Dips 3x8–12
+6. Bicep curl 3x10–12
+
+**Lower Body (Tuesday, Friday)**
+1. Squat 4x6–8 (maintain weight)
+2. Romanian deadlift 3x8–10
+3. Leg press 3x10–12
+4. Leg curl 3x10–12
+5. Bulgarian split squat 3x10–12
+6. Calf raise 4x12–15
+
+### Cardio
+
+**LISS (Low-Intensity Steady State)**
+- **Intensity**: Heart rate 120–140 bpm
+- **Duration**: 30–60 minutes
+- **Frequency**: 4–6 times per week
+- **Advantage**: Low muscle loss risk, low recovery burden
+
+**HIIT (High-Intensity Interval Training)**
+- **Intensity**: Heart rate at 80–90% of max
+- **Duration**: 15–25 minutes
+- **Frequency**: 2–3 times per week
+- **Advantage**: Time efficiency, afterburn effect
+
+**Recommended combination**:
+- LISS 4x + HIIT 2x per week
+- LISS for 20–30 minutes after strength training
+- Separate HIIT sessions for 15–20 minutes
+
+## Supplements During a Cut
+
+### Essential Supplements
+
+**Whey Protein**
+- **Purpose**: Reach daily protein target
+- **How to use**: 1–2 times daily, 30–40 g per serving
+
+**Multivitamin**
+- **Purpose**: Compensate for micronutrient gaps from calorie restriction
+- **How to use**: 1 tablet daily with a meal
+
+**Omega-3**
+- **Purpose**: Reduce inflammation, support hormone function
+- **How to use**: 1–2 g of EPA+DHA per day
+
+### Optional Supplements
+
+**Caffeine**
+- **Purpose**: Fat oxidation, improved exercise performance
+- **How to use**: 100–400 mg pre-workout
+
+**L-Carnitine**
+- **Purpose**: Supports fat metabolism
+- **How to use**: 2–3 g per day with meals
+
+**CLA (Conjugated Linoleic Acid)**
+- **Purpose**: Body fat reduction, muscle preservation
+- **How to use**: 3–6 g per day with meals
+
+## Common Problems During a Cut
+
+### Plateau
+**Cause**: Metabolic adaptation, needs calorie recalculation
+**Solutions**:
+1. Reduce calories by an additional 100–200 kcal
+2. Add 10–15 minutes to cardio sessions
+3. Introduce a refeed day (once per week)
+
+### Muscle Loss
+**Signals**: Rapid strength decline, visible reduction in muscle size
+**Prevention**:
+1. Increase protein to bodyweight × 2.5 g
+2. Maintain strength training intensity
+3. Slow down the weight loss rate (under 0.5 kg/week)
+
+### Extreme Fatigue
+**Cause**: Excessive caloric deficit, insufficient carbohydrates
+**Solutions**:
+1. Refeed day (double carbohydrates)
+2. Deload week (reduce training volume by 50%)
+3. Prioritize sleep (8–9 hours)
+
+### Difficulty Managing Appetite
+**Strategies**:
+1. High-fiber foods (promote satiety)
+2. Adequate hydration (3+ L per day)
+3. Adjust meal frequency (personal preference)
+4. Use sugar-free alternatives
+
+## Cutting Success Tips
+
+### Measurement and Monitoring
+- **Body weight**: Daily at the same time, calculate weekly average
+- **Circumference**: Waist, arms, thighs (once per week)
+- **Photos**: Weekly under identical conditions
+- **Body fat %**: Monthly InBody or caliper measurement
+
+### Psychological Management
+- **Realistic goals**: 2–4 kg loss per month
+- **Drop perfectionism**: 80% adherence still equals success
+- **Social support**: Help family and friends understand your goals
+- **Reward system**: Small rewards for weekly goals achieved
+
+### Handling Social Situations
+**Dining out**:
+- Check the menu in advance
+- Choose protein-forward options
+- Request sauces and dressings on the side
+
+**Work social events**:
+- Eat a light meal beforehand
+- Minimize alcohol
+- Return to normal diet the next day
+
+## Ending the Cut and Reverse Dieting
+
+### Signs It's Time to End the Cut
+- Target body fat percentage achieved
+- No weight change for 3+ weeks
+- Extreme fatigue, compromised immune function
+- The cut is disrupting your social life
+
+### Reverse Diet
+**Purpose**: Restore metabolic rate, prevent rebound
+**Method**: Add 20–30 g carbohydrates and 5–10 g fat per week
+**Duration**: 6–12 weeks
+**Goal**: Gradually return calories to maintenance level
+
+Cutting is a **game of patience**. Don't expect dramatic changes in a short time — steadily uphold your principles. Your body doesn't lie.
     `,
     author: 'Corevia Cut',
     publishedDate: '2025-09-17',

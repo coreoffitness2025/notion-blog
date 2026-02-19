@@ -121,7 +121,7 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
               </div>
               <p className="text-sm text-gray-500 mb-2">{secondaryName(exercise)}</p>
               <div className="flex flex-wrap gap-1">
-                {exercise.muscles.primary.map((muscle) => (
+                {(isEn ? exercise.musclesEn.primary : exercise.muscles.primary).map((muscle) => (
                   <span key={muscle} className="px-2 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded text-xs">
                     {muscle}
                   </span>
@@ -170,7 +170,7 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
                   {difficultyLabel(selectedExercise.difficulty)}
                 </span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm">
-                  {selectedExercise.category}
+                  {isEn ? selectedExercise.categoryEn : selectedExercise.category}
                 </span>
               </div>
 
@@ -178,12 +178,12 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
               <div className="mb-6">
                 <h3 className="text-sm font-medium text-gray-500 mb-2">{t.targetMuscles}</h3>
                 <div className="flex flex-wrap gap-2">
-                  {selectedExercise.muscles.primary.map((muscle) => (
+                  {(isEn ? selectedExercise.musclesEn.primary : selectedExercise.muscles.primary).map((muscle) => (
                     <span key={muscle} className="px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-sm">
                       {muscle} {t.primary}
                     </span>
                   ))}
-                  {selectedExercise.muscles.secondary.map((muscle) => (
+                  {(isEn ? selectedExercise.musclesEn.secondary : selectedExercise.muscles.secondary).map((muscle) => (
                     <span key={muscle} className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm">
                       {muscle}
                     </span>
@@ -195,7 +195,7 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-gray-800 mb-3">{t.howTo}</h3>
                 <ol className="space-y-2">
-                  {selectedExercise.instructions.map((instruction, idx) => (
+                  {(isEn ? selectedExercise.instructionsEn : selectedExercise.instructions).map((instruction, idx) => (
                     <li key={idx} className="flex gap-3 text-gray-500">
                       <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm">
                         {idx + 1}
@@ -210,7 +210,7 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
               <div className="bg-gray-50 rounded-xl p-4">
                 <h3 className="text-lg font-bold text-gray-800 mb-3">{t.tips}</h3>
                 <ul className="space-y-2">
-                  {selectedExercise.tips.map((tip, idx) => (
+                  {(isEn ? selectedExercise.tipsEn : selectedExercise.tips).map((tip, idx) => (
                     <li key={idx} className="flex gap-2 text-gray-500 text-sm">
                       <span className="text-[var(--corevia-primary)]">✓</span>
                       {tip}
