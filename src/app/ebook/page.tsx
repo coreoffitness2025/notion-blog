@@ -255,7 +255,7 @@ export default function EbookPage() {
           <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
             <p className="text-sm text-gray-400 mb-2">전자책 (PDF)</p>
             <p className="text-3xl font-bold text-gray-800 mb-1">
-              ₩9,900
+              ₩11,000
             </p>
             <p className="text-xs text-gray-400 mb-6">결제 후 이메일로 즉시 발송</p>
 

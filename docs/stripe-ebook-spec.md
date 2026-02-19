@@ -20,7 +20,7 @@
 ### 1. `src/app/api/checkout/route.ts`
 - Stripe Checkout Session 생성
 - 상품: Core of Fitness (PDF)
-- 가격: ₩9,900 (일회성)
+- 가격: ₩11,000 (일회성)
 - success_url: /ebook/success
 - cancel_url: /ebook
 
@@ -49,7 +49,7 @@ EBOOK_PDF_URL=https://xxx (비공개 다운로드 URL)
 
 ## 수수료
 - Stripe: 3.5% + ₩400 (한국 카드 기준)
-- ₩9,900 기준 → 약 ₩750 수수료 → 순수익 약 ₩9,150
+- ₩11,000 기준 → 약 ₩750 수수료 → 순수익 약 ₩9,150
 
 ## 참고
 - Stripe 한국 지원: 사업자등록증 필요
