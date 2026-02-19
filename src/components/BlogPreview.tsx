@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getPostsFromCache, type Post } from "@/lib/notion";
+import { getDictionary } from "@/lib/i18n";
+import type { Post } from "@/lib/notion";
 
-export default function BlogPreview() {
-  const posts = getPostsFromCache("Blog").slice(0, 3);
+export default function BlogPreview({ posts, locale }: { posts: Post[]; locale: string }) {
+  const dict = getDictionary(locale);
+  const prefix = locale === "ko" ? "" : `/${locale}`;
 
   if (posts.length === 0) {
     return null;
@@ -15,15 +17,15 @@ export default function BlogPreview() {
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">
-              블로그
+              {dict.blog.title}
             </h2>
-            <p className="text-gray-500">운동과 영양에 대한 유용한 이야기</p>
+            <p className="text-gray-500">{dict.blog.subtitle}</p>
           </div>
           <Link
-            href="/posts"
+            href={`${prefix}/posts`}
             className="text-sm font-semibold text-[var(--corevia-primary)] hover:underline hidden md:block"
           >
-            전체 보기 →
+            {dict.blog.viewAll}
           </Link>
         </div>
 
@@ -31,7 +33,7 @@ export default function BlogPreview() {
           {posts.map((post: Post) => (
             <Link
               key={post.id}
-              href={`/posts/${post.slug}`}
+              href={`${prefix}/posts/${post.slug}`}
               className="group block bg-gray-50 rounded-xl overflow-hidden hover:shadow-md transition-all"
             >
               {post.coverImage && (
@@ -47,7 +49,9 @@ export default function BlogPreview() {
               )}
               <div className="p-5">
                 <p className="text-xs text-gray-400 mb-2">
-                  {new Date(post.date).toLocaleDateString("ko-KR")}
+                  {new Date(post.date).toLocaleDateString(
+                    locale === "ko" ? "ko-KR" : "en-US",
+                  )}
                 </p>
                 <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors line-clamp-2">
                   {post.title}
@@ -61,10 +65,10 @@ export default function BlogPreview() {
         </div>
 
         <Link
-          href="/posts"
+          href={`${prefix}/posts`}
           className="mt-6 block text-center text-sm font-semibold text-[var(--corevia-primary)] md:hidden"
         >
-          전체 보기 →
+          {dict.blog.viewAll}
         </Link>
       </div>
     </section>

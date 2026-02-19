@@ -4,14 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-const nav = [
-  { href: "/#features", label: "기능 소개" },
-  { href: "/team", label: "팀 소개" },
-  { href: "/guide", label: "피트니스 가이드" },
-  { href: "/posts", label: "블로그" },
-  { href: "/contact", label: "문의" },
-];
+import { getDictionary } from "@/lib/i18n";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -19,14 +12,29 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
-export default function Navbar() {
+export default function Navbar({ locale }: { locale: string }) {
   const pathname = usePathname() || "/";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dict = getDictionary(locale);
+  const prefix = locale === "ko" ? "" : `/${locale}`;
+
+  const nav = [
+    { href: `${prefix}/#features`, label: dict.nav.features },
+    { href: `${prefix}/team`, label: dict.nav.team },
+    { href: `${prefix}/guide`, label: dict.nav.guide },
+    { href: `${prefix}/posts`, label: dict.nav.blog },
+    { href: `${prefix}/contact`, label: dict.nav.contact },
+  ];
+
+  const otherLocale = locale === "ko" ? "en" : "ko";
+  const switchPath = locale === "ko"
+    ? `/en${pathname}`
+    : pathname.replace(/^\/en/, "") || "/";
 
   return (
     <header className="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
       <div className="max-w-[1100px] mx-auto px-4 py-3 flex items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href={`${prefix}/`} className="flex items-center gap-2">
           <Image
             src="/logo.png"
             alt="CoreVia Logo"
@@ -57,20 +65,29 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          {/* Language Switcher */}
+          <Link
+            href={switchPath}
+            className="px-3 py-1.5 text-xs font-medium text-gray-500 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            {otherLocale === "en" ? "EN" : "KO"}
+          </Link>
+
           <a
             href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-2 px-4 py-2 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors"
           >
-            앱 다운로드
+            {dict.nav.download}
           </a>
         </nav>
 
         <button
           className="md:hidden p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="메뉴"
+          aria-label={dict.nav.menu}
         >
           <svg
             className="w-6 h-6 text-gray-600"
@@ -116,15 +133,24 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <a
-            href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="block mt-2 mb-2 px-4 py-3 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg text-center"
-          >
-            앱 다운로드
-          </a>
+          <div className="flex items-center gap-3 mt-2 mb-2">
+            <Link
+              href={switchPath}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg text-center flex-1"
+            >
+              {otherLocale === "en" ? "English" : "한국어"}
+            </Link>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg text-center flex-1"
+            >
+              {dict.nav.download}
+            </a>
+          </div>
         </nav>
       )}
     </header>

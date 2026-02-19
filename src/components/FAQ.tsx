@@ -2,29 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const faqs = [
-  {
-    q: "무료인가요?",
-    a: "운동/식단 기록은 무료예요. AI 코치 채팅은 Pro/Max 플랜에서 쓸 수 있어요. 기록만으로도 포인트가 쌓이고, 코치 캐릭터를 꾸밀 수 있어요.",
-  },
-  {
-    q: "AI가 진짜 내 기록을 보고 조언해요?",
-    a: "네. 일반 AI 챗봇이랑 달라요. 내 운동 기록, 식단, 체형 분석까지 실제로 보고 피드백해줘요. 생체 2급 + 대회 수상 트레이너이자 IT 대기업 전략팀 출신 대표가 직접 AI를 튜닝해서, 진짜 PT 받는 느낌이에요.",
-  },
-  {
-    q: "iOS에서도 쓸 수 있나요?",
-    a: "지금은 Android만 돼요. iOS는 준비 중이고, 곧 App Store에서도 만나볼 수 있어요.",
-  },
-  {
-    q: "코치 성격 바꿀 수 있어요?",
-    a: "물론이죠. 설정에서 언제든 바꿀 수 있어요. 독설형이 안 맞으면 격려형으로 바꿔보세요.",
-  },
-  {
-    q: "오프라인 PT 대신 쓸 수 있나요?",
-    a: "생체 2급 트레이너이자 IT 대기업 출신 대표가 직접 튜닝한 AI가 24시간 운동+식단을 같이 봐줘요. PT 갈 시간이나 비용이 부담될 때 좋은 대안이에요.",
-  },
-];
+import { getDictionary } from "@/lib/i18n";
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -71,15 +49,17 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export default function FAQ() {
+export default function FAQ({ locale }: { locale: string }) {
+  const dict = getDictionary(locale);
+
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-[700px] mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10 text-center tracking-tight">
-          자주 묻는 질문
+          {dict.faq.title}
         </h2>
         <div>
-          {faqs.map((faq) => (
+          {dict.faq.items.map((faq) => (
             <FAQItem key={faq.q} q={faq.q} a={faq.a} />
           ))}
         </div>

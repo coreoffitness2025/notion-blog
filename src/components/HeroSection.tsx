@@ -1,11 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { getDictionary } from "@/lib/i18n";
 
-export default function HeroSection() {
+export default function HeroSection({ locale }: { locale: string }) {
+  const dict = getDictionary(locale);
+
   return (
     <section className="relative overflow-hidden bg-[var(--corevia-bg)] pt-20 pb-24 px-4">
-      {/* 배경 장식 — 단색 그라데이션, 최소화 */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gray-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
       <div className="max-w-[1100px] mx-auto relative">
@@ -16,10 +18,10 @@ export default function HeroSection() {
             transition={{ duration: 0.5 }}
             className="text-5xl md:text-6xl lg:text-[72px] font-bold text-gray-800 leading-tight mb-6 tracking-tight"
           >
-            진짜 온라인 PT,
+            {dict.hero.title1}
             <br />
             <span className="text-[var(--corevia-primary)]">
-              코비아 피트니스
+              {dict.hero.title2}
             </span>
           </motion.h1>
 
@@ -29,14 +31,14 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-500 leading-relaxed mb-10 max-w-2xl mx-auto"
           >
-            다이어트? 근성장? 목표가 뭐든,
+            {dict.hero.subtitle1}
             <br className="hidden sm:block" />
-            완전히 개인화된 진짜 온라인 PT를 경험해보세요.
+            {dict.hero.subtitle2}
             <br />
             <span className="text-sm text-gray-400 mt-1 inline-block">
-              선수 출신 개발자가 직접 설계한 쉽고 직관적인 운동/식단 기록과
+              {dict.hero.subtext1}
               <br className="hidden sm:block" />
-              이를 연결하는 진짜 온라인 PT, 코비아 피트니스가 만들어나갑니다.
+              {dict.hero.subtext2}
             </span>
           </motion.p>
 
@@ -59,13 +61,13 @@ export default function HeroSection() {
               >
                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
               </svg>
-              앱 다운로드
+              {dict.hero.download}
             </a>
             <a
               href="#features"
               className="inline-flex items-center justify-center gap-2 bg-white text-gray-600 font-medium px-7 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all"
             >
-              어떤 앱인지 보기
+              {dict.hero.explore}
             </a>
           </motion.div>
         </div>
