@@ -11,38 +11,38 @@ export default function ContactPage() {
   const email = "coreoffitness2025@gmail.com";
 
   return (
-    <div className="min-h-screen bg-[var(--corevia-bg)]">
-      <div style={{ maxWidth: 800, margin: "0 auto", padding: "60px 16px" }}>
-        <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] text-sm font-semibold rounded-full mb-6">
-            Contact
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+    <main className="min-h-screen bg-[var(--corevia-bg)]">
+      <div className="max-w-[800px] mx-auto px-4 pt-20 pb-24">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-4">
             문의하기
           </h1>
-          <p className="mt-4 text-lg text-gray-500 leading-relaxed">
+          <p className="text-lg text-gray-500">
             앱 사용 중 궁금한 점, 피드백, 협업 제안
             <br />
             무엇이든 편하게 연락주세요.
           </p>
         </div>
 
-        <div className="p-10 bg-gradient-to-r from-[var(--corevia-primary)] to-[var(--corevia-accent)] rounded-2xl text-center text-white mb-10">
-          <p className="text-sm text-blue-100 mb-2">이메일 문의</p>
-          <p className="text-2xl md:text-3xl font-bold mb-6 break-all">
+        {/* Email Card */}
+        <div className="bg-white border border-gray-200 rounded-2xl p-8 md:p-10 text-center mb-10">
+          <p className="text-sm text-gray-400 mb-2">이메일 문의</p>
+          <p className="text-xl md:text-2xl font-bold text-gray-800 mb-6 break-all">
             {email}
           </p>
           <a
             href={`mailto:${email}`}
-            className="inline-block px-8 py-4 bg-white text-[var(--corevia-primary)] rounded-xl font-bold hover:bg-blue-50 transition-colors"
+            className="inline-block px-8 py-3.5 bg-[var(--corevia-primary)] text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors"
           >
             이메일 보내기
           </a>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="p-6 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
-            <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+        {/* Contact Types */}
+        <div className="grid gap-4 md:grid-cols-3 mb-14">
+          <div className="bg-white border border-gray-100 rounded-xl p-6">
+            <div className="w-10 h-10 bg-[var(--corevia-primary)]/10 rounded-lg flex items-center justify-center mb-4">
               <svg
                 className="w-5 h-5 text-[var(--corevia-primary)]"
                 fill="none"
@@ -57,17 +57,17 @@ export default function ContactPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-base font-bold text-gray-900 mb-1">
+            <h3 className="text-base font-semibold text-gray-800 mb-1">
               앱 피드백
             </h3>
             <p className="text-sm text-gray-500">
               버그 리포트, 기능 제안, 사용 후기
             </p>
           </div>
-          <div className="p-6 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
-            <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center mb-4">
+          <div className="bg-white border border-gray-100 rounded-xl p-6">
+            <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
               <svg
-                className="w-5 h-5 text-green-600"
+                className="w-5 h-5 text-gray-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -80,17 +80,17 @@ export default function ContactPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-base font-bold text-gray-900 mb-1">
+            <h3 className="text-base font-semibold text-gray-800 mb-1">
               협업 제안
             </h3>
             <p className="text-sm text-gray-500">
               콘텐츠 협업, 피트니스 파트너십
             </p>
           </div>
-          <div className="p-6 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
-            <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center mb-4">
+          <div className="bg-white border border-gray-100 rounded-xl p-6">
+            <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
               <svg
-                className="w-5 h-5 text-[var(--corevia-ai)]"
+                className="w-5 h-5 text-gray-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -103,7 +103,7 @@ export default function ContactPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-base font-bold text-gray-900 mb-1">
+            <h3 className="text-base font-semibold text-gray-800 mb-1">
               기타 문의
             </h3>
             <p className="text-sm text-gray-500">
@@ -112,30 +112,31 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="mt-12 text-center">
+        {/* Footer Links */}
+        <div className="text-center">
           <p className="text-sm text-gray-400 mb-3">다른 페이지도 둘러보세요</p>
           <div className="flex gap-6 justify-center flex-wrap">
             <Link
               href="/coach"
-              className="text-sm text-[var(--corevia-primary)] font-semibold hover:underline"
+              className="text-sm text-[var(--corevia-primary)] font-medium hover:underline"
             >
               AI 코치 소개
             </Link>
             <Link
               href="/guide"
-              className="text-sm text-[var(--corevia-primary)] font-semibold hover:underline"
+              className="text-sm text-[var(--corevia-primary)] font-medium hover:underline"
             >
-              무료 도구
+              피트니스 가이드
             </Link>
             <Link
               href="/posts"
-              className="text-sm text-[var(--corevia-primary)] font-semibold hover:underline"
+              className="text-sm text-[var(--corevia-primary)] font-medium hover:underline"
             >
               블로그
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
