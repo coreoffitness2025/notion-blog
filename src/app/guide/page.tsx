@@ -87,17 +87,8 @@ export default function GuidePage() {
           className="block border border-gray-200 rounded-3xl p-8 md:p-10 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all group"
         >
           <div className="flex flex-col md:flex-row items-center gap-8">
-            {/* Cover Image */}
-            <div className="flex-shrink-0 w-[140px] rounded-xl overflow-hidden shadow-sm border border-gray-100">
-              <img
-                src="/ebook-cover.png"
-                alt="Core of Fitness 표지"
-                className="w-full h-auto"
-              />
-            </div>
-
-            {/* Text */}
-            <div className="text-center md:text-left flex-1">
+            {/* Text — left */}
+            <div className="text-center md:text-left flex-1 order-2 md:order-1">
               <span className="inline-block px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-xs font-semibold mb-3">
                 전자책
               </span>
@@ -111,15 +102,14 @@ export default function GuidePage() {
               </p>
             </div>
 
-            {/* Arrow */}
-            <svg
-              className="w-6 h-6 text-gray-300 group-hover:text-[var(--corevia-primary)] transition-colors flex-shrink-0 hidden md:block"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            {/* Cover Image — right */}
+            <div className="flex-shrink-0 w-[140px] rounded-xl overflow-hidden shadow-sm border border-gray-100 order-1 md:order-2">
+              <img
+                src="/ebook-cover.png"
+                alt="Core of Fitness 표지"
+                className="w-full h-auto"
+              />
+            </div>
           </div>
         </Link>
       </section>
