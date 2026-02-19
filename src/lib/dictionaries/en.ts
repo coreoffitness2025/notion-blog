@@ -1,6 +1,6 @@
 const en = {
   nav: {
-    features: "Features",
+    features: "Product",
     team: "Team",
     guide: "Fitness Guide",
     pricing: "Pricing",
@@ -238,8 +238,28 @@ const en = {
     femaleCoachAlt: "AI Coach Female",
   },
   team: {
-    title: "The Maker",
-    subtitle: "Training and developing — all hands-on",
+    title: "CoreVia",
+    subtitle: "Building real online PT",
+    missionTitle: "Our Mission",
+    missionValues: [
+      {
+        title: "Serious About Both Workout and Diet",
+        description:
+          "Most fitness apps focus on either workouts or diet. CoreVia was built from day one with the principle of doing both properly.",
+      },
+      {
+        title: "When Records Build Up, AI Becomes a Real Coach",
+        description:
+          "CoreVia's AI coach analyzes both workout and diet data to provide cross-feedback. The more you record, the more accurate your online PT becomes.",
+      },
+      {
+        title: "Built by Someone Who's Been There",
+        description:
+          "Real dieting and bulking know-how from competing on stage is built into the app. We know from experience which numbers matter in workout logs and what to look for in diet analysis.",
+      },
+    ],
+    aboutTitle: "About Team",
+    aboutDesc: "Built by a team that understands both technology and fitness",
     careers: [
       "IT Strategy at a Top 4 Corporation",
       "(Former) Samsung Electronics Semiconductor Engineer",
@@ -248,24 +268,6 @@ const en = {
     fitness: [
       "Certified Sports Instructor Level 2 (Bodybuilding)",
       "Multiple natural bodybuilding competition awards (WNGP, Natural SSA, etc.)",
-    ],
-    whyTitle: "Why We Built This",
-    values: [
-      {
-        title: "Built by Someone Who's Been There",
-        description:
-          "Real dieting and bulking know-how from competing on stage is built into the app. We know from experience which numbers matter in workout logs and what to look for in diet analysis.",
-      },
-      {
-        title: "Tech and Business, Both Covered",
-        description:
-          "With a background in mechanical engineering, semiconductor manufacturing at Samsung, and an M.S. in Technology Management leading IT strategy, we deeply understand AI and IT. We obsess over how to best integrate AI into fitness.",
-      },
-      {
-        title: "Serious About Both Workout and Diet",
-        description:
-          "Most fitness apps focus on either workouts or diet. CoreVia was built from day one with the principle of doing both properly.",
-      },
     ],
     contactCta: "Have any questions?",
     contactBtn: "Contact Us",

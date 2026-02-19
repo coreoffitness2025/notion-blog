@@ -27,57 +27,66 @@ export default function TeamPageClient({
   return (
     <section className="bg-white pt-20 pb-24 px-4">
       <div className="max-w-[800px] mx-auto">
+        {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-4">{dict.team.title}</h1>
           <p className="text-lg text-gray-500">{dict.team.subtitle}</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="bg-gray-50 rounded-3xl p-8 md:p-12 mb-12">
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center flex-shrink-0">
-              <Image src="/logo.png" alt="James" width={80} height={80} className="rounded-xl" />
-            </div>
-            <div className="flex-1 text-center md:text-left">
-              <h2 className="text-2xl font-bold text-gray-800 mb-1">James</h2>
-              <p className="text-sm text-gray-400 mb-6">Founder & Developer</p>
-              <div className="mb-5">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Career</p>
-                <div className="space-y-2.5">
-                  {dict.team.careers.map((label, i) => (
-                    <div key={label} className="flex items-center gap-3 text-gray-700">
-                      <span className="text-gray-400">{careerIcons[i]}</span>
-                      <span className="text-sm font-medium">{label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Fitness Domain</p>
-                <div className="space-y-2.5">
-                  {dict.team.fitness.map((label, i) => (
-                    <div key={label} className="flex items-center gap-3 text-gray-700">
-                      <span className="text-gray-400">{fitnessIcons[i]}</span>
-                      <span className="text-sm font-medium">{label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-          <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">{dict.team.whyTitle}</h3>
-          <div className="space-y-4">
-            {dict.team.values.map((v, i) => (
-              <motion.div key={v.title} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }} className="bg-gray-50 rounded-2xl p-6">
-                <h4 className="text-base font-semibold text-gray-800 mb-2">{v.title}</h4>
+        {/* Our Mission */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
+          <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">{dict.team.missionTitle}</h2>
+          <div className="space-y-4 mb-16">
+            {dict.team.missionValues.map((v, i) => (
+              <motion.div key={v.title} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }} className="bg-gray-50 rounded-2xl p-6">
+                <h3 className="text-base font-semibold text-gray-800 mb-2">{v.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{v.description}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
+        {/* About Team */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}>
+          <h2 className="text-xl font-bold text-gray-800 mb-2 text-center">{dict.team.aboutTitle}</h2>
+          <p className="text-sm text-gray-500 text-center mb-8">{dict.team.aboutDesc}</p>
+
+          <div className="bg-gray-50 rounded-3xl p-8 md:p-12">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+              <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center flex-shrink-0">
+                <Image src="/logo.png" alt="James" width={80} height={80} className="rounded-xl" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-2xl font-bold text-gray-800 mb-1">James</h3>
+                <p className="text-sm text-gray-400 mb-6">Founder & Developer</p>
+                <div className="mb-5">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Career</p>
+                  <div className="space-y-2.5">
+                    {dict.team.careers.map((label, i) => (
+                      <div key={label} className="flex items-center gap-3 text-gray-700">
+                        <span className="text-gray-400">{careerIcons[i]}</span>
+                        <span className="text-sm font-medium">{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Fitness Domain</p>
+                  <div className="space-y-2.5">
+                    {dict.team.fitness.map((label, i) => (
+                      <div key={label} className="flex items-center gap-3 text-gray-700">
+                        <span className="text-gray-400">{fitnessIcons[i]}</span>
+                        <span className="text-sm font-medium">{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Contact CTA */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 }} className="text-center mt-16">
           <p className="text-sm text-gray-400 mb-4">{dict.team.contactCta}</p>
           <a href={`${prefix}/contact`} className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 text-sm font-medium rounded-xl hover:bg-gray-200 transition-colors">

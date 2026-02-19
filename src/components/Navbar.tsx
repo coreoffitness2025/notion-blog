@@ -20,11 +20,11 @@ export default function Navbar({ locale }: { locale: string }) {
 
   const nav = [
     { href: `${prefix}/#features`, label: dict.nav.features },
-    { href: `${prefix}/team`, label: dict.nav.team },
     { href: `${prefix}/guide`, label: dict.nav.guide },
     { href: `${prefix}/pricing`, label: dict.nav.pricing },
     { href: `${prefix}/posts`, label: dict.nav.blog },
     { href: `${prefix}/contact`, label: dict.nav.contact },
+    { href: `${prefix}/team`, label: dict.nav.team },
   ];
 
   const otherLocale = locale === "ko" ? "en" : "ko";

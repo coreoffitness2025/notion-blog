@@ -1,9 +1,9 @@
 const ko = {
   nav: {
-    features: "기능 소개",
+    features: "제품",
     team: "팀 소개",
     guide: "피트니스 가이드",
-    pricing: "구독",
+    pricing: "가격",
     blog: "블로그",
     contact: "문의",
     download: "앱 다운로드",
@@ -215,8 +215,28 @@ const ko = {
     femaleCoachAlt: "AI 코치 여성",
   },
   team: {
-    title: "만든 사람",
-    subtitle: "운동도 개발도 직접 합니다",
+    title: "CoreVia",
+    subtitle: "진짜 온라인 PT를 만듭니다",
+    missionTitle: "Our Mission",
+    missionValues: [
+      {
+        title: "운동과 식단, 둘 다 진심입니다",
+        description:
+          "대부분의 피트니스 앱은 운동이면 운동, 식단이면 식단만 다룹니다. CoreVia는 처음부터 둘 다 제대로 다루겠다는 원칙으로 만들었습니다.",
+      },
+      {
+        title: "기록이 쌓이면, AI가 진짜 코치가 됩니다",
+        description:
+          "CoreVia의 AI 코치는 운동 기록과 식단 데이터를 함께 분석해서 크로스 피드백을 해줍니다. 기록이 많을수록 더 정확한 온라인 PT가 가능해집니다.",
+      },
+      {
+        title: "직접 경험한 사람이 만듭니다",
+        description:
+          "직접 대회를 뛰면서 얻은 다이어트와 벌크업 노하우를 앱에 풀었습니다. 운동 기록의 어떤 숫자가 중요한지, 식단 분석에서 뭘 봐야 하는지를 체감으로 알고 있습니다.",
+      },
+    ],
+    aboutTitle: "About Team",
+    aboutDesc: "기술과 피트니스를 모두 이해하는 팀이 만듭니다",
     careers: [
       "4대 기업 IT 전략팀",
       "(전) 삼성전자 반도체 엔지니어",
@@ -225,24 +245,6 @@ const ko = {
     fitness: [
       "생활스포츠지도자 2급 (보디빌딩)",
       "WNGP, Natural SSA 등 네추럴 보디빌딩 대회 수상 다수",
-    ],
-    whyTitle: "왜 이 앱을 만드는가",
-    values: [
-      {
-        title: "직접 경험한 사람이 만듭니다",
-        description:
-          "직접 대회를 뛰면서 얻은 다이어트와 벌크업 노하우를 앱에 풀었습니다. 운동 기록의 어떤 숫자가 중요한지, 식단 분석에서 뭘 봐야 하는지를 체감으로 알고 있습니다.",
-      },
-      {
-        title: "기술과 비즈니스를 모두 이해합니다",
-        description:
-          "기계공학을 전공하고 반도체 엔지니어로 근무하였고, 기술경영으로 석사 학위를 취득해 IT 전략팀에서 근무하며 AI와 IT에 대해 깊게 이해하고 있습니다. 어떻게 해야 피트니스에 가장 완성도 있게 AI를 접목시킬지 누구보다 치열하게 고민합니다.",
-      },
-      {
-        title: "운동과 식단, 둘 다 진심입니다",
-        description:
-          "대부분의 피트니스 앱은 운동이면 운동, 식단이면 식단만 다룹니다. CoreVia는 처음부터 둘 다 제대로 다루겠다는 원칙으로 만들었습니다.",
-      },
     ],
     contactCta: "궁금한 점이 있으신가요?",
     contactBtn: "문의하기",
