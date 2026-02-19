@@ -17,6 +17,7 @@ const footerLinks = {
     { href: "/guide/programs", label: "운동 프로그램" },
   ],
   회사: [
+    { href: "/team", label: "팀 소개" },
     { href: "/posts", label: "블로그" },
     { href: "/contact", label: "문의하기" },
   ],

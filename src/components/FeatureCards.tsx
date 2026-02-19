@@ -107,10 +107,10 @@ export default function FeatureCards() {
       <div className="max-w-[1100px] mx-auto">
         <div className="text-center mb-6">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
-            기록하고, 성장하고, 꾸미고
+            운동도 식단도, 제대로
           </h2>
           <p className="text-base text-gray-500 max-w-xl mx-auto">
-            운동 기록부터 AI 식단 분석, 코치 커스터마이징까지 한 앱에서
+            대부분의 앱은 하나만 다룹니다. 둘 다 봐야 진짜 온라인 PT입니다
           </p>
         </div>
 

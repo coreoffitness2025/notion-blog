@@ -7,6 +7,7 @@ import { useState } from "react";
 
 const nav = [
   { href: "/#features", label: "기능 소개" },
+  { href: "/team", label: "팀 소개" },
   { href: "/guide", label: "무료 도구" },
   { href: "/posts", label: "블로그" },
   { href: "/contact", label: "문의" },
@@ -27,11 +28,11 @@ export default function Navbar() {
       <div className="max-w-[1100px] mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/appstore.png"
+            src="/logo.png"
             alt="CoreVia Logo"
-            width={36}
-            height={36}
-            className="rounded-lg"
+            width={44}
+            height={44}
+            className="rounded-xl"
           />
           <span className="font-extrabold text-xl text-gray-900">
             CoreVia
