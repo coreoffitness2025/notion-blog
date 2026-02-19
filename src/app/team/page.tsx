@@ -20,6 +20,14 @@ const careers = [
     ),
     label: "(전) 삼성전자 반도체 엔지니어",
   },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+      </svg>
+    ),
+    label: "기술경영 석사 · 기계공학 학사",
+  },
 ];
 
 const fitness = [
@@ -45,12 +53,12 @@ const values = [
   {
     title: "직접 경험한 사람이 만듭니다",
     description:
-      "수백 번의 벌크업과 다이어트를 직접 해본 사람만이 아는 디테일. 운동 기록의 어떤 숫자가 중요한지, 식단 분석에서 뭘 봐야 하는지를 체감으로 알고 있습니다.",
+      "직접 대회를 뛰면서 얻은 다이어트와 벌크업 노하우를 앱에 풀었습니다. 운동 기록의 어떤 숫자가 중요한지, 식단 분석에서 뭘 봐야 하는지를 체감으로 알고 있습니다.",
   },
   {
-    title: "기술로 풀어야 할 문제를 압니다",
+    title: "기술과 비즈니스를 모두 이해합니다",
     description:
-      "대기업 IT 전략팀에서 시스템을 설계하고, 반도체 라인에서 데이터를 다뤘습니다. 어디에 AI를 쓰고, 어디에 사람의 판단을 넣을지 구분할 줄 압니다.",
+      "기계공학을 전공하고 반도체 엔지니어로 근무하였고, 기술경영으로 석사 학위를 취득해 IT 전략팀에서 근무하며 AI와 IT에 대해 깊게 이해하고 있습니다. 어떻게 해야 피트니스에 가장 완성도 있게 AI를 접목시킬지 누구보다 치열하게 고민합니다.",
   },
   {
     title: "운동과 식단, 둘 다 진심입니다",
@@ -123,7 +131,7 @@ export default function TeamPage() {
               {/* Fitness */}
               <div>
                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                  Fitness
+                  Fitness Domain
                 </p>
                 <div className="space-y-2.5">
                   {fitness.map((item) => (
