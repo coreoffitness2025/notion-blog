@@ -248,8 +248,12 @@ const en = {
         desc: "Most fitness apps handle either workouts or diet — never both. But real personal training requires seeing the full picture. CoreVia is designed to make tracking both workouts and diet easy and thorough.",
       },
       {
-        title: "As records build, AI becomes a real coach",
-        desc: "Records aren't the end goal — they're the fuel. As workout volume, diet photos, and nutrition data accumulate, the AI coach understands you deeper, delivering cross-feedback on both exercise and diet just like a real PT would.",
+        title: "The more you record, the more it optimizes for you",
+        desc: "Records aren't the end goal — they're the fuel. As workout volume, diet photos, and nutrition data accumulate, the AI coach understands you deeper. It reviews yesterday's workout alongside today's meals, evolving into a PT built just for you.",
+      },
+      {
+        title: "Records earn points, points shape your coach",
+        desc: "Consistency is rewarded. Earn points through regular logging and use them to customize your AI coach's personality and appearance to your liking. Building your own coach, your way — that's how CoreVia works.",
       },
       {
         title: "The ultimate goal: a true online PT agent",
