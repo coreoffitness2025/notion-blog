@@ -146,6 +146,13 @@ export default function PricingClient({
                   {isFree ? t.getStarted : t.upgradeCta}
                 </a>
 
+                {/* Max Coming Soon Notice */}
+                {isMax && t.maxComingSoon && (
+                  <p className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2 mb-4">
+                    {t.maxComingSoon}
+                  </p>
+                )}
+
                 {/* Features */}
                 <ul className="space-y-3">
                   {plan.features.map((feature) => (
@@ -223,25 +230,13 @@ export default function PricingClient({
                           {feature.name}
                         </td>
                         <td className="py-3 px-2 text-center">
-                          {feature.free ? (
-                            <CheckIcon className="text-gray-400" />
-                          ) : (
-                            <XIcon />
-                          )}
+                          <CellValue value={feature.free} color="text-gray-400" />
                         </td>
                         <td className="py-3 px-2 text-center">
-                          {feature.pro ? (
-                            <CheckIcon className="text-[var(--corevia-pro)]" />
-                          ) : (
-                            <XIcon />
-                          )}
+                          <CellValue value={feature.pro} color="text-[var(--corevia-pro)]" />
                         </td>
                         <td className="py-3 px-2 text-center">
-                          {feature.max ? (
-                            <CheckIcon className="text-[var(--corevia-max)]" />
-                          ) : (
-                            <XIcon />
-                          )}
+                          <CellValue value={feature.max} color="text-[var(--corevia-max)]" />
                         </td>
                       </tr>
                     ))}
@@ -309,6 +304,13 @@ export default function PricingClient({
       </section>
     </main>
   );
+}
+
+function CellValue({ value, color }: { value: boolean | string; color: string }) {
+  if (typeof value === "string") {
+    return <span className={`text-xs font-medium ${color}`}>{value}</span>;
+  }
+  return value ? <CheckIcon className={color} /> : <XIcon />;
 }
 
 function CheckIcon({ className = "" }: { className?: string }) {
