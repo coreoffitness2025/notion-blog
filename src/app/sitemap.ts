@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://coreviahomepage.vercel.app";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
   const posts = getPostsFromCache();
   const postUrls = posts.map((post: Post) => ({
