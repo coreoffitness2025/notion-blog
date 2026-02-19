@@ -251,25 +251,32 @@ export default function EbookPage() {
 
       {/* CTA */}
       <section className="py-20 px-4">
-        <div className="max-w-[600px] mx-auto text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">
-            준비 중입니다
-          </h2>
-          <p className="text-gray-500 mb-8">
-            곧 구매하실 수 있습니다. 출시 알림을 받으시려면 문의를 남겨주세요.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
+        <div className="max-w-[500px] mx-auto">
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
+            <p className="text-sm text-gray-400 mb-2">전자책 (PDF)</p>
+            <p className="text-3xl font-bold text-gray-800 mb-1">
+              ₩9,900
+            </p>
+            <p className="text-xs text-gray-400 mb-6">결제 후 이메일로 즉시 발송</p>
+
+            {/* TODO: Stripe Checkout 연동 후 href를 /api/checkout으로 변경 */}
+            <button
+              disabled
+              className="w-full py-4 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl opacity-50 cursor-not-allowed mb-3"
             >
-              출시 알림 받기
-            </Link>
+              구매하기
+            </button>
+            <p className="text-xs text-gray-400">
+              결제 시스템 준비 중입니다. 곧 구매하실 수 있습니다.
+            </p>
+          </div>
+
+          <div className="text-center mt-6">
             <Link
               href="/guide/handbook"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition-colors"
+              className="text-sm text-gray-500 hover:text-[var(--corevia-primary)] transition-colors"
             >
-              무료 핸드북 먼저 보기
+              무료 핸드북 먼저 보기 →
             </Link>
           </div>
         </div>
