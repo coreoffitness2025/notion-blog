@@ -29,8 +29,9 @@ export default function TeamPageClient({
       <div className="max-w-[800px] mx-auto">
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-4">{dict.team.title}</h1>
-          <p className="text-lg text-gray-500">{dict.team.subtitle}</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-3">{dict.team.title}</h1>
+          <p className="text-lg text-gray-500 mb-3">{dict.team.subtitle}</p>
+          <p className="text-sm text-gray-400">{dict.team.vision}</p>
         </motion.div>
 
         {/* Our Mission */}

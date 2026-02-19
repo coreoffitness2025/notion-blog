@@ -239,7 +239,8 @@ const en = {
   },
   team: {
     title: "CoreVia",
-    subtitle: "Building real online PT",
+    subtitle: "Building the real PT agent",
+    vision: "The most seamless fusion of AI and fitness — built by CoreVia.",
     missionTitle: "Our Mission",
     missionValues: [
       {

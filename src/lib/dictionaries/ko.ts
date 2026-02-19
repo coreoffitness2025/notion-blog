@@ -216,7 +216,8 @@ const ko = {
   },
   team: {
     title: "CoreVia",
-    subtitle: "진짜 온라인 PT를 만듭니다",
+    subtitle: "진짜 PT 에이전트를 만듭니다",
+    vision: "AI와 피트니스의 가장 완벽한 접목, CoreVia가 만들어나갑니다.",
     missionTitle: "Our Mission",
     missionValues: [
       {
