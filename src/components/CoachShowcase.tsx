@@ -63,7 +63,7 @@ export default function CoachShowcase({ locale }: { locale: string }) {
               />
             </div>
 
-            <div className="flex-1 max-w-lg space-y-3">
+            <div className="w-full md:flex-1 max-w-lg space-y-3">
               {current.chat.map((msg, i) => (
                 <motion.div
                   key={i}

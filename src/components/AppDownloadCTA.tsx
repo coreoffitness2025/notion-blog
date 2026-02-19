@@ -66,7 +66,7 @@ export default function AppDownloadCTA({ locale }: { locale: string }) {
           </motion.div>
         </div>
 
-        <div className="flex gap-3 items-end">
+        <div className="flex gap-3 items-end shrink-0">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}

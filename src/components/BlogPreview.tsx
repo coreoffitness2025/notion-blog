@@ -14,7 +14,7 @@ export default function BlogPreview({ posts, locale }: { posts: Post[]; locale: 
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-[1100px] mx-auto">
-        <div className="flex items-end justify-between mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-2">
           <div>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">
               {dict.blog.title}
@@ -23,7 +23,7 @@ export default function BlogPreview({ posts, locale }: { posts: Post[]; locale: 
           </div>
           <Link
             href={`${prefix}/posts`}
-            className="text-sm font-semibold text-[var(--corevia-primary)] hover:underline hidden md:block"
+            className="text-sm font-semibold text-[var(--corevia-primary)] hover:underline hidden md:block shrink-0"
           >
             {dict.blog.viewAll}
           </Link>

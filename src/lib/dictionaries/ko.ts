@@ -3,6 +3,7 @@ const ko = {
     features: "기능 소개",
     team: "팀 소개",
     guide: "피트니스 가이드",
+    pricing: "구독",
     blog: "블로그",
     contact: "문의",
     download: "앱 다운로드",
@@ -16,6 +17,7 @@ const ko = {
     tagline2: "나만의 PT 선생님",
     features: "기능 소개",
     aiCoach: "AI 코치",
+    pricing: "구독 플랜",
     download: "앱 다운로드",
     calorieCalc: "칼로리 계산기",
     oneRmCalc: "1RM 계산기",
@@ -566,6 +568,119 @@ const ko = {
       } as Record<string, string>,
     },
   },
+  pricing: {
+    badge: "구독 플랜",
+    title: "나에게 맞는 플랜을 선택하세요",
+    subtitle: "무료로 시작하고, 필요할 때 업그레이드하세요",
+    monthly: "월간",
+    yearly: "연간",
+    yearlyDiscount: "2개월 무료",
+    perMonth: "/월",
+    perYear: "/년",
+    currentPlan: "현재 플랜",
+    upgradeCta: "업그레이드",
+    getStarted: "무료로 시작",
+    mostPopular: "인기",
+    best: "최고",
+    free: "무료",
+    plans: [
+      {
+        id: "free",
+        name: "Free",
+        price: "0",
+        priceYearly: "0",
+        description: "운동과 식단, 기록부터 시작하세요",
+        features: [
+          "운동 기록 (무제한)",
+          "식단 기록 (무제한)",
+          "기본 통계 대시보드",
+          "포인트 적립",
+          "코치 캐릭터 기본 외형",
+          "피트니스 가이드 접근",
+        ],
+      },
+      {
+        id: "pro",
+        name: "Pro",
+        price: "5,900",
+        priceYearly: "47,000",
+        description: "AI 코치가 기록을 분석하고 조언해줘요",
+        features: [
+          "Free 플랜의 모든 기능",
+          "AI 코치 채팅 (무제한)",
+          "AI 식단 사진 분석",
+          "운동+식단 크로스 분석",
+          "상세 주간/월간 리포트",
+          "코치 외형 커스터마이징",
+        ],
+      },
+      {
+        id: "max",
+        name: "Max",
+        price: "12,900",
+        priceYearly: "99,000",
+        description: "최고의 AI PT 경험, 모든 기능 잠금 해제",
+        features: [
+          "Pro 플랜의 모든 기능",
+          "체형 분석 (AI 사진 분석)",
+          "맞춤 운동 프로그램 생성",
+          "맞춤 식단 플랜 생성",
+          "우선 AI 응답 속도",
+          "모든 코치 스킨 잠금 해제",
+        ],
+      },
+    ],
+    comparisonTitle: "상세 기능 비교",
+    categories: [
+      {
+        name: "기록",
+        features: [
+          { name: "운동 기록", free: true, pro: true, max: true },
+          { name: "식단 기록", free: true, pro: true, max: true },
+          { name: "AI 식단 사진 분석", free: false, pro: true, max: true },
+          { name: "상세 통계", free: false, pro: true, max: true },
+        ],
+      },
+      {
+        name: "AI 코치",
+        features: [
+          { name: "AI 코치 채팅", free: false, pro: true, max: true },
+          { name: "운동+식단 크로스 분석", free: false, pro: true, max: true },
+          { name: "체형 분석", free: false, pro: false, max: true },
+          { name: "맞춤 프로그램 생성", free: false, pro: false, max: true },
+        ],
+      },
+      {
+        name: "커스터마이징",
+        features: [
+          { name: "포인트 적립", free: true, pro: true, max: true },
+          { name: "코치 외형 변경", free: false, pro: true, max: true },
+          { name: "모든 스킨 잠금 해제", free: false, pro: false, max: true },
+        ],
+      },
+    ],
+    faqTitle: "구독 관련 FAQ",
+    faqs: [
+      {
+        q: "무료 플랜으로도 충분한가요?",
+        a: "운동과 식단 기록, 포인트 적립, 기본 통계는 무료로 모두 이용 가능합니다. AI 코치의 맞춤 피드백이 필요하시면 Pro 이상을 추천드려요.",
+      },
+      {
+        q: "언제든 해지할 수 있나요?",
+        a: "네, 언제든 구독을 해지할 수 있습니다. 해지하더라도 결제 기간 종료 시까지 이용 가능하며, 기록 데이터는 유지됩니다.",
+      },
+      {
+        q: "결제는 어떻게 하나요?",
+        a: "Google Play Store 앱 내 결제로 진행됩니다. 구글 계정에 등록된 결제 수단으로 자동 결제돼요.",
+      },
+      {
+        q: "Pro와 Max의 차이가 뭔가요?",
+        a: "Pro는 AI 코치 채팅과 식단 분석에 집중합니다. Max는 여기에 체형 분석, 맞춤 프로그램 생성, 우선 응답 속도까지 추가된 올인원 플랜이에요.",
+      },
+    ],
+    ctaTitle: "지금 시작하세요",
+    ctaSubtitle: "무료로 다운로드하고, 나에게 맞는 플랜을 선택하세요",
+  },
   notFound: {
     message: "페이지를 찾을 수 없습니다",
     goHome: "홈으로 돌아가기",
@@ -580,6 +695,9 @@ const ko = {
     contactTitle: "문의하기",
     contactDesc:
       "CoreVia에 문의하세요. 앱 피드백, 제안, 협업 문의를 환영합니다.",
+    pricingTitle: "구독 플랜",
+    pricingDesc:
+      "CoreVia의 Free, Pro, Max 플랜을 비교하고 나에게 맞는 구독 플랜을 선택하세요.",
   },
 };
 

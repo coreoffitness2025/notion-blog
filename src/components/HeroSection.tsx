@@ -16,7 +16,7 @@ export default function HeroSection({ locale }: { locale: string }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-5xl md:text-6xl lg:text-[72px] font-bold text-gray-800 leading-tight mb-6 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-gray-800 leading-tight mb-6 tracking-tight"
           >
             {dict.hero.title1}
             <br />

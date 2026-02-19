@@ -3,6 +3,7 @@ const en = {
     features: "Features",
     team: "Team",
     guide: "Fitness Guide",
+    pricing: "Pricing",
     blog: "Blog",
     contact: "Contact",
     download: "Download App",
@@ -16,6 +17,7 @@ const en = {
     tagline2: "AI PT coach",
     features: "Features",
     aiCoach: "AI Coach",
+    pricing: "Pricing Plans",
     download: "Download App",
     calorieCalc: "Calorie Calculator",
     oneRmCalc: "1RM Calculator",
@@ -599,6 +601,119 @@ const en = {
       } as Record<string, string>,
     },
   },
+  pricing: {
+    badge: "Plans",
+    title: "Choose the plan that fits you",
+    subtitle: "Start free, upgrade when you need it",
+    monthly: "Monthly",
+    yearly: "Yearly",
+    yearlyDiscount: "2 months free",
+    perMonth: "/mo",
+    perYear: "/yr",
+    currentPlan: "Current Plan",
+    upgradeCta: "Upgrade",
+    getStarted: "Get Started Free",
+    mostPopular: "Popular",
+    best: "Best",
+    free: "Free",
+    plans: [
+      {
+        id: "free",
+        name: "Free",
+        price: "0",
+        priceYearly: "0",
+        description: "Start with workout and diet recording",
+        features: [
+          "Workout logging (unlimited)",
+          "Diet logging (unlimited)",
+          "Basic statistics dashboard",
+          "Earn reward points",
+          "Default coach appearance",
+          "Access to fitness guides",
+        ],
+      },
+      {
+        id: "pro",
+        name: "Pro",
+        price: "4.99",
+        priceYearly: "39.99",
+        description: "AI coach analyzes your records and gives advice",
+        features: [
+          "Everything in Free",
+          "AI coach chat (unlimited)",
+          "AI diet photo analysis",
+          "Workout + diet cross-analysis",
+          "Detailed weekly/monthly reports",
+          "Coach appearance customization",
+        ],
+      },
+      {
+        id: "max",
+        name: "Max",
+        price: "9.99",
+        priceYearly: "79.99",
+        description: "The ultimate AI PT experience — unlock everything",
+        features: [
+          "Everything in Pro",
+          "Body analysis (AI photo analysis)",
+          "Custom workout program generation",
+          "Custom meal plan generation",
+          "Priority AI response speed",
+          "All coach skins unlocked",
+        ],
+      },
+    ],
+    comparisonTitle: "Feature Comparison",
+    categories: [
+      {
+        name: "Recording",
+        features: [
+          { name: "Workout logging", free: true, pro: true, max: true },
+          { name: "Diet logging", free: true, pro: true, max: true },
+          { name: "AI diet photo analysis", free: false, pro: true, max: true },
+          { name: "Detailed statistics", free: false, pro: true, max: true },
+        ],
+      },
+      {
+        name: "AI Coach",
+        features: [
+          { name: "AI coach chat", free: false, pro: true, max: true },
+          { name: "Workout + diet cross-analysis", free: false, pro: true, max: true },
+          { name: "Body analysis", free: false, pro: false, max: true },
+          { name: "Custom program generation", free: false, pro: false, max: true },
+        ],
+      },
+      {
+        name: "Customization",
+        features: [
+          { name: "Earn points", free: true, pro: true, max: true },
+          { name: "Coach appearance change", free: false, pro: true, max: true },
+          { name: "All skins unlocked", free: false, pro: false, max: true },
+        ],
+      },
+    ],
+    faqTitle: "Subscription FAQ",
+    faqs: [
+      {
+        q: "Is the free plan enough?",
+        a: "Workout/diet logging, point earning, and basic stats are all free. If you need personalized AI coaching feedback, we recommend Pro or above.",
+      },
+      {
+        q: "Can I cancel anytime?",
+        a: "Yes, you can cancel your subscription at any time. You'll have access until the end of your billing period, and your data is always kept.",
+      },
+      {
+        q: "How do I pay?",
+        a: "Payment is processed through Google Play Store in-app purchase. It charges automatically to the payment method on your Google account.",
+      },
+      {
+        q: "What's the difference between Pro and Max?",
+        a: "Pro focuses on AI coach chat and diet analysis. Max adds body analysis, custom program generation, priority response speed — the all-in-one package.",
+      },
+    ],
+    ctaTitle: "Get Started Today",
+    ctaSubtitle: "Download for free and choose the plan that's right for you",
+  },
   notFound: {
     message: "Page Not Found",
     goHome: "Go to Homepage",
@@ -614,6 +729,9 @@ const en = {
     contactTitle: "Contact Us",
     contactDesc:
       "Contact CoreVia. We welcome app feedback, suggestions, and partnership inquiries.",
+    pricingTitle: "Pricing Plans",
+    pricingDesc:
+      "Compare CoreVia's Free, Pro, and Max plans and choose the subscription that fits you.",
   },
 };
 

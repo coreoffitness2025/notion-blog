@@ -19,9 +19,9 @@ export default function PointsCustomization({ locale }: { locale: string }) {
           <p className="text-base text-gray-500">{dict.points.subtitle}</p>
         </div>
 
-        <div className="flex items-center justify-center gap-6 md:gap-10 mb-16">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-10 mb-16">
           {dict.points.steps.map((s, i) => (
-            <div key={s.step} className="flex items-center gap-6 md:gap-10">
+            <div key={s.step} className="flex items-center gap-4 sm:gap-6 md:gap-10">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -35,14 +35,14 @@ export default function PointsCustomization({ locale }: { locale: string }) {
                 <span className="text-base font-semibold text-gray-800 block">
                   {s.title}
                 </span>
-                <span className="text-xs text-gray-400 mt-1 block hidden md:block">
+                <span className="text-xs text-gray-400 mt-1 block">
                   {s.sub}
                 </span>
               </motion.div>
 
               {i < 2 && (
                 <svg
-                  className="w-4 h-4 text-gray-300 shrink-0"
+                  className="w-4 h-4 text-gray-300 shrink-0 rotate-90 sm:rotate-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
