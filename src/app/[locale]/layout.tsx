@@ -79,12 +79,6 @@ export async function generateMetadata({
         : "All-in-one workout + diet AI coaching.",
       images: ["/opengraph-image.png"],
     },
-    verification: {
-      google: "y8H_9PlpPjFc0uOo0TSUmPgHc-70MAbP-W3NGiVzLaI",
-      other: {
-        "naver-site-verification": ["d2aa7b80e8484a4c96954153259cdeacd915e87e"],
-      },
-    },
   };
 }
 
