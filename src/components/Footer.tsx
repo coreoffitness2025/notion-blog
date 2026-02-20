@@ -9,7 +9,6 @@ export default function Footer({ locale }: { locale: string }) {
     [dict.footer.product]: [
       { href: `${prefix}/#features`, label: dict.footer.features },
       { href: `${prefix}/coach`, label: dict.footer.aiCoach },
-      { href: `${prefix}/pricing`, label: dict.footer.pricing },
       {
         href: "https://play.google.com/store/apps/details?id=com.corevia.fitness",
         label: dict.footer.download,
