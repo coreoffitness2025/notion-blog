@@ -292,7 +292,7 @@ const en = {
     femaleCoachAlt: "AI Coach Female",
   },
   team: {
-    title: "CoreVia Fitness",
+    title: "Team CoreVia",
     subtitle: "",
     missionTitle: "Our Mission",
     missionVision: "We relentlessly pursue the Core of fitness, and build the most effective Via — the path to mastering it through AI.",

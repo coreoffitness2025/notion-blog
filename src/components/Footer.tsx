@@ -24,7 +24,6 @@ export default function Footer({ locale }: { locale: string }) {
     [dict.footer.company]: [
       { href: `${prefix}/team`, label: dict.footer.team },
       { href: `${prefix}/posts`, label: dict.footer.blog },
-      { href: `${prefix}/contact`, label: dict.footer.contactUs },
     ],
   };
 

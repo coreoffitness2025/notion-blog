@@ -58,8 +58,8 @@ export default function TeamPageClient({
 
           <div className="bg-gray-50 rounded-3xl p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-              <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center flex-shrink-0">
-                <Image src="/logo.png" alt="James" width={80} height={80} className="rounded-xl" />
+              <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-50 to-gray-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                <Image src="/coach/male_3_face.png" alt="Coach K" width={112} height={112} className="object-cover" />
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h3 className="text-2xl font-bold text-gray-800 mb-1">James</h3>
@@ -94,7 +94,7 @@ export default function TeamPageClient({
         {/* Contact CTA */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 }} className="text-center mt-16">
           <p className="text-sm text-gray-400 mb-4">{dict.team.contactCta}</p>
-          <a href={`${prefix}/contact`} className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 text-sm font-medium rounded-xl hover:bg-gray-200 transition-colors">
+          <a href="mailto:coreoffitness2025@gmail.com" className="inline-flex items-center gap-2 px-6 py-3 bg-[#4285F4] text-white text-sm font-medium rounded-xl hover:bg-blue-600 transition-colors">
             {dict.team.contactBtn}
           </a>
         </motion.div>

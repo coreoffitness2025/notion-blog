@@ -27,7 +27,6 @@ export default function Navbar({ locale }: { locale: string }) {
     { href: `${prefix}/#features`, label: dict.nav.features },
     { href: `${prefix}/guide`, label: dict.nav.guide },
     { href: `${prefix}/posts`, label: dict.nav.blog },
-    { href: `${prefix}/contact`, label: dict.nav.contact },
     { href: `${prefix}/team`, label: dict.nav.team },
   ];
 

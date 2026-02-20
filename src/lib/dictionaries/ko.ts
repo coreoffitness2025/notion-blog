@@ -277,7 +277,7 @@ const ko = {
     femaleCoachAlt: "AI 코치 여성",
   },
   team: {
-    title: "CoreVia Fitness",
+    title: "Team CoreVia",
     subtitle: "",
     missionTitle: "Our Mission",
     missionVision: "피트니스의 핵심(Core)을 집요하게 추구하고, AI를 통해(Via) 그 핵심에 도달하는 가장 완벽한 길을 만들어갑니다.",
