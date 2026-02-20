@@ -53,7 +53,7 @@ const en = {
       },
       {
         title: "AI Diet Analysis",
-        desc: "One photo and Gemini AI instantly measures calories and nutrients.\nAccurate for Korean food too. AI estimates foods without barcodes",
+        desc: "One photo and AI instantly measures calories and nutrients.\nAccurate for Korean food too. AI estimates foods without barcodes",
       },
       {
         title: "Workout + Diet Cross-Analysis",
@@ -86,7 +86,7 @@ const en = {
     workoutDesc: "Review past weight/reps to set better records today",
     workoutAlt: "Workout recording UI",
     dietLabel: "AI Diet Analysis",
-    dietDesc: "One photo → Gemini AI instant calorie/nutrient measurement",
+    dietDesc: "One photo → AI instant calorie/nutrient measurement",
     dietAlt: "Diet recording UI",
   },
   coach: {
@@ -267,7 +267,7 @@ const en = {
       },
       {
         q: "How does AI diet analysis work?",
-        a: "Take a photo of your food and Gemini AI identifies it, instantly measuring calories and macros (carbs/protein/fat). Accurate for Korean food too. You can also use barcode scan or text search.",
+        a: "Take a photo of your food and AI identifies it, instantly measuring calories and macros (carbs/protein/fat). Accurate for Korean food too. You can also use barcode scan or text search.",
       },
       {
         q: "Is it available on iOS?",
