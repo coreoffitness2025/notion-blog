@@ -9,6 +9,8 @@ export default function PointsCustomization({ locale }: { locale: string }) {
   const [gender, setGender] = useState<"male" | "female">("male");
   const dict = getDictionary(locale);
 
+  const skinLevels = [2, 3, 4, 5];
+
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-[1100px] mx-auto">
@@ -83,23 +85,40 @@ export default function PointsCustomization({ locale }: { locale: string }) {
             </button>
           </div>
 
-          <motion.div
-            key={gender}
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.25 }}
-            className="relative w-56 h-80 md:w-64 md:h-96"
-          >
-            <Image
-              src={`/coach/${gender}_3_front.png`}
-              alt={gender === "male" ? dict.points.maleAlt : dict.points.femaleAlt}
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 224px, 256px"
-            />
-          </motion.div>
+          <p className="text-base font-medium text-gray-600 mb-8">
+            {dict.points.skinGalleryTitle}
+          </p>
 
-          <p className="text-sm text-gray-400 mt-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-[800px]">
+            {skinLevels.map((level, i) => (
+              <motion.div
+                key={`${gender}-${level}`}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="flex flex-col items-center bg-gray-50 rounded-2xl p-4 hover:bg-gray-100/80 transition-colors"
+              >
+                <div className="relative w-32 h-44 md:w-36 md:h-52 mb-3">
+                  <Image
+                    src={`/coach/${gender}_${level}_front.png`}
+                    alt={dict.points.skins[i]?.name || `Level ${level}`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 128px, 144px"
+                  />
+                </div>
+                <span className="text-sm font-semibold text-gray-800">
+                  {dict.points.skins[i]?.name}
+                </span>
+                <span className="text-xs text-gray-400 mt-0.5">
+                  {dict.points.skins[i]?.desc}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          <p className="text-sm text-gray-400 mt-6">
             {dict.points.collectMessage}
           </p>
         </div>

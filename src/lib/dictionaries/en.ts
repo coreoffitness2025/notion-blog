@@ -287,7 +287,8 @@ const en = {
     title: "CoreVia",
     subtitle: "Building the real PT agent",
     missionTitle: "Our Mission",
-    missionDesc: "Crafting the most seamless fusion of AI and fitness.",
+    missionVision: "We relentlessly pursue the Core of fitness, and build the most effective Via — the path to mastering it through AI.",
+    missionDesc: "The name CoreVia was born from this philosophy.",
     missionSteps: [
       {
         title: "Recording is the foundation",

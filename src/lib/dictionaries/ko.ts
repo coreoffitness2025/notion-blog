@@ -264,7 +264,8 @@ const ko = {
     title: "CoreVia",
     subtitle: "진짜 PT 에이전트를 만듭니다",
     missionTitle: "Our Mission",
-    missionDesc: "AI와 피트니스의 가장 완벽한 접목을 그려나갑니다.",
+    missionVision: "피트니스의 핵심(Core)을 집요하게 추구하고, AI를 통해(Via) 그 핵심에 도달하는 가장 완벽한 길을 만들어갑니다.",
+    missionDesc: "CoreVia라는 이름은 이 철학에서 탄생했습니다.",
     missionSteps: [
       {
         title: "기록이 근본입니다",
