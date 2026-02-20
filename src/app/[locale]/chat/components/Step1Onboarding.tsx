@@ -62,8 +62,8 @@ export default function Step1Onboarding({ locale, dict, onStart }: Step1Props) {
           </div>
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight leading-tight">
             {isKo
-              ? "웹에서도 온라인 PT를\n경험할 수 있어요!"
-              : "Experience Online PT\non the Web!"}
+              ? "웹에서도 코비아의\n온라인 PT를 경험해보세요"
+              : "Experience CoreVia's\nOnline PT on the Web"}
           </h1>
           <p className="text-gray-500 text-base md:text-lg max-w-lg mx-auto leading-relaxed whitespace-pre-line">
             {isKo
