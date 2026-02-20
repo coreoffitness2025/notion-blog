@@ -12,16 +12,22 @@ export default function AuthProviderWrapper({
   }> | null>(null);
 
   useEffect(() => {
-    // Lazy load AuthProvider only on client side
-    import("./AuthProvider").then((mod) => {
-      setProvider(() => mod.AuthProvider);
-    });
+    // Skip if Firebase is not configured
+    if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) return;
+
+    import("./AuthProvider")
+      .then((mod) => {
+        setProvider(() => mod.AuthProvider);
+      })
+      .catch(() => {
+        // Firebase not available — render without auth
+      });
   }, []);
 
   if (Provider) {
     return <Provider>{children}</Provider>;
   }
 
-  // Before AuthProvider loads, render children without auth context
+  // Before AuthProvider loads or if Firebase is unavailable, render children without auth
   return <>{children}</>;
 }

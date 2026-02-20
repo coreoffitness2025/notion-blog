@@ -54,19 +54,6 @@ export default function Navbar({ locale }: { locale: string }) {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
-          <Link
-            href={chatHref}
-            aria-current={isChatActive ? "page" : undefined}
-            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
-              isChatActive
-                ? "text-[var(--corevia-ai)]"
-                : "text-[var(--corevia-ai)] hover:text-purple-700"
-            }`}
-          >
-            <MessageCircle className="w-4 h-4" />
-            {dict.nav.aiChat}
-          </Link>
-
           {nav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -84,6 +71,19 @@ export default function Navbar({ locale }: { locale: string }) {
               </Link>
             );
           })}
+
+          <Link
+            href={chatHref}
+            aria-current={isChatActive ? "page" : undefined}
+            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+              isChatActive
+                ? "text-[var(--corevia-ai)]"
+                : "text-[var(--corevia-ai)] hover:text-purple-700"
+            }`}
+          >
+            <MessageCircle className="w-4 h-4" />
+            {dict.nav.aiChat}
+          </Link>
 
           <Link
             href={switchPath}
@@ -127,15 +127,6 @@ export default function Navbar({ locale }: { locale: string }) {
 
       {isMobileMenuOpen && (
         <nav className="md:hidden border-t border-gray-100 bg-white px-4 py-2">
-          <Link
-            href={chatHref}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="flex items-center gap-2 py-3 text-sm font-semibold text-[var(--corevia-ai)]"
-          >
-            <MessageCircle className="w-4 h-4" />
-            {dict.nav.aiChat}
-          </Link>
-
           {nav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -153,6 +144,16 @@ export default function Navbar({ locale }: { locale: string }) {
               </Link>
             );
           })}
+
+          <Link
+            href={chatHref}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-2 py-3 text-sm font-semibold text-[var(--corevia-ai)]"
+          >
+            <MessageCircle className="w-4 h-4" />
+            {dict.nav.aiChat}
+          </Link>
+
           <div className="flex items-center gap-3 mt-2 mb-2">
             <Link
               href={switchPath}
