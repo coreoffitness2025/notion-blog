@@ -48,14 +48,14 @@ export default function NavbarAuthSection({
 
   return (
     <div className="relative flex items-center gap-2" ref={menuRef}>
-      <div className="flex items-center gap-1 px-2.5 py-1 bg-purple-50 rounded-full text-xs font-semibold text-purple-700">
+      <div className="flex items-center gap-1 px-2.5 py-1 bg-blue-50 rounded-full text-xs font-semibold text-blue-700">
         <Coins className="w-3.5 h-3.5" />
         {pointBalance}pt
       </div>
 
       <button
         onClick={() => setShowMenu(!showMenu)}
-        className="w-8 h-8 rounded-full overflow-hidden border-2 border-gray-200 hover:border-purple-400 transition-colors"
+        className="w-8 h-8 rounded-full overflow-hidden border-2 border-gray-200 hover:border-blue-400 transition-colors"
       >
         {user.photoURL ? (
           <Image
@@ -66,7 +66,7 @@ export default function NavbarAuthSection({
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-purple-100 flex items-center justify-center text-xs font-bold text-purple-600">
+          <div className="w-full h-full bg-blue-100 flex items-center justify-center text-xs font-bold text-[#4285F4]">
             {(user.displayName || "U")[0]}
           </div>
         )}

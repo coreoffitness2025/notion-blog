@@ -56,9 +56,9 @@ export default function Step1Onboarding({ locale, dict, onStart }: Step1Props) {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 bg-purple-50 text-purple-600 text-sm font-medium px-4 py-1.5 rounded-full mb-5">
+          <div className="inline-flex items-center gap-2 bg-blue-50 text-[#4285F4] text-sm font-medium px-4 py-1.5 rounded-full mb-5">
             <Sparkles className="w-4 h-4" />
-            {isKo ? "출시 준비 중" : "Coming Soon"}
+            {isKo ? "AI 코치 체험" : "Try AI Coach"}
           </div>
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight leading-tight">
             {isKo
@@ -123,8 +123,8 @@ export default function Step1Onboarding({ locale, dict, onStart }: Step1Props) {
                 key={i}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5"
               >
-                <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mb-3">
-                  <Icon className="w-5 h-5 text-purple-500" />
+                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-3">
+                  <Icon className="w-5 h-5 text-[#4285F4]" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-800 mb-1.5">
                   {isKo ? card.koTitle : card.enTitle}
@@ -174,11 +174,11 @@ export default function Step1Onboarding({ locale, dict, onStart }: Step1Props) {
         >
           <button
             onClick={onStart}
-            className="px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white text-base font-bold rounded-2xl transition-colors shadow-lg shadow-purple-600/20"
+            className="px-8 py-4 bg-[#4285F4] hover:bg-[#4285F4] text-white text-base font-bold rounded-2xl transition-colors shadow-lg shadow-blue-500/20"
           >
             {isKo ? "지금 시작하기" : "Get Started"} &rarr;
           </button>
-          <p className="text-sm text-purple-500 mt-4">
+          <p className="text-sm text-[#4285F4] mt-4">
             {isKo
               ? "가입 시 50pt 무료 지급 (약 6회 대화)"
               : "50pt free on signup (approx. 6 conversations)"}

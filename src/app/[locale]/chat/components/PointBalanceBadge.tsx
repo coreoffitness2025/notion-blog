@@ -18,7 +18,7 @@ export default function PointBalanceBadge({
       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${
         isLow
           ? "bg-red-50 text-red-600"
-          : "bg-purple-50 text-purple-700"
+          : "bg-blue-50 text-blue-700"
       }`}
     >
       <Coins className="w-3.5 h-3.5" />

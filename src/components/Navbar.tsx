@@ -78,7 +78,7 @@ export default function Navbar({ locale }: { locale: string }) {
             className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
               isChatActive
                 ? "text-[var(--corevia-ai)]"
-                : "text-[var(--corevia-ai)] hover:text-purple-700"
+                : "text-[var(--corevia-ai)] hover:text-blue-700"
             }`}
           >
             <MessageCircle className="w-4 h-4" />

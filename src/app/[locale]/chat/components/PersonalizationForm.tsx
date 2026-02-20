@@ -86,7 +86,7 @@ export default function PersonalizationForm({
               onClick={() => setGoal(opt.value)}
               className={`py-2.5 rounded-xl text-sm font-medium transition-all ${
                 goal === opt.value
-                  ? "bg-purple-100 text-purple-700 border-2 border-purple-400"
+                  ? "bg-blue-100 text-blue-700 border-2 border-blue-400"
                   : "bg-gray-50 text-gray-600 border-2 border-transparent hover:bg-gray-100"
               }`}
             >
@@ -108,7 +108,7 @@ export default function PersonalizationForm({
               onClick={() => setExp(opt.value)}
               className={`py-2.5 rounded-xl text-sm font-medium transition-all ${
                 exp === opt.value
-                  ? "bg-purple-100 text-purple-700 border-2 border-purple-400"
+                  ? "bg-blue-100 text-blue-700 border-2 border-blue-400"
                   : "bg-gray-50 text-gray-600 border-2 border-transparent hover:bg-gray-100"
               }`}
             >
@@ -130,7 +130,7 @@ export default function PersonalizationForm({
               onClick={() => setGender(g)}
               className={`flex items-center gap-3 p-3 rounded-2xl transition-all ${
                 gender === g
-                  ? "bg-purple-50 border-2 border-purple-400"
+                  ? "bg-blue-50 border-2 border-blue-400"
                   : "bg-gray-50 border-2 border-transparent hover:bg-gray-100"
               }`}
             >
@@ -167,7 +167,7 @@ export default function PersonalizationForm({
               onClick={() => setPersonality(p.type)}
               className={`flex flex-col items-center gap-1 py-3 rounded-xl text-center transition-all ${
                 personality === p.type
-                  ? "bg-purple-100 border-2 border-purple-400"
+                  ? "bg-blue-100 border-2 border-blue-400"
                   : "bg-gray-50 border-2 border-transparent hover:bg-gray-100"
               }`}
             >
@@ -209,7 +209,7 @@ export default function PersonalizationForm({
       <button
         onClick={handleSubmit}
         disabled={loading}
-        className="w-full py-3.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-2xl transition-colors disabled:opacity-60"
+        className="w-full py-3.5 bg-[#4285F4] hover:bg-[#4285F4] text-white font-bold rounded-2xl transition-colors disabled:opacity-60"
       >
         {loading
           ? "..."

@@ -34,7 +34,7 @@ export default function PointLimitModal({
           onClick={(e) => e.stopPropagation()}
           className="bg-white rounded-3xl p-6 max-w-sm w-full space-y-4 text-center"
         >
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#4285F4] to-indigo-500 flex items-center justify-center">
             <Coins className="w-8 h-8 text-white" />
           </div>
 

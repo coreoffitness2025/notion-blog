@@ -104,7 +104,7 @@ export default function Step2Setup({
                 onSuccess={handleSignInSuccess}
               />
 
-              <p className="text-sm text-purple-600 font-medium">
+              <p className="text-sm text-[#4285F4] font-medium">
                 {isKo
                   ? "가입 시 50pt 무료 지급 🎁"
                   : "50pt free on signup 🎁"}

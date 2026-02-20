@@ -55,14 +55,14 @@ function CoachCard({
               onClick={() => setSelected(p)}
               className={`flex flex-col items-center gap-1 py-2.5 px-1 rounded-xl text-center transition-all ${
                 selected.type === p.type
-                  ? "bg-purple-500/20 border border-purple-500/40"
+                  ? "bg-blue-500/20 border border-blue-500/40"
                   : "bg-white/5 border border-transparent hover:bg-white/10"
               }`}
             >
               <span className="text-lg">{p.emoji}</span>
               <span
                 className={`text-[11px] font-medium ${
-                  selected.type === p.type ? "text-purple-300" : "text-gray-400"
+                  selected.type === p.type ? "text-blue-300" : "text-gray-400"
                 }`}
               >
                 {p.label[loc]}
@@ -112,7 +112,7 @@ function CoachCard({
         {/* CTA */}
         <Link
           href={chatHref}
-          className="flex items-center justify-center gap-2 w-full py-3 bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold rounded-xl transition-colors"
+          className="flex items-center justify-center gap-2 w-full py-3 bg-[#4285F4] hover:bg-[#4285F4] text-white text-sm font-semibold rounded-xl transition-colors"
         >
           <MessageCircle className="w-4 h-4" />
           {dict.chat.startChat}

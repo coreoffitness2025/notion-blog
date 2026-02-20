@@ -79,7 +79,7 @@ export default function HandbookClient({ dict, locale }: { dict: Dictionary; loc
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto prose prose-purple max-w-none">
+            <div className="p-6 overflow-y-auto prose prose-blue max-w-none">
               <ReactMarkdown
                 components={{
                   h1: ({ children }) => <h1 className="text-2xl font-bold text-gray-800 mt-6 mb-4">{children}</h1>,
