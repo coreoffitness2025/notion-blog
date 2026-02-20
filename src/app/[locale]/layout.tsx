@@ -48,7 +48,6 @@ export async function generateMetadata({
           "CoreVia",
         ],
     alternates: {
-      canonical: isKo ? siteUrl : `${siteUrl}/en`,
       languages: {
         ko: siteUrl,
         en: `${siteUrl}/en`,

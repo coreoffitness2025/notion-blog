@@ -63,6 +63,14 @@ const en = {
         title: "Record → Points → Customize",
         desc: "Consistent recording earns points, and points let you customize your coach's appearance",
       },
+      {
+        title: "AI Program Recommendations",
+        desc: "AI matches workout programs to your goals, experience, and available equipment",
+      },
+      {
+        title: "Barcode + AI Text Estimation",
+        desc: "Instant nutrition info via barcode scan. If not in DB, AI estimates the calories",
+      },
     ],
   },
   recording: {
@@ -166,6 +174,36 @@ const en = {
     maleAlt: "Male Coach",
     femaleAlt: "Female Coach",
     collectMessage: "Collect points and create your own coach",
+    skinGalleryTitle: "Purchase different coach appearances with points",
+    skins: [
+      { name: "Sporty", desc: "Active style" },
+      { name: "Classic", desc: "Clean and simple" },
+      { name: "Elite", desc: "Sleek pro style" },
+      { name: "Champion", desc: "The ultimate look" },
+    ],
+  },
+  trainer: {
+    badge: "Trainer Mode",
+    title: "Dedicated Mode for Real PT Trainers",
+    subtitle: "Client management, diet/workout review, and feedback",
+    cards: [
+      {
+        title: "Client Management",
+        desc: "Manage client lists and view PT schedules at a glance",
+      },
+      {
+        title: "Workout/Diet Review",
+        desc: "Review members' workout and diet records by date in detail",
+      },
+      {
+        title: "Write Feedback",
+        desc: "Write feedback directly — it shows up in the member's app instantly",
+      },
+      {
+        title: "PT Tools",
+        desc: "1RM calculator, calorie analysis, exercise search, and more trainer tools",
+      },
+    ],
   },
   guidePreview: {
     title: "Free Fitness Tools",
@@ -226,6 +264,14 @@ const en = {
       {
         q: "Can it replace an in-person PT?",
         a: "The AI, tuned by a certified trainer from a top IT corporation, monitors your workout and diet 24/7. It's a great alternative when PT sessions are too expensive or time-consuming.",
+      },
+      {
+        q: "Can trainers use it too?",
+        a: "Yes, there's a dedicated Trainer Mode. It offers client management, workout/diet review, feedback writing, and PT tools designed for real personal trainers.",
+      },
+      {
+        q: "What do I get from recording?",
+        a: "Recording workouts and meals earns you points. Use points to buy different coach skins in the shop and customize your coach's appearance. Streak bonuses help you earn faster.",
       },
     ],
   },
@@ -488,6 +534,27 @@ const en = {
         { name: "Muscular Endurance", reps: "12-15 reps", desc: "Muscular endurance improvement" },
         { name: "Endurance/Warmup", reps: "15+ reps", desc: "Light warmup and endurance training" },
       ],
+      faqTitle: "Frequently Asked Questions",
+      faq: [
+        {
+          q: "What is 1RM?",
+          a: "1RM (One Repetition Maximum) is the maximum weight you can lift with proper form for one repetition. It's used as a baseline for setting training intensity in weight training.",
+        },
+        {
+          q: "How does the Epley formula work?",
+          a: "Epley formula: 1RM = Weight x (1 + Reps/30). For example, if you lift 60kg for 8 reps, your estimated 1RM is 60 x (1 + 8/30) = 76kg. Most accurate with 5 reps or fewer.",
+        },
+        {
+          q: "Which exercises does this work for?",
+          a: "The calculator is most accurate for compound barbell exercises like bench press, squat, and deadlift. For machine or isolation exercises, results may be less precise.",
+        },
+        {
+          q: "Should I test my 1RM directly?",
+          a: "Beginners should use a calculator instead of direct testing for safety. Even experienced lifters should always use a spotter and warm up thoroughly before attempting a max.",
+        },
+      ],
+      aboutTitle: "How to Use the 1RM Calculator",
+      aboutText: "Enter your exercise weight (kg) and reps (1-30) to estimate your 1RM using the Epley formula. Results include recommended weights for each training zone, helping you set the right intensity for strength, hypertrophy, or endurance goals.",
     },
     calorie: {
       title: "Calorie Calculator",
@@ -534,6 +601,27 @@ const en = {
         { label: "Slow Weight Gain", desc: "~0.25kg/week gain" },
         { label: "Weight Gain (Bulk)", desc: "~0.5kg/week gain" },
       ],
+      faqTitle: "Frequently Asked Questions",
+      faq: [
+        {
+          q: "What is TDEE?",
+          a: "TDEE (Total Daily Energy Expenditure) is the total number of calories you burn per day. It's calculated by multiplying your BMR (Basal Metabolic Rate) by an activity factor.",
+        },
+        {
+          q: "How does the Mifflin-St Jeor formula work?",
+          a: "Male: BMR = (10 x weight in kg) + (6.25 x height in cm) - (5 x age) + 5. Female: BMR = (10 x weight in kg) + (6.25 x height in cm) - (5 x age) - 161. TDEE = BMR x activity factor (1.2-1.9).",
+        },
+        {
+          q: "How much should I reduce calories for weight loss?",
+          a: "A deficit of 300-500 kcal below TDEE typically results in 0.3-0.5 kg of weight loss per week. Avoid extreme restrictions as they can cause muscle loss and rebound weight gain.",
+        },
+        {
+          q: "What is Asian body type adjustment?",
+          a: "Asians tend to have higher body fat percentage at the same BMI, so BMR is adjusted ~10% lower. This option provides more accurate calorie calculations for Asian body types.",
+        },
+      ],
+      aboutTitle: "How to Use the Calorie Calculator",
+      aboutText: "Enter your gender, age, weight, height, and activity level to calculate your daily calories (TDEE) and macros (protein, carbs, fat) using the Mifflin-St Jeor formula. Set your goal — diet, maintenance, or bulking — to get personalized recommendations.",
     },
     exercises: {
       title: "Exercise Guide",

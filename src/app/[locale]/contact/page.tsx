@@ -1,5 +1,30 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/lib/i18n";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isKo = locale === "ko";
+  const path = "/contact";
+  const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
+  const dict = getDictionary(locale);
+
+  return {
+    title: dict.metadata.contactTitle,
+    description: dict.metadata.contactDesc,
+    alternates: {
+      canonical: pageUrl,
+      languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
+    },
+  };
+}
 
 export default async function ContactPage({
   params,

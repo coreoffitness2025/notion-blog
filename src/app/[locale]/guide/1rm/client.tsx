@@ -146,6 +146,38 @@ export default function OneRmClient({ dict, locale }: { dict: Dictionary; locale
             </div>
           </div>
         )}
+
+        {/* About Section - Always visible for SEO */}
+        <div className="mt-12 bg-white border border-gray-200 rounded-2xl p-6 md:p-8">
+          <h2 className="text-xl font-bold text-gray-800 mb-3">{t.aboutTitle}</h2>
+          <p className="text-gray-600 leading-relaxed">{t.aboutText}</p>
+        </div>
+
+        {/* FAQ Section - Always visible for SEO */}
+        <div className="mt-6 bg-white border border-gray-200 rounded-2xl p-6 md:p-8">
+          <h2 className="text-xl font-bold text-gray-800 mb-6">{t.faqTitle}</h2>
+          <div className="space-y-4">
+            {t.faq.map((item, i) => (
+              <details
+                key={i}
+                className="group border border-gray-100 rounded-xl overflow-hidden"
+              >
+                <summary className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+                  <h3 className="font-medium text-gray-800">{item.q}</h3>
+                  <svg
+                    className="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <p className="px-4 pb-4 text-gray-600 leading-relaxed">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );

@@ -10,15 +10,25 @@ interface PostsPageProps {
   params: Promise<{ locale: string }>;
 }
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
+
 export async function generateMetadata({
   params,
 }: PostsPageProps): Promise<Metadata> {
   const { locale } = await params;
+  const isKo = locale === "ko";
   const dict = getDictionary(locale);
+  const path = "/posts";
+  const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
 
   return {
     title: dict.blog.title,
     description: dict.blog.subtitle,
+    alternates: {
+      canonical: pageUrl,
+      languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
+    },
   };
 }
 

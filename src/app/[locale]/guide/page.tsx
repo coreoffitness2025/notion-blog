@@ -1,5 +1,66 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/lib/i18n";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isKo = locale === "ko";
+  const path = "/guide";
+  const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
+
+  return {
+    title: isKo
+      ? "무료 피트니스 가이드 - 1RM 계산기, 칼로리 계산기, 운동 도감"
+      : "Free Fitness Guide - 1RM Calculator, Calorie Calculator, Exercise Library",
+    description: isKo
+      ? "1RM 계산기, 칼로리 계산기, 운동 도감, 운동 프로그램 등 과학적인 피트니스 도구를 무료로 제공합니다. 코비아 피트니스 앱의 핵심 콘텐츠를 웹에서 만나보세요."
+      : "Free fitness tools including 1RM calculator, calorie calculator, exercise library, and workout programs. Access CoreVia's core fitness content on the web.",
+    keywords: isKo
+      ? [
+          "피트니스 가이드",
+          "1RM 계산기",
+          "칼로리 계산기",
+          "운동 도감",
+          "운동 프로그램",
+          "무료 피트니스 도구",
+          "헬스 계산기",
+        ]
+      : [
+          "fitness guide",
+          "1RM calculator",
+          "calorie calculator",
+          "exercise library",
+          "workout programs",
+          "free fitness tools",
+        ],
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        ko: `${siteUrl}${path}`,
+        en: `${siteUrl}/en${path}`,
+      },
+    },
+    openGraph: {
+      title: isKo
+        ? "무료 피트니스 가이드 | CoreVia"
+        : "Free Fitness Guide | CoreVia",
+      description: isKo
+        ? "1RM 계산기, 칼로리 계산기, 운동 도감 등 무료 피트니스 도구 모음"
+        : "Free fitness tools: 1RM calculator, calorie calculator, exercise library and more",
+      url: pageUrl,
+      siteName: "CoreVia",
+      locale: isKo ? "ko_KR" : "en_US",
+      type: "website",
+    },
+  };
+}
 
 const guideHrefs = [
   "/guide/1rm",

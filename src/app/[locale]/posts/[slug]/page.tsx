@@ -29,7 +29,7 @@ export async function generateMetadata(
     return { title: "Post Not Found" };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://your-site.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
   const prefix = locale === "ko" ? "" : `/${locale}`;
 
   return {
