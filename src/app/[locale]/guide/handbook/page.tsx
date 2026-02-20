@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n";
 import HandbookClient from "./client";
-
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 

@@ -9,7 +9,6 @@ import type { Metadata } from "next";
 interface PostsPageProps {
   params: Promise<{ locale: string }>;
 }
-
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 

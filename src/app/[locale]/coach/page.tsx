@@ -4,7 +4,6 @@ import CoachShowcase from "@/components/CoachShowcase";
 import PointsCustomization from "@/components/PointsCustomization";
 import AppDownloadCTA from "@/components/AppDownloadCTA";
 import { getDictionary } from "@/lib/i18n";
-
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 

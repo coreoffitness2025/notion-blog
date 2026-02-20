@@ -10,7 +10,6 @@ import BlogPreview from "@/components/BlogPreview";
 import FAQ from "@/components/FAQ";
 import AppDownloadCTA from "@/components/AppDownloadCTA";
 import { getPostsFromCache } from "@/lib/notion";
-
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 

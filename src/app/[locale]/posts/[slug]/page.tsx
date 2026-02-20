@@ -15,7 +15,6 @@ import rehypeRaw from "rehype-raw";
 interface PostPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
-
 export async function generateMetadata(
   { params }: PostPageProps,
   _parent: ResolvingMetadata
