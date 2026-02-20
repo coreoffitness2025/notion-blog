@@ -175,12 +175,12 @@ const ko = {
     maleAlt: "남성 코치",
     femaleAlt: "여성 코치",
     collectMessage: "기록을 꾸준히 하면 더 빠르게 모을 수 있어요",
-    skinGalleryTitle: "포인트로 다양한 코치 외형을 구매하세요",
+    skinGalleryTitle: "포인트로 코치의 외형을 바꿔보세요",
     skins: [
-      { name: "스포티", desc: "활동적인 스타일" },
-      { name: "클래식", desc: "기본에 충실한 스타일" },
-      { name: "엘리트", desc: "세련된 프로 스타일" },
-      { name: "챔피언", desc: "최고의 외형" },
+      { name: "헤어스타일", desc: "다양한 머리 스타일" },
+      { name: "의상", desc: "운동복, 캐주얼, 정장 등" },
+      { name: "신발", desc: "운동화부터 부츠까지" },
+      { name: "액세서리", desc: "모자, 시계, 가방 등" },
     ],
   },
   trainer: {

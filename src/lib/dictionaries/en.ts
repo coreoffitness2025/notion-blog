@@ -181,12 +181,12 @@ const en = {
     maleAlt: "Male Coach",
     femaleAlt: "Female Coach",
     collectMessage: "Record consistently to earn points faster",
-    skinGalleryTitle: "Purchase different coach appearances with points",
+    skinGalleryTitle: "Customize your coach's look with points",
     skins: [
-      { name: "Sporty", desc: "Active style" },
-      { name: "Classic", desc: "Clean and simple" },
-      { name: "Elite", desc: "Sleek pro style" },
-      { name: "Champion", desc: "The ultimate look" },
+      { name: "Hairstyle", desc: "Various hair styles" },
+      { name: "Outfit", desc: "Sportswear, casual, formal & more" },
+      { name: "Shoes", desc: "Sneakers to boots" },
+      { name: "Accessories", desc: "Hats, watches, bags & more" },
     ],
   },
   trainer: {
