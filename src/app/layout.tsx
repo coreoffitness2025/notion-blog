@@ -42,6 +42,12 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <head>
+        <meta
+          name="naver-site-verification"
+          content="d2aa7b80e8484a4c96954153259cdeacd915e87e"
+        />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
