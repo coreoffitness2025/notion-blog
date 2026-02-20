@@ -299,8 +299,8 @@ const en = {
     missionDesc: "",
     missionSteps: [
       {
-        title: "Recording is the foundation",
-        desc: "Most fitness apps handle either workouts or diet — never both. But real personal training requires seeing the full picture. CoreVia is designed to make tracking both workouts and diet easy and thorough.",
+        title: "Progressive overload is the answer",
+        desc: "We pursue the best strategies for walking the right path. We believe progressive overload is the true principle of fitness. We design workouts, rest, and nutrition to help you become better than yesterday — and integrate AI to make it all possible.",
       },
       {
         title: "The more you record, the more it optimizes for you",
