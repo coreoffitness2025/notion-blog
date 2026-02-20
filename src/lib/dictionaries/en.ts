@@ -31,20 +31,17 @@ const en = {
   hero: {
     title1: "Real Online PT,",
     title2: "CoreVia Fitness",
-    subtitle1: "Workout tracking, AI diet analysis, cross-feedback —",
-    subtitle2:
-      "Your 24/7 AI coach monitors both workouts and diet together",
-    subtext1:
-      "Photo-based calorie tracking, equipment recognition, personalized programs —",
-    subtext2:
-      "the more you record, the smarter your online PT becomes.",
+    subtitle1: "Workouts and diet, managed by a real online PT.",
+    subtitle2: "Built by CoreVia.",
+    subtext1: "",
+    subtext2: "",
     download: "Download App",
     explore: "Learn More",
   },
   features: {
-    title: "Workout & Diet, Done Right with AI",
+    title: "Personalized Coaching, Just for You",
     subtitle:
-      "Recording, analysis, feedback — most apps handle just one, CoreVia does it all",
+      "Goals, body stats, experience, diet habits — AI designs the optimal workout routine and meal plan for you",
     trust: "",
     cards: [
       {

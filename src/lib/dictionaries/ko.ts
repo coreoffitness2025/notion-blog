@@ -31,19 +31,17 @@ const ko = {
   hero: {
     title1: "진짜 온라인 PT,",
     title2: "코비아 피트니스",
-    subtitle1: "운동 기록, AI 식단 분석, 크로스 피드백까지",
-    subtitle2: "24시간 나만의 AI 코치가 운동과 식단을 같이 봐줍니다",
-    subtext1:
-      "사진 한 장으로 칼로리 측정, 기구 인식, 맞춤 프로그램 추천 —",
-    subtext2:
-      "기록할수록 정교해지는 나만의 온라인 PT를 경험하세요.",
+    subtitle1: "운동과 식단, 제대로 봐주는 진짜 온라인 PT",
+    subtitle2: "CoreVia가 만들어나갑니다.",
+    subtext1: "",
+    subtext2: "",
     download: "앱 다운로드",
     explore: "어떤 앱인지 보기",
   },
   features: {
-    title: "운동도 식단도, AI와 함께 제대로",
+    title: "당신에게 딱 맞는 개인화 코칭",
     subtitle:
-      "기록, 분석, 피드백 — 대부분의 앱은 하나만 다루지만, 코비아는 전부 해요",
+      "목표, 신체정보, 경험, 식습관까지 — 최적의 운동 루틴과 식단을 AI가 설계합니다",
     trust: "",
     cards: [
       {

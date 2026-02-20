@@ -34,12 +34,16 @@ export default function HeroSection({ locale }: { locale: string }) {
             {dict.hero.subtitle1}
             <br className="hidden sm:block" />
             {dict.hero.subtitle2}
-            <br />
-            <span className="text-sm text-gray-400 mt-1 inline-block">
-              {dict.hero.subtext1}
-              <br className="hidden sm:block" />
-              {dict.hero.subtext2}
-            </span>
+            {(dict.hero.subtext1 || dict.hero.subtext2) && (
+              <>
+                <br />
+                <span className="text-sm text-gray-400 mt-1 inline-block">
+                  {dict.hero.subtext1}
+                  {dict.hero.subtext1 && dict.hero.subtext2 && <br className="hidden sm:block" />}
+                  {dict.hero.subtext2}
+                </span>
+              </>
+            )}
           </motion.p>
 
           <motion.div
