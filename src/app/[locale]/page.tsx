@@ -44,13 +44,13 @@ export default async function HomePage({
   return (
     <div className="min-h-screen bg-white">
       <HeroSection locale={locale} />
-      <FeatureCards locale={locale} />
       <RecordingUI locale={locale} />
+      <FeatureCards locale={locale} />
       <CoachShowcase locale={locale} />
       <PointsCustomization locale={locale} />
-      <TrainerSection locale={locale} />
       <GuidePreview locale={locale} />
       <BlogPreview posts={posts} locale={locale} />
+      <TrainerSection locale={locale} />
       <FAQ locale={locale} />
       <AppDownloadCTA locale={locale} />
     </div>

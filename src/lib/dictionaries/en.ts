@@ -31,59 +31,59 @@ const en = {
   hero: {
     title1: "Real Online PT,",
     title2: "CoreVia Fitness",
-    subtitle1: "Diet? Muscle growth? Whatever your goal,",
+    subtitle1: "Workout tracking, AI diet analysis, cross-feedback —",
     subtitle2:
-      "experience a truly personalized online PT.",
+      "Your 24/7 AI coach monitors both workouts and diet together",
     subtext1:
-      "Easy and intuitive workout/diet tracking designed by a competitive athlete turned developer,",
+      "Photo-based calorie tracking, equipment recognition, personalized programs —",
     subtext2:
-      "connected through real online PT — that's what CoreVia Fitness is building.",
+      "the more you record, the smarter your online PT becomes.",
     download: "Download App",
     explore: "Learn More",
   },
   features: {
-    title: "Workout & Diet, Done Right",
+    title: "Workout & Diet, Done Right with AI",
     subtitle:
-      "Most apps cover only one. Real online PT needs both",
+      "Recording, analysis, feedback — most apps handle just one, CoreVia does it all",
     trust: "",
     cards: [
       {
         title: "Progressive Overload Tracking",
-        desc: "Record today's workout while reviewing past records. Auto-compare weight, reps, and volume",
+        desc: "Auto-compare past weight, reps, and volume to set better records today.\nPeriodized programs (Linear 12-week, 5/3/1, Hypertrophy 8-week) included",
       },
       {
         title: "AI Diet Analysis",
-        desc: "Just one photo and AI instantly measures calories and nutrients. Manage your diet to match your goals",
+        desc: "One photo and Gemini AI instantly measures calories and nutrients.\nAccurate for Korean food too. AI estimates foods without barcodes",
       },
       {
-        title: "AI Coach Watches Over You",
-        desc: "Analyzes your workout and diet records for cross-feedback. Choose from 4 coaching personalities",
+        title: "Workout + Diet Cross-Analysis",
+        desc: "'Did back day but protein is low' — AI coach reviews workout and diet\ntogether for cross-feedback. Choose from 4 personalities",
       },
       {
-        title: "Record → Points → Customize",
-        desc: "Consistent recording earns points, and points let you customize your coach's appearance",
+        title: "Record → Points → Coach Skins",
+        desc: "Workout +1pt, Diet +1pt, Weekly +3pt, Streak +5-20pt.\nConsistent recording lets you buy coach skins with points",
       },
       {
-        title: "AI Program Recommendations",
-        desc: "AI matches workout programs to your goals, experience, and available equipment",
+        title: "16-Step Personalized Recommendations",
+        desc: "Goals, body info, experience, injuries, diet style, allergies —\nonboarding data personalizes workout programs and meal suggestions",
       },
       {
-        title: "Barcode + AI Text Estimation",
-        desc: "Instant nutrition info via barcode scan. If not in DB, AI estimates the calories",
+        title: "AI Equipment Recognition + Barcode Scan",
+        desc: "Photo a gym machine and AI identifies it with usage tips and exercises.\nBarcode scan for instant nutrition info on packaged foods",
       },
     ],
   },
   recording: {
-    title: "Beat Your Personal Best",
+    title: "Workout & Diet, Easy and Accurate",
     subtitle1:
       "Compare workouts with past records for progressive overload,",
     subtitle2:
-      "while AI instantly measures calories from a single photo",
+      "while AI instantly analyzes calories and nutrients from a single photo",
     workoutLabel: "Workout Log",
-    workoutDesc: "Review past weight/reps → better records today",
+    workoutDesc: "Review past weight/reps to set better records today",
     workoutAlt: "Workout recording UI",
-    dietLabel: "Diet Log",
-    dietDesc: "One photo → AI instant calorie/nutrient analysis",
+    dietLabel: "AI Diet Analysis",
+    dietDesc: "One photo → Gemini AI instant calorie/nutrient measurement",
     dietAlt: "Diet recording UI",
   },
   coach: {
@@ -96,11 +96,14 @@ const en = {
         label: "Tough Love",
         emoji: "😤",
         chat: [
-          { role: "coach" as const, text: "Skipped workout today? Again?" },
-          { role: "user" as const, text: "I was a bit tired today..." },
           {
             role: "coach" as const,
-            text: "You're tired because you didn't work out. Just do 15 minutes. Skip it and tomorrow's worse.",
+            text: "Bench press 60kg 5x5, but you dropped from 65kg last week?",
+          },
+          { role: "user" as const, text: "My shoulder was bothering me..." },
+          {
+            role: "coach" as const,
+            text: "Shoulder issues? Switch to 30° incline. Can't hit 65kg? Use alternatives. I'll program incline for next session.",
           },
         ],
       },
@@ -111,15 +114,15 @@ const en = {
         chat: [
           {
             role: "coach" as const,
-            text: "Your diet log today is perfect! Amazing 👏",
+            text: "120g protein today! You nailed your target 👏",
           },
           {
             role: "user" as const,
-            text: "But I had fried chicken for dinner...",
+            text: "But I had fried chicken and went over on calories...",
           },
           {
             role: "coach" as const,
-            text: "That's okay! You did great until lunch. Just add more protein tomorrow. You're doing great!",
+            text: "That chicken gave you 30g protein! That's why you hit your goal. Just cut carbs a bit tomorrow. You're doing great!",
           },
         ],
       },
@@ -130,12 +133,12 @@ const en = {
         chat: [
           {
             role: "coach" as const,
-            text: "3 workouts this week, 71% diet logging rate. Here's my analysis.",
+            text: "Weekly data: 4 workouts, 86% diet logging. Here's the cross-analysis.",
           },
           { role: "user" as const, text: "What analysis?" },
           {
             role: "coach" as const,
-            text: "Post-back workout protein intake is 15g below average. Supplementing within 30 minutes improves muscle protein synthesis.",
+            text: "Post-back workout protein is 18g below target. Add 25g whey after training to meet daily goal. 100g chicken breast also works.",
           },
         ],
       },
@@ -146,20 +149,21 @@ const en = {
         chat: [
           {
             role: "coach" as const,
-            text: "Leg day today. Great squat volume!",
+            text: "Squat volume 4,800kg, +12% from last week. Great progress!",
           },
           { role: "user" as const, text: "But my knees hurt a bit" },
           {
             role: "coach" as const,
-            text: "If your knees hurt, try reducing depth. Go to parallel instead of full squat. Let me know if it persists, I'll design alternatives.",
+            text: "Volume was solid, but with knee pain, try parallel instead of full squat. If it persists, we'll switch to leg press. Don't ignore knee pain.",
           },
         ],
       },
     ],
   },
   points: {
-    title: "Record to Earn Points, Customize Your Coach",
-    subtitle: "The more you record, the more points you earn",
+    title: "Recording is Rewarding — Build Your Own Coach",
+    subtitle:
+      "The more you record workouts and diet, the more points you earn to buy coach skins in the shop",
     steps: [
       { step: "01", title: "Record", sub: "Workout +1  Diet +1" },
       { step: "02", title: "Points", sub: "Weekly +3  Streak bonus" },
@@ -173,7 +177,7 @@ const en = {
     femaleCoach: "Female Coach",
     maleAlt: "Male Coach",
     femaleAlt: "Female Coach",
-    collectMessage: "Collect points and create your own coach",
+    collectMessage: "Record consistently to earn points faster",
     skinGalleryTitle: "Purchase different coach appearances with points",
     skins: [
       { name: "Sporty", desc: "Active style" },
@@ -206,8 +210,8 @@ const en = {
     ],
   },
   guidePreview: {
-    title: "Free Fitness Tools",
-    subtitle: "Free tools you can use right away, no app needed",
+    title: "Fitness Tools & Guides",
+    subtitle: "Free tools to help with your workouts and nutrition",
     tools: [
       {
         title: "Calorie Calculator",
@@ -247,11 +251,19 @@ const en = {
     items: [
       {
         q: "Is it free?",
-        a: "Workout/diet recording is free. AI coach chat is available on Pro/Max plans. You still earn points just by recording, and can customize your coach character.",
+        a: "Workout/diet recording, progress graphs, and point earning are all free. AI coach chat (10/month) and AI food analysis (3/month) are also free. Upgrade to Pro for unlimited access.",
       },
       {
         q: "Does the AI really analyze my records?",
-        a: "Yes. It's different from generic AI chatbots. It actually reviews your workout records, diet photos, and body analysis to give feedback. The AI is tuned by a certified trainer and competition winner who also led IT strategy at a top corporation — it feels like a real PT session.",
+        a: "Yes. Completely different from generic AI chatbots. The AI coach uses 9 specialized tools (workout lookup, diet analysis, program recommendations, etc.) to cross-analyze your workout and diet data with personalized feedback.",
+      },
+      {
+        q: "What's the difference between free and paid?",
+        a: "Free: unlimited workout/diet recording + AI coach 10/month + AI food analysis 3/month. Pro: unlimited AI features + routine management + barcode scan + AI equipment recognition. Max: all Pro + imbalance analysis + AI workout evaluation.",
+      },
+      {
+        q: "How does AI diet analysis work?",
+        a: "Take a photo of your food and Gemini AI identifies it, instantly measuring calories and macros (carbs/protein/fat). Accurate for Korean food too. You can also use barcode scan or text search.",
       },
       {
         q: "Is it available on iOS?",
@@ -259,19 +271,11 @@ const en = {
       },
       {
         q: "Can I change the coach's personality?",
-        a: "Of course. You can change it anytime in settings. If Tough Love doesn't work for you, try Supportive.",
+        a: "Yes. Choose from 4 styles — Tough Love, Supportive, Analytical, or Balanced — anytime. You can also customize your coach's appearance (skins) with earned points.",
       },
       {
         q: "Can it replace an in-person PT?",
-        a: "The AI, tuned by a certified trainer from a top IT corporation, monitors your workout and diet 24/7. It's a great alternative when PT sessions are too expensive or time-consuming.",
-      },
-      {
-        q: "Can trainers use it too?",
-        a: "Yes, there's a dedicated Trainer Mode. It offers client management, workout/diet review, feedback writing, and PT tools designed for real personal trainers.",
-      },
-      {
-        q: "What do I get from recording?",
-        a: "Recording workouts and meals earns you points. Use points to buy different coach skins in the shop and customize your coach's appearance. Streak bonuses help you earn faster.",
+        a: "The AI coach cross-analyzes workouts and diet together, and uses 16-step onboarding to personalize recommendations based on your goals, experience, injuries, and allergies. A great 24/7 online PT alternative.",
       },
     ],
   },

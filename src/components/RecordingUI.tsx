@@ -8,7 +8,7 @@ export default function RecordingUI({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
 
   return (
-    <section className="py-20 px-4 bg-[var(--corevia-bg)]">
+    <section className="py-20 px-4 bg-white">
       <div className="max-w-[1100px] mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
