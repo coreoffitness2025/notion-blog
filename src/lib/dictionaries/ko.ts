@@ -176,6 +176,7 @@ const ko = {
     femaleAlt: "여성 코치",
     collectMessage: "기록을 꾸준히 하면 더 빠르게 모을 수 있어요",
     skinGalleryTitle: "포인트로 코치의 외형을 바꿔보세요",
+    comingSoon: "준비중",
     skins: [
       { name: "헤어스타일", desc: "다양한 머리 스타일" },
       { name: "의상", desc: "운동복, 캐주얼, 정장 등" },

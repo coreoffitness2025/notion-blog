@@ -182,6 +182,7 @@ const en = {
     femaleAlt: "Female Coach",
     collectMessage: "Record consistently to earn points faster",
     skinGalleryTitle: "Customize your coach's look with points",
+    comingSoon: "Coming Soon",
     skins: [
       { name: "Hairstyle", desc: "Various hair styles" },
       { name: "Outfit", desc: "Sportswear, casual, formal & more" },
