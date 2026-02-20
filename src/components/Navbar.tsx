@@ -49,7 +49,7 @@ export default function Navbar({ locale }: { locale: string }) {
             className="rounded-xl"
           />
           <span className="font-extrabold text-xl text-gray-900">
-            CoreVia
+            CoreVia Fitness
           </span>
         </Link>
 

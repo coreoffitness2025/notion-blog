@@ -285,11 +285,11 @@ const en = {
     femaleCoachAlt: "AI Coach Female",
   },
   team: {
-    title: "CoreVia",
-    subtitle: "Building the real PT agent",
+    title: "CoreVia Fitness",
+    subtitle: "",
     missionTitle: "Our Mission",
     missionVision: "We relentlessly pursue the Core of fitness, and build the most effective Via — the path to mastering it through AI.",
-    missionDesc: "The name CoreVia was born from this philosophy.",
+    missionDesc: "",
     missionSteps: [
       {
         title: "Recording is the foundation",
@@ -304,8 +304,8 @@ const en = {
         desc: "Consistency is rewarded. Earn points through regular logging and use them to customize your AI coach's personality and appearance to your liking. Building your own coach, your way — that's how CoreVia works.",
       },
       {
-        title: "The ultimate goal: a true online PT agent",
-        desc: "This isn't a simple chatbot. It's an AI agent that queries your workout logs, analyzes your meals, and tracks your body changes — an agent that knows how to use tools. A PT that sharpens with every record you make. That's the future CoreVia is building.",
+        title: "Our Vision: AI Native Fitness Ecosystem",
+        desc: "This isn't a simple chatbot. It's an AI agent that queries your workout logs, analyzes your meals, and tracks your body changes — an agent that knows how to use tools. A PT that sharpens with every record you make. That's the AI Native Fitness ecosystem CoreVia Fitness is building.",
       },
     ],
     aboutTitle: "About Team",

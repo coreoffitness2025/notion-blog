@@ -35,7 +35,7 @@ export default function Footer({ locale }: { locale: string }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
             <p className="font-extrabold text-xl text-gray-900 mb-2">
-              CoreVia
+              CoreVia Fitness
             </p>
             <p className="text-sm text-gray-500 leading-relaxed">
               {dict.footer.tagline1}
@@ -78,7 +78,7 @@ export default function Footer({ locale }: { locale: string }) {
 
         <div className="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} CoreVia. All rights reserved.
+            &copy; {new Date().getFullYear()} CoreVia Fitness. All rights reserved.
           </p>
           <p className="text-xs text-gray-400">coreoffitness2025@gmail.com</p>
         </div>

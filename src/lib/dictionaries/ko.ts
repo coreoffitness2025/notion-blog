@@ -262,11 +262,11 @@ const ko = {
     femaleCoachAlt: "AI 코치 여성",
   },
   team: {
-    title: "CoreVia",
-    subtitle: "진짜 PT 에이전트를 만듭니다",
+    title: "CoreVia Fitness",
+    subtitle: "",
     missionTitle: "Our Mission",
     missionVision: "피트니스의 핵심(Core)을 집요하게 추구하고, AI를 통해(Via) 그 핵심에 도달하는 가장 완벽한 길을 만들어갑니다.",
-    missionDesc: "CoreVia라는 이름은 이 철학에서 탄생했습니다.",
+    missionDesc: "",
     missionSteps: [
       {
         title: "기록이 근본입니다",
@@ -281,8 +281,8 @@ const ko = {
         desc: "꾸준한 기록은 보상으로 돌아옵니다. 포인트를 모아 AI 코치의 성격과 외형을 자신의 취향대로 꾸밀 수 있어요. 나만의 코치를 직접 만들어가는 재미, 그게 CoreVia의 방식입니다.",
       },
       {
-        title: "궁극의 목표: 진짜 온라인 PT 에이전트",
-        desc: "단순한 챗봇이 아닙니다. 당신의 운동 기록을 직접 조회하고, 식단을 분석하고, 체형 변화를 추적하는 — 도구를 쓸 줄 아는 AI 에이전트. 기록할수록 정교해지는 나만의 PT, 그것이 CoreVia가 만들어가는 미래입니다.",
+        title: "우리의 비전: AI Native Fitness 생태계",
+        desc: "단순한 챗봇이 아닙니다. 당신의 운동 기록을 직접 조회하고, 식단을 분석하고, 체형 변화를 추적하는 — 도구를 쓸 줄 아는 AI 에이전트. 기록할수록 정교해지는 나만의 PT, 그것이 CoreVia Fitness가 만들어가는 AI Native Fitness 생태계입니다.",
       },
     ],
     aboutTitle: "About Team",
