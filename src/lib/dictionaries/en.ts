@@ -7,6 +7,7 @@ const en = {
     blog: "Blog",
     contact: "Contact",
     download: "Download App",
+    aiChat: "AI Coach",
     menu: "Menu",
   },
   footer: {
@@ -825,6 +826,42 @@ const en = {
     pricingTitle: "Pricing Plans",
     pricingDesc:
       "Compare CoreVia's Free, Pro, and Max plans and choose the subscription that fits you.",
+    chatTitle: "Chat with AI PT Coach",
+    chatDesc:
+      "Chat with 4 different AI coaching personalities. Get advice on workouts, diet, and routines.",
+  },
+  chat: {
+    metaTitle: "Chat with AI PT Coach",
+    metaDesc:
+      "Chat with 4 different AI PT coaching personalities. Get advice on workouts, diet, and routines.",
+    heroTitle: "Chat with Your AI PT Coach",
+    heroSubtitle:
+      "Pick your favorite from 8 unique AI coaches and start your fitness consultation",
+    startChat: "Start Chat",
+    freeNotice: "5 free messages daily | Unlimited in app",
+    inputPlaceholder: "Type your message...",
+    limitReached: "You've used all free messages for today",
+    errorMessage: "Sorry, something went wrong. Please try again.",
+    aiDisclaimer:
+      "AI coach advice is for reference only and does not replace professional medical advice.",
+    goalLoseWeight: "I want to lose weight",
+    goalBuildMuscle: "I want to build muscle",
+    goalGetFit: "I want to get fit",
+    limitLabels: {
+      remaining: "Remaining",
+      of: "/",
+      unlimited: "Unlimited",
+    },
+    ctaLabels: {
+      inlineTitle: "Want coaching based on real workout data?",
+      inlineDesc:
+        "Record your workouts & diet in the app for data-driven 1:1 AI coaching.",
+      modalTitle: "See you tomorrow!",
+      modalDesc:
+        "You've used all free messages today. Get unlimited AI coaching in the app.",
+      downloadApp: "Download App",
+      maybeLater: "I'll come back tomorrow",
+    },
   },
 };
 

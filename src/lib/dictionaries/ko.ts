@@ -7,6 +7,7 @@ const ko = {
     blog: "블로그",
     contact: "문의",
     download: "앱 다운로드",
+    aiChat: "AI 코치",
     menu: "메뉴",
   },
   footer: {
@@ -791,6 +792,42 @@ const ko = {
     pricingTitle: "구독 플랜",
     pricingDesc:
       "CoreVia의 Free, Pro, Max 플랜을 비교하고 나에게 맞는 구독 플랜을 선택하세요.",
+    chatTitle: "AI PT 코치와 대화하기",
+    chatDesc:
+      "4가지 성격의 AI 코치와 실시간 대화. 운동, 식단, 루틴 고민을 상담하세요.",
+  },
+  chat: {
+    metaTitle: "AI PT 코치와 대화하기",
+    metaDesc:
+      "4가지 성격의 AI PT 코치와 실시간 대화. 운동, 식단, 루틴 고민을 상담하세요.",
+    heroTitle: "AI PT 코치와 대화해보세요",
+    heroSubtitle:
+      "8명의 개성 넘치는 AI 코치 중 마음에 드는 코치를 골라 피트니스 상담을 시작하세요",
+    startChat: "대화 시작",
+    freeNotice: "매일 5번 무료 대화 | 무제한은 앱에서",
+    inputPlaceholder: "메시지를 입력하세요...",
+    limitReached: "오늘의 무료 대화를 모두 사용했어요",
+    errorMessage: "죄송합니다, 응답 중 오류가 발생했어요. 다시 시도해 주세요.",
+    aiDisclaimer:
+      "AI 코치의 조언은 참고용이며, 의료 전문가의 조언을 대체하지 않습니다.",
+    goalLoseWeight: "체중 감량하고 싶어요",
+    goalBuildMuscle: "근육을 키우고 싶어요",
+    goalGetFit: "체력을 늘리고 싶어요",
+    limitLabels: {
+      remaining: "남은 대화",
+      of: "/",
+      unlimited: "무제한",
+    },
+    ctaLabels: {
+      inlineTitle: "실제 운동 데이터로 코칭 받고 싶다면?",
+      inlineDesc:
+        "앱에서 운동·식단을 기록하면 AI 코치가 데이터 기반 1:1 피드백을 줘요.",
+      modalTitle: "내일 다시 만나요!",
+      modalDesc:
+        "오늘의 무료 대화가 끝났어요. 앱에서는 매일 무제한으로 AI 코치와 대화할 수 있어요.",
+      downloadApp: "앱 다운로드",
+      maybeLater: "내일 다시 올게요",
+    },
   },
 };
 
