@@ -3,30 +3,20 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { getDictionary } from "@/lib/i18n";
+import { useRef } from "react";
+
+const screenshots = [
+  { src: "/store-screenshots/01-coach-k.png", alt: "AI Coach" },
+  { src: "/store-screenshots/02-coach-jane.png", alt: "Coach Customizing" },
+  { src: "/store-screenshots/03-workout.png", alt: "Workout Input" },
+  { src: "/store-screenshots/04-nutrition.png", alt: "Nutrition Tracking" },
+  { src: "/store-screenshots/05-dashboard.png", alt: "Home Dashboard" },
+  { src: "/store-screenshots/06-trainer-mode.png", alt: "Trainer Mode" },
+];
 
 export default function RecordingUI({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
-
-  const screens = [
-    {
-      src: "/app-ui-dashboard.png",
-      alt: dict.recording.dashboardAlt,
-      label: dict.recording.dashboardLabel,
-      desc: dict.recording.dashboardDesc,
-    },
-    {
-      src: "/app-ui-workout.png",
-      alt: dict.recording.workoutAlt,
-      label: dict.recording.workoutLabel,
-      desc: dict.recording.workoutDesc,
-    },
-    {
-      src: "/app-ui-food.png",
-      alt: dict.recording.dietAlt,
-      label: dict.recording.dietLabel,
-      desc: dict.recording.dietDesc,
-    },
-  ];
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <section className="py-20 px-4 bg-white">
@@ -42,31 +32,29 @@ export default function RecordingUI({ locale }: { locale: string }) {
           </p>
         </div>
 
-        <div className="flex items-start justify-center gap-6 md:gap-10">
-          {screens.map((screen, i) => (
+        <div
+          ref={scrollRef}
+          className="flex gap-4 md:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {screenshots.map((shot, i) => (
             <motion.div
-              key={screen.src}
+              key={shot.src}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex flex-col items-center min-w-0"
+              transition={{ delay: i * 0.08 }}
+              className="flex-shrink-0 snap-center"
             >
-              <div className="relative w-[110px] h-[196px] sm:w-[180px] sm:h-[320px] md:w-[240px] md:h-[428px] lg:w-[280px] lg:h-[500px]">
+              <div className="relative w-[200px] h-[432px] sm:w-[240px] sm:h-[519px] md:w-[280px] md:h-[606px] lg:w-[320px] lg:h-[692px] rounded-2xl overflow-hidden shadow-md">
                 <Image
-                  src={screen.src}
-                  alt={screen.alt}
+                  src={shot.src}
+                  alt={shot.alt}
                   fill
-                  className="object-contain drop-shadow-lg"
-                  sizes="(max-width: 640px) 110px, (max-width: 768px) 180px, (max-width: 1024px) 240px, 280px"
+                  className="object-cover"
+                  sizes="(max-width: 640px) 200px, (max-width: 768px) 240px, (max-width: 1024px) 280px, 320px"
                 />
               </div>
-              <p className="mt-3 text-xs sm:text-sm font-medium text-gray-800">
-                {screen.label}
-              </p>
-              <p className="text-[10px] sm:text-xs text-gray-400 mt-1 text-center">
-                {screen.desc}
-              </p>
             </motion.div>
           ))}
         </div>
