@@ -43,8 +43,7 @@ const ko = {
   features: {
     title: "운동도 식단도, 제대로",
     subtitle: "대부분의 앱은 하나만 다룹니다. 둘 다 봐야 진짜 온라인 PT입니다",
-    trust:
-      "생체 2급 + 대회 수상 트레이너이자 IT 대기업 전략팀 출신 대표가 직접 튜닝한 AI",
+    trust: "",
     cards: [
       {
         title: "점진적 과부하 운동 기록",
@@ -170,9 +169,9 @@ const ko = {
     ],
   },
   trainer: {
-    badge: "Trainer Mode",
+    badge: "트레이너 모드도 지원해요!",
     title: "실제 PT 트레이너를 위한 전용 모드",
-    subtitle: "회원 관리, 식단/운동 리뷰, 피드백까지",
+    subtitle: "회원이 기록한 운동·식단 데이터를 트레이너가 직접 확인하고, 피드백까지 한 곳에서 관리할 수 있어요",
     cards: [
       {
         title: "회원 관리",

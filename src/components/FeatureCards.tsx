@@ -69,14 +69,16 @@ export default function FeatureCards({ locale }: { locale: string }) {
           </p>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-sm text-gray-400 mb-14"
-        >
-          {dict.features.trust}
-        </motion.p>
+        {dict.features.trust && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-sm text-gray-400 mb-14"
+          >
+            {dict.features.trust}
+          </motion.p>
+        )}
 
         <motion.div
           variants={container}

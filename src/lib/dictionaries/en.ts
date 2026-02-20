@@ -45,8 +45,7 @@ const en = {
     title: "Workout & Diet, Done Right",
     subtitle:
       "Most apps cover only one. Real online PT needs both",
-    trust:
-      "AI tuned by a certified trainer & competition winner who also led IT strategy at a top corporation",
+    trust: "",
     cards: [
       {
         title: "Progressive Overload Tracking",
@@ -184,9 +183,9 @@ const en = {
     ],
   },
   trainer: {
-    badge: "Trainer Mode",
+    badge: "Trainer Mode Supported!",
     title: "Dedicated Mode for Real PT Trainers",
-    subtitle: "Client management, diet/workout review, and feedback",
+    subtitle: "Trainers can directly review their clients' workout and diet data, and manage feedback all in one place",
     cards: [
       {
         title: "Client Management",
