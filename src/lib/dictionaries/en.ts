@@ -79,6 +79,9 @@ const en = {
       "Compare workouts with past records for progressive overload,",
     subtitle2:
       "while AI instantly analyzes calories and nutrients from a single photo",
+    dashboardLabel: "Home Dashboard",
+    dashboardDesc: "Target calories, monthly workouts, and weight at a glance",
+    dashboardAlt: "Home Dashboard UI",
     workoutLabel: "Workout Log",
     workoutDesc: "Review past weight/reps to set better records today",
     workoutAlt: "Workout recording UI",

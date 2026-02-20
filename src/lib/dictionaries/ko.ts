@@ -77,6 +77,9 @@ const ko = {
     subtitle1: "운동은 지난 기록과 비교하며 점진적 과부하를,",
     subtitle2:
       "식단은 사진 한 장이면 AI가 칼로리와 영양소를 즉시 분석해줘요",
+    dashboardLabel: "홈 대시보드",
+    dashboardDesc: "목표 칼로리, 이번 달 운동, 체중까지 한눈에",
+    dashboardAlt: "홈 대시보드 UI",
     workoutLabel: "운동 기록",
     workoutDesc: "이전 무게/횟수를 보면서 더 나은 오늘을 기록",
     workoutAlt: "운동 기록 UI",
