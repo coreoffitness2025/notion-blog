@@ -785,7 +785,7 @@ const ko = {
       "스마트폰 하나로 운동+식단 AI 코칭. 기록만 하는 앱은 많지만, 기록을 보고 조언해주는 앱은 CoreVia뿐. AI가 운동과 식단을 분석하고 맞춤 피드백을 제공합니다.",
     coachTitle: "AI 코치 소개",
     coachDesc:
-      "4가지 성격의 AI PT 코치가 운동과 식단을 함께 관리해줍니다. 독설형, 격려형, 냉정형, 밸런스형 중 나에게 맞는 코치를 골라보세요.",
+      "코치 케이와 코치 제인, 2명의 AI PT 코치가 4가지 성격으로 운동과 식단을 함께 관리해줍니다.",
     contactTitle: "문의하기",
     contactDesc:
       "CoreVia에 문의하세요. 앱 피드백, 제안, 협업 문의를 환영합니다.",
@@ -794,19 +794,27 @@ const ko = {
       "CoreVia의 Free, Pro, Max 플랜을 비교하고 나에게 맞는 구독 플랜을 선택하세요.",
     chatTitle: "AI PT 코치와 대화하기",
     chatDesc:
-      "4가지 성격의 AI 코치와 실시간 대화. 운동, 식단, 루틴 고민을 상담하세요.",
+      "코치 케이 · 코치 제인과 실시간 대화. 운동, 식단, 루틴 고민을 상담하세요.",
   },
   chat: {
-    metaTitle: "AI PT 코치와 대화하기",
+    metaTitle: "AI PT 코치와 대화하기 | CoreVia",
     metaDesc:
-      "4가지 성격의 AI PT 코치와 실시간 대화. 운동, 식단, 루틴 고민을 상담하세요.",
-    heroTitle: "AI PT 코치와 대화해보세요",
+      "코치 케이 · 코치 제인, 4가지 성격으로 만나는 AI PT 코칭. 운동, 식단, 루틴 고민을 상담하세요.",
+    heroBadge: "AI FITNESS COACH",
+    heroTitle: "어떤 코치와 대화해볼까요?",
     heroSubtitle:
-      "8명의 개성 넘치는 AI 코치 중 마음에 드는 코치를 골라 피트니스 상담을 시작하세요",
-    startChat: "대화 시작",
-    freeNotice: "매일 5번 무료 대화 | 무제한은 앱에서",
+      "코치 케이와 코치 제인이 4가지 성격으로 기다리고 있어요. 골라서 바로 대화해보세요.",
+    startChat: "대화하기",
+    pickPersonality: "코칭 스타일을 골라보세요",
+    personalityPreviews: {
+      tough: "오늘도 빠질 거야? 진짜?",
+      cheerful: "와 오늘도 왔어? 대단하다!",
+      cool: "이번 주 달성률 68%. 목표 근접.",
+      balanced: "오늘 뭐 해볼까요? 같이 짜봅시다.",
+    } as Record<string, string>,
+    freeNotice: "가입 시 50pt 무료 지급",
     inputPlaceholder: "메시지를 입력하세요...",
-    limitReached: "오늘의 무료 대화를 모두 사용했어요",
+    limitReached: "포인트가 부족합니다",
     errorMessage: "죄송합니다, 응답 중 오류가 발생했어요. 다시 시도해 주세요.",
     aiDisclaimer:
       "AI 코치의 조언은 참고용이며, 의료 전문가의 조언을 대체하지 않습니다.",
@@ -822,9 +830,9 @@ const ko = {
       inlineTitle: "실제 운동 데이터로 코칭 받고 싶다면?",
       inlineDesc:
         "앱에서 운동·식단을 기록하면 AI 코치가 데이터 기반 1:1 피드백을 줘요.",
-      modalTitle: "내일 다시 만나요!",
+      modalTitle: "포인트가 부족해요",
       modalDesc:
-        "오늘의 무료 대화가 끝났어요. 앱에서는 매일 무제한으로 AI 코치와 대화할 수 있어요.",
+        "앱에서 운동·식단을 기록하면 포인트가 적립돼요. 포인트 충전도 곧 준비됩니다.",
       downloadApp: "앱 다운로드",
       maybeLater: "내일 다시 올게요",
     },

@@ -9,6 +9,7 @@ interface ChatBubbleProps {
   avatarSrc?: string;
   coachName?: string;
   isStreaming?: boolean;
+  avatarClassName?: string;
 }
 
 export default function ChatBubble({
@@ -17,6 +18,7 @@ export default function ChatBubble({
   avatarSrc,
   coachName,
   isStreaming,
+  avatarClassName,
 }: ChatBubbleProps) {
   const isCoach = role === "coach";
 
@@ -34,7 +36,7 @@ export default function ChatBubble({
             alt={coachName || "Coach"}
             width={32}
             height={32}
-            className="object-cover object-top w-full h-full"
+            className={`w-full h-full ${avatarClassName || "object-cover object-top"}`}
           />
         </div>
       )}

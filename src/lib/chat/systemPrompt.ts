@@ -5,7 +5,7 @@
 
 import { ChatLocale } from "./personalities";
 import { PERSONALITY_TONES, PersonalityType } from "./personalities";
-import { Character } from "./characters";
+import { Coach } from "./characters";
 
 const MEDICAL_DISCLAIMERS: Record<ChatLocale, string> = {
   ko: "통증/부상 질문 → '전문 의료기관 방문을 권합니다' 먼저 안내.",
@@ -26,12 +26,31 @@ const LOCALE_INSTRUCTIONS: Record<ChatLocale, string> = {
   en: "\n[IMPORTANT] Respond in English only.",
 };
 
+export interface WebUserContext {
+  fitnessGoal?: string;
+  experienceLevel?: string;
+  injuries?: string[];
+}
+
+const GOAL_MAP: Record<string, Record<ChatLocale, string>> = {
+  lose: { ko: "체중 감량", en: "weight loss" },
+  maintain: { ko: "체중 유지", en: "weight maintenance" },
+  gain: { ko: "체중 증량 (벌크업)", en: "weight gain (bulk)" },
+};
+
+const EXP_MAP: Record<string, Record<ChatLocale, string>> = {
+  beginner: { ko: "초보 (6개월 미만)", en: "beginner (<6 months)" },
+  intermediate: { ko: "중급 (6개월~2년)", en: "intermediate (6mo-2yr)" },
+  advanced: { ko: "고급 (2년 이상)", en: "advanced (2yr+)" },
+};
+
 export function buildWebSystemPrompt(
   locale: ChatLocale,
-  character: Character,
+  coach: Coach,
   personalityType: PersonalityType,
+  userContext?: WebUserContext,
 ): string {
-  const coachName = character.name[locale];
+  const coachName = coach.name[locale];
   const tonePrompt =
     PERSONALITY_TONES[personalityType]?.[locale] ||
     PERSONALITY_TONES.balanced.ko;
@@ -53,10 +72,46 @@ export function buildWebSystemPrompt(
 - 정체성 질문(AI냐, 뭐냐 등) → "저는 ${coachName}이에요! 운동이나 식단 관련해서 도와드릴까요?" 식으로 코치 캐릭터 유지.
 - 연애/성적/정치/종교 주제 → 정중히 거절하고 피트니스로 전환.
 - 기록에 없는 운동/식단 수치를 지어내지 마.
-- 이건 웹 채팅이라 회원의 실제 운동/식단 데이터가 없어. 일반적인 피트니스 조언과 코칭에 집중해.
-- 구체적인 데이터 기반 피드백이 필요하면 CoreVia 앱 사용을 자연스럽게 추천해.
+- 회원의 실제 데이터가 없으니, 대화에서 들은 정보를 토대로 최선의 피트니스 조언을 해.
+- 회원이 직접 알려주는 체중/키/경력/목표 등을 기억하고 활용해. 모르는 건 물어봐.
+- 앱이나 서비스 홍보 절대 하지 마. 순수하게 코칭에만 집중.
 
 ${tonePrompt}
 
-${COLD_START[locale]}${localeInstr}`;
+${COLD_START[locale]}${localeInstr}${buildUserContextBlock(locale, userContext)}`;
+}
+
+function buildUserContextBlock(
+  locale: ChatLocale,
+  ctx?: WebUserContext,
+): string {
+  if (!ctx) return "";
+
+  const lines: string[] = [];
+  if (ctx.fitnessGoal) {
+    const label = GOAL_MAP[ctx.fitnessGoal]?.[locale] || ctx.fitnessGoal;
+    lines.push(`- ${locale === "ko" ? "목표" : "Goal"}: ${label}`);
+  }
+  if (ctx.experienceLevel) {
+    const label = EXP_MAP[ctx.experienceLevel]?.[locale] || ctx.experienceLevel;
+    lines.push(`- ${locale === "ko" ? "운동 경험" : "Experience"}: ${label}`);
+  }
+  if (ctx.injuries?.length) {
+    lines.push(
+      `- ${locale === "ko" ? "부상 이력" : "Injuries"}: ${ctx.injuries.join(", ")}`,
+    );
+  }
+
+  if (lines.length === 0) return "";
+
+  const header =
+    locale === "ko"
+      ? "\n\n## 회원 정보\n"
+      : "\n\n## Member Info\n";
+  const footer =
+    locale === "ko"
+      ? "\n이 정보를 바탕으로 맞춤 코칭해."
+      : "\nUse this info to personalize your coaching.";
+
+  return header + lines.join("\n") + footer;
 }

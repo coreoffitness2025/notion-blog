@@ -2,14 +2,30 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { sanitizeUserMessage, filterResponse } from "@/lib/chat/sanitize";
 import { buildWebSystemPrompt } from "@/lib/chat/systemPrompt";
-import { getCharacterById } from "@/lib/chat/characters";
+import { parseCharacterId, getCoach } from "@/lib/chat/characters";
 import { ChatLocale } from "@/lib/chat/personalities";
-import { incrementUsage } from "@/lib/chat/rateLimiter";
+import { adminAuth, adminDb } from "@/lib/firebase/admin";
+import { deductPoints } from "@/lib/points/pointService";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 const SLIDING_WINDOW = 6;
 const MAX_OUTPUT_TOKENS = 500;
+
+// UID-based rate limiting (in-memory, resets per minute)
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(uid: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(uid);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(uid, { count: 1, resetAt: now + 60_000 });
+    return true;
+  }
+  if (entry.count >= 10) return false;
+  entry.count++;
+  return true;
+}
 
 interface ChatMessage {
   role: "user" | "model";
@@ -18,65 +34,71 @@ interface ChatMessage {
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limit check
-    const { allowed, remaining, total } = await incrementUsage();
-    if (!allowed) {
+    // --- Auth check ---
+    const authHeader = request.headers.get("authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
       return NextResponse.json(
-        {
-          error: "daily_limit",
-          message: "Daily message limit reached",
-          remaining: 0,
-          total,
-        },
+        { error: "unauthorized", message: "Login required" },
+        { status: 401 },
+      );
+    }
+
+    const token = authHeader.slice(7);
+    let uid: string;
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+    } catch {
+      return NextResponse.json(
+        { error: "unauthorized", message: "Invalid token" },
+        { status: 401 },
+      );
+    }
+
+    // --- Rate limit ---
+    if (!checkRateLimit(uid)) {
+      return NextResponse.json(
+        { error: "rate_limit", message: "Too many requests" },
         { status: 429 },
       );
     }
 
+    // --- Deduct points ---
+    const pointResult = await deductPoints(uid);
+    if (!pointResult.success) {
+      return NextResponse.json(
+        {
+          error: "insufficient_points",
+          balance: pointResult.balance,
+        },
+        { status: 402 },
+      );
+    }
+
+    // --- Parse request ---
     const body = await request.json();
     const {
       message,
       characterId,
       locale = "ko",
       history = [],
-      turnstileToken,
     } = body as {
       message: string;
       characterId: string;
       locale: string;
       history: ChatMessage[];
-      turnstileToken?: string;
     };
 
-    // Turnstile verification (if configured)
-    if (process.env.TURNSTILE_SECRET_KEY && turnstileToken) {
-      const turnstileRes = await fetch(
-        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            secret: process.env.TURNSTILE_SECRET_KEY,
-            response: turnstileToken,
-          }),
-        },
-      );
-      const turnstileData = await turnstileRes.json();
-      if (!turnstileData.success) {
-        return NextResponse.json(
-          { error: "turnstile_failed" },
-          { status: 403 },
-        );
-      }
-    }
-
     // Validate character
-    const character = getCharacterById(characterId);
-    if (!character) {
+    const parsed = parseCharacterId(characterId);
+    if (!parsed) {
       return NextResponse.json(
         { error: "invalid_character" },
         { status: 400 },
       );
     }
+
+    const coach = getCoach(parsed.gender);
 
     // Sanitize input
     const sanitizedMessage = sanitizeUserMessage(message);
@@ -84,15 +106,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "empty_message" }, { status: 400 });
     }
 
-    // Build system prompt
+    // --- Load personalization ---
+    let userContext: {
+      fitnessGoal?: string;
+      experienceLevel?: string;
+      injuries?: string[];
+    } | undefined;
+
+    try {
+      const userSnap = await adminDb.doc(`users/${uid}`).get();
+      const userData = userSnap.data();
+      if (userData?.webPersonalization) {
+        userContext = userData.webPersonalization;
+      }
+    } catch {
+      // proceed without personalization
+    }
+
+    // --- Build system prompt ---
     const chatLocale: ChatLocale = locale === "en" ? "en" : "ko";
     const systemPrompt = buildWebSystemPrompt(
       chatLocale,
-      character,
-      character.personalityType,
+      coach,
+      parsed.personality,
+      userContext,
     );
 
-    // Sliding window: keep last N messages
+    // Sliding window
     const recentHistory = history.slice(-SLIDING_WINDOW);
 
     // Create model
@@ -105,14 +145,10 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Start chat with history
-    const chat = model.startChat({
-      history: recentHistory,
-    });
-
-    // Stream response
+    const chat = model.startChat({ history: recentHistory });
     const result = await chat.sendMessageStream(sanitizedMessage);
 
+    // --- Stream response ---
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
@@ -122,7 +158,12 @@ export async function POST(request: NextRequest) {
             if (text) {
               const filtered = filterResponse(text);
               controller.enqueue(
-                encoder.encode(`data: ${JSON.stringify({ text: filtered, remaining })}\n\n`),
+                encoder.encode(
+                  `data: ${JSON.stringify({
+                    text: filtered,
+                    pointBalance: pointResult.balance,
+                  })}\n\n`,
+                ),
               );
             }
           }

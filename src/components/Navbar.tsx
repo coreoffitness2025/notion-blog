@@ -4,7 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { MessageCircle } from "lucide-react";
 import { getDictionary } from "@/lib/i18n";
+import NavbarAuthSection from "./NavbarAuthSection";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -18,9 +20,11 @@ export default function Navbar({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
   const prefix = locale === "ko" ? "" : `/${locale}`;
 
+  const chatHref = `${prefix}/chat`;
+  const isChatActive = isActive(pathname, chatHref);
+
   const nav = [
     { href: `${prefix}/#features`, label: dict.nav.features },
-    { href: `${prefix}/chat`, label: dict.nav.aiChat },
     { href: `${prefix}/guide`, label: dict.nav.guide },
     { href: `${prefix}/pricing`, label: dict.nav.pricing },
     { href: `${prefix}/posts`, label: dict.nav.blog },
@@ -50,6 +54,19 @@ export default function Navbar({ locale }: { locale: string }) {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
+          <Link
+            href={chatHref}
+            aria-current={isChatActive ? "page" : undefined}
+            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+              isChatActive
+                ? "text-[var(--corevia-ai)]"
+                : "text-[var(--corevia-ai)] hover:text-purple-700"
+            }`}
+          >
+            <MessageCircle className="w-4 h-4" />
+            {dict.nav.aiChat}
+          </Link>
+
           {nav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -68,7 +85,6 @@ export default function Navbar({ locale }: { locale: string }) {
             );
           })}
 
-          {/* Language Switcher */}
           <Link
             href={switchPath}
             className="px-3 py-1.5 text-xs font-medium text-gray-500 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
@@ -76,14 +92,7 @@ export default function Navbar({ locale }: { locale: string }) {
             {otherLocale === "en" ? "EN" : "KO"}
           </Link>
 
-          <a
-            href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 px-4 py-2 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            {dict.nav.download}
-          </a>
+          <NavbarAuthSection locale={locale} downloadLabel={dict.nav.download} />
         </nav>
 
         <button
@@ -118,6 +127,15 @@ export default function Navbar({ locale }: { locale: string }) {
 
       {isMobileMenuOpen && (
         <nav className="md:hidden border-t border-gray-100 bg-white px-4 py-2">
+          <Link
+            href={chatHref}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-2 py-3 text-sm font-semibold text-[var(--corevia-ai)]"
+          >
+            <MessageCircle className="w-4 h-4" />
+            {dict.nav.aiChat}
+          </Link>
+
           {nav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -143,15 +161,7 @@ export default function Navbar({ locale }: { locale: string }) {
             >
               {otherLocale === "en" ? "English" : "한국어"}
             </Link>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg text-center flex-1"
-            >
-              {dict.nav.download}
-            </a>
+            <NavbarAuthSection locale={locale} downloadLabel={dict.nav.download} />
           </div>
         </nav>
       )}

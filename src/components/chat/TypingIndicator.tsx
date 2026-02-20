@@ -6,11 +6,13 @@ import Image from "next/image";
 interface TypingIndicatorProps {
   avatarSrc: string;
   coachName: string;
+  avatarClassName?: string;
 }
 
 export default function TypingIndicator({
   avatarSrc,
   coachName,
+  avatarClassName,
 }: TypingIndicatorProps) {
   return (
     <div className="flex gap-2.5 justify-start">
@@ -20,7 +22,7 @@ export default function TypingIndicator({
           alt={coachName}
           width={32}
           height={32}
-          className="object-cover object-top w-full h-full"
+          className={`w-full h-full ${avatarClassName || "object-cover object-top"}`}
         />
       </div>
       <div className="flex flex-col gap-0.5">

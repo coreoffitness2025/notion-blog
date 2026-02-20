@@ -819,7 +819,7 @@ const en = {
       "All-in-one workout + diet AI coaching on your smartphone. Many apps just record — only CoreVia analyzes your records and provides personalized feedback.",
     coachTitle: "AI Coach",
     coachDesc:
-      "4 AI PT coaches with different personalities manage both your workouts and diet. Choose from Tough Love, Supportive, Analytical, or Balanced.",
+      "Coach Kay and Coach Jane — 2 AI PT coaches with 4 coaching styles manage both your workouts and diet.",
     contactTitle: "Contact Us",
     contactDesc:
       "Contact CoreVia. We welcome app feedback, suggestions, and partnership inquiries.",
@@ -828,19 +828,27 @@ const en = {
       "Compare CoreVia's Free, Pro, and Max plans and choose the subscription that fits you.",
     chatTitle: "Chat with AI PT Coach",
     chatDesc:
-      "Chat with 4 different AI coaching personalities. Get advice on workouts, diet, and routines.",
+      "Chat with Coach Kay or Coach Jane. Get AI advice on workouts, diet, and routines.",
   },
   chat: {
-    metaTitle: "Chat with AI PT Coach",
+    metaTitle: "Chat with AI PT Coach | CoreVia",
     metaDesc:
-      "Chat with 4 different AI PT coaching personalities. Get advice on workouts, diet, and routines.",
-    heroTitle: "Chat with Your AI PT Coach",
+      "Coach Kay & Coach Jane with 4 coaching personalities. Get AI PT advice on workouts, diet, and routines.",
+    heroBadge: "AI FITNESS COACH",
+    heroTitle: "Which coach will you talk to?",
     heroSubtitle:
-      "Pick your favorite from 8 unique AI coaches and start your fitness consultation",
-    startChat: "Start Chat",
-    freeNotice: "5 free messages daily | Unlimited in app",
+      "Coach Kay and Coach Jane are waiting with 4 coaching styles. Pick one and start chatting.",
+    startChat: "Chat now",
+    pickPersonality: "Pick a coaching style",
+    personalityPreviews: {
+      tough: "Skipping again today? Really?",
+      cheerful: "You showed up again! That's awesome!",
+      cool: "Weekly completion rate: 68%. On track.",
+      balanced: "What should we work on today?",
+    } as Record<string, string>,
+    freeNotice: "50pt free on signup",
     inputPlaceholder: "Type your message...",
-    limitReached: "You've used all free messages for today",
+    limitReached: "Not enough points",
     errorMessage: "Sorry, something went wrong. Please try again.",
     aiDisclaimer:
       "AI coach advice is for reference only and does not replace professional medical advice.",
@@ -856,9 +864,9 @@ const en = {
       inlineTitle: "Want coaching based on real workout data?",
       inlineDesc:
         "Record your workouts & diet in the app for data-driven 1:1 AI coaching.",
-      modalTitle: "See you tomorrow!",
+      modalTitle: "Not enough points",
       modalDesc:
-        "You've used all free messages today. Get unlimited AI coaching in the app.",
+        "Record workouts & diet in the app to earn points. Point purchase is coming soon.",
       downloadApp: "Download App",
       maybeLater: "I'll come back tomorrow",
     },

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getDictionary, locales } from "@/lib/i18n";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AuthProviderWrapper from "@/lib/auth/AuthProviderWrapper";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -124,9 +125,11 @@ export default async function LocaleLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Navbar locale={locale} />
-      <main>{children}</main>
-      <Footer locale={locale} />
+      <AuthProviderWrapper>
+        <Navbar locale={locale} />
+        <main>{children}</main>
+        <Footer locale={locale} />
+      </AuthProviderWrapper>
     </>
   );
 }

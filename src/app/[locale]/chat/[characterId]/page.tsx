@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n";
-import { getCharacterById } from "@/lib/chat/characters";
+import { parseCharacterId, getCoach, PERSONALITIES } from "@/lib/chat/characters";
 import { notFound } from "next/navigation";
 import ChatInterface from "./ChatInterface";
 
@@ -16,12 +16,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, characterId } = await params;
   const dict = getDictionary(locale);
-  const loc = locale === "en" ? "en" : "ko";
-  const character = getCharacterById(characterId);
+  const loc = (locale === "en" ? "en" : "ko") as "ko" | "en";
+  const parsed = parseCharacterId(characterId);
 
-  if (!character) return {};
+  if (!parsed) return {};
 
-  const title = `${character.name[loc]} - ${dict.chat.metaTitle}`;
+  const coach = getCoach(parsed.gender);
+  const personality = PERSONALITIES.find((p) => p.type === parsed.personality);
+  const title = `${coach.name[loc]} (${personality?.label[loc]}) - ${dict.chat.metaTitle}`;
 
   return {
     title,
@@ -41,9 +43,9 @@ export default async function ChatCharacterPage({
   params: Promise<{ locale: string; characterId: string }>;
 }) {
   const { locale, characterId } = await params;
-  const character = getCharacterById(characterId);
+  const parsed = parseCharacterId(characterId);
 
-  if (!character) notFound();
+  if (!parsed) notFound();
 
   const dict = getDictionary(locale);
 

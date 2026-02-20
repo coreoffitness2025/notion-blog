@@ -2,15 +2,16 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Settings } from "lucide-react";
 import ChatBubble from "@/components/chat/ChatBubble";
 import ChatInput from "@/components/chat/ChatInput";
 import TypingIndicator from "@/components/chat/TypingIndicator";
-import MessageLimitBanner from "@/components/chat/MessageLimitBanner";
-import AppDownloadPrompt from "@/components/chat/AppDownloadPrompt";
-import { parseCharacterId, getCoach, PERSONALITIES } from "@/lib/chat/characters";
+import PointLimitModal from "@/components/chat/PointLimitModal";
+import PointBalanceBadge from "./PointBalanceBadge";
+import { getCoach, PERSONALITIES } from "@/lib/chat/characters";
+import { useAuth } from "@/lib/auth/AuthContext";
 import type { Dictionary } from "@/lib/i18n";
+import type { PersonalizationData } from "./PersonalizationForm";
 
 interface Message {
   id: string;
@@ -23,69 +24,69 @@ interface GeminiMessage {
   parts: { text: string }[];
 }
 
-const CTA_AFTER_TURN = 3;
+const POINT_COST = 8;
 
-export default function ChatInterface({
-  locale,
-  characterId,
-  dict,
-}: {
+interface Step3Props {
   locale: string;
-  characterId: string;
   dict: Dictionary;
-}) {
-  const parsed = parseCharacterId(characterId)!;
-  const coach = getCoach(parsed.gender);
-  const personality = PERSONALITIES.find((p) => p.type === parsed.personality)!;
+  personalization: PersonalizationData;
+  onBack: () => void;
+}
+
+export default function Step3Chat({
+  locale,
+  dict,
+  personalization,
+  onBack,
+}: Step3Props) {
+  const { user, pointBalance } = useAuth();
   const loc = (locale === "en" ? "en" : "ko") as "ko" | "en";
-  const prefix = locale === "ko" ? "" : `/${locale}`;
+
+  const coach = getCoach(personalization.coachGender);
+  const personality = PERSONALITIES.find(
+    (p) => p.type === personalization.personalityType,
+  )!;
+  const characterId = `${personalization.coachGender}-${personalization.personalityType}`;
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [remaining, setRemaining] = useState(5);
-  const [limit] = useState(5);
-  const [showInlineCta, setShowInlineCta] = useState(false);
+  const [localBalance, setLocalBalance] = useState(pointBalance);
   const [showLimitModal, setShowLimitModal] = useState(false);
-  const [turnCount, setTurnCount] = useState(0);
-  const [dismissedCta, setDismissedCta] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Fetch initial usage
+  // Sync balance from context
   useEffect(() => {
-    fetch("/api/chat/usage")
-      .then((r) => r.json())
-      .then((data) => setRemaining(data.remaining))
-      .catch(() => {});
-  }, []);
+    setLocalBalance(pointBalance);
+  }, [pointBalance]);
 
-  // Auto-scroll to bottom
+  // Auto-scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
-  // Save/restore from sessionStorage
+  // Restore session
   useEffect(() => {
-    const saved = sessionStorage.getItem(`chat_${characterId}`);
+    const saved = sessionStorage.getItem(`chat_auth_${characterId}`);
     if (saved) {
       try {
         const p = JSON.parse(saved);
         setMessages(p.messages || []);
-        setTurnCount(p.turnCount || 0);
       } catch {
         // ignore
       }
     }
   }, [characterId]);
 
+  // Persist session
   useEffect(() => {
     if (messages.length > 0) {
       sessionStorage.setItem(
-        `chat_${characterId}`,
-        JSON.stringify({ messages, turnCount }),
+        `chat_auth_${characterId}`,
+        JSON.stringify({ messages }),
       );
     }
-  }, [messages, turnCount, characterId]);
+  }, [messages, characterId]);
 
   const buildHistory = useCallback((): GeminiMessage[] => {
     return messages.map((m) => ({
@@ -96,9 +97,9 @@ export default function ChatInterface({
 
   const handleSend = useCallback(
     async (text: string) => {
-      if (isLoading) return;
+      if (isLoading || !user) return;
 
-      if (remaining <= 0) {
+      if (localBalance < POINT_COST) {
         setShowLimitModal(true);
         return;
       }
@@ -108,18 +109,21 @@ export default function ChatInterface({
         role: "user",
         text,
       };
-
       setMessages((prev) => [...prev, userMsg]);
       setIsLoading(true);
 
       const coachMsgId = `coach-${Date.now()}`;
 
       try {
+        const token = await user.getIdToken();
         const history = buildHistory();
 
         const res = await fetch("/api/chat", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify({
             message: text,
             characterId,
@@ -128,8 +132,13 @@ export default function ChatInterface({
           }),
         });
 
-        if (res.status === 429) {
-          setRemaining(0);
+        if (res.status === 401) {
+          // Token expired — should re-auth
+          setIsLoading(false);
+          return;
+        }
+
+        if (res.status === 402) {
           setShowLimitModal(true);
           setIsLoading(false);
           return;
@@ -139,7 +148,6 @@ export default function ChatInterface({
           throw new Error("Stream failed");
         }
 
-        // Add empty coach message
         setMessages((prev) => [
           ...prev,
           { id: coachMsgId, role: "coach", text: "" },
@@ -173,21 +181,14 @@ export default function ChatInterface({
                       : m,
                   ),
                 );
-                if (j.remaining !== undefined) {
-                  setRemaining(j.remaining);
-                }
+              }
+              if (j.pointBalance !== undefined) {
+                setLocalBalance(j.pointBalance);
               }
             } catch {
-              // ignore parse errors
+              // ignore
             }
           }
-        }
-
-        const newTurn = turnCount + 1;
-        setTurnCount(newTurn);
-
-        if (newTurn === CTA_AFTER_TURN && !dismissedCta) {
-          setShowInlineCta(true);
         }
       } catch (error) {
         console.error("Chat error:", error);
@@ -204,15 +205,19 @@ export default function ChatInterface({
     },
     [
       isLoading,
-      remaining,
+      user,
+      localBalance,
       buildHistory,
       characterId,
       locale,
-      turnCount,
-      dismissedCta,
       dict.chat.errorMessage,
     ],
   );
+
+  const avatarClass =
+    personalization.coachGender === "male"
+      ? "object-cover object-[center_15%] scale-[2.5]"
+      : "object-cover object-top";
 
   const quickGoals = [
     dict.chat.goalLoseWeight,
@@ -221,23 +226,18 @@ export default function ChatInterface({
   ];
 
   const showWelcome = messages.length === 0;
-
-  // 남자는 face 이미지가 없으므로 front 이미지를 확대 크롭
-  const avatarClass =
-    parsed.gender === "male"
-      ? "object-cover object-[center_15%] scale-[2.5]"
-      : "object-cover object-top";
+  const isKo = loc === "ko";
 
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] bg-white">
       {/* Header */}
       <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 bg-white/90 backdrop-blur-md">
-        <Link
-          href={`${prefix}/chat`}
+        <button
+          onClick={onBack}
           className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
         >
           <ArrowLeft className="w-5 h-5 text-gray-600" />
-        </Link>
+        </button>
         <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-100 shrink-0">
           <Image
             src={coach.avatarImage}
@@ -255,23 +255,28 @@ export default function ChatInterface({
             {personality.emoji} {personality.label[loc]}
           </p>
         </div>
-        <MessageLimitBanner
-          remaining={remaining}
-          limit={limit}
-          labels={dict.chat.limitLabels}
-        />
+        <PointBalanceBadge balance={localBalance} />
       </div>
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-        {/* AI Disclaimer */}
+        {/* Disclaimer */}
         <div className="text-center py-2">
           <p className="text-xs text-gray-400 bg-gray-50 inline-block px-3 py-1 rounded-full">
             {dict.chat.aiDisclaimer}
           </p>
         </div>
 
-        {/* Welcome screen */}
+        {/* Point cost info */}
+        <div className="text-center">
+          <p className="text-xs text-gray-400">
+            {isKo
+              ? `메시지당 ${POINT_COST}pt 차감`
+              : `${POINT_COST}pt per message`}
+          </p>
+        </div>
+
+        {/* Welcome */}
         {showWelcome && (
           <div className="flex flex-col items-center gap-6 py-8">
             <div className="w-32 h-48 relative">
@@ -306,7 +311,7 @@ export default function ChatInterface({
           </div>
         )}
 
-        {/* Chat messages */}
+        {/* Messages */}
         {messages.map((msg) => (
           <ChatBubble
             key={msg.id}
@@ -318,7 +323,7 @@ export default function ChatInterface({
           />
         ))}
 
-        {/* Typing indicator */}
+        {/* Typing */}
         {isLoading &&
           !messages.some(
             (m) => m.role === "coach" && m.id.startsWith("coach-") && m.text,
@@ -330,17 +335,6 @@ export default function ChatInterface({
             />
           )}
 
-        {/* Inline CTA */}
-        <AppDownloadPrompt
-          type="inline"
-          show={showInlineCta && !dismissedCta}
-          onClose={() => {
-            setShowInlineCta(false);
-            setDismissedCta(true);
-          }}
-          labels={dict.chat.ctaLabels}
-        />
-
         <div ref={messagesEndRef} />
       </div>
 
@@ -348,21 +342,22 @@ export default function ChatInterface({
       <div className="p-3 border-t border-gray-100 bg-white">
         <ChatInput
           onSend={handleSend}
-          disabled={isLoading || remaining <= 0}
+          disabled={isLoading || localBalance < POINT_COST}
           placeholder={
-            remaining <= 0
-              ? dict.chat.limitReached
+            localBalance < POINT_COST
+              ? isKo
+                ? "포인트가 부족합니다"
+                : "Not enough points"
               : dict.chat.inputPlaceholder
           }
         />
       </div>
 
-      {/* Limit modal */}
-      <AppDownloadPrompt
-        type="modal"
+      {/* Point Limit Modal */}
+      <PointLimitModal
         show={showLimitModal}
         onClose={() => setShowLimitModal(false)}
-        labels={dict.chat.ctaLabels}
+        locale={locale}
       />
     </div>
   );
