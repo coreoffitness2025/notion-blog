@@ -293,8 +293,8 @@ const en = {
     subtitle: "",
 
     missionLabel: "Mission",
-    missionHeadline: "We pursue the Core of fitness,\nand optimize the journey via AI.",
-    missionText: "We believe the fundamentals are the fastest path.\nWalking the proven path of fitness, optimized by AI.",
+    missionHeadline: "We relentlessly pursue the Core of fitness,\nand build the most effective Via —\nthe path to mastering it through AI.",
+    missionText: "",
 
     visionLabel: "Vision",
     visionHeadline: "AI Native Fitness",

@@ -77,9 +77,11 @@ export default function TeamPageClient({
             {dict.team.missionHeadline}
           </h2>
 
-          <p className="text-[clamp(1rem,0.5vw+0.875rem,1.25rem)] text-gray-500 leading-[1.8] whitespace-pre-line">
-            {dict.team.missionText}
-          </p>
+          {dict.team.missionText && (
+            <p className="text-[clamp(1rem,0.5vw+0.875rem,1.25rem)] text-gray-500 leading-[1.8] whitespace-pre-line">
+              {dict.team.missionText}
+            </p>
+          )}
         </motion.div>
       </section>
 

@@ -279,8 +279,8 @@ const ko = {
     subtitle: "",
 
     missionLabel: "Mission",
-    missionHeadline: "피트니스의 핵심(Core)을 추구하며,\n그 과정을 AI로 최적화(Via)합니다.",
-    missionText: "정석이 가장 빠른 길이라 믿습니다.\n피트니스의 정도를 걸으며, AI로 그 과정을 최적화합니다.",
+    missionHeadline: "피트니스의 핵심(Core)을 집요하게 추구하고,\nAI를 통해(Via) 그 핵심에 도달하는\n가장 완벽한 길을 만들어갑니다.",
+    missionText: "",
 
     visionLabel: "Vision",
     visionHeadline: "AI Native Fitness",
