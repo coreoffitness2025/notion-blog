@@ -36,11 +36,11 @@ export default function TeamPageClient({
         {/* Mission & Vision */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-center mb-24">
           {/* Mission */}
-          <p className="text-xs uppercase tracking-widest text-gray-400 mb-6">{dict.team.missionLabel}</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-[var(--corevia-primary)] mb-6">{dict.team.missionLabel}</p>
           <p className="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed max-w-[600px] mx-auto">
             {dict.team.missionText.split(/(Core|Via)/g).map((part, i) =>
               part === "Core" || part === "Via" ? (
-                <span key={i} className="text-[#4285F4]">{part}</span>
+                <span key={i} className="text-[var(--corevia-primary)]">{part}</span>
               ) : (
                 <span key={i}>{part}</span>
               )
@@ -50,7 +50,7 @@ export default function TeamPageClient({
           <div className="mb-32 md:mb-40" />
 
           {/* Vision */}
-          <p className="text-xs uppercase tracking-widest text-gray-400 mb-6">{dict.team.visionLabel}</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-[var(--corevia-primary)] mb-6">{dict.team.visionLabel}</p>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">{dict.team.visionHeadline}</h2>
           <p className="text-base text-gray-500 leading-relaxed max-w-[520px] mx-auto">
             {dict.team.visionText.split("\n").map((line, i, arr) => (
