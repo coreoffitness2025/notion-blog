@@ -37,17 +37,6 @@ export default function ComingSoon({ locale }: { locale: string }) {
           </h1>
         </motion.div>
 
-        {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center text-gray-500 text-base md:text-lg leading-relaxed max-w-md mx-auto mb-16 whitespace-pre-line"
-        >
-          {isKo
-            ? "코치 케이와 코치 제인이\n앱에서 먼저 만나실 수 있습니다"
-            : "Meet Coach Kay and Coach Jane\nin the app first"}
-        </motion.p>
 
         {/* Coach characters */}
         <div className="flex justify-center items-end gap-8 md:gap-14 mb-16">
