@@ -285,6 +285,7 @@ const ko = {
     visionHeadline: "AI Native Fitness",
     visionText: "소프트웨어에서 하드웨어까지.\n기록하고, 분석하고, 제안하는 것을 넘어\n피트니스의 모든 접점에서 AI가 함께하는 생태계.\n그것이 CoreVia가 그리는 미래입니다.",
 
+    teamLabel: "Team",
     closing: "Team CoreVia가 만들어나갑니다.",
 
     aboutTitle: "About",

@@ -299,6 +299,7 @@ const en = {
     visionHeadline: "AI Native Fitness",
     visionText: "From software to hardware.\nBeyond recording, analyzing, and recommending —\nan ecosystem where AI meets every touchpoint of fitness.\nThat's the future CoreVia envisions.",
 
+    teamLabel: "Team",
     closing: "Built by Team CoreVia.",
 
     aboutTitle: "About",

@@ -25,17 +25,18 @@ export default function TeamPageClient({
   const prefix = locale === "ko" ? "" : `/${locale}`;
 
   return (
-    <section className="bg-white pt-20 pb-24 px-4">
-      <div className="max-w-[800px] mx-auto">
-        {/* Hero */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center mb-24">
+    <div className="bg-white">
+      {/* Hero */}
+      <section className="pt-20 pb-24 px-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center max-w-[800px] mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-4">{dict.team.title}</h1>
           {dict.team.subtitle && <p className="text-lg text-gray-500">{dict.team.subtitle}</p>}
         </motion.div>
+      </section>
 
-        {/* Mission & Vision */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-center mb-24">
-          {/* Mission */}
+      {/* Mission */}
+      <section className="py-32 md:py-40 px-4 border-t border-gray-100">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-center max-w-[800px] mx-auto">
           <p className="text-[45px] font-medium uppercase tracking-widest text-[var(--corevia-primary)] mb-6">{dict.team.missionLabel}</p>
           <p className="text-[24px] font-normal text-gray-900 leading-relaxed max-w-[700px] mx-auto">
             {dict.team.missionText.split(/(Core|Via)/g).map((part, i) =>
@@ -46,10 +47,12 @@ export default function TeamPageClient({
               )
             )}
           </p>
+        </motion.div>
+      </section>
 
-          <div className="mb-32 md:mb-40" />
-
-          {/* Vision */}
+      {/* Vision */}
+      <section className="py-32 md:py-40 px-4 border-t border-gray-100">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-center max-w-[800px] mx-auto">
           <p className="text-[45px] font-medium uppercase tracking-widest text-[var(--corevia-primary)] mb-6">{dict.team.visionLabel}</p>
           <h2 className="text-[24px] font-normal text-gray-900 mb-10">{dict.team.visionHeadline}</h2>
           <p className="text-[24px] font-normal text-gray-500 leading-relaxed max-w-[600px] mx-auto">
@@ -60,16 +63,18 @@ export default function TeamPageClient({
               </span>
             ))}
           </p>
-
-          <div className="mb-32 md:mb-40" />
-
-          {/* Closing */}
-          <p className="text-lg font-semibold text-gray-800">{dict.team.closing}</p>
         </motion.div>
+      </section>
 
-        {/* About Team */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}>
-          <h2 className="text-xl font-bold text-gray-800 mb-2 text-center">{dict.team.aboutTitle}</h2>
+      {/* Team */}
+      <section className="py-32 md:py-40 px-4 border-t border-gray-100">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="max-w-[800px] mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-[45px] font-medium uppercase tracking-widest text-[var(--corevia-primary)] mb-6">{dict.team.teamLabel}</p>
+            <p className="text-lg font-semibold text-gray-800">{dict.team.closing}</p>
+          </div>
+
+          <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">{dict.team.aboutTitle}</h3>
           <p className="text-sm text-gray-500 text-center mb-8">{dict.team.aboutDesc}</p>
 
           <div className="bg-gray-50 rounded-3xl p-8 md:p-12">
@@ -106,15 +111,17 @@ export default function TeamPageClient({
             </div>
           </div>
         </motion.div>
+      </section>
 
-        {/* Contact CTA */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 }} className="text-center mt-16">
+      {/* Contact CTA */}
+      <section className="pb-24 px-4">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 }} className="text-center">
           <p className="text-sm text-gray-400 mb-4">{dict.team.contactCta}</p>
           <a href="mailto:coreoffitness2025@gmail.com" className="inline-flex items-center gap-2 px-6 py-3 bg-[#4285F4] text-white text-sm font-medium rounded-xl hover:bg-blue-600 transition-colors">
             {dict.team.contactBtn}
           </a>
         </motion.div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
