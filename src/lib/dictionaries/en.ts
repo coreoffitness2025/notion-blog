@@ -290,17 +290,18 @@ const en = {
   },
   team: {
     title: "Team CoreVia",
-    subtitle: "Connecting the core of fitness through AI",
+    subtitle: "",
 
     missionLabel: "Mission",
-    missionText: "We relentlessly pursue the Core of fitness, and build the most effective Via — the path to mastering it through AI.",
+    missionHeadline: "The fundamentals are\nthe fastest path.",
+    missionText: "Progressive overload. Adequate protein. Consistent tracking.\nWe walk the proven path of fitness, optimized by AI.",
 
     visionLabel: "Vision",
     visionHeadline: "AI Native Fitness",
-    visionText: "From software to hardware.\nBeyond recording, analyzing, and recommending —\nan ecosystem where AI meets every touchpoint of fitness.\nThat's the future CoreVia envisions.",
+    visionText: "Beyond recording, analyzing, and recommending —\na world where AI meets every touchpoint of fitness.",
 
     teamLabel: "Team",
-    closing: "Built by Team CoreVia.",
+    closing: "",
 
     aboutTitle: "About",
     aboutDesc: "Built by someone who understands both technology and fitness",

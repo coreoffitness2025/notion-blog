@@ -276,17 +276,18 @@ const ko = {
   },
   team: {
     title: "Team CoreVia",
-    subtitle: "피트니스의 핵심을 AI로 연결하는 팀",
+    subtitle: "",
 
     missionLabel: "Mission",
-    missionText: "피트니스의 핵심(Core)을 집요하게 추구하고, AI를 통해(Via) 그 핵심에 도달하는 가장 완벽한 길을 만들어갑니다.",
+    missionHeadline: "정석이 가장 빠른 길이라\n믿습니다.",
+    missionText: "점진적 과부하. 충분한 단백질. 꾸준한 기록.\n피트니스의 정도를 걸으며, 그 과정을 AI로 최적화합니다.",
 
     visionLabel: "Vision",
     visionHeadline: "AI Native Fitness",
-    visionText: "소프트웨어에서 하드웨어까지.\n기록하고, 분석하고, 제안하는 것을 넘어\n피트니스의 모든 접점에서 AI가 함께하는 생태계.\n그것이 CoreVia가 그리는 미래입니다.",
+    visionText: "기록하고, 분석하고, 피드백하는 것을 넘어 —\n피트니스의 모든 접점에서 AI가 함께하는 세상.",
 
     teamLabel: "Team",
-    closing: "Team CoreVia가 만들어나갑니다.",
+    closing: "",
 
     aboutTitle: "About",
     aboutDesc: "기술과 피트니스, 둘 다 아는 사람이 만듭니다",
