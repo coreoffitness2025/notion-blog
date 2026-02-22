@@ -7,7 +7,7 @@ const en = {
     blog: "Blog",
     contact: "Contact",
     download: "Download App",
-    aiChat: "AI Coach",
+    aiChat: "Online PT",
     menu: "Menu",
   },
   footer: {
@@ -17,7 +17,7 @@ const en = {
     tagline1: "Your personal",
     tagline2: "AI PT coach",
     features: "Features",
-    aiCoach: "AI Coach",
+    aiCoach: "Online PT",
     pricing: "Pricing Plans",
     download: "Download App",
     calorieCalc: "Calorie Calculator",

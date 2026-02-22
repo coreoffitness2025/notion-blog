@@ -7,7 +7,7 @@ const ko = {
     blog: "Blog",
     contact: "문의",
     download: "앱 다운로드",
-    aiChat: "AI 코치",
+    aiChat: "Online PT",
     menu: "메뉴",
   },
   footer: {
@@ -17,7 +17,7 @@ const ko = {
     tagline1: "스마트폰 하나로,",
     tagline2: "나만의 PT 선생님",
     features: "기능 소개",
-    aiCoach: "AI 코치",
+    aiCoach: "Online PT",
     pricing: "구독 플랜",
     download: "앱 다운로드",
     calorieCalc: "칼로리 계산기",
