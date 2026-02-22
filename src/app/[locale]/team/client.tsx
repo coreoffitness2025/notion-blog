@@ -46,7 +46,7 @@ export default function TeamPageClient({
             )}
           </p>
           {dict.team.missionDesc && <p className="text-sm text-gray-400 text-center mt-4">{dict.team.missionDesc}</p>}
-          <div className="mt-16 space-y-16">
+          <div className="mt-24 md:mt-32 space-y-16">
             {dict.team.missionSteps.map((step, i) => (
               <motion.div key={step.title} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 + i * 0.15 }}>
                 <div className="flex items-start gap-5">
