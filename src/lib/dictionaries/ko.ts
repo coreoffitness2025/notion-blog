@@ -276,30 +276,19 @@ const ko = {
   },
   team: {
     title: "Team CoreVia",
-    subtitle: "",
-    missionTitle: "Our Mission",
-    missionVision: "피트니스의 핵심(Core)을 집요하게 추구하고, AI를 통해(Via) 그 핵심에 도달하는 가장 완벽한 길을 만들어갑니다.",
-    missionDesc: "",
-    missionSteps: [
-      {
-        title: "점진적 과부하가 정답입니다",
-        desc: "정도를 걷기 위한 최선의 전략을 추구합니다. 점진적 과부하야말로 피트니스의 정답이라고 믿습니다. 이전보다 더 나아진 나를 위한 운동 설계와 휴식, 식습관을 컨설팅하고 이를 더 잘 이루어내기 위해 AI를 접목합니다.",
-      },
-      {
-        title: "기록할수록, 당신에게 최적화됩니다",
-        desc: "기록은 그 자체로 끝이 아닙니다. 운동 볼륨, 식단 사진, 영양소 데이터가 쌓일수록 AI 코치는 당신을 더 깊이 이해합니다. 어제의 운동과 오늘의 식단을 함께 보고 피드백하는, 당신만을 위한 PT로 거듭납니다.",
-      },
-      {
-        title: "기록이 쌓이면 포인트도 쌓입니다",
-        desc: "꾸준한 기록은 보상으로 돌아옵니다. 포인트를 모아 AI 코치의 성격과 외형을 자신의 취향대로 꾸밀 수 있어요. 나만의 코치를 직접 만들어가는 재미, 그게 CoreVia의 방식입니다.",
-      },
-      {
-        title: "우리의 비전: AI Native Fitness 생태계",
-        desc: "단순한 챗봇이 아닙니다. 당신의 운동 기록을 직접 조회하고, 식단을 분석하고, 체형 변화를 추적하는 — 도구를 쓸 줄 아는 AI 에이전트. 기록할수록 정교해지는 나만의 PT, 그것이 CoreVia Fitness가 만들어가는 AI Native Fitness 생태계입니다.",
-      },
-    ],
-    aboutTitle: "About Team",
-    aboutDesc: "기술과 피트니스를 모두 이해하는 팀이 만듭니다",
+    subtitle: "피트니스의 핵심을 AI로 연결하는 팀",
+
+    missionLabel: "Mission",
+    missionText: "피트니스의 핵심(Core)을 집요하게 추구하고, AI를 통해(Via) 그 핵심에 도달하는 가장 완벽한 길을 만들어갑니다.",
+
+    visionLabel: "Vision",
+    visionHeadline: "AI Native Fitness",
+    visionText: "소프트웨어에서 하드웨어까지.\n기록하고, 분석하고, 제안하는 것을 넘어\n피트니스의 모든 접점에서 AI가 함께하는 생태계.\n그것이 CoreVia가 그리는 미래입니다.",
+
+    closing: "Team CoreVia가 만들어나갑니다.",
+
+    aboutTitle: "About",
+    aboutDesc: "기술과 피트니스, 둘 다 아는 사람이 만듭니다",
     careers: [
       "4대 기업 IT 전략팀",
       "(전) 삼성전자 반도체 엔지니어",

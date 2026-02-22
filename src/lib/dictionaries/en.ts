@@ -290,30 +290,19 @@ const en = {
   },
   team: {
     title: "Team CoreVia",
-    subtitle: "",
-    missionTitle: "Our Mission",
-    missionVision: "We relentlessly pursue the Core of fitness, and build the most effective Via — the path to mastering it through AI.",
-    missionDesc: "",
-    missionSteps: [
-      {
-        title: "Progressive overload is the answer",
-        desc: "We pursue the best strategies for walking the right path. We believe progressive overload is the true principle of fitness. We design workouts, rest, and nutrition to help you become better than yesterday — and integrate AI to make it all possible.",
-      },
-      {
-        title: "The more you record, the more it optimizes for you",
-        desc: "Records aren't the end goal — they're the fuel. As workout volume, diet photos, and nutrition data accumulate, the AI coach understands you deeper. It reviews yesterday's workout alongside today's meals, evolving into a PT built just for you.",
-      },
-      {
-        title: "Records earn points, points shape your coach",
-        desc: "Consistency is rewarded. Earn points through regular logging and use them to customize your AI coach's personality and appearance to your liking. Building your own coach, your way — that's how CoreVia works.",
-      },
-      {
-        title: "Our Vision: AI Native Fitness Ecosystem",
-        desc: "This isn't a simple chatbot. It's an AI agent that queries your workout logs, analyzes your meals, and tracks your body changes — an agent that knows how to use tools. A PT that sharpens with every record you make. That's the AI Native Fitness ecosystem CoreVia Fitness is building.",
-      },
-    ],
-    aboutTitle: "About Team",
-    aboutDesc: "Built by a team that understands both technology and fitness",
+    subtitle: "Connecting the core of fitness through AI",
+
+    missionLabel: "Mission",
+    missionText: "We relentlessly pursue the Core of fitness, and build the most effective Via — the path to mastering it through AI.",
+
+    visionLabel: "Vision",
+    visionHeadline: "AI Native Fitness",
+    visionText: "From software to hardware.\nBeyond recording, analyzing, and recommending —\nan ecosystem where AI meets every touchpoint of fitness.\nThat's the future CoreVia envisions.",
+
+    closing: "Built by Team CoreVia.",
+
+    aboutTitle: "About",
+    aboutDesc: "Built by someone who understands both technology and fitness",
     careers: [
       "IT Strategy at a Top 4 Corporation",
       "(Former) Samsung Electronics Semiconductor Engineer",

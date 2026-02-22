@@ -28,40 +28,43 @@ export default function TeamPageClient({
     <section className="bg-white pt-20 pb-24 px-4">
       <div className="max-w-[800px] mx-auto">
         {/* Hero */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center mb-16">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center mb-24">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-4">{dict.team.title}</h1>
           {dict.team.subtitle && <p className="text-lg text-gray-500">{dict.team.subtitle}</p>}
         </motion.div>
 
-        {/* Our Vision & Mission */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mb-24">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center tracking-tight">{dict.team.missionTitle}</h2>
-          <p className="text-xl md:text-2xl font-bold text-gray-900 text-center leading-relaxed max-w-[600px] mx-auto">
-            {dict.team.missionVision.split(/(Core|Via)/g).map((part, i) =>
+        {/* Mission & Vision */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-center mb-24">
+          {/* Mission */}
+          <p className="text-xs uppercase tracking-widest text-gray-400 mb-6">{dict.team.missionLabel}</p>
+          <p className="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed max-w-[600px] mx-auto">
+            {dict.team.missionText.split(/(Core|Via)/g).map((part, i) =>
               part === "Core" || part === "Via" ? (
-                <span key={i} className="text-[var(--corevia-primary)]">{part}</span>
+                <span key={i} className="text-[#4285F4]">{part}</span>
               ) : (
                 <span key={i}>{part}</span>
               )
             )}
           </p>
-          {dict.team.missionDesc && <p className="text-sm text-gray-400 text-center mt-4">{dict.team.missionDesc}</p>}
-          <div className="mt-24 md:mt-32 space-y-16">
-            {dict.team.missionSteps.map((step, i) => (
-              <motion.div key={step.title} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 + i * 0.15 }}>
-                <div className="flex items-start gap-5">
-                  <span className="text-3xl md:text-4xl font-bold text-[var(--corevia-primary)]/20 leading-none shrink-0 pt-1">{String(i + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2">{step.title}</h3>
-                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">{step.desc}</p>
-                  </div>
-                </div>
-                {i < dict.team.missionSteps.length - 1 && (
-                  <div className="mt-16 border-b border-gray-100" />
-                )}
-              </motion.div>
+
+          <div className="mb-32 md:mb-40" />
+
+          {/* Vision */}
+          <p className="text-xs uppercase tracking-widest text-gray-400 mb-6">{dict.team.visionLabel}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">{dict.team.visionHeadline}</h2>
+          <p className="text-base text-gray-500 leading-relaxed max-w-[520px] mx-auto">
+            {dict.team.visionText.split("\n").map((line, i, arr) => (
+              <span key={i}>
+                {line}
+                {i < arr.length - 1 && <br />}
+              </span>
             ))}
-          </div>
+          </p>
+
+          <div className="mb-32 md:mb-40" />
+
+          {/* Closing */}
+          <p className="text-lg font-semibold text-gray-800">{dict.team.closing}</p>
         </motion.div>
 
         {/* About Team */}
