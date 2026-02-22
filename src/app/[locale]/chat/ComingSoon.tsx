@@ -32,8 +32,8 @@ export default function ComingSoon({ locale }: { locale: string }) {
         >
           <h1 className="text-[clamp(1.75rem,4vw+0.5rem,3rem)] font-bold text-gray-900 tracking-tight leading-[1.2] whitespace-pre-line">
             {isKo
-              ? "AI 코치,\n곧 웹에서도 만나요"
-              : "AI Coach,\nComing to the Web"}
+              ? "코비아의 온라인 PT,\n곧 웹에서도 만나요"
+              : "CoreVia Online PT,\nComing to the Web"}
           </h1>
         </motion.div>
 
@@ -80,14 +80,6 @@ export default function ComingSoon({ locale }: { locale: string }) {
             >
               {isKo ? "코치 케이" : "Coach Kay"}
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 1.1 }}
-              className="text-xs text-gray-400 mt-0.5"
-            >
-              {isKo ? "남성 AI 코치" : "Male AI Coach"}
-            </motion.p>
           </motion.div>
 
           {/* Coach Jane — slides in from right */}
@@ -118,14 +110,6 @@ export default function ComingSoon({ locale }: { locale: string }) {
               className="text-sm font-semibold text-gray-700 mt-3"
             >
               {isKo ? "코치 제인" : "Coach Jane"}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 1.25 }}
-              className="text-xs text-gray-400 mt-0.5"
-            >
-              {isKo ? "여성 AI 코치" : "Female AI Coach"}
             </motion.p>
           </motion.div>
         </div>
@@ -165,8 +149,8 @@ export default function ComingSoon({ locale }: { locale: string }) {
         >
           <p className="text-sm text-gray-400 mb-5">
             {isKo
-              ? "지금 앱에서 AI 코치를 만나보세요"
-              : "Try the AI Coach in the app now"}
+              ? "지금 앱에서도 코치 케이와 제인을 만나보세요"
+              : "Meet Coach Kay and Jane in the app now"}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
