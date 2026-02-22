@@ -283,8 +283,8 @@ const ko = {
     missionText: "",
 
     visionLabel: "Vision",
-    visionHeadline: "AI Native Fitness",
-    visionText: "기록하고, 분석하고, 피드백하는 것을 넘어 —\n피트니스의 모든 접점에서 AI가 함께하는 세상.",
+    visionHeadline: "",
+    visionText: "AI Native Fitness.\n단순히 기록하고, 분석하고, 피드백하는 것을 넘어 —\nSW와 HW의 융합으로 모든 접점에서 AI가 함께하는\n피트니스 생태계를 만들어나갑니다.",
 
     teamLabel: "Team",
     closing: "",

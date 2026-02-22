@@ -73,9 +73,9 @@ export default function TeamPageClient({
             <SectionLabel>{dict.team.missionLabel}</SectionLabel>
           </div>
 
-          <h2 className="text-[clamp(1.75rem,3.5vw+0.5rem,2.75rem)] font-bold text-gray-900 leading-[1.2] tracking-tight mb-8 md:mb-10 whitespace-pre-line">
+          <p className="text-[clamp(1.05rem,0.5vw+0.9rem,1.35rem)] font-medium text-gray-700 leading-[1.8] whitespace-pre-line">
             {dict.team.missionHeadline}
-          </h2>
+          </p>
 
           {dict.team.missionText && (
             <p className="text-[clamp(1rem,0.5vw+0.875rem,1.25rem)] text-gray-500 leading-[1.8] whitespace-pre-line">
@@ -98,11 +98,13 @@ export default function TeamPageClient({
             <SectionLabel>{dict.team.visionLabel}</SectionLabel>
           </div>
 
-          <h2 className="text-[clamp(1.75rem,3.5vw+0.5rem,2.75rem)] font-bold text-gray-900 leading-[1.2] tracking-tight mb-8 md:mb-10">
-            {dict.team.visionHeadline}
-          </h2>
+          {dict.team.visionHeadline && (
+            <h2 className="text-[clamp(1.75rem,3.5vw+0.5rem,2.75rem)] font-bold text-gray-900 leading-[1.2] tracking-tight mb-8 md:mb-10">
+              {dict.team.visionHeadline}
+            </h2>
+          )}
 
-          <p className="text-[clamp(1rem,0.5vw+0.875rem,1.25rem)] text-gray-500 leading-[1.8] whitespace-pre-line">
+          <p className="text-[clamp(1.05rem,0.5vw+0.9rem,1.35rem)] font-medium text-gray-700 leading-[1.8] whitespace-pre-line">
             {dict.team.visionText}
           </p>
         </motion.div>

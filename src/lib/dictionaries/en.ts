@@ -297,8 +297,8 @@ const en = {
     missionText: "",
 
     visionLabel: "Vision",
-    visionHeadline: "AI Native Fitness",
-    visionText: "Beyond recording, analyzing, and recommending —\na world where AI meets every touchpoint of fitness.",
+    visionHeadline: "",
+    visionText: "AI Native Fitness.\nBeyond simply recording, analyzing, and giving feedback —\nwe're building a fitness ecosystem where AI is present\nat every touchpoint through the fusion of SW and HW.",
 
     teamLabel: "Team",
     closing: "",
