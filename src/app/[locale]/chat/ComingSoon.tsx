@@ -138,8 +138,8 @@ export default function ComingSoon({ locale }: { locale: string }) {
         >
           <p className="text-sm text-gray-400 mb-5">
             {isKo
-              ? "지금 앱에서도 코치 케이와 제인을 만나보세요"
-              : "Meet Coach Kay and Jane in the app now"}
+              ? "앱에서 코치 케이와 제인의 온라인 PT를 경험하세요"
+              : "Experience online PT with Coach Kay and Jane in the app"}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
