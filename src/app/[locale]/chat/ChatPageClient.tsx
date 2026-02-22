@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import type { Dictionary } from "@/lib/i18n";
 
-const ChatFlowContainer = dynamic(() => import("./ChatFlowContainer"), {
+const ComingSoon = dynamic(() => import("./ComingSoon"), {
   ssr: false,
   loading: () => (
     <div className="min-h-[calc(100vh-64px)] bg-white flex items-center justify-center">
@@ -19,5 +19,5 @@ export default function ChatPageClient({
   locale: string;
   dict: Dictionary;
 }) {
-  return <ChatFlowContainer locale={locale} dict={dict} />;
+  return <ComingSoon locale={locale} />;
 }
