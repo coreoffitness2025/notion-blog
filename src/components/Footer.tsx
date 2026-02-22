@@ -29,8 +29,8 @@ export default function Footer({ locale }: { locale: string }) {
 
   return (
     <footer className="bg-gray-50 border-t border-gray-100">
-      <div className="max-w-[1100px] mx-auto px-4 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="max-w-[1120px] mx-auto px-[var(--section-px)] py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           <div className="col-span-2 md:col-span-1">
             <p className="font-extrabold text-xl text-gray-900 mb-2">
               CoreVia Fitness

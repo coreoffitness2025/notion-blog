@@ -14,18 +14,18 @@ export default function PointsCustomization({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
 
   return (
-    <section className="py-20 px-4 bg-white">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="py-[var(--section-py)] px-[var(--section-px)] bg-white">
+      <div className="max-w-[1120px] mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
+          <h2 className="text-[length:var(--text-heading)] font-bold text-gray-800 mb-3 tracking-tight">
             {dict.points.title}
           </h2>
           <p className="text-base text-gray-500">{dict.points.subtitle}</p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-10 mb-16">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 md:gap-8 mb-10 md:mb-16">
           {dict.points.steps.map((s, i) => (
-            <div key={s.step} className="flex items-center gap-4 sm:gap-6 md:gap-10">
+            <div key={s.step} className="flex items-center gap-3 sm:gap-6 md:gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -68,7 +68,7 @@ export default function PointsCustomization({ locale }: { locale: string }) {
             {dict.points.skinGalleryTitle}
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-[800px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6 w-full max-w-[800px]">
             {dict.points.skins.map((skin, i) => (
               <motion.div
                 key={skin.name}
@@ -76,7 +76,7 @@ export default function PointsCustomization({ locale }: { locale: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="relative flex flex-col items-center bg-gray-50 rounded-2xl p-6 md:p-8"
+                className="relative flex flex-col items-center bg-gray-50 rounded-2xl p-4 md:p-6 lg:p-8"
               >
                 <span className="absolute top-3 right-3 text-[10px] font-medium text-white bg-gray-400 rounded-full px-2 py-0.5">
                   {dict.points.comingSoon}

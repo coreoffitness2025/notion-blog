@@ -12,11 +12,11 @@ export default function BlogPreview({ posts, locale }: { posts: Post[]; locale: 
   }
 
   return (
-    <section className="py-20 px-4 bg-white">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="py-[var(--section-py)] px-[var(--section-px)] bg-white">
+      <div className="max-w-[1120px] mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-2">
           <div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">
+            <h2 className="text-[length:var(--text-heading)] font-bold text-gray-900 mb-2 tracking-tight">
               {dict.blog.title}
             </h2>
             <p className="text-gray-500">{dict.blog.subtitle}</p>
@@ -37,7 +37,7 @@ export default function BlogPreview({ posts, locale }: { posts: Post[]; locale: 
               className="group block bg-gray-50 rounded-xl overflow-hidden hover:shadow-md transition-all"
             >
               {post.coverImage && (
-                <div className="relative h-44 bg-gray-200">
+                <div className="relative h-40 md:h-44 bg-gray-200">
                   <Image
                     src={post.coverImage}
                     alt={post.title}
@@ -47,7 +47,7 @@ export default function BlogPreview({ posts, locale }: { posts: Post[]; locale: 
                   />
                 </div>
               )}
-              <div className="p-5">
+              <div className="p-4 md:p-5">
                 <p className="text-xs text-gray-400 mb-2">
                   {new Date(post.date).toLocaleDateString(
                     locale === "ko" ? "ko-KR" : "en-US",

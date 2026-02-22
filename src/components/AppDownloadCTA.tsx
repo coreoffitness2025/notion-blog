@@ -8,14 +8,14 @@ export default function AppDownloadCTA({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
 
   return (
-    <section className="relative overflow-hidden bg-white py-20 px-4 border-t border-gray-100">
-      <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center gap-10">
+    <section className="relative overflow-hidden bg-white py-[var(--section-py)] px-[var(--section-px)] border-t border-gray-100">
+      <div className="max-w-[1120px] mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-10">
         <div className="flex-1 text-center md:text-left">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 tracking-tight"
+            className="text-[length:var(--text-heading)] font-bold text-gray-800 mb-4 tracking-tight"
           >
             {dict.cta.title}
           </motion.h2>
@@ -42,7 +42,7 @@ export default function AppDownloadCTA({ locale }: { locale: string }) {
               href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-[var(--corevia-primary)] text-white font-medium px-6 py-3.5 rounded-xl hover:bg-blue-600 transition-colors shadow-sm"
+              className="inline-flex items-center justify-center gap-3 bg-[var(--corevia-primary)] text-white font-medium px-8 py-4 rounded-2xl hover:bg-blue-600 transition-colors shadow-sm"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -72,14 +72,14 @@ export default function AppDownloadCTA({ locale }: { locale: string }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="relative w-36 h-72 md:w-44 md:h-88 origin-bottom scale-[1.18]"
+            className="relative w-28 h-56 md:w-40 md:h-80 lg:w-44 lg:h-[352px]"
           >
             <Image
               src="/coach/male_3_full.png"
               alt={dict.cta.maleCoachAlt}
               fill
               className="object-contain"
-              sizes="(max-width: 768px) 144px, 176px"
+              sizes="(max-width: 768px) 112px, (max-width: 1024px) 160px, 176px"
             />
           </motion.div>
           <motion.div
@@ -87,14 +87,14 @@ export default function AppDownloadCTA({ locale }: { locale: string }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="relative w-36 h-72 md:w-44 md:h-88"
+            className="relative w-28 h-56 md:w-40 md:h-80 lg:w-44 lg:h-[352px]"
           >
             <Image
               src="/coach/female_3_full.png"
               alt={dict.cta.femaleCoachAlt}
               fill
               className="object-contain"
-              sizes="(max-width: 768px) 144px, 176px"
+              sizes="(max-width: 768px) 112px, (max-width: 1024px) 160px, 176px"
             />
           </motion.div>
         </div>

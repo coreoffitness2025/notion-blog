@@ -30,10 +30,10 @@ export default function GuidePreview({ locale }: { locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
 
   return (
-    <section className="py-20 px-4 bg-[var(--corevia-bg)]">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--corevia-bg)]">
+      <div className="max-w-[1120px] mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+          <h2 className="text-[length:var(--text-heading)] font-bold text-gray-900 mb-3 tracking-tight">
             {dict.guidePreview.title}
           </h2>
           <p className="text-gray-500 text-lg">
@@ -52,7 +52,7 @@ export default function GuidePreview({ locale }: { locale: string }) {
             <motion.div key={hrefs[i]} variants={item}>
               <Link
                 href={`${prefix}${hrefs[i]}`}
-                className="block bg-white rounded-xl p-5 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all group"
+                className="block bg-white rounded-xl p-4 md:p-5 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all group"
               >
                 <span className="text-2xl mb-3 block">{icons[i]}</span>
                 <h3 className="font-bold text-gray-900 mb-1 group-hover:text-[var(--corevia-primary)] transition-colors">

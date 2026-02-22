@@ -7,16 +7,16 @@ export default function HeroSection({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
 
   return (
-    <section className="relative overflow-hidden bg-[var(--corevia-bg)] pt-20 pb-24 px-4">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gray-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+    <section className="relative overflow-hidden bg-[var(--corevia-bg)] py-[var(--section-py)] px-[var(--section-px)]">
+      <div className="absolute top-0 right-0 w-[50vw] max-w-[500px] h-[50vw] max-h-[500px] bg-gray-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
-      <div className="max-w-[1100px] mx-auto relative">
+      <div className="max-w-[1120px] mx-auto relative">
         <div className="text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-gray-800 leading-tight mb-6 tracking-tight"
+            className="text-[length:var(--text-display)] font-bold text-gray-800 leading-[1.1] mb-4 md:mb-6 tracking-tight"
           >
             {dict.hero.title1}
             <br />
@@ -29,7 +29,7 @@ export default function HeroSection({ locale }: { locale: string }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-500 leading-relaxed mb-10 max-w-2xl mx-auto"
+            className="text-[length:var(--text-body-lg)] text-gray-500 leading-relaxed mb-8 md:mb-12 max-w-lg md:max-w-xl mx-auto"
           >
             {dict.hero.subtitle1}
             <br className="hidden sm:block" />
@@ -56,7 +56,7 @@ export default function HeroSection({ locale }: { locale: string }) {
               href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[var(--corevia-primary)] text-white font-medium px-7 py-3.5 rounded-xl hover:bg-blue-600 transition-all shadow-sm"
+              className="inline-flex items-center justify-center gap-2 bg-[var(--corevia-primary)] text-white font-medium px-8 py-4 rounded-2xl text-base hover:bg-blue-600 transition-all shadow-sm"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ export default function HeroSection({ locale }: { locale: string }) {
             </a>
             <a
               href="#features"
-              className="inline-flex items-center justify-center gap-2 bg-white text-gray-600 font-medium px-7 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all"
+              className="inline-flex items-center justify-center gap-2 bg-white text-gray-600 font-medium px-8 py-4 rounded-2xl text-base border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all"
             >
               {dict.hero.explore}
             </a>

@@ -37,7 +37,7 @@ export default function Navbar({ locale }: { locale: string }) {
 
   return (
     <header className="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
-      <div className="max-w-[1100px] mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <div className="max-w-[1120px] mx-auto px-[var(--section-px)] py-3 flex items-center justify-between gap-4">
         <Link href={`${prefix}/`} className="flex items-center gap-2">
           <Image
             src="/logo.png"
@@ -124,7 +124,7 @@ export default function Navbar({ locale }: { locale: string }) {
       </div>
 
       {isMobileMenuOpen && (
-        <nav className="md:hidden border-t border-gray-100 bg-white px-4 py-2">
+        <nav className="md:hidden border-t border-gray-100 bg-white px-[var(--section-px)] py-2">
           {nav.map((item) => {
             const active = isActive(pathname, item.href);
             return (

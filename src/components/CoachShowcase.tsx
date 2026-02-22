@@ -19,10 +19,10 @@ export default function CoachShowcase({ locale }: { locale: string }) {
   const current = dict.coach.personalities[activeIdx];
 
   return (
-    <section className="py-20 px-4 bg-[var(--corevia-bg)]">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--corevia-bg)]">
+      <div className="max-w-[1120px] mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
+          <h2 className="text-[length:var(--text-heading)] font-bold text-gray-800 mb-3 tracking-tight">
             {dict.coach.title}
           </h2>
           <p className="text-gray-500 text-base">{dict.coach.subtitle}</p>
@@ -33,7 +33,7 @@ export default function CoachShowcase({ locale }: { locale: string }) {
             <button
               key={p.id}
               onClick={() => setActive(p.id)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 py-2 md:px-5 md:py-2.5 rounded-full text-sm font-medium transition-all ${
                 active === p.id
                   ? "bg-gray-800 text-white"
                   : "bg-white text-gray-500 hover:bg-gray-100 border border-gray-200"
@@ -51,15 +51,15 @@ export default function CoachShowcase({ locale }: { locale: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col md:flex-row items-center gap-8 md:gap-14"
+            className="flex flex-col md:flex-row items-center gap-6 md:gap-10 lg:gap-14"
           >
-            <div className="relative w-52 h-80 md:w-64 md:h-96 shrink-0">
+            <div className="relative w-40 h-60 md:w-56 md:h-[340px] lg:w-64 lg:h-96 shrink-0">
               <Image
                 src={images[activeIdx]}
                 alt={`${current.label} ${dict.coach.coachAlt}`}
                 fill
                 className="object-contain"
-                sizes="(max-width: 768px) 208px, 256px"
+                sizes="(max-width: 768px) 160px, (max-width: 1024px) 224px, 256px"
               />
             </div>
 
@@ -78,7 +78,7 @@ export default function CoachShowcase({ locale }: { locale: string }) {
                   }`}
                 >
                   <div
-                    className={`px-4 py-3 rounded-2xl max-w-[80%] text-sm leading-relaxed ${
+                    className={`px-3.5 py-2.5 md:px-4 md:py-3 rounded-2xl max-w-[80%] text-sm leading-relaxed ${
                       msg.role === "coach"
                         ? "bg-gray-100 text-gray-700 rounded-tl-md"
                         : "bg-gray-800 text-white rounded-tr-md"

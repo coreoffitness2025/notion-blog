@@ -11,7 +11,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
     <div className="border-b border-gray-100 last:border-b-0">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left group"
+        className="w-full flex items-center justify-between py-4 md:py-5 text-left group"
       >
         <span className="font-medium text-gray-800 group-hover:text-gray-600 transition-colors pr-4">
           {q}
@@ -53,12 +53,12 @@ export default function FAQ({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
 
   return (
-    <section className="py-20 px-4 bg-white">
-      <div className="max-w-[700px] mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10 text-center tracking-tight">
+    <section className="py-[var(--section-py)] px-[var(--section-px)] bg-white">
+      <div className="max-w-[1120px] mx-auto">
+        <h2 className="text-[length:var(--text-heading)] font-bold text-gray-800 mb-10 text-center tracking-tight">
           {dict.faq.title}
         </h2>
-        <div>
+        <div className="max-w-2xl mx-auto">
           {dict.faq.items.map((faq) => (
             <FAQItem key={faq.q} q={faq.q} a={faq.a} />
           ))}

@@ -136,6 +136,24 @@
   --corevia-pro: #667eea;
   --corevia-max: #9CA3AF;
   --corevia-ai: #4285F4;
+
+  /* Mobile-first responsive tokens */
+  --text-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --text-heading: clamp(1.875rem, 3vw + 0.5rem, 3rem);
+  --text-body-lg: clamp(1rem, 0.5vw + 0.75rem, 1.25rem);
+
+  --section-py: clamp(3rem, 6vw, 7rem);
+  --section-px: clamp(1.25rem, 4vw, 2rem);
+  --section-gap: clamp(2rem, 4vw, 4rem);
+  --card-padding: clamp(1.25rem, 2vw, 2rem);
+
+  --marquee-speed: 30s;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --marquee-speed: 45s;
+  }
 }
 
 /* 애니메이션 */
@@ -173,5 +191,5 @@
 }
 
 .animate-marquee {
-  animation: marquee 40s linear infinite;
+  animation: marquee var(--marquee-speed) linear infinite;
 }
