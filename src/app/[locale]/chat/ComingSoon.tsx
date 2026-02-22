@@ -62,24 +62,16 @@ export default function ComingSoon({ locale }: { locale: string }) {
             }}
             className="text-center"
           >
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="relative w-36 h-56 md:w-48 md:h-72"
-            >
+            <div className="relative w-36 h-56 md:w-48 md:h-72">
               <Image
                 src="/coach/male_3_full.png"
                 alt={isKo ? "코치 케이" : "Coach Kay"}
                 fill
-                className="object-contain object-bottom drop-shadow-lg"
+                className="object-contain object-bottom"
                 sizes="(max-width: 768px) 144px, 192px"
                 priority
               />
-            </motion.div>
+            </div>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -109,25 +101,16 @@ export default function ComingSoon({ locale }: { locale: string }) {
             }}
             className="text-center"
           >
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                duration: 3,
-                delay: 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="relative w-36 h-56 md:w-48 md:h-72"
-            >
+            <div className="relative w-36 h-56 md:w-48 md:h-72">
               <Image
                 src="/coach/female_3_full.png"
                 alt={isKo ? "코치 제인" : "Coach Jane"}
                 fill
-                className="object-contain object-bottom drop-shadow-lg"
+                className="object-contain object-bottom"
                 sizes="(max-width: 768px) 144px, 192px"
                 priority
               />
-            </motion.div>
+            </div>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
