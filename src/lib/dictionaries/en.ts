@@ -294,7 +294,7 @@ const en = {
 
     missionLabel: "Mission",
     missionHeadline: "The fundamentals are\nthe fastest path.",
-    missionText: "Progressive overload. Adequate protein. Consistent tracking.\nWe walk the proven path of fitness, optimized by AI.",
+    missionText: "There are no shortcuts.\nWe walk the proven path of fitness, optimized by AI.",
 
     visionLabel: "Vision",
     visionHeadline: "AI Native Fitness",
