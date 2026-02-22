@@ -289,7 +289,7 @@ const en = {
     femaleCoachAlt: "AI Coach Female",
   },
   team: {
-    title: "Team CoreVia",
+    title: "About CoreVia",
     subtitle: "",
 
     missionLabel: "Mission",

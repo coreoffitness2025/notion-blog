@@ -1,18 +1,18 @@
 const ko = {
   nav: {
-    features: "제품",
-    team: "팀 소개",
-    guide: "피트니스 가이드",
+    features: "Product",
+    team: "About",
+    guide: "Fitness Guide",
     pricing: "가격",
-    blog: "블로그",
+    blog: "Blog",
     contact: "문의",
     download: "앱 다운로드",
     aiChat: "AI 코치",
     menu: "메뉴",
   },
   footer: {
-    product: "제품",
-    fitnessGuide: "피트니스 가이드",
+    product: "Product",
+    fitnessGuide: "Fitness Guide",
     company: "회사",
     tagline1: "스마트폰 하나로,",
     tagline2: "나만의 PT 선생님",
@@ -24,8 +24,8 @@ const ko = {
     oneRmCalc: "1RM 계산기",
     exerciseDb: "운동 도감",
     programs: "운동 프로그램",
-    team: "팀 소개",
-    blog: "블로그",
+    team: "About",
+    blog: "Blog",
     contactUs: "문의하기",
   },
   hero: {
@@ -275,7 +275,7 @@ const ko = {
     femaleCoachAlt: "AI 코치 여성",
   },
   team: {
-    title: "Team CoreVia",
+    title: "About CoreVia",
     subtitle: "",
 
     missionLabel: "Mission",
