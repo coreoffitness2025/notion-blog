@@ -21,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/guide/programs", priority: 0.7, freq: "monthly" as const },
     { path: "/guide/meal-plans", priority: 0.7, freq: "monthly" as const },
     { path: "/guide/handbook", priority: 0.7, freq: "monthly" as const },
-    { path: "/pricing", priority: 0.9, freq: "monthly" as const },
     { path: "/posts", priority: 0.8, freq: "daily" as const },
     { path: "/contact", priority: 0.5, freq: "monthly" as const },
   ];

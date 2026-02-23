@@ -4,28 +4,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { getDictionary } from "@/lib/i18n";
 
-const screenshotFiles = [
-  { name: "01-coach-k.png", alt: "AI Coach" },
-  { name: "02-coach-jane.png", alt: "Coach Customizing" },
-  { name: "03-workout.png", alt: "Workout Input" },
-  { name: "04-nutrition.png", alt: "Nutrition Tracking" },
-  { name: "05-dashboard.png", alt: "Home Dashboard" },
-  { name: "06-trainer-mode.png", alt: "Trainer Mode" },
-];
-
 export default function RecordingUI({ locale }: { locale: string }) {
   const dict = getDictionary(locale);
   const dir = locale === "ko" ? "/store-screenshots" : "/store-screenshots-en";
-  const screenshots = screenshotFiles.map((f) => ({
-    src: `${dir}/${f.name}`,
-    alt: f.alt,
-  }));
-
-  const doubled = [...screenshots, ...screenshots];
 
   return (
-    <section className="py-[var(--section-py)] bg-white overflow-hidden">
-      <div className="max-w-[1120px] mx-auto px-[var(--section-px)]">
+    <section className="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--corevia-bg)]">
+      <div className="max-w-[1120px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -35,35 +20,93 @@ export default function RecordingUI({ locale }: { locale: string }) {
           <h2 className="text-[length:var(--text-heading)] font-bold text-gray-800 mb-3 tracking-tight">
             {dict.recording.title}
           </h2>
-          <p className="text-base text-gray-500 max-w-xl mx-auto">
-            {dict.recording.subtitle1}
-            <br className="hidden sm:block" />
-            {dict.recording.subtitle2}
+          <p className="text-base text-gray-500 max-w-2xl mx-auto">
+            {dict.recording.subtitle}
           </p>
         </motion.div>
-      </div>
 
-      {/* 무한 자동 스크롤 + 양쪽 페이드 그래디언트 */}
-      <div className="relative group">
-        {/* 왼쪽 페이드 */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 lg:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        {/* 오른쪽 페이드 */}
-        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 lg:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-        <div className="flex gap-3 md:gap-5 animate-marquee group-hover:[animation-play-state:paused]">
-          {doubled.map((shot, i) => (
-            <div key={`${shot.src}-${i}`} className="flex-shrink-0">
-              <div className="relative w-[160px] h-[346px] sm:w-[180px] sm:h-[389px] md:w-[240px] md:h-[519px] lg:w-[280px] lg:h-[605px] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        <div className="space-y-16 md:space-y-20">
+          {/* 운동 섹션 */}
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex-shrink-0"
+            >
+              <div className="relative w-[220px] h-[476px] md:w-[260px] md:h-[562px] lg:w-[300px] lg:h-[649px] rounded-3xl overflow-hidden shadow-lg">
                 <Image
-                  src={shot.src}
-                  alt={shot.alt}
+                  src={`${dir}/${dict.recording.workout.screenshot}`}
+                  alt="Workout"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 640px) 160px, (max-width: 768px) 180px, (max-width: 1024px) 240px, 280px"
+                  sizes="(max-width: 768px) 220px, (max-width: 1024px) 260px, 300px"
                 />
               </div>
-            </div>
-          ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex-1 text-center md:text-left"
+            >
+              <div className="mb-4">
+                <span className="text-4xl md:text-5xl font-bold text-[var(--corevia-primary)]">
+                  {dict.recording.workout.stat}
+                </span>
+                <span className="ml-2 text-lg md:text-xl font-semibold text-gray-700">
+                  {dict.recording.workout.statLabel}
+                </span>
+              </div>
+              <p className="text-base md:text-lg text-gray-500 leading-relaxed">
+                {dict.recording.workout.description}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* 식단 섹션 (방향 반전) */}
+          <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex-shrink-0"
+            >
+              <div className="relative w-[220px] h-[476px] md:w-[260px] md:h-[562px] lg:w-[300px] lg:h-[649px] rounded-3xl overflow-hidden shadow-lg">
+                <Image
+                  src={`${dir}/${dict.recording.nutrition.screenshot}`}
+                  alt="Nutrition"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 220px, (max-width: 1024px) 260px, 300px"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex-1 text-center md:text-left"
+            >
+              <div className="mb-4">
+                <span className="text-4xl md:text-5xl font-bold text-[var(--corevia-primary)]">
+                  {dict.recording.nutrition.stat}
+                </span>
+                <span className="ml-2 text-lg md:text-xl font-semibold text-gray-700">
+                  {dict.recording.nutrition.statLabel}
+                </span>
+              </div>
+              <p className="text-base md:text-lg text-gray-500 leading-relaxed">
+                {dict.recording.nutrition.description}
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

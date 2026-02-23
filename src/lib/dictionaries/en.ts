@@ -40,8 +40,9 @@ const en = {
   },
   features: {
     title: "Personalized Coaching, Just for You",
-    subtitle:
-      "Goals, body stats, experience, diet habits — AI designs the optimal workout routine and meal plan for you",
+    subtitle: "A real online PT app that manages your workouts and diet",
+    description: "Goals, body stats, experience, diet habits — AI designs the optimal workout routine and meal plan for you",
+    screenshot: "01-coach-k.png",
     trust: "",
     cards: [
       {
@@ -72,19 +73,19 @@ const en = {
   },
   recording: {
     title: "Workout & Diet, Easy and Accurate",
-    subtitle1:
-      "Compare workouts with past records for progressive overload,",
-    subtitle2:
-      "while AI instantly analyzes calories and nutrients from a single photo",
-    dashboardLabel: "Home Dashboard",
-    dashboardDesc: "Target calories, monthly workouts, and weight at a glance",
-    dashboardAlt: "Home Dashboard UI",
-    workoutLabel: "Workout Log",
-    workoutDesc: "Review past weight/reps to set better records today",
-    workoutAlt: "Workout recording UI",
-    dietLabel: "AI Diet Analysis",
-    dietDesc: "One photo → AI instant calorie/nutrient measurement",
-    dietAlt: "Diet recording UI",
+    subtitle: "The most intuitive workout input UI designed by trainers, record your diet easily with AI",
+    workout: {
+      stat: "22+",
+      statLabel: "Workout Programs",
+      description: "Work out easily with periodized routines and improve your performance with continuous tracking",
+      screenshot: "03-workout.png",
+    },
+    nutrition: {
+      stat: "16,000+",
+      statLabel: "Food Database",
+      description: "Record easily with AI and measure calories accurately using a database of 16,000+ foods",
+      screenshot: "04-nutrition.png",
+    },
   },
   coach: {
     title: "4 AI Coach Personalities",
@@ -162,8 +163,9 @@ const en = {
   },
   points: {
     title: "Recording is Rewarding — Build Your Own Coach",
-    subtitle:
-      "The more you record workouts and diet, the more points you earn to buy coach skins in the shop",
+    subtitle: "Earn points by recording and hire your own PT coach",
+    description: "The more you record workouts and diet, the more points you earn to customize and hire your coach",
+    screenshot: "02-coach-jane.png",
     steps: [
       { step: "01", title: "Record", sub: "Workout +1  Diet +1" },
       { step: "02", title: "Points", sub: "Weekly +3  Streak bonus" },
@@ -190,7 +192,9 @@ const en = {
   trainer: {
     badge: "Trainer Mode Supported!",
     title: "Dedicated Mode for Real PT Trainers",
-    subtitle: "Trainers can directly review their clients' workout and diet data, and manage feedback all in one place",
+    subtitle: "Client management, workout/diet review, and feedback writing",
+    description: "Trainers can directly review their clients' workout and diet data and send feedback",
+    screenshot: "06-trainer-mode.png",
     cards: [
       {
         title: "Client Management",

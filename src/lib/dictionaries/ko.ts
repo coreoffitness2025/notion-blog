@@ -40,8 +40,9 @@ const ko = {
   },
   features: {
     title: "당신에게 딱 맞는 개인화 코칭",
-    subtitle:
-      "목표, 신체정보, 경험, 식습관까지 — 최적의 운동 루틴과 식단을 AI가 설계합니다",
+    subtitle: "운동과 식단 제대로 봐주는 진짜 온라인 PT 앱",
+    description: "목표, 신체정보, 경험, 식습관까지 — 최적의 운동 루틴과 식단을 AI가 설계합니다",
+    screenshot: "01-coach-k.png",
     trust: "",
     cards: [
       {
@@ -72,18 +73,19 @@ const ko = {
   },
   recording: {
     title: "운동도 식단도, 쉽고 정확하게",
-    subtitle1: "운동은 지난 기록과 비교하며 점진적 과부하를,",
-    subtitle2:
-      "식단은 사진 한 장이면 AI가 칼로리와 영양소를 즉시 분석해줘요",
-    dashboardLabel: "홈 대시보드",
-    dashboardDesc: "목표 칼로리, 이번 달 운동, 체중까지 한눈에",
-    dashboardAlt: "홈 대시보드 UI",
-    workoutLabel: "운동 기록",
-    workoutDesc: "이전 무게/횟수를 보면서 더 나은 오늘을 기록",
-    workoutAlt: "운동 기록 UI",
-    dietLabel: "AI 식단 분석",
-    dietDesc: "사진 한 장 → AI가 칼로리/영양소 즉시 측정",
-    dietAlt: "식단 기록 UI",
+    subtitle: "트레이너가 설계한 가장 직관적인 운동 입력 UI, AI로 빠르고 쉽게 식단을 기록하세요",
+    workout: {
+      stat: "22개+",
+      statLabel: "운동 프로그램",
+      description: "주기화된 운동 루틴으로 쉽게 운동하고, 지속적인 트래킹으로 자신의 운동 퍼포먼스를 향상시키세요",
+      screenshot: "03-workout.png",
+    },
+    nutrition: {
+      stat: "16,000개+",
+      statLabel: "식단 DB",
+      description: "AI로 쉽게 기록하고, 16,000개의 식단 DB를 이용해서 정확하게 칼로리를 측정하세요",
+      screenshot: "04-nutrition.png",
+    },
   },
   coach: {
     title: "4가지 성격의 AI 코치",
@@ -161,8 +163,9 @@ const ko = {
   },
   points: {
     title: "기록이 곧 보상, 포인트로 나만의 코치를",
-    subtitle:
-      "운동과 식단을 기록할수록 포인트가 쌓이고, 코치 상점에서 다양한 스킨을 구매할 수 있어요",
+    subtitle: "기록으로 포인트를 얻고 나만의 PT 코치를 고용하세요",
+    description: "운동과 식단을 기록할수록 포인트가 쌓이고, 포인트로 코치를 꾸미고 고용하세요",
+    screenshot: "02-coach-jane.png",
     steps: [
       { step: "01", title: "기록", sub: "운동 +1  식단 +1" },
       { step: "02", title: "포인트", sub: "주간 +3  스트릭 보너스" },
@@ -185,7 +188,9 @@ const ko = {
   trainer: {
     badge: "트레이너 모드도 지원해요!",
     title: "실제 PT 트레이너를 위한 전용 모드",
-    subtitle: "회원이 기록한 운동·식단 데이터를 트레이너가 직접 확인하고, 피드백까지 한 곳에서 관리할 수 있어요",
+    subtitle: "회원 관리, 운동/식단 리뷰, 피드백 작성까지",
+    description: "회원이 기록한 운동·식단 데이터를 트레이너가 직접 확인하고 피드백을 보내줄 수 있어요",
+    screenshot: "06-trainer-mode.png",
     cards: [
       {
         title: "회원 관리",
