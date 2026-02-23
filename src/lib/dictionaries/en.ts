@@ -310,12 +310,12 @@ const en = {
     aboutTitle: "About",
     aboutDesc: "Built by someone who understands both technology and fitness",
     careers: [
-      "IT Strategy at a Top 4 Corporation",
+      "IT Strategy at a Major Korean Conglomerate",
       "(Former) Samsung Electronics Semiconductor Engineer",
       "M.S. Technology Management · B.S. Mechanical Engineering",
     ],
     fitness: [
-      "Certified Sports Instructor Level 2 (Bodybuilding)",
+      "Government-Certified Sports Instructor (Bodybuilding)",
       "Multiple natural bodybuilding competition awards (WNGP, Natural SSA, etc.)",
     ],
     contactCta: "Have any questions?",
