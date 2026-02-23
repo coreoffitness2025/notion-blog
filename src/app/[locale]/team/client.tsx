@@ -22,9 +22,19 @@ const fitnessIcons = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block text-[11px] md:text-[13px] font-semibold uppercase tracking-[0.25em] text-gray-400">
+    <span className="inline-block text-sm md:text-base font-semibold uppercase tracking-[0.25em] text-gray-400">
       {children}
     </span>
+  );
+}
+
+function highlightKeywords(text: string, keywords: string[]) {
+  const pattern = new RegExp(`(${keywords.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g');
+  const parts = text.split(pattern);
+  return parts.map((part, i) =>
+    keywords.includes(part)
+      ? <span key={i} className="text-[#4285F4]">{part}</span>
+      : part
   );
 }
 
@@ -55,7 +65,7 @@ export default function TeamPageClient({
           className="text-center max-w-[720px] mx-auto"
         >
           <h1 className="text-[clamp(2rem,4vw+0.5rem,3.25rem)] font-bold text-gray-900 tracking-tight">
-            {dict.team.title}
+            {highlightKeywords(dict.team.title, ['CoreVia'])}
           </h1>
         </motion.div>
       </section>
@@ -74,7 +84,7 @@ export default function TeamPageClient({
           </div>
 
           <p className="text-[clamp(1.05rem,0.5vw+0.9rem,1.35rem)] font-medium text-gray-700 leading-[1.8] whitespace-pre-line">
-            {dict.team.missionHeadline}
+            {highlightKeywords(dict.team.missionHeadline, ['Core', 'Via'])}
           </p>
 
           {dict.team.missionText && (
@@ -105,7 +115,7 @@ export default function TeamPageClient({
           )}
 
           <p className="text-[clamp(1.05rem,0.5vw+0.9rem,1.35rem)] font-medium text-gray-700 leading-[1.8] whitespace-pre-line">
-            {dict.team.visionText}
+            {highlightKeywords(dict.team.visionText, ['AI Native Fitness.'])}
           </p>
         </motion.div>
       </section>
