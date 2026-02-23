@@ -81,8 +81,8 @@ const en = {
       screenshot: "03-workout.png",
     },
     nutrition: {
-      stat: "AI",
-      statLabel: "Easy Diet Management",
+      stat: "",
+      statLabel: "AI-Powered Easy Diet Management",
       description: "One photo completes your entire log — record your diet quickly and easily with CoreVia's 16,000+ food database",
       screenshot: "04-nutrition.png",
     },

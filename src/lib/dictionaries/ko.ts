@@ -81,8 +81,8 @@ const ko = {
       screenshot: "03-workout.png",
     },
     nutrition: {
-      stat: "AI",
-      statLabel: "로 쉬운 식단 관리",
+      stat: "",
+      statLabel: "AI로 쉬운 식단 관리",
       description: "사진 한 장이면 모든 기록이 완료, 코비아의 16,000+의 음식 DB와 함께 쉽고 빠르게 식단을 기록하세요",
       screenshot: "04-nutrition.png",
     },
