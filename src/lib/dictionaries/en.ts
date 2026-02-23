@@ -75,7 +75,7 @@ const en = {
     title: "Workout & Diet, Easy and Accurate",
     subtitle: "Record your diet quickly and easily with AI",
     workout: {
-      stat: "No.1",
+      stat: "",
       statLabel: "Trainer-designed workout logging UI",
       description: "Track your workout performance with the most intuitive and easy-to-use logging UI, and grow with rich periodized programs",
       screenshot: "03-workout.png",

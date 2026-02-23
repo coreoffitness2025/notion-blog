@@ -75,7 +75,7 @@ const ko = {
     title: "운동도 식단도, 쉽고 정확하게",
     subtitle: "AI로 빠르고 쉽게 식단을 기록하세요",
     workout: {
-      stat: "No.1",
+      stat: "",
       statLabel: "트레이너가 직접 설계한 운동 기록 UI",
       description: "어떤 앱보다 직관적이고 쉬운 운동 입력 UI를 바탕으로 자신의 운동 퍼포먼스를 트래킹하고, 풍부한 주기화 프로그램과 함께 성장하세요",
       screenshot: "03-workout.png",
