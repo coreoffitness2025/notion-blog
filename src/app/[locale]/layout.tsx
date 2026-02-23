@@ -55,10 +55,10 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: isKo ? "CoreVia - 나만의 AI PT 코치" : "CoreVia - Your AI PT Coach",
+      title: isKo ? "CoreVia - 진짜 온라인 PT" : "CoreVia - Real Online PT",
       description: isKo
-        ? "스마트폰 하나로 운동+식단 AI 코칭. AI가 기록을 분석하고 맞춤 피드백을 제공합니다."
-        : "All-in-one workout + diet AI coaching. AI analyzes your records and provides personalized feedback.",
+        ? "스마트폰 하나로 운동+식단 통합 관리. 운동과 식단을 함께 분석해서 개인화 피드백을 제공합니다."
+        : "All-in-one workout + diet management. Analyzes both workouts and diet together for personalized feedback.",
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
       type: "website",
@@ -68,16 +68,16 @@ export async function generateMetadata({
           url: "/opengraph-image.png",
           width: 1200,
           height: 630,
-          alt: "CoreVia - AI PT Coach App",
+          alt: "CoreVia - Real Online PT App",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isKo ? "CoreVia - 나만의 AI PT 코치" : "CoreVia - Your AI PT Coach",
+      title: isKo ? "CoreVia - 진짜 온라인 PT" : "CoreVia - Real Online PT",
       description: isKo
-        ? "스마트폰 하나로 운동+식단 AI 코칭."
-        : "All-in-one workout + diet AI coaching.",
+        ? "스마트폰 하나로 운동+식단 통합 관리."
+        : "All-in-one workout + diet management.",
       images: ["/opengraph-image.png"],
     },
   };
