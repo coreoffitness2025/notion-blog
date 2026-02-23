@@ -73,17 +73,17 @@ const en = {
   },
   recording: {
     title: "Workout & Diet, Easy and Accurate",
-    subtitle: "Record workouts and diet quickly and accurately with intuitive UI designed by trainers",
+    subtitle: "Record your diet quickly and easily with AI",
     workout: {
-      stat: "22+",
-      statLabel: "Workout Programs",
-      description: "Work out easily with periodized routines and improve your performance with continuous tracking",
+      stat: "No.1",
+      statLabel: "Trainer-designed workout logging UI",
+      description: "Track your workout performance with the most intuitive and easy-to-use logging UI, and grow with rich periodized programs",
       screenshot: "03-workout.png",
     },
     nutrition: {
       stat: "16,000+",
       statLabel: "Food Database",
-      description: "Record easily with one photo and measure calories accurately using a database of 16,000+ foods",
+      description: "One photo completes your entire log — record your diet quickly and easily with CoreVia's 16,000+ food database",
       screenshot: "04-nutrition.png",
     },
   },
@@ -193,7 +193,7 @@ const en = {
     badge: "Trainer Mode Supported!",
     title: "Dedicated Mode for Real PT Trainers",
     subtitle: "Client management, workout/diet review, and feedback writing",
-    description: "Trainers can directly review their clients' workout and diet data and send feedback",
+    description: "Easily manage your clients' PT sessions, review their everyday workout and diet logs beyond just PT hours, and send feedback directly",
     screenshot: "06-trainer-mode.png",
     cards: [
       {

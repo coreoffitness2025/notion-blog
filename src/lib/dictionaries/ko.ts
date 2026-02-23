@@ -73,17 +73,17 @@ const ko = {
   },
   recording: {
     title: "운동도 식단도, 쉽고 정확하게",
-    subtitle: "트레이너가 설계한 직관적인 UI로 운동과 식단을 빠르고 정확하게 기록하세요",
+    subtitle: "AI로 빠르고 쉽게 식단을 기록하세요",
     workout: {
-      stat: "22개+",
-      statLabel: "운동 프로그램",
-      description: "주기화된 운동 루틴으로 쉽게 운동하고, 지속적인 트래킹으로 자신의 운동 퍼포먼스를 향상시키세요",
+      stat: "No.1",
+      statLabel: "트레이너가 직접 설계한 운동 기록 UI",
+      description: "어떤 앱보다 직관적이고 쉬운 운동 입력 UI를 바탕으로 자신의 운동 퍼포먼스를 트래킹하고, 풍부한 주기화 프로그램과 함께 성장하세요",
       screenshot: "03-workout.png",
     },
     nutrition: {
       stat: "16,000개+",
       statLabel: "식단 DB",
-      description: "사진 한 장으로 쉽게 기록하고, 16,000개의 식단 DB로 정확한 칼로리를 측정하세요",
+      description: "사진 한 장이면 모든 기록이 완료, 코비아의 16,000+의 음식 DB와 함께 쉽고 빠르게 식단을 기록하세요",
       screenshot: "04-nutrition.png",
     },
   },
@@ -189,7 +189,7 @@ const ko = {
     badge: "트레이너 모드도 지원해요!",
     title: "실제 PT 트레이너를 위한 전용 모드",
     subtitle: "회원 관리, 운동/식단 리뷰, 피드백 작성까지",
-    description: "회원이 기록한 운동·식단 데이터를 트레이너가 직접 확인하고 피드백을 보내줄 수 있어요",
+    description: "쉽게 회원의 PT 세션을 관리하면서 PT 시간 뿐 아니라 회원이 평소에 기록하고 있는 운동과 식단 기록까지 직접 확인하고, 피드백하세요",
     screenshot: "06-trainer-mode.png",
     cards: [
       {
