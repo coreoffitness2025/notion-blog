@@ -98,27 +98,6 @@ export default async function GuidePage({
         </div>
       </section>
 
-      {/* Guide Grid */}
-      <section className="max-w-6xl mx-auto px-4 pb-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {dict.guide.items.map((item, i) => (
-            <Link
-              key={guideHrefs[i]}
-              href={`${prefix}${guideHrefs[i]}`}
-              className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-            >
-              <span className="text-2xl mb-4 block">{item.icon}</span>
-              <h2 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors">
-                {item.title}
-              </h2>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                {item.description}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {/* Ebook Promotion */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
         <Link
@@ -143,6 +122,27 @@ export default async function GuidePage({
             </div>
           </div>
         </Link>
+      </section>
+
+      {/* Guide Grid */}
+      <section className="max-w-6xl mx-auto px-4 pb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {dict.guide.items.map((item, i) => (
+            <Link
+              key={guideHrefs[i]}
+              href={`${prefix}${guideHrefs[i]}`}
+              className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+            >
+              <span className="text-2xl mb-4 block">{item.icon}</span>
+              <h2 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors">
+                {item.title}
+              </h2>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                {item.description}
+              </p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* CTA Section */}
