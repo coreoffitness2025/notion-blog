@@ -41,7 +41,7 @@ const en = {
   features: {
     title: "Personalized Coaching, Just for You",
     subtitle: "A real online PT app that manages your workouts and diet",
-    description: "Unlike apps that only track workouts or only track diet — we believe real PT means managing both. Personalized coaching based on your data",
+    description: "In fitness, workouts and diet should not be considered separately — they must be managed together. We thoroughly track and analyze both, delivering a personalized PT experience optimized for your data",
     screenshot: "01-coach-k.png",
     trust: "",
     cards: [
