@@ -302,7 +302,7 @@ const en = {
 
     visionLabel: "Vision",
     visionHeadline: "",
-    visionText: "AI Native Fitness.\nBeyond simply recording, analyzing, and giving feedback —\nwe're building a fitness ecosystem where AI is present\nat every touchpoint through the fusion of SW and HW.",
+    visionText: "AI Native Fitness.\nBeyond simply recording, analyzing, and giving feedback —\nwe're connecting fitness through SW and HW technology,\nbuilding a fitness ecosystem where AI is present at every touchpoint.",
 
     teamLabel: "Team",
     closing: "",
