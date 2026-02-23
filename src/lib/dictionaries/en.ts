@@ -41,7 +41,7 @@ const en = {
   features: {
     title: "Personalized Coaching, Just for You",
     subtitle: "A real online PT app that manages your workouts and diet",
-    description: "Goals, body stats, experience, diet habits — AI designs the optimal workout routine and meal plan for you",
+    description: "Unlike apps that only track workouts or only track diet — we believe real PT means managing both. Personalized coaching based on your data",
     screenshot: "01-coach-k.png",
     trust: "",
     cards: [
@@ -73,7 +73,7 @@ const en = {
   },
   recording: {
     title: "Workout & Diet, Easy and Accurate",
-    subtitle: "The most intuitive workout input UI designed by trainers, record your diet easily with AI",
+    subtitle: "Record workouts and diet quickly and accurately with intuitive UI designed by trainers",
     workout: {
       stat: "22+",
       statLabel: "Workout Programs",
@@ -83,13 +83,13 @@ const en = {
     nutrition: {
       stat: "16,000+",
       statLabel: "Food Database",
-      description: "Record easily with AI and measure calories accurately using a database of 16,000+ foods",
+      description: "Record easily with one photo and measure calories accurately using a database of 16,000+ foods",
       screenshot: "04-nutrition.png",
     },
   },
   coach: {
-    title: "4 AI Coach Personalities",
-    subtitle: "Choose the style that fits you",
+    title: "4 Coaching Styles",
+    subtitle: "A coach that manages both workouts and diet — choose the style that fits you",
     coachAlt: "Coach",
     personalities: [
       {
@@ -256,15 +256,15 @@ const en = {
     items: [
       {
         q: "Is it free?",
-        a: "Workout/diet recording, progress graphs, and point earning are all free. AI coach chat (10/month) and AI food analysis (3/month) are also free. Upgrade to Pro for unlimited access.",
+        a: "Workout/diet recording, progress graphs, and point earning are all free. Online PT (10/month) and food analysis (3/month) are also free. Upgrade to Pro for unlimited access.",
       },
       {
-        q: "Does the AI really analyze my records?",
-        a: "Yes. Completely different from generic AI chatbots. The AI coach uses 9 specialized tools (workout lookup, diet analysis, program recommendations, etc.) to cross-analyze your workout and diet data with personalized feedback.",
+        q: "Does it really analyze my records?",
+        a: "Yes. Completely different from simple tracking apps. 9 specialized tools cross-analyze your workout and diet data to provide personalized feedback.",
       },
       {
         q: "What's the difference between free and paid?",
-        a: "Free: unlimited workout/diet recording + AI coach 10/month + AI food analysis 3/month. Pro: unlimited AI features + routine management + barcode scan + AI equipment recognition. Max: all Pro + imbalance analysis + AI workout evaluation.",
+        a: "Free: unlimited workout/diet recording + Online PT 10/month + food analysis 3/month. Pro: unlimited coaching features + routine management + barcode scan + equipment recognition. Max: all Pro + imbalance analysis + workout evaluation.",
       },
       {
         q: "How does AI diet analysis work?",
@@ -280,14 +280,14 @@ const en = {
       },
       {
         q: "Can it replace an in-person PT?",
-        a: "The AI coach cross-analyzes workouts and diet together, and uses 16-step onboarding to personalize recommendations based on your goals, experience, injuries, and allergies. A great 24/7 online PT alternative.",
+        a: "Cross-analyzes workouts and diet together, and uses 16-step onboarding to personalize recommendations based on your goals, experience, injuries, and allergies. A great 24/7 online PT alternative.",
       },
     ],
   },
   cta: {
     title: "Get Started Now",
     subtitle1: "Download for free and",
-    subtitle2: "meet your personal AI PT coach",
+    subtitle2: "start your own online PT",
     iosComing: "iOS Coming Soon",
     maleCoachAlt: "AI Coach Male",
     femaleCoachAlt: "AI Coach Female",
@@ -436,19 +436,19 @@ const en = {
   coachPage: {
     badge: "AI Coach",
     title1: "Meet Your Personal",
-    title2: "AI PT Coach",
+    title2: "Online PT Coaching",
     subtitle1:
       "The more consistently you record, the more accurate your coaching becomes.",
     subtitle2: "Choose from 4 personalities.",
-    diffTitle: "How is it different from regular AI chatbots?",
+    diffTitle: "How is it different from regular tracking apps?",
     diffs: [
       {
         title: "It actually reviews your records",
-        desc: "Workout logs, diet photos, body analysis — the AI actually reviews and advises.",
+        desc: "Workout logs, diet data, body stats — your data is actually analyzed to provide personalized advice.",
       },
       {
         title: "Cross-analyzes workout & diet",
-        desc: '"You did back exercises but lack protein" — it cross-references, not just checks individually.',
+        desc: "'Did back day but protein is low' — unlike apps that only track workouts or diet, we analyze both together.",
       },
       {
         title: "Built by a real expert",
@@ -813,27 +813,27 @@ const en = {
   },
   metadata: {
     homeTitle:
-      "CoreVia - Your AI PT Coach | Workout & Diet AI Coaching App",
+      "CoreVia - Your Online PT | Workout & Diet Integrated Coaching App",
     homeDesc:
-      "All-in-one workout + diet AI coaching on your smartphone. Many apps just record — only CoreVia analyzes your records and provides personalized feedback.",
+      "All-in-one workout + diet management on your smartphone. Many apps just record — only CoreVia analyzes both workouts and diet together for personalized feedback.",
     coachTitle: "AI Coach",
     coachDesc:
-      "Coach Kay and Coach Jane — 2 AI PT coaches with 4 coaching styles manage both your workouts and diet.",
+      "Coach Kay and Coach Jane — 4 coaching styles to manage both your workouts and diet.",
     contactTitle: "Contact Us",
     contactDesc:
       "Contact CoreVia. We welcome app feedback, suggestions, and partnership inquiries.",
     pricingTitle: "Pricing Plans",
     pricingDesc:
       "Compare CoreVia's Free, Pro, and Max plans and choose the subscription that fits you.",
-    chatTitle: "Chat with AI PT Coach",
+    chatTitle: "Chat with Online PT Coach",
     chatDesc:
       "Chat with Coach Kay or Coach Jane. Get AI advice on workouts, diet, and routines.",
   },
   chat: {
-    metaTitle: "Chat with AI PT Coach | CoreVia",
+    metaTitle: "Chat with Online PT Coach | CoreVia",
     metaDesc:
-      "Coach Kay & Coach Jane with 4 coaching personalities. Get AI PT advice on workouts, diet, and routines.",
-    heroBadge: "AI FITNESS COACH",
+      "Coach Kay & Coach Jane with 4 coaching styles. Get online PT advice on workouts, diet, and routines.",
+    heroBadge: "ONLINE PT COACH",
     heroTitle: "Which coach will you talk to?",
     heroSubtitle:
       "Coach Kay and Coach Jane are waiting with 4 coaching styles. Pick one and start chatting.",
