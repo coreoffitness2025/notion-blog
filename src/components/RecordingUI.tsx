@@ -20,9 +20,11 @@ export default function RecordingUI({ locale }: { locale: string }) {
           <h2 className="text-[length:var(--text-heading)] font-bold text-gray-800 mb-3 tracking-tight">
             {dict.recording.title}
           </h2>
-          <p className="text-base text-gray-500 max-w-2xl mx-auto">
-            {dict.recording.subtitle}
-          </p>
+          {dict.recording.subtitle && (
+            <p className="text-base text-gray-500 max-w-2xl mx-auto">
+              {dict.recording.subtitle}
+            </p>
+          )}
         </motion.div>
 
         <div className="space-y-16 md:space-y-20">

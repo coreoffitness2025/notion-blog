@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
 import FeatureCards from "@/components/FeatureCards";
 import RecordingUI from "@/components/RecordingUI";
-import CoachShowcase from "@/components/CoachShowcase";
+
 import PointsCustomization from "@/components/PointsCustomization";
 import TrainerSection from "@/components/TrainerSection";
 import GuidePreview from "@/components/GuidePreview";
@@ -47,7 +47,6 @@ export default async function HomePage({
       <FeatureCards locale={locale} />
       <RecordingUI locale={locale} />
       <PointsCustomization locale={locale} />
-      <CoachShowcase locale={locale} />
       <TrainerSection locale={locale} />
       <GuidePreview locale={locale} />
       <BlogPreview posts={posts} locale={locale} />

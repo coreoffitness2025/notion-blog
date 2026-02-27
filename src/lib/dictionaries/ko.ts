@@ -73,7 +73,7 @@ const ko = {
   },
   recording: {
     title: "운동도 식단도, 쉽고 정확하게",
-    subtitle: "AI로 빠르고 쉽게 식단을 기록하세요",
+    subtitle: "",
     workout: {
       stat: "",
       statLabel: "트레이너가 직접 설계한 운동 기록 UI",

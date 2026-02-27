@@ -73,7 +73,7 @@ const en = {
   },
   recording: {
     title: "Workout & Diet, Easy and Accurate",
-    subtitle: "Record your diet quickly and easily with AI",
+    subtitle: "",
     workout: {
       stat: "",
       statLabel: "Trainer-designed workout logging UI",
