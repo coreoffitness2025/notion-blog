@@ -316,7 +316,7 @@ const en = {
     ],
     fitness: [
       "Government-Certified Sports Instructor (Bodybuilding)",
-      "Multiple natural bodybuilding competition awards (WNGP, Natural SSA, etc.)",
+      "Natural bodybuilding awards (WNGP Physique / Natural SSA Korea Physique)",
     ],
     contactCta: "Have any questions?",
     contactBtn: "Contact Us",

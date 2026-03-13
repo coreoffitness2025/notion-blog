@@ -74,7 +74,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                 onClick={() => setSelectedGoal("all")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   selectedGoal === "all"
-                    ? "bg-pink-600 text-white"
+                    ? "bg-neutral-900 text-white"
                     : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                 }`}
               >
@@ -86,7 +86,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                   onClick={() => setSelectedGoal(goal.id)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                     selectedGoal === goal.id
-                      ? "bg-pink-600 text-white"
+                      ? "bg-neutral-900 text-white"
                       : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                   }`}
                 >
@@ -104,7 +104,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                 onClick={() => setSelectedLevel("all")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   selectedLevel === "all"
-                    ? "bg-pink-600 text-white"
+                    ? "bg-neutral-900 text-white"
                     : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                 }`}
               >
@@ -116,7 +116,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                   onClick={() => setSelectedLevel(level.id)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedLevel === level.id
-                      ? "bg-pink-600 text-white"
+                      ? "bg-neutral-900 text-white"
                       : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                   }`}
                 >
@@ -133,7 +133,7 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
             <button
               key={idx}
               onClick={() => setSelectedProgram(program)}
-              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-pink-500/50 transition-all shadow-sm"
+              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-neutral-400 transition-all shadow-sm"
             >
               <div className="flex items-start justify-between mb-2">
                 <h3 className="font-bold text-gray-800">{isEn ? program.nameEn : program.name}</h3>
@@ -212,14 +212,14 @@ export default function ProgramsClient({ dict, locale }: { dict: Dictionary; loc
                       key={idx}
                       className={`flex items-center justify-between p-4 rounded-xl ${
                         exercise.type === "main"
-                          ? "bg-pink-50 border border-pink-500/30"
+                          ? "bg-neutral-50 border border-neutral-300"
                           : "bg-white border border-gray-200"
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                           exercise.type === "main"
-                            ? "bg-pink-600 text-white"
+                            ? "bg-neutral-900 text-white"
                             : "bg-gray-100 text-gray-500"
                         }`}>
                           {idx + 1}

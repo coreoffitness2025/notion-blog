@@ -77,13 +77,13 @@ const ko = {
     workout: {
       stat: "",
       statLabel: "트레이너가 직접 설계한 운동 기록 UI",
-      description: "어떤 앱보다 직관적이고 쉬운 운동 입력 UI를 바탕으로 자신의 운동 퍼포먼스를 트래킹하고, 풍부한 주기화 프로그램과 함께 성장하세요",
+      description: "피트니스는 이전보다 더 강한 퍼포먼스를 이끌어 내는 것이 중요합니다. Corevia fitness의 운동 UI는 철저하게 이전보다 더 강한 나를 이끌어내는데 초점을 두고, 다양한 주기화 프로그램들과 루틴을 함께 제공합니다. 어떤 앱보다 직관적이고 쉬운 운동 입력 UI를 바탕으로 자신의 운동 퍼포먼스를 향상시키고 트래킹하세요.",
       screenshot: "03-workout.png",
     },
     nutrition: {
       stat: "",
       statLabel: "AI로 쉬운 식단 관리",
-      description: "사진 한 장이면 모든 기록이 완료, 코비아의 16,000+의 음식 DB와 함께 쉽고 빠르게 식단을 기록하세요",
+      description: "CoreVia Fitness는 AI 식단 추적으로 쉽게 칼로리를 계산하고 반영하여 쉬운 일일 칼로리 관리를 가능케합니다. 사진 한장으로 음식의 영양 성분을 분석하고, 수만가지의 음식 DB로 쉽고 빠르게 식단을 기록하세요.",
       screenshot: "04-nutrition.png",
     },
   },
@@ -164,7 +164,7 @@ const ko = {
   points: {
     title: "기록이 곧 보상, 포인트로 나만의 코치를",
     subtitle: "기록으로 포인트를 얻고 나만의 PT 코치를 고용하세요",
-    description: "운동과 식단을 기록할수록 포인트가 쌓이고, 포인트로 코치를 꾸미고 고용하세요",
+    description: "지속 가능한 기록과 관리, CoreVia Fitness는 운동과 식단을 기록할 수록 포인트를 쌓고 이를 통해 커스텀된 온라인 PT 코치를 고용할 수 있습니다. 꾸준히 기록하고 나만의 코치를 만나보세요.",
     screenshot: "02-coach-jane.png",
     steps: [
       { step: "01", title: "기록", sub: "운동 +1  식단 +1" },
@@ -303,7 +303,7 @@ const ko = {
     ],
     fitness: [
       "생활스포츠지도자 2급 (보디빌딩)",
-      "WNGP, Natural SSA 등 네추럴 보디빌딩 대회 수상 다수",
+      "네추럴 보디빌딩 대회 수상 다수 (WNGP 피지크 / Natural SSA Korea 피지크)",
     ],
     contactCta: "궁금한 점이 있으신가요?",
     contactBtn: "문의하기",
