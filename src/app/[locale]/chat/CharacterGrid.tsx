@@ -87,7 +87,7 @@ function CoachCard({
               <div className="w-7 h-7 rounded-full overflow-hidden shrink-0 bg-gray-700">
                 <Image
                   src={coach.avatarImage}
-                  alt=""
+                  alt={coach.name[loc]}
                   width={28}
                   height={28}
                   className={`w-full h-full ${

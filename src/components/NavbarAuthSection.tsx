@@ -60,7 +60,7 @@ export default function NavbarAuthSection({
         {user.photoURL ? (
           <Image
             src={user.photoURL}
-            alt=""
+            alt={user.displayName || "User profile"}
             width={32}
             height={32}
             className="w-full h-full object-cover"

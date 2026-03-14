@@ -36,7 +36,7 @@ export default async function Image() {
         {/* Logo */}
         <img
           src="https://coreviafitness.com/logo.png"
-          alt=""
+          alt="CoreVia Logo"
           width={140}
           height={140}
           style={{ borderRadius: 28, marginBottom: 28 }}
