@@ -7,7 +7,6 @@ import PointsCustomization from "@/components/PointsCustomization";
 import TrainerSection from "@/components/TrainerSection";
 import GuidePreview from "@/components/GuidePreview";
 import BlogPreview from "@/components/BlogPreview";
-import FAQ from "@/components/FAQ";
 import AppDownloadCTA from "@/components/AppDownloadCTA";
 import { getPostsFromCache } from "@/lib/notion";
 const siteUrl =
@@ -50,7 +49,6 @@ export default async function HomePage({
       <TrainerSection locale={locale} />
       <GuidePreview locale={locale} />
       <BlogPreview posts={posts} locale={locale} />
-      <FAQ locale={locale} />
       <AppDownloadCTA locale={locale} />
     </div>
   );

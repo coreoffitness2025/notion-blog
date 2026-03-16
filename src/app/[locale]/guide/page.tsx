@@ -158,12 +158,20 @@ export default async function GuidePage({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
+              href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all"
+            >
+              App Store
+            </a>
+            <a
               href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-all"
             >
-              {dict.guide.download}
+              Google Play
             </a>
             <Link
               href={`${prefix}/contact`}

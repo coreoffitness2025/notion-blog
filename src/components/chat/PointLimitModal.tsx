@@ -48,15 +48,26 @@ export default function PointLimitModal({
           </p>
 
           <div className="space-y-2 pt-2">
-            <a
-              href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
-            >
-              <Smartphone className="w-4 h-4" />
-              {isKo ? "앱에서 포인트 적립" : "Earn points in app"}
-            </a>
+            <div className="flex gap-2">
+              <a
+                href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors"
+              >
+                <Smartphone className="w-4 h-4" />
+                App Store
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
+              >
+                <Smartphone className="w-4 h-4" />
+                Google Play
+              </a>
+            </div>
 
             <button
               disabled

@@ -36,10 +36,10 @@ export default function NavbarAuthSection({
   if (!user) {
     return (
       <a
-        href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+        href="https://apps.apple.com/app/corevia-fitness/id6744396445"
         target="_blank"
         rel="noopener noreferrer"
-        className="ml-2 px-4 py-2 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors"
+        className="ml-2 px-4 py-2 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-colors"
       >
         {downloadLabel}
       </a>

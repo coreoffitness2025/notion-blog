@@ -51,14 +51,24 @@ export default function AppDownloadPrompt({
             <X className="w-4 h-4" />
           </button>
         </div>
-        <a
-          href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 block w-full text-center py-2 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-xl hover:bg-blue-600 transition-colors"
-        >
-          {labels.downloadApp}
-        </a>
+        <div className="mt-3 flex gap-2">
+          <a
+            href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 text-center py-2 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-800 transition-colors"
+          >
+            App Store
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 text-center py-2 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-xl hover:bg-blue-600 transition-colors"
+          >
+            Google Play
+          </a>
+        </div>
       </motion.div>
     );
   }
@@ -90,14 +100,24 @@ export default function AppDownloadPrompt({
             {labels.modalDesc}
           </p>
           <div className="space-y-2">
-            <a
-              href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full py-3 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
-            >
-              {labels.downloadApp}
-            </a>
+            <div className="flex gap-2">
+              <a
+                href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-3 text-center bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors"
+              >
+                App Store
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-3 text-center bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"
+              >
+                Google Play
+              </a>
+            </div>
             <button
               onClick={onClose}
               className="block w-full py-3 text-gray-500 text-sm font-medium hover:text-gray-700 transition-colors"
