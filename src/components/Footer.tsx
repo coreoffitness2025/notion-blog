@@ -73,7 +73,7 @@ export default function Footer({ locale }: { locale: string }) {
           <p className="text-xs text-gray-400">
             &copy; {new Date().getFullYear()} CoreVia Fitness. All rights reserved.
           </p>
-          <p className="text-xs text-gray-400">coreoffitness2025@gmail.com</p>
+          <p className="text-xs text-gray-400">support@coreviafitness.com</p>
         </div>
       </div>
     </footer>
