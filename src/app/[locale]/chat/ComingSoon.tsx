@@ -143,7 +143,7 @@ export default function ComingSoon({ locale }: { locale: string }) {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
-              href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+              href={locale === "en" ? "https://apps.apple.com/us/app/corevia-fitness/id6753667196" : "https://apps.apple.com/app/corevia-fitness/id6753667196"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-colors"

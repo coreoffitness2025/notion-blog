@@ -50,7 +50,7 @@ export default function PointLimitModal({
           <div className="space-y-2 pt-2">
             <div className="flex gap-2">
               <a
-                href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+                href="https://apps.apple.com/app/corevia-fitness/id6753667196"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors"

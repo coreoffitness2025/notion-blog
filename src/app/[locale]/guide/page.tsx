@@ -158,7 +158,7 @@ export default async function GuidePage({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+              href={locale === "en" ? "https://apps.apple.com/us/app/corevia-fitness/id6753667196" : "https://apps.apple.com/app/corevia-fitness/id6753667196"}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all"

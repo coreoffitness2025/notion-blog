@@ -39,7 +39,7 @@ export default function AppDownloadCTA({ locale }: { locale: string }) {
             className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
           >
             <a
-              href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+              href={locale === "en" ? "https://apps.apple.com/us/app/corevia-fitness/id6753667196" : "https://apps.apple.com/app/corevia-fitness/id6753667196"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white font-medium px-8 py-4 rounded-2xl hover:bg-gray-800 transition-colors shadow-sm"

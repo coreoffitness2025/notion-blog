@@ -53,7 +53,7 @@ export default function AppDownloadPrompt({
         </div>
         <div className="mt-3 flex gap-2">
           <a
-            href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+            href="https://apps.apple.com/app/corevia-fitness/id6753667196"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 text-center py-2 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-800 transition-colors"
@@ -102,7 +102,7 @@ export default function AppDownloadPrompt({
           <div className="space-y-2">
             <div className="flex gap-2">
               <a
-                href="https://apps.apple.com/app/corevia-fitness/id6744396445"
+                href="https://apps.apple.com/app/corevia-fitness/id6753667196"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 py-3 text-center bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors"
