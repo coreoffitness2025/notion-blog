@@ -36,10 +36,8 @@ export default function NavbarAuthSection({
   if (!user) {
     return (
       <a
-        href={locale !== "en" ? "https://apps.apple.com/app/corevia-fitness/id6753667196" : "https://apps.apple.com/us/app/corevia-fitness/id6753667196"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="ml-2 px-4 py-2 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-colors"
+        href="#cta"
+        className="ml-2 px-4 py-2 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors"
       >
         {downloadLabel}
       </a>
