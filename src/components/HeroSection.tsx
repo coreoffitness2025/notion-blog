@@ -32,8 +32,7 @@ export default function HeroSection({ locale }: { locale: string }) {
             className="text-[length:var(--text-body-lg)] text-gray-500 leading-relaxed mb-8 md:mb-12 max-w-lg md:max-w-xl mx-auto"
           >
             {dict.hero.subtitle1}
-            <br className="hidden sm:block" />
-            {dict.hero.subtitle2}
+            {dict.hero.subtitle2 && <><br className="hidden sm:block" />{dict.hero.subtitle2}</>}
             {(dict.hero.subtext1 || dict.hero.subtext2) && (
               <>
                 <br />
@@ -81,12 +80,6 @@ export default function HeroSection({ locale }: { locale: string }) {
                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
               </svg>
               Google Play
-            </a>
-            <a
-              href="#features"
-              className="inline-flex items-center justify-center gap-2 bg-white text-gray-600 font-medium px-8 py-4 rounded-2xl text-base border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all"
-            >
-              {dict.hero.explore}
             </a>
           </motion.div>
         </div>
