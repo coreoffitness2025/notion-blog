@@ -36,7 +36,7 @@ export default function NavbarAuthSection({
   if (!user) {
     return (
       <a
-        href="#cta"
+        href={`${locale === "ko" ? "" : `/${locale}`}/#cta`}
         className="ml-2 px-4 py-2 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors"
       >
         {downloadLabel}
