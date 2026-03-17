@@ -216,7 +216,7 @@ export default function TeamPageClient({
             {dict.team.contactCta}
           </p>
           <a
-            href="mailto:coreoffitness2025@gmail.com"
+            href="mailto:support@coreviafitness.com"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-colors"
           >
             {dict.team.contactBtn}

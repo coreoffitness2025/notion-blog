@@ -33,7 +33,7 @@ export default async function ContactPage({
   const { locale } = await params;
   const dict = getDictionary(locale);
   const prefix = locale === "ko" ? "" : `/${locale}`;
-  const email = "coreoffitness2025@gmail.com";
+  const email = "support@coreviafitness.com";
 
   return (
     <main className="min-h-screen bg-[var(--corevia-bg)]">
