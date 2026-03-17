@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     // 워터마크 PDF 생성
     const pdfBytes = await generateWatermarkedPdf(customerName, customerPhone);
 
-    return new NextResponse(pdfBytes, {
+    return new NextResponse(Buffer.from(pdfBytes), {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition":
