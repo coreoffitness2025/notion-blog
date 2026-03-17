@@ -326,11 +326,11 @@ const en = {
     title: "Core of Fitness",
     subtitle: "The Core of Fitness",
     description1:
-      "Dieting is more about execution and willpower than knowledge. But without understanding the core principles, it's hard to sustain.",
+      "Hypertrophy and dieting are more about execution and willpower than knowledge. But without a clear understanding of the methodology, it's hard to sustain. Understanding the core is paramount, and there are skills that make it easier.",
     description2:
-      "This book clarifies the fundamentals of dieting and hypertrophy, and provides meal/workout programs based on them. It covers useful tips and essential nutrition/exercise knowledge to build upon.",
+      "Fitness content is an endless reproduction of the same knowledge — because the core principles are already defined and rarely change. Instead of pro-level details that may overwhelm the average person, knowing the essentials covers most needs.",
     description3:
-      "We hope this book contributes to designing your healthy daily life.",
+      "This book clearly organizes the key focus areas for weight loss and hypertrophy. Starting from the fundamentals, it provides meal/workout programs, along with useful tips and nutrition/exercise knowledge to build upon. We hope this book contributes to designing your healthy daily life.",
     author:
       "Author: James (Certified Sports Instructor Lv.2 · Natural Bodybuilding Competition Winner)",
     highlights: [
@@ -391,6 +391,15 @@ const en = {
         ],
       },
     ],
+    introTitle: "About This Book",
+    introParagraphs: [
+      "Hypertrophy and dieting aren't really about knowing more — they're about execution and willpower. You may already have your own methodology.",
+      "However, without a clear understanding of the methodology behind your actions, sustaining progress can be difficult. Understanding the core is paramount, and there are skills that make it easier — but those skills lose meaning without a solid grasp of the fundamentals.",
+      "This book aims to organize the core of fitness in a way that's easy to read from an everyday person's perspective. Fitness content today is an endless cycle of reproducing the same knowledge — because the core principles are already defined and rarely change. On top of that, various marketing tactics and methods tempt people.",
+      "It's natural to seek the easiest path to your goals, but we firmly believe that understanding the core and walking the fundamental path — not shortcuts — is the fastest way.",
+      "Much fitness content introduces pro-level details in exercise and diet that may overwhelm the average person, presenting them as necessary information. Opinions often directly contradict each other. But most people who simply want a solid physique don't need to digest all of this. Knowing the core covers most needs. Understanding the essentials is what matters.",
+      "This book clearly organizes the key focus areas for weight loss and hypertrophy. Starting from the fundamentals of dieting and hypertrophy, it provides meal/workout programs, along with useful tips and nutrition/exercise knowledge. We hope this book contributes to designing your healthy daily life.",
+    ],
     recommendTitle: "Who This Book Is For",
     recommendations: [
       "Started working out but don't know what to eat",
@@ -399,12 +408,32 @@ const en = {
       "Preparing for a competition or body profile shoot",
     ],
     priceLabel: "eBook (PDF)",
-    price: "₩11,000",
-    deliveryNote: "Instant email delivery after purchase",
+    price: "₩30,000",
+    deliveryNote: "Instant download after payment",
+    nameLabel: "Name",
+    namePlaceholder: "Enter your full name",
+    phoneLabel: "Phone number",
+    phonePlaceholder: "01012345678",
+    watermarkNotice: "Buyer info will be watermarked on the ebook.",
     buyButton: "Buy Now",
+    processing: "Processing payment...",
     comingSoon:
       "Payment system coming soon. You'll be able to purchase shortly.",
     freeHandbook: "Read the free handbook first →",
+  },
+  ebookSuccess: {
+    confirming: "Confirming your payment...",
+    title: "Payment Complete!",
+    subtitle: "Your ebook is ready. Click below to download.",
+    downloadButton: "Download eBook",
+    generating: "Generating your personalized ebook...",
+    doneTitle: "Download Complete!",
+    doneSubtitle: "Enjoy reading! Feel free to contact us with any questions.",
+    redownload: "Download Again",
+    errorTitle: "Something went wrong",
+    errorInvalid: "Invalid payment information. Please try again.",
+    errorConfirm: "Payment confirmation failed. Please contact support.",
+    errorDownload: "Download failed. Please try again.",
   },
   contact: {
     title: "Contact Us",

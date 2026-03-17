@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  outputFileTracingIncludes: {
+    "/api/ebook/download": ["./private/**/*"],
+  },
 };
 
 export default nextConfig;
