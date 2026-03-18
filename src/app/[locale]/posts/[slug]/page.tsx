@@ -45,7 +45,7 @@ export async function generateMetadata(
       tags: post.tags,
       images: [
         {
-          url: post.coverImage || `${siteUrl}/opengraph-image.png`,
+          url: post.coverImage || `${siteUrl}/og-ko.png`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -56,7 +56,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: [post.coverImage || `${siteUrl}/opengraph-image.png`],
+      images: [post.coverImage || `${siteUrl}/og-ko.png`],
     },
   };
 }

@@ -65,10 +65,10 @@ export async function generateMetadata({
       url: isKo ? siteUrl : `${siteUrl}/en`,
       images: [
         {
-          url: "/opengraph-image.png",
-          width: 1200,
-          height: 630,
-          alt: "CoreVia - Real Online PT App",
+          url: isKo ? "/og-ko.png" : "/og-en.png",
+          width: 1024,
+          height: 500,
+          alt: isKo ? "CoreVia - 진짜 온라인 PT" : "CoreVia - Real Online PT",
         },
       ],
     },
@@ -78,7 +78,7 @@ export async function generateMetadata({
       description: isKo
         ? "스마트폰 하나로 운동+식단 통합 관리."
         : "All-in-one workout + diet management.",
-      images: ["/opengraph-image.png"],
+      images: [isKo ? "/og-ko.png" : "/og-en.png"],
     },
   };
 }
@@ -90,7 +90,7 @@ const jsonLd = {
       "@type": "Organization",
       name: "CoreVia",
       url: siteUrl,
-      logo: `${siteUrl}/opengraph-image.png`,
+      logo: `${siteUrl}/og-ko.png`,
       description:
         "AI-powered personalized fitness coaching app. Record workouts and diet, get AI coach feedback.",
     },
