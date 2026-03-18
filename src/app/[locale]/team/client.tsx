@@ -149,11 +149,11 @@ export default function TeamPageClient({
               </div>
 
               {/* Info */}
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-xl font-bold text-gray-900 mb-0.5">
+              <div className="flex-1 text-left">
+                <h3 className="text-xl font-bold text-gray-900 mb-0.5 text-center md:text-left">
                   James
                 </h3>
-                <p className="text-sm text-gray-400 mb-6">
+                <p className="text-sm text-gray-400 mb-6 text-center md:text-left">
                   Founder & Developer
                 </p>
 
