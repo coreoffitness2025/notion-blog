@@ -32,7 +32,7 @@ export default function HeroSection({ locale }: { locale: string }) {
             className="text-[length:var(--text-body-lg)] text-gray-500 leading-relaxed mb-8 md:mb-12 max-w-lg md:max-w-xl mx-auto"
           >
             {dict.hero.subtitle1}
-            {dict.hero.subtitle2 && <><br className="hidden sm:block" />{dict.hero.subtitle2}</>}
+            {dict.hero.subtitle2 && <><br />{dict.hero.subtitle2}</>}
             {(dict.hero.subtext1 || dict.hero.subtext2) && (
               <>
                 <br />
