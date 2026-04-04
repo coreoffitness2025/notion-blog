@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n";
+
+const CAFE24_EBOOK_URL = "https://coreviafitness.cafe24.com/";
 
 export default function EbookPageClient({
   dict,
@@ -14,53 +15,6 @@ export default function EbookPageClient({
   locale: string;
 }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const isValid = name.trim().length >= 2 && /^01\d{8,9}$/.test(phone.replace(/-/g, ""));
-
-  const handlePurchase = async () => {
-    if (!isValid || loading) return;
-    setLoading(true);
-
-    try {
-      // sessionStorage에 워터마크용 정보 저장
-      const cleanPhone = phone.replace(/-/g, "");
-      sessionStorage.setItem("ebook_customerName", name.trim());
-      sessionStorage.setItem("ebook_customerPhone", cleanPhone);
-
-      const clientKey = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
-      if (!clientKey) {
-        alert(dict.ebook.comingSoon);
-        setLoading(false);
-        return;
-      }
-
-      const { loadTossPayments, ANONYMOUS } = await import(
-        "@tosspayments/tosspayments-sdk"
-      );
-      const tossPayments = await loadTossPayments(clientKey);
-      const payment = tossPayments.payment({ customerKey: ANONYMOUS });
-
-      const orderId = `ebook-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-      const origin = window.location.origin;
-
-      await payment.requestPayment({
-        method: "CARD",
-        amount: { currency: "KRW", value: 30000 },
-        orderId,
-        orderName: "Core of Fitness 전자책",
-        customerName: name.trim(),
-        customerMobilePhone: cleanPhone,
-        successUrl: `${origin}${prefix}/ebook/success`,
-        failUrl: `${origin}${prefix}/ebook?error=true`,
-      });
-    } catch {
-      // 사용자가 결제 취소한 경우 등
-      setLoading(false);
-    }
-  };
 
   return (
     <main className="min-h-screen bg-[var(--corevia-bg)]">
@@ -266,7 +220,7 @@ export default function EbookPageClient({
         </div>
       </section>
 
-      {/* CTA — Purchase Form */}
+      {/* CTA — Purchase Link */}
       <section className="py-20 px-4">
         <div className="max-w-[500px] mx-auto">
           <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
@@ -276,42 +230,14 @@ export default function EbookPageClient({
             </p>
             <p className="text-xs text-gray-400 mb-6">{dict.ebook.deliveryNote}</p>
 
-            {/* 구매자 정보 입력 */}
-            <div className="space-y-3 mb-5 text-left">
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">
-                  {dict.ebook.nameLabel}
-                </label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder={dict.ebook.namePlaceholder}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[var(--corevia-primary)] transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">
-                  {dict.ebook.phoneLabel}
-                </label>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder={dict.ebook.phonePlaceholder}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[var(--corevia-primary)] transition-colors"
-                />
-              </div>
-              <p className="text-xs text-gray-400">{dict.ebook.watermarkNotice}</p>
-            </div>
-
-            <button
-              onClick={handlePurchase}
-              disabled={!isValid || loading}
-              className="w-full py-4 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl transition-opacity disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
+            <a
+              href={CAFE24_EBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full py-4 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl transition-opacity hover:opacity-90 text-center"
             >
-              {loading ? dict.ebook.processing : dict.ebook.buyButton}
-            </button>
+              {dict.ebook.buyButton}
+            </a>
           </div>
 
           <div className="text-center mt-6">
