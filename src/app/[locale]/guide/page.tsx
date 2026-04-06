@@ -65,6 +65,7 @@ const guideHrefs = [
   "/guide/1rm",
   "/guide/calorie",
   "/guide/exercises",
+  "/guide/nutrition",
   "/guide/handbook",
   "/guide/meal-plans",
   "/guide/programs",

@@ -7,7 +7,10 @@
     "build": "pnpm run cache:posts && next build --experimental-build-mode compile",
     "start": "next start",
     "lint": "next lint",
-    "cache:posts": "tsx scripts/cache-posts.ts"
+    "cache:posts": "tsx scripts/cache-posts.ts",
+    "sync:exercises": "tsx scripts/sync-exercises.ts",
+    "sync:nutrition": "tsx scripts/sync-nutrition.ts",
+    "sync:all": "pnpm run sync:exercises && pnpm run sync:nutrition"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

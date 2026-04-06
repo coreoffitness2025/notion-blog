@@ -23,6 +23,7 @@ const en = {
     calorieCalc: "Calorie Calculator",
     oneRmCalc: "1RM Calculator",
     exerciseDb: "Exercise Database",
+    nutritionDb: "Nutrition Database",
     programs: "Workout Programs",
     team: "Team",
     blog: "Blog",
@@ -487,6 +488,11 @@ const en = {
         description:
           "Browse exercises by body part with proper form guides",
         icon: "💪",
+      },
+      {
+        title: "Nutrition Database",
+        description: "Search nutrition facts for 5,672 foods — calories, protein, carbs & fat",
+        icon: "🍎",
       },
       {
         title: "Fitness Handbook",

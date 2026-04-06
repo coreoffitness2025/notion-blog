@@ -218,6 +218,14 @@ export default function ExercisesClient({ dict, locale }: { dict: Dictionary; lo
                   ))}
                 </ul>
               </div>
+
+              {/* Link to detail page */}
+              <Link
+                href={`${prefix}/guide/exercises/${selectedExercise.id}`}
+                className="mt-4 block text-center py-3 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-xl font-medium hover:bg-[var(--corevia-primary)]/20 transition-colors"
+              >
+                {isEn ? "View Full Guide →" : "상세 가이드 보기 →"}
+              </Link>
             </div>
           </div>
         </div>

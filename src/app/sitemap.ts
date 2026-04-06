@@ -1,4 +1,6 @@
 import { getPostsFromCache, Post } from "@/lib/notion";
+import { getAllExerciseIds } from "@/data/exerciseDatabase";
+import { getAllNutritionIds } from "@/data/nutritionDatabase";
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/guide/calorie", priority: 0.8, freq: "monthly" as const },
     { path: "/guide/1rm", priority: 0.8, freq: "monthly" as const },
     { path: "/guide/exercises", priority: 0.8, freq: "monthly" as const },
+    { path: "/guide/nutrition", priority: 0.8, freq: "monthly" as const },
     { path: "/guide/programs", priority: 0.7, freq: "monthly" as const },
     { path: "/guide/meal-plans", priority: 0.7, freq: "monthly" as const },
     { path: "/guide/handbook", priority: 0.7, freq: "monthly" as const },
@@ -55,5 +58,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...staticUrls, ...postUrls];
+  // Exercise detail pages (99 x 2 locales = 198 URLs)
+  const exerciseUrls = getAllExerciseIds().flatMap((id) =>
+    locales.map((locale) => ({
+      url: `${siteUrl}${locale}/guide/exercises/${id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: locale === "" ? 0.6 : 0.5,
+      alternates: {
+        languages: {
+          ko: `${siteUrl}/guide/exercises/${id}`,
+          en: `${siteUrl}/en/guide/exercises/${id}`,
+        },
+      },
+    })),
+  );
+
+  // Nutrition detail pages (5,672 x 2 locales = 11,344 URLs)
+  const nutritionUrls = getAllNutritionIds().flatMap((id) =>
+    locales.map((locale) => ({
+      url: `${siteUrl}${locale}/guide/nutrition/${id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: locale === "" ? 0.5 : 0.4,
+      alternates: {
+        languages: {
+          ko: `${siteUrl}/guide/nutrition/${id}`,
+          en: `${siteUrl}/en/guide/nutrition/${id}`,
+        },
+      },
+    })),
+  );
+
+  return [...staticUrls, ...postUrls, ...exerciseUrls, ...nutritionUrls];
 }

@@ -23,6 +23,7 @@ const ko = {
     calorieCalc: "칼로리 계산기",
     oneRmCalc: "1RM 계산기",
     exerciseDb: "운동 도감",
+    nutritionDb: "영양성분 사전",
     programs: "운동 프로그램",
     team: "About",
     blog: "Blog",
@@ -469,6 +470,11 @@ const ko = {
         title: "운동 가이드",
         description: "부위별 운동 방법과 올바른 자세를 확인하세요",
         icon: "💪",
+      },
+      {
+        title: "영양성분 사전",
+        description: "5,672개 음식의 칼로리와 영양 정보를 검색하세요",
+        icon: "🍎",
       },
       {
         title: "피트니스 핸드북",

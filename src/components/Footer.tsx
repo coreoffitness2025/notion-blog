@@ -14,6 +14,7 @@ export default function Footer({ locale }: { locale: string }) {
       { href: `${prefix}/guide/calorie`, label: dict.footer.calorieCalc },
       { href: `${prefix}/guide/1rm`, label: dict.footer.oneRmCalc },
       { href: `${prefix}/guide/exercises`, label: dict.footer.exerciseDb },
+      { href: `${prefix}/guide/nutrition`, label: dict.footer.nutritionDb },
       { href: `${prefix}/guide/programs`, label: dict.footer.programs },
     ],
     [dict.footer.company]: [
