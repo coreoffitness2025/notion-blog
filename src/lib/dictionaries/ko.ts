@@ -3,6 +3,7 @@ const ko = {
     features: "Product",
     team: "About",
     guide: "Fitness Guide",
+    nutritionGuide: "Nutrition Guide",
     pricing: "가격",
     blog: "Blog",
     contact: "문의",
@@ -470,11 +471,6 @@ const ko = {
         title: "운동 가이드",
         description: "부위별 운동 방법과 올바른 자세를 확인하세요",
         icon: "💪",
-      },
-      {
-        title: "영양성분 사전",
-        description: "5,672개 음식의 칼로리와 영양 정보를 검색하세요",
-        icon: "🍎",
       },
       {
         title: "피트니스 핸드북",

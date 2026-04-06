@@ -3,6 +3,7 @@ const en = {
     features: "Product",
     team: "Team",
     guide: "Fitness Guide",
+    nutritionGuide: "Nutrition Guide",
     pricing: "Pricing",
     blog: "Blog",
     contact: "Contact",
@@ -488,11 +489,6 @@ const en = {
         description:
           "Browse exercises by body part with proper form guides",
         icon: "💪",
-      },
-      {
-        title: "Nutrition Database",
-        description: "Search nutrition facts for 5,672 foods — calories, protein, carbs & fat",
-        icon: "🍎",
       },
       {
         title: "Fitness Handbook",

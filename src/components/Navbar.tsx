@@ -26,8 +26,8 @@ export default function Navbar({ locale }: { locale: string }) {
   const nav = [
     { href: `${prefix}/#features`, label: dict.nav.features },
     { href: `${prefix}/guide`, label: dict.nav.guide },
+    { href: `${prefix}/guide/nutrition`, label: dict.nav.nutritionGuide },
     { href: `${prefix}/posts`, label: dict.nav.blog },
-    { href: `${prefix}/team`, label: dict.nav.team },
   ];
 
   const otherLocale = locale === "ko" ? "en" : "ko";
