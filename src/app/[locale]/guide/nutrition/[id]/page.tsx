@@ -121,9 +121,7 @@ export default async function NutritionDetailPage({
   const sourceLabel = item.source === "kfda"
     ? isEn ? "KFDA (Korea Food & Drug Administration)" : "식품의약품안전처 (KFDA)"
     : "USDA (U.S. Department of Agriculture)";
-  const sourceBadge = item.source === "kfda"
-    ? "bg-blue-50 text-blue-700 border-blue-200"
-    : "bg-green-50 text-green-700 border-green-200";
+  const sourceBadge = "bg-[var(--corevia-primary)]/5 text-[var(--corevia-primary)] border-[var(--corevia-primary)]/20";
 
   // Macro ratio
   const totalMacroKcal = item.protein * 4 + item.carbs * 4 + item.fat * 9;
@@ -175,8 +173,8 @@ export default async function NutritionDetailPage({
           <div className="grid md:grid-cols-2 gap-6">
             {/* Nutrition Facts Table (FDA-style) */}
             <section>
-              <div className="bg-white border-2 border-gray-800 rounded-xl overflow-hidden">
-                <div className="bg-gray-800 text-white px-4 py-3">
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                <div className="bg-[var(--corevia-primary)] text-white px-4 py-3">
                   <h2 className="text-lg font-bold">
                     {isEn ? "Nutrition Facts" : "영양성분"}
                   </h2>
@@ -192,7 +190,7 @@ export default async function NutritionDetailPage({
                 </div>
 
                 {/* Calories */}
-                <div className="px-4 py-3 border-b-4 border-gray-800 flex justify-between items-baseline">
+                <div className="px-4 py-3 border-b-2 border-[var(--corevia-primary)]/30 flex justify-between items-baseline">
                   <span className="text-lg font-bold text-gray-800">
                     {isEn ? "Calories" : "칼로리"}
                   </span>
@@ -274,41 +272,41 @@ export default async function NutritionDetailPage({
                 <h3 className="font-bold text-gray-800 mb-4">
                   {isEn ? "Macro Ratio" : "영양소 비율"}
                 </h3>
-                <div className="flex gap-1 h-6 rounded-full overflow-hidden mb-4">
+                <div className="flex gap-0.5 h-6 rounded-full overflow-hidden mb-4">
                   {macroRatio.protein > 0 && (
                     <div
-                      className="bg-blue-500 transition-all"
+                      className="bg-[var(--corevia-primary)] transition-all"
                       style={{ width: `${macroRatio.protein}%` }}
                     />
                   )}
                   {macroRatio.carbs > 0 && (
                     <div
-                      className="bg-yellow-400 transition-all"
+                      className="bg-[var(--corevia-primary)]/40 transition-all"
                       style={{ width: `${macroRatio.carbs}%` }}
                     />
                   )}
                   {macroRatio.fat > 0 && (
                     <div
-                      className="bg-red-400 transition-all"
+                      className="bg-[var(--corevia-primary)]/15 transition-all"
                       style={{ width: `${macroRatio.fat}%` }}
                     />
                   )}
                 </div>
                 <div className="flex justify-between text-sm">
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full" />
+                    <div className="w-3 h-3 bg-[var(--corevia-primary)] rounded-full" />
                     <span className="text-gray-600">
                       {isEn ? "Protein" : "단백질"} {macroRatio.protein}%
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full" />
+                    <div className="w-3 h-3 bg-[var(--corevia-primary)]/40 rounded-full" />
                     <span className="text-gray-600">
                       {isEn ? "Carbs" : "탄수"} {macroRatio.carbs}%
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-red-400 rounded-full" />
+                    <div className="w-3 h-3 bg-[var(--corevia-primary)]/15 rounded-full" />
                     <span className="text-gray-600">
                       {isEn ? "Fat" : "지방"} {macroRatio.fat}%
                     </span>
@@ -320,7 +318,7 @@ export default async function NutritionDetailPage({
               <ServingCalculator item={item} locale={locale} />
 
               {/* App CTA */}
-              <section className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-6 text-center">
+              <section className="bg-[var(--corevia-primary)]/5 border border-[var(--corevia-primary)]/10 rounded-xl p-6 text-center">
                 <p className="text-lg font-bold text-gray-800 mb-2">
                   {isEn
                     ? "Track your meals with AI"

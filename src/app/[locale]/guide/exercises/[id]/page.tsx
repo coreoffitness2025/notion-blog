@@ -136,9 +136,9 @@ export default async function ExerciseDetailPage({
 
   const difficultyLabel = t.difficulty[exercise.difficulty as keyof typeof t.difficulty] || exercise.difficulty;
   const difficultyColor = {
-    beginner: "bg-green-50 text-green-700 border-green-200",
-    intermediate: "bg-blue-50 text-blue-700 border-blue-200",
-    advanced: "bg-red-50 text-red-700 border-red-200",
+    beginner: "bg-[var(--corevia-primary)]/5 text-[var(--corevia-primary)]/70 border-[var(--corevia-primary)]/10",
+    intermediate: "bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] border-[var(--corevia-primary)]/20",
+    advanced: "bg-[var(--corevia-primary)]/20 text-[var(--corevia-primary)] border-[var(--corevia-primary)]/30",
   }[exercise.difficulty] || "bg-gray-100 text-gray-500";
 
   const equipmentLabels: Record<string, { ko: string; en: string }> = {
@@ -254,7 +254,7 @@ export default async function ExerciseDetailPage({
             <ol className="space-y-3">
               {instructions.map((instruction, idx) => (
                 <li key={idx} className="flex gap-3">
-                  <span className="flex-shrink-0 w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                  <span className="flex-shrink-0 w-7 h-7 bg-[var(--corevia-primary)] text-white rounded-full flex items-center justify-center text-sm font-medium">
                     {idx + 1}
                   </span>
                   <span className="text-gray-700 leading-relaxed pt-0.5">{instruction}</span>
@@ -282,7 +282,7 @@ export default async function ExerciseDetailPage({
 
           {/* App CTA (instead of trainerTips) */}
           <section className="mb-8">
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-6 text-center">
+            <div className="bg-[var(--corevia-primary)]/5 border border-[var(--corevia-primary)]/10 rounded-xl p-6 text-center">
               <p className="text-lg font-bold text-gray-800 mb-2">
                 {isEn
                   ? "Want expert trainer tips for this exercise?"

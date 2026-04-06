@@ -88,7 +88,7 @@ export default function NutritionHubClient({
                 onClick={() => setSourceFilter(source)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   sourceFilter === source
-                    ? "bg-blue-600 text-white"
+                    ? "bg-[var(--corevia-primary)] text-white"
                     : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
                 }`}
               >
@@ -142,11 +142,7 @@ export default function NutritionHubClient({
               </div>
               <div className="col-span-2 text-center">
                 <span
-                  className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
-                    item.source === "kfda"
-                      ? "bg-blue-50 text-blue-700"
-                      : "bg-green-50 text-green-700"
-                  }`}
+                  className="inline-block px-2 py-0.5 rounded text-xs font-medium bg-[var(--corevia-primary)]/5 text-[var(--corevia-primary)]"
                 >
                   {sourceLabel(item.source)}
                 </span>
