@@ -47,8 +47,13 @@ export async function generateMetadata({
       ? `${name} 100g 기준 ${item.calories}kcal, 단백질 ${item.protein}g, 탄수화물 ${item.carbs}g, 지방 ${item.fat}g. ${sourceLabel} 공식 데이터 기반 영양 정보.`
       : `${name}: ${item.calories}kcal, ${item.protein}g protein, ${item.carbs}g carbs, ${item.fat}g fat per 100g. Based on official ${sourceLabel} data.`,
     keywords: isKo
-      ? [name, `${name} 칼로리`, `${name} 영양성분`, `${name} 단백질`]
-      : [name, `${name} calories`, `${name} nutrition`, `${name} protein`],
+      ? [name, `${name} 칼로리`, `${name} 영양성분`, `${name} 단백질`,
+         ...(name.includes("닭") ? ["치킨 칼로리", "치킨 영양성분"] : []),
+         ...(name.includes("치킨") ? ["닭 칼로리", "닭고기 영양성분"] : []),
+        ]
+      : [name, `${name} calories`, `${name} nutrition`, `${name} protein`,
+         ...(name.toLowerCase().includes("chicken") ? ["chicken calories", "chicken nutrition"] : []),
+        ],
     alternates: {
       canonical: pageUrl,
       languages: {

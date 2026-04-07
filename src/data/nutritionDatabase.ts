@@ -41,6 +41,32 @@ export function getNutritionCount(): number {
   return DB.length;
 }
 
+// 동의어 매핑 (검색 확장)
+const SYNONYMS: Record<string, string[]> = {
+  "치킨": ["닭", "chicken"],
+  "닭": ["치킨"],
+  "chicken": ["치킨", "닭"],
+  "소고기": ["beef", "쇠고기"],
+  "beef": ["소고기", "쇠고기"],
+  "돼지": ["pork", "돈"],
+  "pork": ["돼지", "돈"],
+  "계란": ["달걀", "egg"],
+  "달걀": ["계란"],
+  "egg": ["계란", "달걀"],
+  "밥": ["rice", "공기밥"],
+  "rice": ["밥", "쌀"],
+  "고구마": ["sweet potato"],
+  "감자": ["potato"],
+  "연어": ["salmon"],
+  "salmon": ["연어"],
+  "참치": ["tuna"],
+  "tuna": ["참치"],
+  "두부": ["tofu"],
+  "tofu": ["두부"],
+  "우유": ["milk"],
+  "milk": ["우유"],
+};
+
 export function searchNutrition(
   query: string,
   locale: string,
@@ -52,9 +78,12 @@ export function searchNutrition(
   const lang = locale === "en" ? "en" : "ko";
   const names = NAMES[lang];
 
+  // 동의어 확장
+  const queries = [q, ...(SYNONYMS[q] || [])];
+
   return DB.filter((item) => {
-    const name = names[item.id] || "";
-    return name.toLowerCase().includes(q);
+    const name = (names[item.id] || "").toLowerCase();
+    return queries.some((term) => name.includes(term));
   }).slice(0, limit);
 }
 
