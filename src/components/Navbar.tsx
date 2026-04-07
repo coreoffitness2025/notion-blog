@@ -10,6 +10,8 @@ import NavbarAuthSection from "./NavbarAuthSection";
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   if (href.startsWith("/#")) return false;
+  // /guide exact match only — don't highlight when on /guide/workout or /guide/nutrition
+  if (/^(\/en)?\/guide$/.test(href)) return pathname === href;
   return pathname === href || pathname.startsWith(href + "/");
 }
 
