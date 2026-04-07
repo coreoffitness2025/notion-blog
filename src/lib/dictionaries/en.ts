@@ -219,34 +219,8 @@ const en = {
     ],
   },
   guidePreview: {
-    title: "Fitness Tools & Guides",
-    subtitle: "Free tools to help with your workouts and nutrition",
-    tools: [
-      {
-        title: "Calorie Calculator",
-        desc: "Calculate daily calories and macros for your goal",
-      },
-      {
-        title: "1RM Calculator",
-        desc: "Estimate your one-rep max from reps",
-      },
-      {
-        title: "Exercise Database",
-        desc: "300+ exercises by body part with guides",
-      },
-      {
-        title: "Workout Programs",
-        desc: "Weekly workout routines by goal",
-      },
-      {
-        title: "Meal Guide",
-        desc: "Diet/bulk meal plan templates",
-      },
-      {
-        title: "Fitness Handbook",
-        desc: "Essential concepts for beginners",
-      },
-    ],
+    title: "Explore Fitness Guides & Tools",
+    subtitle: "Free guides and tools to help with your workouts and nutrition",
   },
   blog: {
     title: "Blog",
