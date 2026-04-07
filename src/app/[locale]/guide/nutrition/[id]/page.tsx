@@ -341,7 +341,7 @@ export default async function NutritionDetailPage({
               </p>
               <div className="flex justify-center gap-3">
                 <a
-                  href="https://apps.apple.com/app/corevia-fitness/id6739446554"
+                  href="https://apps.apple.com/app/corevia-fitness/id6753667196"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-gray-800 transition-colors"
