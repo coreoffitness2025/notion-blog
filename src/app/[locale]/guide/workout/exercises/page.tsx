@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n";
-import HandbookClient from "./client";
+import ExercisesClient from "./client";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
@@ -11,25 +11,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isKo = locale === "ko";
-  const path = "/guide/handbook";
+  const path = "/guide/workout/exercises";
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
 
   return {
     title: isKo
-      ? "피트니스 핸드북 - 운동 & 영양 심층 가이드"
-      : "Fitness Handbook - In-Depth Workout & Nutrition Guide",
+      ? "운동 도감 - 부위별 운동 방법 & 올바른 자세"
+      : "Exercise Library - Workout Guide by Muscle Group",
     description: isKo
-      ? "운동과 영양에 대한 심층 가이드 아티클 모음. 과학적 근거에 기반한 피트니스 지식을 무료로 제공합니다."
-      : "In-depth guide articles on workout and nutrition. Science-based fitness knowledge, free to access.",
+      ? "가슴, 등, 어깨, 하체, 팔, 코어 등 부위별 운동 방법과 올바른 자세를 확인하세요. 초급부터 고급까지 난이도별 필터 제공."
+      : "Browse exercises by muscle group with proper form guides. Filter by difficulty from beginner to advanced. Free exercise library.",
     alternates: {
       canonical: pageUrl,
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
     },
     openGraph: {
-      title: isKo ? "피트니스 핸드북 | CoreVia" : "Fitness Handbook | CoreVia",
+      title: isKo ? "운동 도감 | CoreVia" : "Exercise Library | CoreVia",
       description: isKo
-        ? "운동과 영양에 대한 심층 가이드"
-        : "In-depth workout and nutrition guides",
+        ? "부위별 운동 방법과 올바른 자세 가이드"
+        : "Exercise guide by muscle group with proper form",
       url: pageUrl,
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
@@ -38,12 +38,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function HandbookPage({
+export default async function ExercisesPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const dict = getDictionary(locale);
-  return <HandbookClient dict={dict} locale={locale} />;
+  return <ExercisesClient dict={dict} locale={locale} />;
 }

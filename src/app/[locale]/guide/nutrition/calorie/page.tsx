@@ -11,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isKo = locale === "ko";
-  const path = "/guide/calorie";
+  const path = "/guide/nutrition/calorie";
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
 
   return {
@@ -69,7 +69,7 @@ export async function generateMetadata({
 
 function getJsonLd(locale: string) {
   const isKo = locale === "ko";
-  const path = "/guide/calorie";
+  const path = "/guide/nutrition/calorie";
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
 
   return {

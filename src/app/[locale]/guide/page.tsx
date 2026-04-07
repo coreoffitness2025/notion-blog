@@ -61,15 +61,6 @@ export async function generateMetadata({
   };
 }
 
-const guideHrefs = [
-  "/guide/1rm",
-  "/guide/calorie",
-  "/guide/exercises",
-  "/guide/handbook",
-  "/guide/meal-plans",
-  "/guide/programs",
-];
-
 export default async function GuidePage({
   params,
 }: {
@@ -78,6 +69,7 @@ export default async function GuidePage({
   const { locale } = await params;
   const dict = getDictionary(locale);
   const prefix = locale === "ko" ? "" : `/${locale}`;
+  const isEn = locale === "en";
 
   return (
     <main className="min-h-screen bg-[var(--corevia-bg)]">
@@ -99,7 +91,7 @@ export default async function GuidePage({
       </section>
 
       {/* Ebook Promotion */}
-      <section className="max-w-6xl mx-auto px-4 pb-20">
+      <section className="max-w-6xl mx-auto px-4 pb-12">
         <Link
           href={`${prefix}/ebook`}
           className="block border border-gray-200 rounded-3xl p-8 md:p-10 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all group"
@@ -124,24 +116,33 @@ export default async function GuidePage({
         </Link>
       </section>
 
-      {/* Guide Grid */}
+      {/* Quick Links to Sub-guides */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {dict.guide.items.map((item, i) => (
-            <Link
-              key={guideHrefs[i]}
-              href={`${prefix}${guideHrefs[i]}`}
-              className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-            >
-              <span className="text-2xl mb-4 block">{item.icon}</span>
-              <h2 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors">
-                {item.title}
-              </h2>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                {item.description}
-              </p>
-            </Link>
-          ))}
+        <div className="grid md:grid-cols-2 gap-4">
+          <Link
+            href={`${prefix}/guide/workout`}
+            className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all"
+          >
+            <span className="text-2xl mb-3 block">💪</span>
+            <h2 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--corevia-primary)] transition-colors">
+              {isEn ? "Workout Guide" : "Workout Guide"}
+            </h2>
+            <p className="text-sm text-gray-500">
+              {isEn ? "1RM calculator, programs & exercise library" : "1RM 계산기, 운동 프로그램, 운동 도감"}
+            </p>
+          </Link>
+          <Link
+            href={`${prefix}/guide/nutrition`}
+            className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all"
+          >
+            <span className="text-2xl mb-3 block">🍎</span>
+            <h2 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--corevia-primary)] transition-colors">
+              {isEn ? "Nutrition Guide" : "Nutrition Guide"}
+            </h2>
+            <p className="text-sm text-gray-500">
+              {isEn ? "Calorie calculator, meal plans & food database" : "칼로리 계산기, 식단 추천, 영양성분 사전"}
+            </p>
+          </Link>
         </div>
       </section>
 

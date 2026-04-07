@@ -59,17 +59,55 @@ export default function NutritionHubClient({
             {dict.guideSubpages.backToGuide}
           </Link>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            {isEn ? "Food Nutrition Database" : "음식 영양성분 사전"}
+            {isEn ? "Nutrition Guide" : "Nutrition Guide"}
           </h1>
           <p className="text-gray-500">
             {isEn
-              ? `Search nutrition facts for ${totalCount.toLocaleString()} foods`
-              : `${totalCount.toLocaleString()}개 음식의 영양 정보를 검색하세요`}
+              ? "Nutrition tools and food database"
+              : "영양 도구와 음식 데이터베이스"}
           </p>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
+        {/* Tool Cards */}
+        <div className="grid md:grid-cols-2 gap-4 mb-8">
+          <Link
+            href={`${prefix}/guide/nutrition/calorie`}
+            className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all"
+          >
+            <span className="text-2xl mb-3 block">🔥</span>
+            <h2 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--corevia-primary)] transition-colors">
+              {isEn ? "Calorie Calculator" : "칼로리 계산기"}
+            </h2>
+            <p className="text-sm text-gray-500">
+              {isEn
+                ? "Calculate your daily calories and macros"
+                : "일일 칼로리와 매크로 영양소를 계산하세요"}
+            </p>
+          </Link>
+          <Link
+            href={`${prefix}/guide/nutrition/meal-plans`}
+            className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all"
+          >
+            <span className="text-2xl mb-3 block">🥗</span>
+            <h2 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--corevia-primary)] transition-colors">
+              {isEn ? "Meal Plans" : "식단 추천"}
+            </h2>
+            <p className="text-sm text-gray-500">
+              {isEn
+                ? "Meal plans tailored to your goals"
+                : "목표에 맞는 식단 플랜"}
+            </p>
+          </Link>
+        </div>
+
+        {/* Food Database Section */}
+        <h2 className="text-xl font-bold text-gray-800 mb-4">
+          {isEn
+            ? `Food Database (${totalCount.toLocaleString()} foods)`
+            : `음식 영양성분 사전 (${totalCount.toLocaleString()}개)`}
+        </h2>
         {/* Search & Filters */}
         <div className="space-y-4 mb-8">
           <input

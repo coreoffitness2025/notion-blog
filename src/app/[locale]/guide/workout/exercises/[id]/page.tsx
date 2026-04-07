@@ -33,7 +33,7 @@ export async function generateMetadata({
   const muscles = isKo
     ? exercise.muscles.primary.join(", ")
     : exercise.musclesEn.primary.join(", ");
-  const path = `/guide/exercises/${id}`;
+  const path = `/guide/workout/exercises/${id}`;
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
 
   const diffLabel = isKo
@@ -53,8 +53,8 @@ export async function generateMetadata({
     alternates: {
       canonical: pageUrl,
       languages: {
-        ko: `${siteUrl}/guide/exercises/${id}`,
-        en: `${siteUrl}/en/guide/exercises/${id}`,
+        ko: `${siteUrl}/guide/workout/exercises/${id}`,
+        en: `${siteUrl}/en/guide/workout/exercises/${id}`,
       },
     },
     openGraph: {
@@ -178,7 +178,7 @@ export default async function ExerciseDetailPage({
             </Link>
             <span>/</span>
             <Link
-              href={`${prefix}/guide/exercises`}
+              href={`${prefix}/guide/workout/exercises`}
               className="hover:text-gray-800 transition-colors"
             >
               {t.title}
@@ -331,7 +331,7 @@ export default async function ExerciseDetailPage({
                 {related.map((rel) => (
                   <Link
                     key={rel.id}
-                    href={`${prefix}/guide/exercises/${rel.id}`}
+                    href={`${prefix}/guide/workout/exercises/${rel.id}`}
                     className="bg-white border border-gray-100 rounded-xl p-4 hover:border-[var(--corevia-primary)]/30 transition-all"
                   >
                     <h3 className="font-bold text-gray-800 text-sm mb-1">

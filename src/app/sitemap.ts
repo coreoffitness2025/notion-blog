@@ -17,13 +17,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/team", priority: 0.7, freq: "monthly" as const },
     { path: "/ebook", priority: 0.8, freq: "monthly" as const },
     { path: "/guide", priority: 0.8, freq: "weekly" as const },
-    { path: "/guide/calorie", priority: 0.8, freq: "monthly" as const },
-    { path: "/guide/1rm", priority: 0.8, freq: "monthly" as const },
-    { path: "/guide/exercises", priority: 0.8, freq: "monthly" as const },
-    { path: "/guide/nutrition", priority: 0.8, freq: "monthly" as const },
-    { path: "/guide/programs", priority: 0.7, freq: "monthly" as const },
-    { path: "/guide/meal-plans", priority: 0.7, freq: "monthly" as const },
-    { path: "/guide/handbook", priority: 0.7, freq: "monthly" as const },
+    { path: "/guide/workout", priority: 0.8, freq: "weekly" as const },
+    { path: "/guide/workout/1rm", priority: 0.8, freq: "monthly" as const },
+    { path: "/guide/workout/exercises", priority: 0.8, freq: "monthly" as const },
+    { path: "/guide/workout/programs", priority: 0.7, freq: "monthly" as const },
+    { path: "/guide/nutrition", priority: 0.8, freq: "weekly" as const },
+    { path: "/guide/nutrition/calorie", priority: 0.8, freq: "monthly" as const },
+    { path: "/guide/nutrition/meal-plans", priority: 0.7, freq: "monthly" as const },
     { path: "/posts", priority: 0.8, freq: "daily" as const },
     { path: "/contact", priority: 0.5, freq: "monthly" as const },
   ];
@@ -61,14 +61,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Exercise detail pages (99 x 2 locales = 198 URLs)
   const exerciseUrls = getAllExerciseIds().flatMap((id) =>
     locales.map((locale) => ({
-      url: `${siteUrl}${locale}/guide/exercises/${id}`,
+      url: `${siteUrl}${locale}/guide/workout/exercises/${id}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: locale === "" ? 0.6 : 0.5,
       alternates: {
         languages: {
-          ko: `${siteUrl}/guide/exercises/${id}`,
-          en: `${siteUrl}/en/guide/exercises/${id}`,
+          ko: `${siteUrl}/guide/workout/exercises/${id}`,
+          en: `${siteUrl}/en/guide/workout/exercises/${id}`,
         },
       },
     })),

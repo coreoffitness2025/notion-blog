@@ -8,14 +8,18 @@ export default function Footer({ locale }: { locale: string }) {
   const footerLinks = {
     [dict.footer.product]: [
       { href: `${prefix}/#features`, label: dict.footer.features },
+      { href: `${prefix}/guide`, label: dict.footer.fitnessGuide },
       { href: `${prefix}/#cta`, label: dict.footer.download },
     ],
-    [dict.footer.fitnessGuide]: [
-      { href: `${prefix}/guide/calorie`, label: dict.footer.calorieCalc },
-      { href: `${prefix}/guide/1rm`, label: dict.footer.oneRmCalc },
-      { href: `${prefix}/guide/exercises`, label: dict.footer.exerciseDb },
+    "Workout Guide": [
+      { href: `${prefix}/guide/workout/1rm`, label: dict.footer.oneRmCalc },
+      { href: `${prefix}/guide/workout/programs`, label: dict.footer.programs },
+      { href: `${prefix}/guide/workout/exercises`, label: dict.footer.exerciseDb },
+    ],
+    "Nutrition Guide": [
+      { href: `${prefix}/guide/nutrition/calorie`, label: dict.footer.calorieCalc },
+      { href: `${prefix}/guide/nutrition/meal-plans`, label: dict.footer.mealPlans || "Meal Plans" },
       { href: `${prefix}/guide/nutrition`, label: dict.footer.nutritionDb },
-      { href: `${prefix}/guide/programs`, label: dict.footer.programs },
     ],
     [dict.footer.company]: [
       { href: `${prefix}/team`, label: dict.footer.team },

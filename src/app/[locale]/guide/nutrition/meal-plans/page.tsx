@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n";
-import ProgramsClient from "./client";
+import MealPlansClient from "./client";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
@@ -11,25 +11,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isKo = locale === "ko";
-  const path = "/guide/programs";
+  const path = "/guide/nutrition/meal-plans";
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
 
   return {
     title: isKo
-      ? "운동 프로그램 - 레벨별 맞춤 운동 루틴"
-      : "Workout Programs - Training Routines by Level",
+      ? "식단 추천 - 목표별 맞춤 식단 플랜"
+      : "Meal Plans - Goal-Based Diet Recommendations",
     description: isKo
-      ? "초급, 중급, 고급 레벨과 목표에 맞는 맞춤 운동 프로그램을 무료로 제공합니다. 분할 운동, 전신 운동, 홈트 등."
-      : "Free workout programs for all levels. Split routines, full body, home workouts and more, tailored to your goals.",
+      ? "다이어트, 벌크업, 유지 등 목표에 맞는 한국인 맞춤 식단 플랜과 영양 정보를 제공합니다."
+      : "Diet plans tailored to your goals: weight loss, bulking, or maintenance. Personalized nutrition info included.",
     alternates: {
       canonical: pageUrl,
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
     },
     openGraph: {
-      title: isKo ? "운동 프로그램 | CoreVia" : "Workout Programs | CoreVia",
+      title: isKo ? "식단 추천 | CoreVia" : "Meal Plans | CoreVia",
       description: isKo
-        ? "레벨별 맞춤 운동 루틴 제공"
-        : "Training routines tailored to your level",
+        ? "목표에 맞는 맞춤 식단 플랜"
+        : "Goal-based personalized diet plans",
       url: pageUrl,
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
@@ -38,12 +38,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProgramsPage({
+export default async function MealPlansPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const dict = getDictionary(locale);
-  return <ProgramsClient dict={dict} locale={locale} />;
+  return <MealPlansClient dict={dict} locale={locale} />;
 }
