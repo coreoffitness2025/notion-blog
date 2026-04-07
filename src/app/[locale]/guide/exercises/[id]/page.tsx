@@ -8,6 +8,7 @@ import {
   type Exercise,
 } from "@/data/exerciseDatabase";
 import { notFound } from "next/navigation";
+import AdSense from "@/components/AdSense";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -263,6 +264,9 @@ export default async function ExerciseDetailPage({
             </ol>
           </section>
 
+          {/* Ad 1 */}
+          <AdSense slot="auto" className="mb-8" />
+
           {/* Tips */}
           <section className="mb-8">
             <div className="bg-gray-50 rounded-xl p-6">
@@ -313,6 +317,9 @@ export default async function ExerciseDetailPage({
               </div>
             </div>
           </section>
+
+          {/* Ad 2 */}
+          <AdSense slot="auto" className="mb-8" />
 
           {/* Related Exercises */}
           {related.length > 0 && (
