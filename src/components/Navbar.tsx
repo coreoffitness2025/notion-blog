@@ -74,6 +74,8 @@ export default function Navbar({ locale }: { locale: string }) {
       ],
     },
     { href: `${prefix}/posts`, label: dict.nav.blog },
+    { href: `${prefix}/shop`, label: isEn ? "Shop" : "Shop" },
+    { href: `${prefix}/team`, label: isEn ? "About" : "About" },
   ];
 
   const otherLocale = locale === "ko" ? "en" : "ko";
