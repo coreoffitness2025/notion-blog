@@ -275,38 +275,38 @@ export default async function NutritionDetailPage({
                 <div className="flex gap-0.5 h-6 rounded-full overflow-hidden mb-4">
                   {macroRatio.protein > 0 && (
                     <div
-                      className="bg-[var(--corevia-primary)] transition-all"
+                      className="bg-blue-500 transition-all"
                       style={{ width: `${macroRatio.protein}%` }}
                     />
                   )}
                   {macroRatio.carbs > 0 && (
                     <div
-                      className="bg-[var(--corevia-primary)]/40 transition-all"
+                      className="bg-amber-400 transition-all"
                       style={{ width: `${macroRatio.carbs}%` }}
                     />
                   )}
                   {macroRatio.fat > 0 && (
                     <div
-                      className="bg-[var(--corevia-primary)]/15 transition-all"
+                      className="bg-rose-400 transition-all"
                       style={{ width: `${macroRatio.fat}%` }}
                     />
                   )}
                 </div>
                 <div className="flex justify-between text-sm">
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-[var(--corevia-primary)] rounded-full" />
+                    <div className="w-3 h-3 bg-blue-500 rounded-full" />
                     <span className="text-gray-600">
                       {isEn ? "Protein" : "단백질"} {macroRatio.protein}%
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-[var(--corevia-primary)]/40 rounded-full" />
+                    <div className="w-3 h-3 bg-amber-400 rounded-full" />
                     <span className="text-gray-600">
                       {isEn ? "Carbs" : "탄수"} {macroRatio.carbs}%
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-[var(--corevia-primary)]/15 rounded-full" />
+                    <div className="w-3 h-3 bg-rose-400 rounded-full" />
                     <span className="text-gray-600">
                       {isEn ? "Fat" : "지방"} {macroRatio.fat}%
                     </span>

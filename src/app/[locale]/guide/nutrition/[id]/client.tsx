@@ -67,8 +67,8 @@ export default function ServingCalculator({
           <p className="text-2xl font-bold text-gray-800">{calc.calories}</p>
           <p className="text-xs text-gray-500">{isEn ? "Calories" : "칼로리"}</p>
         </div>
-        <div className="bg-[var(--corevia-primary)]/5 rounded-lg p-3 text-center">
-          <p className="text-2xl font-bold text-[var(--corevia-primary)]">{calc.protein}g</p>
+        <div className="bg-gray-50 rounded-lg p-3 text-center">
+          <p className="text-2xl font-bold text-gray-800">{calc.protein}g</p>
           <p className="text-xs text-gray-500">{isEn ? "Protein" : "단백질"}</p>
         </div>
         <div className="bg-gray-50 rounded-lg p-3 text-center">
