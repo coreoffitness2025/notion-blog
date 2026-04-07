@@ -88,7 +88,7 @@ export default async function WorkoutGuidePage({
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            {dict.guideSubpages.backToGuide}
+            {isEn ? "Fitness Guide" : "Fitness Guide"}
           </Link>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
             {isEn ? "Workout Guide" : "Workout Guide"}

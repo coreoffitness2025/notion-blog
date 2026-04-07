@@ -1,6 +1,7 @@
 import { getPostsFromCache, Post } from "@/lib/notion";
 import { getAllExerciseIds } from "@/data/exerciseDatabase";
 import { getAllNutritionIds } from "@/data/nutritionDatabase";
+import { MEAL_PLAN_DATA } from "@/data/mealPlanData";
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -90,5 +91,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...staticUrls, ...postUrls, ...exerciseUrls, ...nutritionUrls];
+  // Meal plan detail pages (33 x 2 = 66 URLs)
+  const mealPlanUrls = MEAL_PLAN_DATA.flatMap((plan) =>
+    locales.map((locale) => ({
+      url: `${siteUrl}${locale}/guide/nutrition/meal-plans/${plan.id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: locale === "" ? 0.6 : 0.5,
+      alternates: {
+        languages: {
+          ko: `${siteUrl}/guide/nutrition/meal-plans/${plan.id}`,
+          en: `${siteUrl}/en/guide/nutrition/meal-plans/${plan.id}`,
+        },
+      },
+    })),
+  );
+
+  return [...staticUrls, ...postUrls, ...exerciseUrls, ...nutritionUrls, ...mealPlanUrls];
 }

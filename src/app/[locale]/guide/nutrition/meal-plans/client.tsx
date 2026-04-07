@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n";
-import { MEAL_PLAN_DATA, MealPlan } from "@/data/mealPlanData";
+import { MEAL_PLAN_DATA } from "@/data/mealPlanData";
 
 export default function MealPlansClient({ dict, locale }: { dict: Dictionary; locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
@@ -11,8 +11,6 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
   const isEn = locale === "en";
 
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedPlan, setSelectedPlan] = useState<MealPlan | null>(null);
-
   const filteredPlans = useMemo(() => {
     if (selectedCategory === "all") return MEAL_PLAN_DATA;
     return MEAL_PLAN_DATA.filter((plan) => plan.category === selectedCategory);
@@ -30,7 +28,7 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            {dict.guideSubpages.backToGuide}
+            {isEn ? "Nutrition Guide" : "Nutrition Guide"}
           </Link>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">{t.title}</h1>
           <p className="text-gray-500">
@@ -61,10 +59,10 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
         {/* Plan List */}
         <div className="grid md:grid-cols-2 gap-4">
           {filteredPlans.map((plan) => (
-            <button
+            <Link
               key={plan.id}
-              onClick={() => setSelectedPlan(plan)}
-              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-[var(--corevia-primary)]/30 transition-all shadow-sm"
+              href={`${prefix}/guide/nutrition/meal-plans/${plan.id}`}
+              className="text-left bg-white border border-gray-200 rounded-xl p-5 hover:border-[var(--corevia-primary)]/30 transition-all shadow-sm block"
             >
               <h3 className="font-bold text-gray-800 mb-2">{isEn ? plan.titleEn : plan.title}</h3>
               <p className="text-sm text-gray-500 mb-4 line-clamp-2">{isEn ? plan.descriptionEn : plan.description}</p>
@@ -75,7 +73,7 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
                   <p className="text-xs text-gray-500">kcal</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="text-lg font-bold text-[var(--corevia-primary)]">{plan.protein}g</p>
+                  <p className="text-lg font-bold text-gray-800">{plan.protein}g</p>
                   <p className="text-xs text-gray-500">{t.protein}</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-2">
@@ -97,84 +95,10 @@ export default function MealPlansClient({ dict, locale }: { dict: Dictionary; lo
                   ))}
                 </div>
               )}
-            </button>
+            </Link>
           ))}
         </div>
       </div>
-
-      {/* Plan Detail Modal */}
-      {selectedPlan && (
-        <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedPlan(null)}
-        >
-          <div
-            className="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">{isEn ? selectedPlan.titleEn : selectedPlan.title}</h2>
-                <button
-                  onClick={() => setSelectedPlan(null)}
-                  className="p-2 hover:bg-gray-50 rounded-full transition-colors"
-                >
-                  <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              <p className="text-gray-500 mb-6">{isEn ? selectedPlan.descriptionEn : selectedPlan.description}</p>
-
-              <div className="grid grid-cols-4 gap-3 mb-6">
-                <div className="bg-[var(--corevia-primary)]/10 border border-[var(--corevia-primary)]/20 rounded-xl p-3 text-center">
-                  <p className="text-2xl font-bold text-gray-800">{selectedPlan.calories}</p>
-                  <p className="text-xs text-gray-500">kcal</p>
-                </div>
-                <div className="bg-[var(--corevia-primary)]/10 border border-blue-500/30 rounded-xl p-3 text-center">
-                  <p className="text-2xl font-bold text-[var(--corevia-primary)]">{selectedPlan.protein}g</p>
-                  <p className="text-xs text-gray-500">{t.protein}</p>
-                </div>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center">
-                  <p className="text-2xl font-bold text-gray-700">{selectedPlan.carbs}g</p>
-                  <p className="text-xs text-gray-500">{t.carbs}</p>
-                </div>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center">
-                  <p className="text-2xl font-bold text-gray-700">{selectedPlan.fat}g</p>
-                  <p className="text-xs text-gray-500">{t.fat}</p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {selectedPlan.meals.map((meal, idx) => (
-                  <div key={idx} className="bg-gray-50 rounded-xl p-4">
-                    <h3 className="font-bold text-gray-800 mb-2">{isEn ? meal.nameEn : meal.name}</h3>
-                    <ul className="space-y-1">
-                      {(isEn ? meal.itemsEn : meal.items).map((item, itemIdx) => (
-                        <li key={itemIdx} className="text-gray-600 text-sm flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-[var(--corevia-primary)]/40 rounded-full" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              {selectedPlan.tags && (
-                <div className="flex flex-wrap gap-2 mt-6">
-                  {(isEn ? selectedPlan.tagsEn ?? selectedPlan.tags : selectedPlan.tags).map((tag) => (
-                    <span key={tag} className="px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-sm">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   );
 }
