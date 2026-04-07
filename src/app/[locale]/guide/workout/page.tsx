@@ -18,7 +18,7 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? `Workout Guide - 1RM 계산기, 운동 프로그램, ${EXERCISE_DATABASE.length}개 운동 도감`
+      ? `Workout Guide - 1RM 계산기, 운동 프로그램, ${EXERCISE_DATABASE.length}개 운동 가이드`
       : `Workout Guide - 1RM Calculator, Programs & ${EXERCISE_DATABASE.length} Exercises`,
     description: isKo
       ? `1RM 계산기, 운동 프로그램, ${EXERCISE_DATABASE.length}개 운동 가이드를 무료로 제공합니다.`

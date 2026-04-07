@@ -110,7 +110,7 @@ function getJsonLd(exercise: Exercise, locale: string) {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
         { "@type": "ListItem", position: 2, name: "Workout Guide", item: `${siteUrl}${prefix}/guide/workout` },
-        { "@type": "ListItem", position: 3, name: isKo ? "운동 도감" : "Exercise Library", item: `${siteUrl}${prefix}/guide/workout/exercises` },
+        { "@type": "ListItem", position: 3, name: isKo ? "운동 가이드" : "Exercise Library", item: `${siteUrl}${prefix}/guide/workout/exercises` },
         { "@type": "ListItem", position: 4, name: name },
       ],
     },

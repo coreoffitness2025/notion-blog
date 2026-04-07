@@ -24,7 +24,7 @@ const ko = {
     download: "앱 다운로드",
     calorieCalc: "칼로리 계산기",
     oneRmCalc: "1RM 계산기",
-    exerciseDb: "운동 도감",
+    exerciseDb: "운동 가이드",
     nutritionDb: "영양성분 사전",
     mealPlans: "식단 추천",
     programs: "운동 프로그램",
@@ -224,7 +224,7 @@ const ko = {
       },
       { title: "1RM 계산기", desc: "반복 횟수로 예상 최대 중량 계산" },
       {
-        title: "운동 도감",
+        title: "운동 가이드",
         desc: "부위별 300+ 운동 검색 및 가이드",
       },
       { title: "운동 프로그램", desc: "목표별 주간 운동 루틴 추천" },

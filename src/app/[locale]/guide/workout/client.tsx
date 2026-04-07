@@ -99,7 +99,7 @@ export default function WorkoutHubClient({
         {/* Exercise Database Section */}
         <div className="mb-6">
           <h2 className="text-xl font-bold text-gray-800 mb-1">
-            {isEn ? "Exercise Database" : "운동 도감"}
+            {isEn ? "Exercise Database" : "운동 가이드"}
           </h2>
           <p className="text-sm text-gray-500">
             {isEn

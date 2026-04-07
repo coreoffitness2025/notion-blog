@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? "운동 도감 - 부위별 운동 방법 & 올바른 자세"
+      ? "운동 가이드 - 부위별 운동 방법 & 올바른 자세"
       : "Exercise Library - Workout Guide by Muscle Group",
     description: isKo
       ? "가슴, 등, 어깨, 하체, 팔, 코어 등 부위별 운동 방법과 올바른 자세를 확인하세요. 초급부터 고급까지 난이도별 필터 제공."
@@ -26,7 +26,7 @@ export async function generateMetadata({
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
     },
     openGraph: {
-      title: isKo ? "운동 도감" : "Exercise Library",
+      title: isKo ? "운동 가이드" : "Exercise Library",
       description: isKo
         ? "부위별 운동 방법과 올바른 자세 가이드"
         : "Exercise guide by muscle group with proper form",

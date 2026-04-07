@@ -48,7 +48,7 @@ export default function Navbar({ locale }: { locale: string }) {
         },
         {
           href: `${prefix}/guide/workout/exercises`,
-          label: isEn ? "Exercise Library" : "운동 도감",
+          label: isEn ? "Fitness Guide" : "운동 가이드",
           desc: isEn ? "99 exercises with proper form" : "99개 운동 올바른 자세",
         },
       ],

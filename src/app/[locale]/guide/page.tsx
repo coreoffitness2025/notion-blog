@@ -16,17 +16,17 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? "무료 피트니스 가이드 - 1RM 계산기, 칼로리 계산기, 운동 도감"
+      ? "무료 피트니스 가이드 - 1RM 계산기, 칼로리 계산기, 운동 가이드"
       : "Free Fitness Guide - 1RM Calculator, Calorie Calculator, Exercise Library",
     description: isKo
-      ? "1RM 계산기, 칼로리 계산기, 운동 도감, 운동 프로그램 등 과학적인 피트니스 도구를 무료로 제공합니다. 코비아 피트니스 앱의 핵심 콘텐츠를 웹에서 만나보세요."
+      ? "1RM 계산기, 칼로리 계산기, 운동 가이드, 운동 프로그램 등 과학적인 피트니스 도구를 무료로 제공합니다. 코비아 피트니스 앱의 핵심 콘텐츠를 웹에서 만나보세요."
       : "Free fitness tools including 1RM calculator, calorie calculator, exercise library, and workout programs. Access CoreVia's core fitness content on the web.",
     keywords: isKo
       ? [
           "피트니스 가이드",
           "1RM 계산기",
           "칼로리 계산기",
-          "운동 도감",
+          "운동 가이드",
           "운동 프로그램",
           "무료 피트니스 도구",
           "헬스 계산기",
@@ -51,7 +51,7 @@ export async function generateMetadata({
         ? "무료 피트니스 가이드"
         : "Free Fitness Guide",
       description: isKo
-        ? "1RM 계산기, 칼로리 계산기, 운동 도감 등 무료 피트니스 도구 모음"
+        ? "1RM 계산기, 칼로리 계산기, 운동 가이드 등 무료 피트니스 도구 모음"
         : "Free fitness tools: 1RM calculator, calorie calculator, exercise library and more",
       url: pageUrl,
       siteName: "CoreVia",
@@ -128,7 +128,7 @@ export default async function GuidePage({
               {isEn ? "Workout Guide" : "Workout Guide"}
             </h2>
             <p className="text-sm text-gray-500">
-              {isEn ? "1RM calculator, programs & exercise library" : "1RM 계산기, 운동 프로그램, 운동 도감"}
+              {isEn ? "1RM calculator, programs & exercise library" : "1RM 계산기, 운동 프로그램, 운동 가이드"}
             </p>
           </Link>
           <Link
