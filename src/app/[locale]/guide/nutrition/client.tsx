@@ -103,106 +103,167 @@ export default function NutritionHubClient({
         </div>
 
         {/* Food Database Section */}
-        <h2 className="text-xl font-bold text-gray-800 mb-4">
-          {isEn
-            ? `Food Database (${totalCount.toLocaleString()} foods)`
-            : `음식 영양성분 사전 (${totalCount.toLocaleString()}개)`}
-        </h2>
-        {/* Search & Filters */}
-        <div className="space-y-4 mb-8">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={isEn ? "Search by food name..." : "음식 이름으로 검색..."}
-            className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:border-[var(--corevia-primary)] focus:outline-none"
-          />
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-1">
+            {isEn
+              ? `Food Nutrition Database`
+              : `음식 영양성분 사전`}
+          </h2>
+          <p className="text-sm text-gray-500">
+            {isEn
+              ? `Search nutrition facts from ${totalCount.toLocaleString()} foods (KFDA & USDA)`
+              : `${totalCount.toLocaleString()}개 음식의 영양 정보를 검색하세요 (식약처 & USDA)`}
+          </p>
+        </div>
 
-          {/* Source Filter */}
-          <div className="flex flex-wrap gap-2">
-            {(["all", "kfda", "usda"] as const).map((source) => (
-              <button
-                key={source}
-                onClick={() => setSourceFilter(source)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  sourceFilter === source
-                    ? "bg-[var(--corevia-primary)] text-white"
-                    : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
-                }`}
-              >
-                {source === "all"
-                  ? isEn ? "All Sources" : "전체"
-                  : source === "kfda"
-                    ? isEn ? "KFDA (Korea)" : "식약처 (KFDA)"
-                    : "USDA"}
-              </button>
-            ))}
+        {/* Search Bar — prominent */}
+        <div className="mb-6">
+          <div className="relative">
+            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={isEn ? "Search food name (e.g. chicken breast, rice, salmon...)" : "음식 이름을 검색하세요 (예: 닭가슴살, 현미밥, 연어...)"}
+              className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:border-[var(--corevia-primary)] focus:outline-none text-lg"
+            />
           </div>
         </div>
 
-        {/* Results Table */}
-        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
-          {/* Table Header */}
-          <div className="grid grid-cols-12 gap-2 px-4 py-3 bg-gray-50 border-b border-gray-100 text-xs font-medium text-gray-500 uppercase">
-            <div className="col-span-5">{isEn ? "Food" : "음식"}</div>
-            <div className="col-span-1 text-right">{isEn ? "Cal" : "칼로리"}</div>
-            <div className="col-span-1 text-right">{isEn ? "Prot" : "단백질"}</div>
-            <div className="col-span-1 text-right">{isEn ? "Carbs" : "탄수"}</div>
-            <div className="col-span-1 text-right">{isEn ? "Fat" : "지방"}</div>
-            <div className="col-span-1 text-right">{isEn ? "Serv" : "제공량"}</div>
-            <div className="col-span-2 text-center">{isEn ? "Source" : "출처"}</div>
-          </div>
-
-          {/* Results */}
-          {results.map((item) => (
-            <Link
-              key={item.id}
-              href={`${prefix}/guide/nutrition/${item.id}`}
-              className="grid grid-cols-12 gap-2 px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors items-center"
-            >
-              <div className="col-span-5 font-medium text-gray-800 text-sm truncate">
-                {getNutritionName(item.id, locale)}
-              </div>
-              <div className="col-span-1 text-right text-sm text-gray-700">
-                {item.calories}
-              </div>
-              <div className="col-span-1 text-right text-sm text-gray-600">
-                {item.protein}g
-              </div>
-              <div className="col-span-1 text-right text-sm text-gray-600">
-                {item.carbs}g
-              </div>
-              <div className="col-span-1 text-right text-sm text-gray-600">
-                {item.fat}g
-              </div>
-              <div className="col-span-1 text-right text-sm text-gray-500">
-                {item.serving_size ? `${item.serving_size}g` : "-"}
-              </div>
-              <div className="col-span-2 text-center">
-                <span
-                  className="inline-block px-2 py-0.5 rounded text-xs font-medium bg-[var(--corevia-primary)]/5 text-[var(--corevia-primary)]"
-                >
-                  {sourceLabel(item.source)}
-                </span>
-              </div>
-            </Link>
-          ))}
-
-          {results.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500">
-                {isEn ? "No results found" : "검색 결과가 없습니다"}
+        {/* Before search: Quick search suggestions + Source filter */}
+        {!searchQuery.trim() && (
+          <div className="space-y-6 mb-8">
+            {/* Quick search keywords */}
+            <div>
+              <p className="text-sm font-medium text-gray-500 mb-3">
+                {isEn ? "Popular searches" : "인기 검색어"}
               </p>
+              <div className="flex flex-wrap gap-2">
+                {(isEn
+                  ? ["Chicken Breast", "Rice", "Egg", "Salmon", "Tofu", "Sweet Potato", "Oatmeal", "Banana", "Milk", "Beef"]
+                  : ["닭가슴살", "현미밥", "계란", "연어", "두부", "고구마", "귀리", "바나나", "우유", "소고기"]
+                ).map((keyword) => (
+                  <button
+                    key={keyword}
+                    onClick={() => setSearchQuery(keyword)}
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:border-[var(--corevia-primary)] hover:text-[var(--corevia-primary)] transition-colors"
+                  >
+                    {keyword}
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
-        </div>
 
-        {/* Note */}
-        <p className="text-xs text-gray-400 mt-4 text-center">
-          {isEn
-            ? "Nutrition values per 100g. Data from KFDA (Korea Food & Drug Administration) and USDA."
-            : "100g 기준 영양 정보입니다. 식품의약품안전처(KFDA) 및 미국 농무부(USDA) 데이터 기반."}
-        </p>
+            {/* Source filter as cards */}
+            <div>
+              <p className="text-sm font-medium text-gray-500 mb-3">
+                {isEn ? "Browse by source" : "데이터 출처별 검색"}
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => { setSourceFilter("kfda"); setSearchQuery(" "); }}
+                  className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:border-[var(--corevia-primary)]/30 transition-all"
+                >
+                  <p className="font-bold text-gray-800 mb-0.5">{isEn ? "KFDA" : "식약처 (KFDA)"}</p>
+                  <p className="text-xs text-gray-500">{isEn ? "4,745 Korean foods" : "4,745개 한국 음식"}</p>
+                </button>
+                <button
+                  onClick={() => { setSourceFilter("usda"); setSearchQuery(" "); }}
+                  className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:border-[var(--corevia-primary)]/30 transition-all"
+                >
+                  <p className="font-bold text-gray-800 mb-0.5">USDA</p>
+                  <p className="text-xs text-gray-500">{isEn ? "927 international foods" : "927개 해외 음식"}</p>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Search results — only when searching */}
+        {searchQuery.trim() && (
+          <>
+            {/* Source filter pills */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {(["all", "kfda", "usda"] as const).map((source) => (
+                <button
+                  key={source}
+                  onClick={() => setSourceFilter(source)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    sourceFilter === source
+                      ? "bg-[var(--corevia-primary)] text-white"
+                      : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-200"
+                  }`}
+                >
+                  {source === "all"
+                    ? isEn ? "All" : "전체"
+                    : source === "kfda"
+                      ? "KFDA"
+                      : "USDA"}
+                </button>
+              ))}
+              <span className="text-sm text-gray-400 self-center ml-2">
+                {results.length}{isEn ? " results" : "건"}
+              </span>
+            </div>
+
+            {/* Results Table */}
+            <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+              <div className="grid grid-cols-12 gap-2 px-4 py-3 bg-gray-50 border-b border-gray-100 text-xs font-medium text-gray-500 uppercase">
+                <div className="col-span-5">{isEn ? "Food" : "음식"}</div>
+                <div className="col-span-2 text-right">{isEn ? "Cal" : "칼로리"}</div>
+                <div className="col-span-1 text-right">{isEn ? "P" : "단백"}</div>
+                <div className="col-span-1 text-right">{isEn ? "C" : "탄수"}</div>
+                <div className="col-span-1 text-right">{isEn ? "F" : "지방"}</div>
+                <div className="col-span-2 text-center">{isEn ? "Source" : "출처"}</div>
+              </div>
+
+              {results.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`${prefix}/guide/nutrition/${item.id}`}
+                  className="grid grid-cols-12 gap-2 px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors items-center"
+                >
+                  <div className="col-span-5 font-medium text-gray-800 text-sm truncate">
+                    {getNutritionName(item.id, locale)}
+                  </div>
+                  <div className="col-span-2 text-right text-sm font-semibold text-gray-800">
+                    {item.calories} <span className="font-normal text-gray-400 text-xs">kcal</span>
+                  </div>
+                  <div className="col-span-1 text-right text-sm text-gray-600">
+                    {item.protein}g
+                  </div>
+                  <div className="col-span-1 text-right text-sm text-gray-600">
+                    {item.carbs}g
+                  </div>
+                  <div className="col-span-1 text-right text-sm text-gray-600">
+                    {item.fat}g
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <span className="inline-block px-2 py-0.5 rounded text-xs font-medium bg-[var(--corevia-primary)]/5 text-[var(--corevia-primary)]">
+                      {sourceLabel(item.source)}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+
+              {results.length === 0 && (
+                <div className="text-center py-12">
+                  <p className="text-gray-500">
+                    {isEn ? "No results found" : "검색 결과가 없습니다"}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <p className="text-xs text-gray-400 mt-4 text-center">
+              {isEn
+                ? "Nutrition values per 100g. Data from KFDA & USDA."
+                : "100g 기준 영양 정보. 식약처(KFDA) 및 USDA 데이터 기반."}
+            </p>
+          </>
+        )}
       </div>
     </main>
   );
