@@ -86,7 +86,7 @@ export default function Navbar({ locale }: { locale: string }) {
       <div className="max-w-[1120px] mx-auto px-[var(--section-px)] py-3 flex items-center justify-between gap-4">
         <Link href={`${prefix}/`} className="flex items-center">
           <span className="font-extrabold text-xl text-gray-900">
-            CoreVia
+            CoreVia Fitness
           </span>
         </Link>
 
