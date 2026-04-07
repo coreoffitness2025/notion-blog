@@ -8,6 +8,7 @@ import {
 } from "@/data/nutritionDatabase";
 import { notFound } from "next/navigation";
 import ServingCalculator from "./client";
+import AdSense from "@/components/AdSense";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -175,10 +176,10 @@ export default async function NutritionDetailPage({
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 items-stretch">
             {/* Nutrition Facts Table (FDA-style) */}
-            <section>
-              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+            <section className="flex flex-col">
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden flex-1 flex flex-col">
                 <div className="bg-[var(--corevia-primary)] text-white px-4 py-3">
                   <h2 className="text-lg font-bold">
                     {isEn ? "Nutrition Facts" : "영양성분"}
@@ -256,7 +257,7 @@ export default async function NutritionDetailPage({
                 )}
 
                 {/* Footnote */}
-                <div className="px-4 py-2 text-xs text-gray-400 border-t border-gray-200">
+                <div className="px-4 py-2 text-xs text-gray-400 border-t border-gray-200 mt-auto">
                   {isEn
                     ? "* Percent Daily Values are based on a 2,000 calorie diet."
                     : "* 일일 권장량은 2,000kcal 식단 기준입니다."}
@@ -325,6 +326,9 @@ export default async function NutritionDetailPage({
 
             </div>
           </div>
+
+          {/* AdSense */}
+          <AdSense slot="auto" className="mt-8" />
 
           {/* App CTA — banner style */}
           <section className="mt-8 rounded-2xl overflow-hidden border border-gray-200">
