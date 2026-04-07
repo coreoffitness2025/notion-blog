@@ -8,7 +8,6 @@ import {
 } from "@/data/nutritionDatabase";
 import { notFound } from "next/navigation";
 import ServingCalculator from "./client";
-import AdSense from "@/components/AdSense";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -265,8 +264,6 @@ export default async function NutritionDetailPage({
                 {sourceLabel}
               </p>
 
-              {/* Ad 1 */}
-              <AdSense slot="auto" className="mt-6" />
             </section>
 
             {/* Right column: Macro ratio + Calculator + CTA */}
@@ -353,8 +350,6 @@ export default async function NutritionDetailPage({
                 </div>
               </section>
 
-              {/* Ad 2 */}
-              <AdSense slot="auto" />
             </div>
           </div>
         </div>
