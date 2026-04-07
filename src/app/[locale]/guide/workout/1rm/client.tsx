@@ -54,7 +54,7 @@ export default function OneRmClient({ dict, locale }: { dict: Dictionary; locale
         {/* Header */}
         <div className="mb-8">
           <Link
-            href={`${prefix}/guide`}
+            href={`${prefix}/guide/workout`}
             className="text-gray-500 hover:text-gray-800 transition-colors inline-flex items-center gap-2 mb-4"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
