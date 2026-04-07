@@ -23,8 +23,8 @@ export default function GuidePreview({ locale }: { locale: string }) {
     {
       title: isEn ? "Fitness Guide" : "피트니스 가이드",
       desc: isEn
-        ? "All-in-one fitness hub with calculators, programs, and guides"
-        : "계산기, 프로그램, 가이드를 한 곳에서",
+        ? "Master the fundamentals of fitness — from training principles to nutrition basics"
+        : "피트니스의 핵심을 파악하세요 — 훈련 원리부터 영양 기초까지",
       href: `${prefix}/guide`,
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,33 +32,33 @@ export default function GuidePreview({ locale }: { locale: string }) {
         </svg>
       ),
       children: [
-        { label: isEn ? "1RM Calculator" : "1RM 계산기", href: `${prefix}/guide/workout/1rm` },
-        { label: isEn ? "Calorie Calculator" : "칼로리 계산기", href: `${prefix}/guide/nutrition/calorie` },
-        { label: isEn ? "Programs" : "운동 프로그램", href: `${prefix}/guide/workout/programs` },
+        { label: isEn ? "Workout Guide" : "운동 가이드", href: `${prefix}/guide/workout` },
+        { label: isEn ? "Nutrition Guide" : "영양 가이드", href: `${prefix}/guide/nutrition` },
+        { label: isEn ? "Blog" : "블로그", href: `${prefix}/posts` },
       ],
     },
     {
       title: isEn ? "Workout Guide" : "운동 가이드",
       desc: isEn
-        ? "99 exercises with proper form, target muscles, and step-by-step instructions"
-        : "99개 운동의 올바른 자세, 타겟 근육, 단계별 가이드",
-      href: `${prefix}/guide/workout/exercises`,
+        ? "99 exercises with proper form, 1RM calculator, and custom workout programs"
+        : "99개 운동의 올바른 자세, 1RM 계산기, 맞춤 운동 프로그램",
+      href: `${prefix}/guide/workout`,
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
         </svg>
       ),
       children: [
-        { label: isEn ? "Chest" : "가슴 운동", href: `${prefix}/guide/workout/exercises` },
-        { label: isEn ? "Back" : "등 운동", href: `${prefix}/guide/workout/exercises` },
-        { label: isEn ? "Legs" : "하체 운동", href: `${prefix}/guide/workout/exercises` },
+        { label: isEn ? "1RM Calculator" : "1RM 계산기", href: `${prefix}/guide/workout/1rm` },
+        { label: isEn ? "Programs" : "운동 프로그램", href: `${prefix}/guide/workout/programs` },
+        { label: isEn ? "Exercise Guide" : "운동 가이드", href: `${prefix}/guide/workout/exercises` },
       ],
     },
     {
       title: isEn ? "Nutrition Guide" : "영양 가이드",
       desc: isEn
-        ? "5,672 food nutrition facts, meal plans, and calorie tracking"
-        : "5,672개 음식 영양 정보, 식단 추천, 칼로리 관리",
+        ? "5,672 food nutrition facts, calorie calculator, and personalized meal plans"
+        : "5,672개 음식 영양 정보, 칼로리 계산기, 맞춤 식단 추천",
       href: `${prefix}/guide/nutrition`,
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,9 +66,9 @@ export default function GuidePreview({ locale }: { locale: string }) {
         </svg>
       ),
       children: [
-        { label: isEn ? "Food Database" : "영양성분 사전", href: `${prefix}/guide/nutrition` },
-        { label: isEn ? "Meal Plans" : "식단 추천", href: `${prefix}/guide/nutrition/meal-plans` },
         { label: isEn ? "Calorie Calculator" : "칼로리 계산기", href: `${prefix}/guide/nutrition/calorie` },
+        { label: isEn ? "Meal Plans" : "식단 추천", href: `${prefix}/guide/nutrition/meal-plans` },
+        { label: isEn ? "Food Database" : "영양성분 사전", href: `${prefix}/guide/nutrition` },
       ],
     },
   ];
