@@ -382,13 +382,17 @@ export function searchNutrition(
         const termNoSpace = term.replace(/[\s_]/g, "");
         if (name.includes(term) || nameNoSpace.includes(termNoSpace)) {
           score = 80 - Math.abs(name.length - term.length);
+          // 동의어 정확 매칭 보너스 (닭튀김 = "닭튀김" 그 자체)
+          if (name === term || nameNoSpace === termNoSpace) score += 30;
+          // 동의어로 시작하면 보너스 (닭튀김_양념 등)
+          else if (name.startsWith(term) || nameNoSpace.startsWith(termNoSpace)) score += 15;
           break;
         }
       }
     }
 
-    // 짧고 심플한 이름 보너스
-    if (score > 0 && !name.includes("(") && name.length <= 10) score += 5;
+    // 짧고 심플한 이름 보너스 (가정식 우선)
+    if (score > 0 && !name.includes("(") && name.length <= 10) score += 8;
     // 완전 데이터 보너스
     if (score > 0 && item.dataQuality === "complete") score += 3;
 
