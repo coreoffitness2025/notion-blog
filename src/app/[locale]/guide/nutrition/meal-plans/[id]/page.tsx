@@ -27,8 +27,8 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? `${title} - ${plan.calories}kcal 식단 플랜 | CoreVia`
-      : `${title} - ${plan.calories}kcal Meal Plan | CoreVia`,
+      ? `${title} - ${plan.calories}kcal 식단 플랜`
+      : `${title} - ${plan.calories}kcal Meal Plan`,
     description: isKo
       ? `${title}: ${plan.calories}kcal, 단백질 ${plan.protein}g, 탄수화물 ${plan.carbs}g, 지방 ${plan.fat}g. ${plan.description}`
       : `${title}: ${plan.calories}kcal, ${plan.protein}g protein, ${plan.carbs}g carbs, ${plan.fat}g fat. ${plan.descriptionEn}`,
@@ -40,7 +40,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: `${title} | CoreVia`,
+      title: `${title}`,
       url: pageUrl,
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
@@ -66,7 +66,28 @@ export default async function MealPlanDetailPage({
   const title = isEn ? plan.titleEn : plan.title;
   const description = isEn ? plan.descriptionEn : plan.description;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: title,
+    description: description,
+    nutrition: {
+      "@type": "NutritionInformation",
+      calories: `${plan.calories} calories`,
+      proteinContent: `${plan.protein} g`,
+      carbohydrateContent: `${plan.carbs} g`,
+      fatContent: `${plan.fat} g`,
+    },
+    recipeCategory: isEn ? "Meal Plan" : "식단 플랜",
+    recipeCuisine: isEn ? "Korean" : "한식",
+  };
+
   return (
+    <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <main className="min-h-screen bg-[var(--corevia-bg)]">
       {/* Breadcrumb */}
       <nav className="border-b border-gray-200 py-4 px-4">
@@ -183,5 +204,6 @@ export default async function MealPlanDetailPage({
         </section>
       </div>
     </main>
+    </>
   );
 }

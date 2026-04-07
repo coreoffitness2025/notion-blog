@@ -48,8 +48,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isKo
-        ? "무료 피트니스 가이드 | CoreVia"
-        : "Free Fitness Guide | CoreVia",
+        ? "무료 피트니스 가이드"
+        : "Free Fitness Guide",
       description: isKo
         ? "1RM 계산기, 칼로리 계산기, 운동 도감 등 무료 피트니스 도구 모음"
         : "Free fitness tools: 1RM calculator, calorie calculator, exercise library and more",

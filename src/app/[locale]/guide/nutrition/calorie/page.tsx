@@ -54,8 +54,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isKo
-        ? "칼로리 계산기 - TDEE & 매크로 무료 계산 | CoreVia"
-        : "Calorie Calculator - Free TDEE & Macro Estimator | CoreVia",
+        ? "칼로리 계산기 - TDEE & 매크로 무료 계산"
+        : "Calorie Calculator - Free TDEE & Macro Estimator",
       description: isKo
         ? "Mifflin-St Jeor 공식으로 일일 권장 칼로리와 탄단지 비율을 계산하세요."
         : "Calculate your daily calories and macro ratios with the Mifflin-St Jeor formula.",

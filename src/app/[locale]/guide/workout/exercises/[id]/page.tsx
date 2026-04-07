@@ -44,8 +44,8 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? `${name} 운동 방법, 올바른 자세 & 타겟 근육 | CoreVia`
-      : `${name} - How to, Proper Form & Target Muscles | CoreVia`,
+      ? `${name} 운동 방법, 올바른 자세 & 타겟 근육`
+      : `${name} - How to, Proper Form & Target Muscles`,
     description: isKo
       ? `${name} 운동의 올바른 자세와 단계별 운동 방법을 확인하세요. 타겟 근육: ${muscles}. 난이도: ${diffLabel[exercise.difficulty]}. 무료 운동 가이드.`
       : `Learn proper ${name} form with step-by-step instructions. Target muscles: ${muscles}. Difficulty: ${diffLabel[exercise.difficulty]}. Free exercise guide.`,
@@ -61,8 +61,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isKo
-        ? `${name} 운동 가이드 | CoreVia`
-        : `${name} Exercise Guide | CoreVia`,
+        ? `${name} 운동 가이드`
+        : `${name} Exercise Guide`,
       description: isKo
         ? `${name}의 올바른 자세, 타겟 근육, 운동 팁`
         : `${name} proper form, target muscles & tips`,

@@ -54,8 +54,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isKo
-        ? "1RM 계산기 - 최대 중량 무료 계산 | CoreVia"
-        : "1RM Calculator - Free One Rep Max Estimator | CoreVia",
+        ? "1RM 계산기 - 최대 중량 무료 계산"
+        : "1RM Calculator - Free One Rep Max Estimator",
       description: isKo
         ? "Epley 공식으로 1RM을 계산하고, 트레이닝 존별 권장 중량을 확인하세요."
         : "Calculate your 1RM with the Epley formula and get training zone recommendations.",

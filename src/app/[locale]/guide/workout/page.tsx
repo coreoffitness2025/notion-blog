@@ -18,8 +18,8 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? `Workout Guide - 1RM 계산기, 운동 프로그램, ${EXERCISE_DATABASE.length}개 운동 도감 | CoreVia`
-      : `Workout Guide - 1RM Calculator, Programs & ${EXERCISE_DATABASE.length} Exercises | CoreVia`,
+      ? `Workout Guide - 1RM 계산기, 운동 프로그램, ${EXERCISE_DATABASE.length}개 운동 도감`
+      : `Workout Guide - 1RM Calculator, Programs & ${EXERCISE_DATABASE.length} Exercises`,
     description: isKo
       ? `1RM 계산기, 운동 프로그램, ${EXERCISE_DATABASE.length}개 운동 가이드를 무료로 제공합니다.`
       : `Free 1RM calculator, workout programs, and ${EXERCISE_DATABASE.length} exercise guides.`,
@@ -31,7 +31,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: "Workout Guide | CoreVia",
+      title: "Workout Guide",
       url: pageUrl,
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",

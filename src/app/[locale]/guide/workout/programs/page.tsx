@@ -26,7 +26,7 @@ export async function generateMetadata({
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
     },
     openGraph: {
-      title: isKo ? "운동 프로그램 | CoreVia" : "Workout Programs | CoreVia",
+      title: isKo ? "운동 프로그램" : "Workout Programs",
       description: isKo
         ? "레벨별 맞춤 운동 루틴 제공"
         : "Training routines tailored to your level",

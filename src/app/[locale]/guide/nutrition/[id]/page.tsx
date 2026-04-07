@@ -42,8 +42,8 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? `${name} 칼로리, 단백질, 영양성분 | CoreVia`
-      : `${name} Calories, Protein, Nutrition Facts | CoreVia`,
+      ? `${name} 칼로리, 단백질, 영양성분`
+      : `${name} Calories, Protein, Nutrition Facts`,
     description: isKo
       ? `${name} 100g 기준 ${item.calories}kcal, 단백질 ${item.protein}g, 탄수화물 ${item.carbs}g, 지방 ${item.fat}g. ${sourceLabel} 공식 데이터 기반 영양 정보.`
       : `${name}: ${item.calories}kcal, ${item.protein}g protein, ${item.carbs}g carbs, ${item.fat}g fat per 100g. Based on official ${sourceLabel} data.`,
@@ -64,8 +64,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isKo
-        ? `${name} 영양성분 | CoreVia`
-        : `${name} Nutrition Facts | CoreVia`,
+        ? `${name} 영양성분`
+        : `${name} Nutrition Facts`,
       description: isKo
         ? `${item.calories}kcal | 단백질 ${item.protein}g | 탄수 ${item.carbs}g | 지방 ${item.fat}g`
         : `${item.calories}kcal | Protein ${item.protein}g | Carbs ${item.carbs}g | Fat ${item.fat}g`,

@@ -54,8 +54,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isKo
-        ? "음식 영양성분 사전 | CoreVia"
-        : "Food Nutrition Database | CoreVia",
+        ? "음식 영양성분 사전"
+        : "Food Nutrition Database",
       description: isKo
         ? `${count.toLocaleString()}개 음식의 칼로리와 영양 정보를 무료로 검색하세요`
         : `Search nutrition facts for ${count.toLocaleString()} foods for free`,
