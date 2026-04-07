@@ -5212,18 +5212,102 @@ export function getAllExerciseIds(): string[] {
   return EXERCISE_DATABASE.map((e) => e.id);
 }
 
+// ── 운동 검색 동의어 ──
+const EXERCISE_SYNONYMS: Record<string, string[]> = {
+  // 한글 별칭
+  "턱걸이": ["풀업", "친업", "pull up", "chin up"],
+  "팔굽혀펴기": ["푸시업", "push up"],
+  "푸쉬업": ["푸시업", "push up"],
+  "푸샵": ["푸시업", "push up"],
+  "윗몸일으키기": ["크런치", "시트업", "sit up"],
+  "렛풀": ["랫 풀다운", "lat pulldown"],
+  "랫풀": ["랫 풀다운", "lat pulldown"],
+  "레그프레스": ["레그 프레스", "leg press"],
+  "레그컬": ["레그 컬", "leg curl"],
+  "레그익스텐션": ["레그 익스텐션", "leg extension"],
+  "숄더프레스": ["숄더 프레스", "shoulder press"],
+  "벤치프레스": ["벤치 프레스", "bench press"],
+  "인클라인벤치": ["인클라인 벤치프레스", "incline bench"],
+  "바벨로우": ["바벨 로우", "barbell row"],
+  "덤벨프레스": ["덤벨 프레스", "dumbbell press"],
+  "사이드레터럴": ["래터럴 레이즈", "lateral raise"],
+  "사레레": ["래터럴 레이즈", "lateral raise"],
+  // 영문 별칭 (띄어쓰기 변형)
+  "pullup": ["pull up", "풀업"],
+  "pushup": ["push up", "푸시업"],
+  "pullups": ["pull up", "풀업"],
+  "pushups": ["push up", "푸시업"],
+  "chinup": ["chin up", "친업"],
+  "situp": ["sit up", "시트업"],
+  // 근육명 → 관련 운동 bodyPart 매핑
+  "이두": ["arm"],
+  "삼두": ["arm"],
+  "이두근": ["arm"],
+  "삼두근": ["arm"],
+  "bicep": ["arm"],
+  "tricep": ["arm"],
+  "가슴": ["chest"],
+  "chest": ["chest"],
+  "등": ["back"],
+  "back": ["back"],
+  "어깨": ["shoulder"],
+  "shoulder": ["shoulder"],
+  "하체": ["leg"],
+  "다리": ["leg"],
+  "legs": ["leg"],
+  "복근": ["core"],
+  "abs": ["core"],
+  "코어": ["core"],
+  "유산소": ["cardio"],
+  "cardio": ["cardio"],
+};
+
+// bodyPart 값인지 확인
+const BODY_PARTS = new Set(["chest", "back", "shoulder", "arm", "leg", "core", "cardio"]);
+
 export function searchExercises(
   query: string,
   filters?: { bodyPart?: string; difficulty?: string }
 ): Exercise[] {
   const q = query.toLowerCase().trim();
+  const qNoSpace = q.replace(/[\s_-]/g, "");
+
   return EXERCISE_DATABASE.filter((exercise) => {
     if (filters?.bodyPart && !exercise.bodyPart.includes(filters.bodyPart)) return false;
     if (filters?.difficulty && exercise.difficulty !== filters.difficulty) return false;
     if (!q) return true;
-    return (
-      exercise.name.toLowerCase().includes(q) ||
-      exercise.nameEn.toLowerCase().includes(q)
-    );
+
+    const name = exercise.name.toLowerCase();
+    const nameEn = exercise.nameEn.toLowerCase();
+    const nameNoSpace = name.replace(/[\s_-]/g, "");
+    const nameEnNoSpace = nameEn.replace(/[\s_-]/g, "");
+
+    // 1. 직접 매칭 (띄어쓰기 무시)
+    if (name.includes(q) || nameEn.includes(q) ||
+        nameNoSpace.includes(qNoSpace) || nameEnNoSpace.includes(qNoSpace)) {
+      return true;
+    }
+
+    // 2. 동의어 매칭
+    const synonyms = EXERCISE_SYNONYMS[q] || [];
+    for (const syn of synonyms) {
+      // bodyPart 매핑인 경우
+      if (BODY_PARTS.has(syn)) {
+        if (exercise.bodyPart.includes(syn)) return true;
+      } else {
+        const synNoSpace = syn.replace(/[\s_-]/g, "").toLowerCase();
+        if (name.includes(syn.toLowerCase()) || nameEn.includes(syn.toLowerCase()) ||
+            nameNoSpace.includes(synNoSpace) || nameEnNoSpace.includes(synNoSpace)) {
+          return true;
+        }
+      }
+    }
+
+    // 3. 근육명 검색 (주동근/보조근에 포함되면 매칭)
+    const muscles = [...exercise.muscles.primary, ...exercise.muscles.secondary].join(" ").toLowerCase();
+    const musclesEn = [...exercise.musclesEn.primary, ...exercise.musclesEn.secondary].join(" ").toLowerCase();
+    if (muscles.includes(q) || musclesEn.includes(q)) return true;
+
+    return false;
   });
 }

@@ -8,6 +8,9 @@ import {
   type Exercise,
 } from "@/data/exerciseDatabase";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import { getExerciseGifUrl } from "@/data/exerciseGifMap";
+import AdSense from "@/components/AdSense";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -133,6 +136,7 @@ export default async function ExerciseDetailPage({
   const secondaryMuscles = isEn ? exercise.musclesEn.secondary : exercise.muscles.secondary;
   const category = isEn ? exercise.categoryEn : exercise.category;
   const related = getRelatedExercises(exercise);
+  const gifUrl = getExerciseGifUrl(id);
 
   const difficultyLabel = t.difficulty[exercise.difficulty as keyof typeof t.difficulty] || exercise.difficulty;
   const difficultyColor = {
@@ -201,6 +205,24 @@ export default async function ExerciseDetailPage({
               </span>
             </div>
           </div>
+
+          {/* Exercise GIF */}
+          {gifUrl && (
+            <section className="mb-8">
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                <div className="relative w-full h-[400px] bg-gray-50">
+                  <Image
+                    src={gifUrl}
+                    alt={`${name} - ${isEn ? "proper form demonstration" : "올바른 자세 시연"}`}
+                    fill
+                    className="object-contain"
+                    unoptimized
+                    priority
+                  />
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* Target Muscles */}
           <section className="mb-8">
@@ -281,6 +303,9 @@ export default async function ExerciseDetailPage({
             </div>
           </section>
 
+          {/* AdSense */}
+          <AdSense slot="auto" className="mb-8" />
+
           {/* App CTA — banner style */}
           <section className="mb-8 rounded-2xl overflow-hidden border border-gray-200">
             <img
@@ -330,20 +355,36 @@ export default async function ExerciseDetailPage({
                 {isEn ? "Related Exercises" : "관련 운동"}
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {related.map((rel) => (
-                  <Link
-                    key={rel.id}
-                    href={`${prefix}/guide/workout/exercises/${rel.id}`}
-                    className="bg-white border border-gray-100 rounded-xl p-4 hover:border-[var(--corevia-primary)]/30 transition-all"
-                  >
-                    <h3 className="font-bold text-gray-800 text-sm mb-1">
-                      {isEn ? rel.nameEn : rel.name}
-                    </h3>
-                    <p className="text-xs text-gray-500">
-                      {(isEn ? rel.musclesEn.primary : rel.muscles.primary).slice(0, 2).join(", ")}
-                    </p>
-                  </Link>
-                ))}
+                {related.map((rel) => {
+                  const relGif = getExerciseGifUrl(rel.id);
+                  return (
+                    <Link
+                      key={rel.id}
+                      href={`${prefix}/guide/workout/exercises/${rel.id}`}
+                      className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:border-[var(--corevia-primary)]/30 transition-all"
+                    >
+                      {relGif && (
+                        <div className="relative w-full h-28 bg-gray-50">
+                          <Image
+                            src={relGif}
+                            alt={isEn ? rel.nameEn : rel.name}
+                            fill
+                            className="object-contain"
+                            unoptimized
+                          />
+                        </div>
+                      )}
+                      <div className="p-3">
+                        <h3 className="font-bold text-gray-800 text-sm mb-1">
+                          {isEn ? rel.nameEn : rel.name}
+                        </h3>
+                        <p className="text-xs text-gray-500">
+                          {(isEn ? rel.musclesEn.primary : rel.muscles.primary).slice(0, 2).join(", ")}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </section>
           )}
