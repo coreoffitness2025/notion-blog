@@ -324,7 +324,7 @@ export default async function NutritionDetailPage({
           {/* App CTA — banner style */}
           <section className="mt-8 rounded-2xl overflow-hidden border border-gray-200">
             <img
-              src="/cta-banner.png"
+              src={isEn ? "/cta-banner-en.png" : "/cta-banner.png"}
               alt="CoreVia Fitness - 진짜 온라인 PT"
               className="w-full h-auto"
             />
