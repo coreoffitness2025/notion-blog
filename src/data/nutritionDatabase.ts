@@ -403,6 +403,29 @@ export function searchNutrition(
   return scored.slice(0, limit).map((s) => s.item);
 }
 
+/** Get similar nutrition items (same source, similar calories) for internal linking */
+export function getSimilarNutrition(
+  id: string,
+  limit = 6
+): NutritionItem[] {
+  const target = getNutritionById(id);
+  if (!target) return [];
+
+  const calRange = target.calories * 0.3;
+  const minCal = target.calories - calRange;
+  const maxCal = target.calories + calRange;
+
+  return DB.filter(
+    (item) =>
+      item.id !== id &&
+      item.dataQuality === "complete" &&
+      item.calories >= minCal &&
+      item.calories <= maxCal
+  )
+    .sort((a, b) => Math.abs(a.calories - target.calories) - Math.abs(b.calories - target.calories))
+    .slice(0, limit);
+}
+
 /** Get popular items (complete data, reasonable serving size) for initial SSR */
 export function getPopularNutrition(limit = 100): NutritionItem[] {
   const complete = DB.filter(

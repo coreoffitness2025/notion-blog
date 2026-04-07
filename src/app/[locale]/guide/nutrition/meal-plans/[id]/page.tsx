@@ -66,7 +66,8 @@ export default async function MealPlanDetailPage({
   const title = isEn ? plan.titleEn : plan.title;
   const description = isEn ? plan.descriptionEn : plan.description;
 
-  const jsonLd = {
+  const jsonLd = [
+    {
     "@context": "https://schema.org",
     "@type": "Recipe",
     name: title,
@@ -80,7 +81,18 @@ export default async function MealPlanDetailPage({
     },
     recipeCategory: isEn ? "Meal Plan" : "식단 플랜",
     recipeCuisine: isEn ? "Korean" : "한식",
-  };
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
+        { "@type": "ListItem", position: 2, name: "Nutrition Guide", item: `${siteUrl}${prefix}/guide/nutrition` },
+        { "@type": "ListItem", position: 3, name: isEn ? "Meal Plans" : "식단 추천", item: `${siteUrl}${prefix}/guide/nutrition/meal-plans` },
+        { "@type": "ListItem", position: 4, name: title },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -141,9 +153,14 @@ export default async function MealPlanDetailPage({
               <h3 className="font-bold text-gray-800 mb-3">{isEn ? meal.nameEn : meal.name}</h3>
               <ul className="space-y-1.5">
                 {(isEn ? meal.itemsEn : meal.items).map((item, itemIdx) => (
-                  <li key={itemIdx} className="text-gray-600 text-sm flex items-center gap-2">
+                  <li key={itemIdx} className="text-sm flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-gray-300 rounded-full flex-shrink-0" />
-                    {item}
+                    <Link
+                      href={`${prefix}/guide/nutrition?q=${encodeURIComponent(item.split("(")[0].split(",")[0].trim())}`}
+                      className="text-gray-600 hover:text-[var(--corevia-primary)] hover:underline transition-colors"
+                    >
+                      {item}
+                    </Link>
                   </li>
                 ))}
               </ul>

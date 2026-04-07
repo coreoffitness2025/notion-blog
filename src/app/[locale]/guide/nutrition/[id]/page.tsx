@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/i18n";
 import {
   getNutritionById,
   getNutritionName,
+  getSimilarNutrition,
   type NutritionItem,
 } from "@/data/nutritionDatabase";
 import { notFound } from "next/navigation";
@@ -42,8 +43,8 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? `${name} 칼로리, 단백질, 영양성분`
-      : `${name} Calories, Protein, Nutrition Facts`,
+      ? `${name} 칼로리 ${item.calories}kcal, 단백질 ${item.protein}g - 영양성분`
+      : `${name} ${item.calories}kcal, ${item.protein}g Protein - Nutrition Facts`,
     description: isKo
       ? `${name} 100g 기준 ${item.calories}kcal, 단백질 ${item.protein}g, 탄수화물 ${item.carbs}g, 지방 ${item.fat}g. ${sourceLabel} 공식 데이터 기반 영양 정보.`
       : `${name}: ${item.calories}kcal, ${item.protein}g protein, ${item.carbs}g carbs, ${item.fat}g fat per 100g. Based on official ${sourceLabel} data.`,
@@ -77,21 +78,34 @@ export async function generateMetadata({
   };
 }
 
-// ── JSON-LD: NutritionInformation ──
-function getJsonLd(item: NutritionItem, name: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "NutritionInformation",
-    name: `${name} Nutrition Facts`,
-    calories: `${item.calories} calories`,
-    proteinContent: `${item.protein} g`,
-    carbohydrateContent: `${item.carbs} g`,
-    fatContent: `${item.fat} g`,
-    ...(item.saturated_fat != null ? { saturatedFatContent: `${item.saturated_fat} g` } : {}),
-    ...(item.sodium != null ? { sodiumContent: `${item.sodium} mg` } : {}),
-    ...(item.sugar != null ? { sugarContent: `${item.sugar} g` } : {}),
-    ...(item.serving_size ? { servingSize: `${item.serving_size} g` } : {}),
-  };
+// ── JSON-LD: NutritionInformation + BreadcrumbList ──
+function getJsonLd(item: NutritionItem, name: string, locale: string) {
+  const isKo = locale === "ko";
+  const prefix = isKo ? "" : "/en";
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "NutritionInformation",
+      name: `${name} Nutrition Facts`,
+      calories: `${item.calories} calories`,
+      proteinContent: `${item.protein} g`,
+      carbohydrateContent: `${item.carbs} g`,
+      fatContent: `${item.fat} g`,
+      ...(item.saturated_fat != null ? { saturatedFatContent: `${item.saturated_fat} g` } : {}),
+      ...(item.sodium != null ? { sodiumContent: `${item.sodium} mg` } : {}),
+      ...(item.sugar != null ? { sugarContent: `${item.sugar} g` } : {}),
+      ...(item.serving_size ? { servingSize: `${item.serving_size} g` } : {}),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
+        { "@type": "ListItem", position: 2, name: "Nutrition Guide", item: `${siteUrl}${prefix}/guide/nutrition` },
+        { "@type": "ListItem", position: 3, name: name },
+      ],
+    },
+  ];
 }
 
 // ── Daily Value percentages (based on 2000kcal diet) ──
@@ -143,7 +157,7 @@ export default async function NutritionDetailPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLd(item, name)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLd(item, name, locale)) }}
       />
       <main className="min-h-screen bg-[var(--corevia-bg)]">
         {/* Breadcrumb */}
@@ -264,10 +278,14 @@ export default async function NutritionDetailPage({
                 </div>
               </div>
 
-              {/* Data source */}
+              {/* Data source — detailed for EEAT */}
               <p className="text-xs text-gray-400 mt-3">
                 {isEn ? "Data source: " : "데이터 출처: "}
-                {sourceLabel}
+                {item.source === "kfda"
+                  ? isEn
+                    ? "KFDA Food Nutrient Database (Updated 2025.12)"
+                    : "식품의약품안전처 식품영양성분 데이터베이스 (2025.12 갱신)"
+                  : "USDA FoodData Central (SR Legacy)"}
               </p>
 
             </section>
@@ -370,6 +388,42 @@ export default async function NutritionDetailPage({
               </div>
             </div>
           </section>
+
+          {/* Similar Foods — internal link network */}
+          {(() => {
+            const similar = getSimilarNutrition(id, 6);
+            if (similar.length === 0) return null;
+            return (
+              <section className="mt-8">
+                <h2 className="text-xl font-bold text-gray-800 mb-4">
+                  {isEn ? "Similar Foods" : "비슷한 음식"}
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {similar.map((s) => (
+                    <Link
+                      key={s.id}
+                      href={`${prefix}/guide/nutrition/${s.id}`}
+                      className="bg-white border border-gray-100 rounded-xl p-4 hover:border-[var(--corevia-primary)]/30 transition-all"
+                    >
+                      <p className="font-medium text-gray-800 text-sm truncate">
+                        {getNutritionName(s.id, locale)}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {s.calories}kcal · {isEn ? "P" : "단"} {s.protein}g · {isEn ? "C" : "탄"} {s.carbs}g · {isEn ? "F" : "지"} {s.fat}g
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })()}
+
+          {/* Disclaimer — EEAT Trust */}
+          <p className="mt-8 text-xs text-gray-400 text-center">
+            {isEn
+              ? "This information is for general reference only and does not substitute professional medical or dietary advice."
+              : "이 정보는 일반적인 참고용이며, 전문적인 의료 또는 영양 상담을 대체하지 않습니다."}
+          </p>
         </div>
       </main>
     </>

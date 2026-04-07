@@ -44,8 +44,8 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? `${name} 운동 방법, 올바른 자세 & 타겟 근육`
-      : `${name} - How to, Proper Form & Target Muscles`,
+      ? `${name} 자세 & 운동법 - ${muscles} 타겟 (${diffLabel[exercise.difficulty]})`
+      : `${name} Form & Guide - ${muscles} (${diffLabel[exercise.difficulty]})`,
     description: isKo
       ? `${name} 운동의 올바른 자세와 단계별 운동 방법을 확인하세요. 타겟 근육: ${muscles}. 난이도: ${diffLabel[exercise.difficulty]}. 무료 운동 가이드.`
       : `Learn proper ${name} form with step-by-step instructions. Target muscles: ${muscles}. Difficulty: ${diffLabel[exercise.difficulty]}. Free exercise guide.`,
@@ -81,27 +81,40 @@ function getJsonLd(exercise: Exercise, locale: string) {
   const instructions = isKo ? exercise.instructions : exercise.instructionsEn;
   const tips = isKo ? exercise.tips : exercise.tipsEn;
 
-  return {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: isKo ? `${name} 운동 방법` : `How to do ${name}`,
-    description: isKo
-      ? `${name} 운동의 올바른 자세와 단계별 가이드`
-      : `Step-by-step guide for proper ${name} form`,
-    step: instructions.map((text, idx) => ({
-      "@type": "HowToStep",
-      position: idx + 1,
-      text,
-    })),
-    supply: exercise.equipment.map((eq) => ({
-      "@type": "HowToSupply",
-      name: eq,
-    })),
-    tip: tips.map((t) => ({
-      "@type": "HowToTip",
-      text: t,
-    })),
-  };
+  const prefix = isKo ? "" : "/en";
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: isKo ? `${name} 운동 방법` : `How to do ${name}`,
+      description: isKo
+        ? `${name} 운동의 올바른 자세와 단계별 가이드`
+        : `Step-by-step guide for proper ${name} form`,
+      step: instructions.map((text, idx) => ({
+        "@type": "HowToStep",
+        position: idx + 1,
+        text,
+      })),
+      supply: exercise.equipment.map((eq) => ({
+        "@type": "HowToSupply",
+        name: eq,
+      })),
+      tip: tips.map((t) => ({
+        "@type": "HowToTip",
+        text: t,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
+        { "@type": "ListItem", position: 2, name: "Workout Guide", item: `${siteUrl}${prefix}/guide/workout` },
+        { "@type": "ListItem", position: 3, name: isKo ? "운동 도감" : "Exercise Library", item: `${siteUrl}${prefix}/guide/workout/exercises` },
+        { "@type": "ListItem", position: 4, name: name },
+      ],
+    },
+  ];
 }
 
 // ── Related exercises (same body part) ──
@@ -407,6 +420,24 @@ export default async function ExerciseDetailPage({
               </div>
             </section>
           )}
+          {/* Cross-link to Nutrition */}
+          <div className="mt-6 bg-white border border-gray-100 rounded-xl p-4">
+            <Link
+              href={`${prefix}/guide/nutrition/meal-plans`}
+              className="flex items-center justify-between text-sm hover:text-[var(--corevia-primary)] transition-colors"
+            >
+              <span className="text-gray-700 font-medium">
+                {isEn ? "Post-workout meal plans →" : "운동 후 추천 식단 보기 →"}
+              </span>
+            </Link>
+          </div>
+
+          {/* Disclaimer — EEAT Trust */}
+          <p className="mt-6 text-xs text-gray-400 text-center">
+            {isEn
+              ? "This guide is for general reference only. Consult a professional before starting a new exercise program."
+              : "이 가이드는 일반적인 참고용이며, 새로운 운동 프로그램 시작 전 전문가 상담을 권장합니다."}
+          </p>
         </div>
       </main>
     </>
