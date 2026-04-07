@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { getDictionary } from "@/lib/i18n";
@@ -85,16 +84,9 @@ export default function Navbar({ locale }: { locale: string }) {
   return (
     <header className="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
       <div className="max-w-[1120px] mx-auto px-[var(--section-px)] py-3 flex items-center justify-between gap-4">
-        <Link href={`${prefix}/`} className="flex items-center gap-2">
-          <Image
-            src="/logo.png"
-            alt="CoreVia Logo"
-            width={44}
-            height={44}
-            className="rounded-xl"
-          />
+        <Link href={`${prefix}/`} className="flex items-center">
           <span className="font-extrabold text-xl text-gray-900">
-            CoreVia Fitness
+            CoreVia
           </span>
         </Link>
 
