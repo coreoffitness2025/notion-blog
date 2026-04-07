@@ -6,6 +6,9 @@ const defaultLocale = "ko";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Skip static files (ads.txt, robots.txt, etc.)
+  if (pathname.includes(".")) return;
+
   // Check if the pathname already has a locale prefix
   const pathnameHasLocale = locales.some(
     (locale) =>
