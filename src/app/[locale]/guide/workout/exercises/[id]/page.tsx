@@ -9,7 +9,7 @@ import {
 } from "@/data/exerciseDatabase";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { getExerciseGifUrl } from "@/data/exerciseGifMap";
+import { getExerciseImages } from "@/data/exerciseGifMap";
 import AdSense from "@/components/AdSense";
 
 const siteUrl =
@@ -136,7 +136,7 @@ export default async function ExerciseDetailPage({
   const secondaryMuscles = isEn ? exercise.musclesEn.secondary : exercise.muscles.secondary;
   const category = isEn ? exercise.categoryEn : exercise.category;
   const related = getRelatedExercises(exercise);
-  const gifUrl = getExerciseGifUrl(id);
+  const images = getExerciseImages(id);
 
   const difficultyLabel = t.difficulty[exercise.difficulty as keyof typeof t.difficulty] || exercise.difficulty;
   const difficultyColor = {
@@ -206,19 +206,38 @@ export default async function ExerciseDetailPage({
             </div>
           </div>
 
-          {/* Exercise GIF */}
-          {gifUrl && (
+          {/* Exercise Images — Start & End Position */}
+          {images && (
             <section className="mb-8">
-              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-                <div className="relative w-full h-[400px] bg-gray-50">
-                  <Image
-                    src={gifUrl}
-                    alt={`${name} - ${isEn ? "proper form demonstration" : "올바른 자세 시연"}`}
-                    fill
-                    className="object-contain"
-                    unoptimized
-                    priority
-                  />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                  <div className="relative w-full h-[300px] bg-gray-50">
+                    <Image
+                      src={images[0]}
+                      alt={`${name} - ${isEn ? "starting position" : "시작 자세"}`}
+                      fill
+                      className="object-contain"
+                      unoptimized
+                      priority
+                    />
+                  </div>
+                  <p className="text-center text-sm text-gray-500 py-2 font-medium">
+                    {isEn ? "Starting Position" : "시작 자세"}
+                  </p>
+                </div>
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                  <div className="relative w-full h-[300px] bg-gray-50">
+                    <Image
+                      src={images[1]}
+                      alt={`${name} - ${isEn ? "end position" : "종료 자세"}`}
+                      fill
+                      className="object-contain"
+                      unoptimized
+                    />
+                  </div>
+                  <p className="text-center text-sm text-gray-500 py-2 font-medium">
+                    {isEn ? "End Position" : "종료 자세"}
+                  </p>
                 </div>
               </div>
             </section>
@@ -356,17 +375,17 @@ export default async function ExerciseDetailPage({
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {related.map((rel) => {
-                  const relGif = getExerciseGifUrl(rel.id);
+                  const relImages = getExerciseImages(rel.id);
                   return (
                     <Link
                       key={rel.id}
                       href={`${prefix}/guide/workout/exercises/${rel.id}`}
                       className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:border-[var(--corevia-primary)]/30 transition-all"
                     >
-                      {relGif && (
+                      {relImages && (
                         <div className="relative w-full h-28 bg-gray-50">
                           <Image
-                            src={relGif}
+                            src={relImages[0]}
                             alt={isEn ? rel.nameEn : rel.name}
                             fill
                             className="object-contain"
