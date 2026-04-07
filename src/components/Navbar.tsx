@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { MessageCircle } from "lucide-react";
 import { getDictionary } from "@/lib/i18n";
 import NavbarAuthSection from "./NavbarAuthSection";
 
@@ -19,9 +18,6 @@ export default function Navbar({ locale }: { locale: string }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dict = getDictionary(locale);
   const prefix = locale === "ko" ? "" : `/${locale}`;
-
-  const chatHref = `${prefix}/chat`;
-  const isChatActive = isActive(pathname, chatHref);
 
   const isEn = locale === "en";
 
@@ -156,19 +152,6 @@ export default function Navbar({ locale }: { locale: string }) {
           })}
 
           <Link
-            href={chatHref}
-            aria-current={isChatActive ? "page" : undefined}
-            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
-              isChatActive
-                ? "text-[var(--corevia-ai)]"
-                : "text-[var(--corevia-ai)] hover:text-blue-700"
-            }`}
-          >
-            <MessageCircle className="w-4 h-4" />
-            {dict.nav.aiChat}
-          </Link>
-
-          <Link
             href={switchPath}
             className="px-3 py-1.5 text-xs font-medium text-gray-500 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
           >
@@ -239,15 +222,6 @@ export default function Navbar({ locale }: { locale: string }) {
               )}
             </div>
           ))}
-
-          <Link
-            href={chatHref}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="flex items-center gap-2 py-3 text-sm font-semibold text-[var(--corevia-ai)]"
-          >
-            <MessageCircle className="w-4 h-4" />
-            {dict.nav.aiChat}
-          </Link>
 
           <div className="flex items-center gap-3 mt-2 mb-2">
             <Link
