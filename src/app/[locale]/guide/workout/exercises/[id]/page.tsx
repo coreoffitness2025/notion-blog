@@ -286,13 +286,13 @@ export default async function ExerciseDetailPage({
             <div className="bg-[var(--corevia-primary)]/5 border border-[var(--corevia-primary)]/10 rounded-xl p-6 text-center">
               <p className="text-lg font-bold text-gray-800 mb-2">
                 {isEn
-                  ? "Want expert trainer tips for this exercise?"
-                  : "이 운동의 전문 트레이너 팁이 궁금하다면?"}
+                  ? "Start your fitness journey with CoreVia"
+                  : "진짜 온라인 PT, CoreVia Fitness와 운동을 시작해보세요"}
               </p>
               <p className="text-gray-600 mb-4">
                 {isEn
-                  ? "Get personalized coaching tips backed by research in the CoreVia app."
-                  : "CoreVia 앱에서 논문 기반 전문 트레이너 팁을 확인하세요."}
+                  ? "Expert trainer tips, personalized programs, and AI coaching — all in one app."
+                  : "전문 트레이너 팁, 맞춤 프로그램, AI 코칭까지 — 하나의 앱으로."}
               </p>
               <div className="flex justify-center gap-3">
                 <a

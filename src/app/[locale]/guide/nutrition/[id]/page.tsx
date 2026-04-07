@@ -318,40 +318,40 @@ export default async function NutritionDetailPage({
               {/* Serving Calculator (Client Component) */}
               <ServingCalculator item={item} locale={locale} />
 
-              {/* App CTA */}
-              <section className="bg-[var(--corevia-primary)]/5 border border-[var(--corevia-primary)]/10 rounded-xl p-6 text-center">
-                <p className="text-lg font-bold text-gray-800 mb-2">
-                  {isEn
-                    ? "Track your meals with AI"
-                    : "AI로 식단을 기록하세요"}
-                </p>
-                <p className="text-gray-600 mb-4 text-sm">
-                  {isEn
-                    ? "Just take a photo — CoreVia AI analyzes your food and logs nutrition automatically."
-                    : "사진만 찍으면 AI가 음식을 분석하고 영양소를 자동으로 기록합니다."}
-                </p>
-                <div className="flex justify-center gap-3">
-                  <a
-                    href="https://apps.apple.com/app/corevia-fitness/id6739446554"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
-                  >
-                    App Store
-                  </a>
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
-                  >
-                    Google Play
-                  </a>
-                </div>
-              </section>
-
             </div>
           </div>
+
+          {/* App CTA — full width, centered */}
+          <section className="mt-8 bg-[var(--corevia-primary)]/5 border border-[var(--corevia-primary)]/10 rounded-xl p-8 text-center">
+            <p className="text-xl font-bold text-gray-800 mb-2">
+              {isEn
+                ? "Start your healthy journey with CoreVia Fitness"
+                : "진짜 온라인 PT, CoreVia Fitness와 건강한 식단 관리를 시작해보세요"}
+            </p>
+            <p className="text-gray-600 mb-5 text-sm">
+              {isEn
+                ? "AI-powered meal tracking, personalized coaching, and more — all in one app."
+                : "AI 음식 분석, 맞춤 코칭, 운동 기록까지 — 하나의 앱으로."}
+            </p>
+            <div className="flex justify-center gap-3">
+              <a
+                href="https://apps.apple.com/app/corevia-fitness/id6739446554"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+              >
+                App Store
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+              >
+                Google Play
+              </a>
+            </div>
+          </section>
         </div>
       </main>
     </>

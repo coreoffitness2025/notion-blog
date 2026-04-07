@@ -28,14 +28,14 @@ export default function NutritionHubClient({
   const results = useMemo(() => {
     let items: NutritionItem[];
     if (searchQuery.trim()) {
-      items = searchNutrition(searchQuery, locale, 100);
+      items = searchNutrition(searchQuery, locale, 200);
     } else {
-      items = getPopularNutrition(100);
+      items = getPopularNutrition(sourceFilter !== "all" ? 500 : 100);
     }
     if (sourceFilter !== "all") {
       items = items.filter((item) => item.source === sourceFilter);
     }
-    return items;
+    return items.slice(0, 100);
   }, [searchQuery, sourceFilter, locale]);
 
   const sourceLabel = (source: string) => {

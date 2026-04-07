@@ -60,7 +60,13 @@ export function searchNutrition(
 
 /** Get popular items (complete data, reasonable serving size) for initial SSR */
 export function getPopularNutrition(limit = 100): NutritionItem[] {
-  return DB.filter(
+  const complete = DB.filter(
     (item) => item.dataQuality === "complete" && item.serving_size && item.serving_size < 1000
-  ).slice(0, limit);
+  );
+  // KFDA와 USDA를 균형 있게 섞어서 반환
+  const kfda = complete.filter((i) => i.source === "kfda");
+  const usda = complete.filter((i) => i.source === "usda");
+  const usdaCount = Math.min(Math.floor(limit * 0.2), usda.length); // 20% USDA
+  const kfdaCount = limit - usdaCount;
+  return [...kfda.slice(0, kfdaCount), ...usda.slice(0, usdaCount)];
 }
