@@ -28,6 +28,28 @@ export async function generateMetadata({
       canonical: pageUrl,
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
     },
+    openGraph: {
+      title: dict.blog.title,
+      description: dict.blog.subtitle,
+      url: pageUrl,
+      siteName: "CoreVia",
+      locale: isKo ? "ko_KR" : "en_US",
+      type: "website",
+      images: [
+        {
+          url: `${siteUrl}/og-${isKo ? "ko" : "en"}.png`,
+          width: 1200,
+          height: 630,
+          alt: dict.blog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.blog.title,
+      description: dict.blog.subtitle,
+      images: [`${siteUrl}/og-${isKo ? "ko" : "en"}.png`],
+    },
   };
 }
 
@@ -139,6 +161,53 @@ export default async function PostsPage({ params }: PostsPageProps) {
           ))}
         </div>
       )}
+
+      {/* Cross-link to Guides */}
+      <div
+        style={{
+          marginTop: 32,
+          display: "grid",
+          gap: 12,
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+        }}
+      >
+        <Link
+          href={`${prefix}/guide/workout`}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: 16,
+            border: "1px solid rgba(0,0,0,0.08)",
+            borderRadius: 12,
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          <span style={{ fontWeight: 600, fontSize: 14 }}>
+            {locale === "en" ? "Workout Guide" : "운동 가이드"}
+          </span>
+          <span style={{ fontSize: 14, opacity: 0.5 }}>→</span>
+        </Link>
+        <Link
+          href={`${prefix}/guide/nutrition`}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: 16,
+            border: "1px solid rgba(0,0,0,0.08)",
+            borderRadius: 12,
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          <span style={{ fontWeight: 600, fontSize: 14 }}>
+            {locale === "en" ? "Nutrition Guide" : "영양 가이드"}
+          </span>
+          <span style={{ fontSize: 14, opacity: 0.5 }}>→</span>
+        </Link>
+      </div>
     </div>
   );
 }

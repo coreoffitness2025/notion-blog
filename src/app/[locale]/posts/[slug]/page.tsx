@@ -1,4 +1,4 @@
-import { getPostsFromCache, getWordCount } from "@/lib/notion";
+import { getPostsFromCache, getWordCount, type Post } from "@/lib/notion";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +11,56 @@ import { components } from "@/components/mdx-component";
 import { getDictionary } from "@/lib/i18n";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
+
+function getJsonLd(post: Post, locale: string, wordCount: number) {
+  const isKo = locale === "ko";
+  const prefix = isKo ? "" : "/en";
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      datePublished: new Date(post.date).toISOString(),
+      ...(post.author
+        ? { author: { "@type": "Person", name: post.author } }
+        : {}),
+      image: post.coverImage || `${siteUrl}/og-ko.png`,
+      url: `${siteUrl}${prefix}/posts/${post.slug}`,
+      publisher: {
+        "@type": "Organization",
+        name: "CoreVia Fitness",
+        url: siteUrl,
+      },
+      wordCount,
+      ...(post.tags.length > 0 ? { keywords: post.tags.join(", ") } : {}),
+      ...(post.category ? { articleSection: post.category } : {}),
+      inLanguage: isKo ? "ko" : "en",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: isKo ? "홈" : "Home",
+          item: `${siteUrl}${prefix}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: isKo ? "블로그" : "Blog",
+          item: `${siteUrl}${prefix}/posts`,
+        },
+        { "@type": "ListItem", position: 3, name: post.title },
+      ],
+    },
+  ];
+}
 
 interface PostPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -28,7 +78,6 @@ export async function generateMetadata(
     return { title: "Post Not Found" };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
   const prefix = locale === "ko" ? "" : `/${locale}`;
 
   return {
@@ -74,7 +123,14 @@ export default async function PostPage({ params }: PostPageProps) {
   const wordCount = post.content ? getWordCount(post.content) : 0;
 
   return (
-    <article className="max-w-3xl mx-auto prose dark:prose-invert">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(getJsonLd(post, locale, wordCount)),
+        }}
+      />
+      <article className="max-w-3xl mx-auto prose dark:prose-invert">
       {/* Back to blog list */}
       <div className="mb-6 not-prose">
         <Link
@@ -158,5 +214,6 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       </section>
     </article>
+    </>
   );
 }

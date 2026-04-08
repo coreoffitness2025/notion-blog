@@ -49,6 +49,7 @@ export default function sitemap({ id }: { id: number }): MetadataRoute.Sitemap {
       { path: "/guide/nutrition/calorie", priority: 0.8, freq: "monthly" as const },
       { path: "/guide/nutrition/meal-plans", priority: 0.7, freq: "monthly" as const },
       { path: "/posts", priority: 0.8, freq: "daily" as const },
+      { path: "/shop", priority: 0.6, freq: "monthly" as const },
       { path: "/contact", priority: 0.5, freq: "monthly" as const },
     ];
 

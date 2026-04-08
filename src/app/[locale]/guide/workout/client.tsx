@@ -96,6 +96,28 @@ export default function WorkoutHubClient({
           </Link>
         </div>
 
+        {/* Cross-link to Nutrition Guide */}
+        <div className="mb-8">
+          <Link
+            href={`${prefix}/guide/nutrition`}
+            className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all flex items-center justify-between"
+          >
+            <div>
+              <h2 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--corevia-primary)] transition-colors">
+                {isEn ? "Nutrition Guide" : "영양 가이드"}
+              </h2>
+              <p className="text-sm text-gray-500">
+                {isEn
+                  ? "Calorie calculator, meal plans & food database"
+                  : "칼로리 계산기, 식단 추천, 음식 영양 사전"}
+              </p>
+            </div>
+            <svg className="w-5 h-5 text-gray-400 group-hover:text-[var(--corevia-primary)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+
         {/* Exercise Database Section */}
         <div className="mb-6">
           <h2 className="text-xl font-bold text-gray-800 mb-1">

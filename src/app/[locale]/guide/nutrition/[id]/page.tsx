@@ -418,6 +418,18 @@ export default async function NutritionDetailPage({
             );
           })()}
 
+          {/* Cross-link to Workout */}
+          <div className="mt-6 bg-white border border-gray-100 rounded-xl p-4">
+            <Link
+              href={`${prefix}/guide/workout/exercises`}
+              className="flex items-center justify-between text-sm hover:text-[var(--corevia-primary)] transition-colors"
+            >
+              <span className="text-gray-700 font-medium">
+                {isEn ? "Browse exercise guides →" : "운동 자세 가이드 보기 →"}
+              </span>
+            </Link>
+          </div>
+
           {/* Disclaimer — EEAT Trust */}
           <p className="mt-8 text-xs text-gray-400 text-center">
             {isEn
