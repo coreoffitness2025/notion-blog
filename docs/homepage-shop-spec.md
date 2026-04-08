@@ -199,3 +199,55 @@ src/app/admin/
 - [ ] 개인정보처리방침 페이지
 - [ ] 교환/반품 정책 (수령 7일 이내 청약철회)
 - [ ] 현금영수증 자동발행 (PortOne cashReceipt)
+- [ ] 상품 필수 정보 표시 (원산지/소재/제조사/A/S — sellerInfo 필드)
+- [ ] 청약철회 3영업일 환급 의무 (지연 시 연 15% 이자)
+- [ ] 호스팅사업자 상호 (Vercel Inc.) Footer 표시
+- [ ] 2026.7.21 전자상거래법 전부개정 시행 전 대응
+
+---
+
+## 검수 보완 사항 (2026-04-08 추가)
+
+> 헤드리스 커머스 벤치마킹 리서치 기반 검수 결과
+
+### 멱등성(Idempotency) 처리
+
+웹 결제 완료 후 verifyStorePayment CF 호출 시, 네트워크 오류로 클라이언트가 재시도할 수 있음.
+앱 스펙과 동일하게 `processed_events` 컬렉션으로 중복 방지.
+
+### On-Demand ISR 트리거
+
+```
+Firestore shop_products 변경 → onDocumentUpdated CF → POST /api/revalidate
+→ revalidateTag('product-{handle}') → 즉시 페이지 갱신
+```
+
+- **트리거 조건**: price, salePrice, inStock, variants[].stock 변경 시에만
+- **폴백**: `revalidate: 300` (5분 time-based)
+- `/api/revalidate` Route Handler에 `x-revalidate-secret` 헤더 검증 필수
+
+### Firestore Rules 변경 (홈페이지 오픈 시)
+
+```
+// 현재: 인증 유저만 읽기
+match /shop_products/{productId} {
+  allow read: if isAuthenticated();
+}
+
+// 변경: 비로그인 유저 + SEO 크롤러 접근 허용
+match /shop_products/{productId} {
+  allow read: if true;
+  allow write: if false;
+}
+```
+
+> 앱은 항상 인증 상태이므로 영향 없음. 홈페이지 /shop 구현 착수 시 변경.
+
+### 카트 전략 (앱과 독립)
+
+| 채널 | 저장소 | 동기화 |
+|------|--------|--------|
+| 웹 | Zustand + localStorage | 서버 동기화 없음 |
+| 앱 | Zustand + MMKV | 서버 동기화 없음 |
+
+앱 카트와 웹 카트는 의도적으로 독립 운영. 주문 시점에 CF가 가격/재고 재검증.
