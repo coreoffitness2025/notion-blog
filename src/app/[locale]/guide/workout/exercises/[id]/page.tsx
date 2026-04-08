@@ -103,14 +103,15 @@ function getJsonLd(exercise: Exercise, locale: string) {
         "@type": "HowToTip",
         text: t,
       })),
+      inLanguage: isKo ? "ko" : "en",
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
-        { "@type": "ListItem", position: 2, name: "Workout Guide", item: `${siteUrl}${prefix}/guide/workout` },
-        { "@type": "ListItem", position: 3, name: isKo ? "운동 가이드" : "Exercise Library", item: `${siteUrl}${prefix}/guide/workout/exercises` },
+        { "@type": "ListItem", position: 1, name: isKo ? "피트니스 가이드" : "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
+        { "@type": "ListItem", position: 2, name: isKo ? "운동 가이드" : "Workout Guide", item: `${siteUrl}${prefix}/guide/workout` },
+        { "@type": "ListItem", position: 3, name: isKo ? "운동 자세 사전" : "Exercise Library", item: `${siteUrl}${prefix}/guide/workout/exercises` },
         { "@type": "ListItem", position: 4, name: name },
       ],
     },

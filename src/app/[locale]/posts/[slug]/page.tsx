@@ -89,12 +89,13 @@ export async function generateMetadata(
       description: post.description,
       type: "article",
       url: `${siteUrl}${prefix}/posts/${post.slug}`,
+      locale: locale === "ko" ? "ko_KR" : "en_US",
       publishedTime: new Date(post.date).toISOString(),
       authors: post.author ? [post.author] : [],
       tags: post.tags,
       images: [
         {
-          url: post.coverImage || `${siteUrl}/og-ko.png`,
+          url: post.coverImage || `${siteUrl}/og-${locale === "ko" ? "ko" : "en"}.png`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -105,7 +106,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: [post.coverImage || `${siteUrl}/og-ko.png`],
+      images: [post.coverImage || `${siteUrl}/og-${locale === "ko" ? "ko" : "en"}.png`],
     },
   };
 }

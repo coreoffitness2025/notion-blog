@@ -95,13 +95,14 @@ function getJsonLd(item: NutritionItem, name: string, locale: string) {
       ...(item.sodium != null ? { sodiumContent: `${item.sodium} mg` } : {}),
       ...(item.sugar != null ? { sugarContent: `${item.sugar} g` } : {}),
       ...(item.serving_size ? { servingSize: `${item.serving_size} g` } : {}),
+      inLanguage: isKo ? "ko" : "en",
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
-        { "@type": "ListItem", position: 2, name: "Nutrition Guide", item: `${siteUrl}${prefix}/guide/nutrition` },
+        { "@type": "ListItem", position: 1, name: isKo ? "피트니스 가이드" : "Fitness Guide", item: `${siteUrl}${prefix}/guide` },
+        { "@type": "ListItem", position: 2, name: isKo ? "영양 가이드" : "Nutrition Guide", item: `${siteUrl}${prefix}/guide/nutrition` },
         { "@type": "ListItem", position: 3, name: name },
       ],
     },
