@@ -15,6 +15,8 @@ import rehypeRaw from "rehype-raw";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
+export const revalidate = 3600; // 1h
+
 function getJsonLd(post: Post, locale: string, wordCount: number) {
   const isKo = locale === "ko";
   const prefix = isKo ? "" : "/en";

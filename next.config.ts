@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/sitemap.xml", destination: "/api/sitemap" },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async redirects() {
     return [
       { source: "/guide/1rm", destination: "/guide/workout/1rm", permanent: true },

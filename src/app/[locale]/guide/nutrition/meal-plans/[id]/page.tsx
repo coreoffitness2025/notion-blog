@@ -7,6 +7,8 @@ import { notFound } from "next/navigation";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
+export const revalidate = 604800; // 7 days
+
 export function generateStaticParams() {
   return MEAL_PLAN_DATA.map((plan) => ({ id: plan.id }));
 }

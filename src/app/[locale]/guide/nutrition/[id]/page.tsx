@@ -16,6 +16,7 @@ const siteUrl =
 
 // ── Static Params: top 200 pre-generated, rest on-demand ISR ──
 export const dynamicParams = true;
+export const revalidate = 86400; // 24h — nutrition data is stable
 
 export function generateStaticParams() {
   // Import inline to avoid bundling entire DB in client

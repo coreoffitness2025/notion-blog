@@ -6,6 +6,12 @@ import { getNutritionCount } from "@/data/nutritionDatabase";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
+export const revalidate = 3600; // 1h
+
+export function generateStaticParams() {
+  return [{ locale: "ko" }, { locale: "en" }];
+}
+
 export async function generateMetadata({
   params,
 }: {

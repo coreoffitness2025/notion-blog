@@ -16,6 +16,8 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
 // ── Static Params: 99 exercises ──
+export const revalidate = 604800; // 7 days — exercise data rarely changes
+
 export function generateStaticParams() {
   return getAllExerciseIds().map((id) => ({ id }));
 }

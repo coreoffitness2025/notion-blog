@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-
-export const dynamic = "force-dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,14 +43,14 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <head>
-        <script
-          async
+      <body className={inter.className}>
+        {children}
+        <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2952925573999681"
+          strategy="afterInteractive"
           crossOrigin="anonymous"
         />
-      </head>
-      <body className={inter.className}>{children}</body>
+      </body>
     </html>
   );
 }
