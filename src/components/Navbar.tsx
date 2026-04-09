@@ -90,7 +90,7 @@ export default function Navbar({ locale }: { locale: string }) {
           <img
             src="/logo-horizontal.png"
             alt="CoreVia Fitness"
-            className="h-8 w-auto"
+            className="h-12 w-auto"
           />
         </Link>
 
