@@ -87,9 +87,11 @@ export default function Navbar({ locale }: { locale: string }) {
     <header className="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
       <div className="max-w-[1120px] mx-auto pl-4 pr-[var(--section-px)] py-3 flex items-center justify-between gap-4">
         <Link href={`${prefix}/`} className="flex items-center">
-          <span className="font-extrabold text-xl text-gray-900">
-            CoreVia Fitness
-          </span>
+          <img
+            src="/logo-horizontal.png"
+            alt="CoreVia Fitness"
+            className="h-8 w-auto"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
