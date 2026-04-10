@@ -68,12 +68,20 @@ export default async function MealPlanDetailPage({
   const title = isEn ? plan.titleEn : plan.title;
   const description = isEn ? plan.descriptionEn : plan.description;
 
+  const allIngredients = plan.meals.flatMap((m) => isEn ? m.itemsEn : m.items);
   const jsonLd = [
     {
     "@context": "https://schema.org",
     "@type": "Recipe",
     name: title,
     description: description,
+    image: `${siteUrl}/og-${isEn ? "en" : "ko"}.png`,
+    author: { "@type": "Organization", name: "CoreVia Fitness", url: siteUrl },
+    prepTime: "PT10M",
+    cookTime: "PT20M",
+    totalTime: "PT30M",
+    recipeYield: "1 serving",
+    recipeIngredient: allIngredients,
     nutrition: {
       "@type": "NutritionInformation",
       calories: `${plan.calories} calories`,
