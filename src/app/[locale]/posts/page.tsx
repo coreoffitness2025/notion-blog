@@ -8,7 +8,16 @@ import type { Metadata } from "next";
 
 interface PostsPageProps {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ category?: string }>;
 }
+
+const CATEGORIES_KO = ["전체", "운동", "근비대", "다이어트", "영양", "부상 방지", "보충제", "마인드셋", "부위별 운동", "초보자"] as const;
+const CATEGORIES_EN = ["All", "Exercise", "Hypertrophy", "Diet", "Nutrition", "Injury Prevention", "Supplements", "Mindset", "Body Part Training", "Beginner"] as const;
+const CATEGORY_KO_TO_EN: Record<string, string> = {
+  "운동": "Exercise", "근비대": "Hypertrophy", "다이어트": "Diet", "영양": "Nutrition",
+  "부상 방지": "Injury Prevention", "보충제": "Supplements", "마인드셋": "Mindset",
+  "부위별 운동": "Body Part Training", "초보자": "Beginner",
+};
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
@@ -53,15 +62,31 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostsPage({ params }: PostsPageProps) {
+export default async function PostsPage({ params, searchParams }: PostsPageProps) {
   const { locale } = await params;
+  const { category: selectedCategory } = await searchParams;
   const dict = getDictionary(locale);
   const prefix = locale === "ko" ? "" : `/${locale}`;
+  const isKo = locale === "ko";
+  const categories = isKo ? CATEGORIES_KO : CATEGORIES_EN;
 
   // 캐시에서 Blog 타입만 가져오기 (Type이 없으면 전체 반환)
   const allPosts = getPostsFromCache();
   // Blog 타입이거나 Type이 없는 것들을 블로그로 표시
-  const posts = allPosts.filter((p) => p.type === "Blog" || !p.type);
+  const blogPosts = allPosts.filter((p) => p.type === "Blog" || !p.type);
+
+  // 카테고리 필터 적용
+  const posts = selectedCategory
+    ? blogPosts.filter((p) => p.category === selectedCategory)
+    : blogPosts;
+
+  // 카테고리별 글 수 계산
+  const categoryCounts: Record<string, number> = {};
+  for (const p of blogPosts) {
+    if (p.category) {
+      categoryCounts[p.category] = (categoryCounts[p.category] || 0) + 1;
+    }
+  }
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 16px" }}>
@@ -71,6 +96,38 @@ export default async function PostsPage({ params }: PostsPageProps) {
       </p>
 
       <hr style={{ margin: "24px 0", opacity: 0.2 }} />
+
+      {/* 카테고리 필터 */}
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 24 }}>
+        {categories.map((cat, i) => {
+          const isAll = i === 0;
+          const koCategory = isKo ? cat : Object.entries(CATEGORY_KO_TO_EN).find(([, v]) => v === cat)?.[0] || "";
+          const isActive = isAll ? !selectedCategory : selectedCategory === koCategory;
+          const count = isAll ? blogPosts.length : categoryCounts[koCategory] || 0;
+          if (!isAll && count === 0) return null;
+          const href = isAll
+            ? `${prefix}/posts`
+            : `${prefix}/posts?category=${encodeURIComponent(koCategory)}`;
+          return (
+            <Link
+              key={cat}
+              href={href}
+              style={{
+                padding: "8px 16px",
+                borderRadius: 20,
+                fontSize: 14,
+                fontWeight: isActive ? 600 : 400,
+                textDecoration: "none",
+                color: isActive ? "#fff" : "#333",
+                background: isActive ? "#003478" : "#f3f4f6",
+                transition: "all 0.2s",
+              }}
+            >
+              {cat} ({count})
+            </Link>
+          );
+        })}
+      </div>
 
       {posts.length === 0 ? (
         <p style={{ opacity: 0.8 }}>{dict.blog.noPosts}</p>
@@ -108,17 +165,23 @@ export default async function PostsPage({ params }: PostsPageProps) {
               ) : (
                 <div
                   style={{
+                    position: "relative",
                     aspectRatio: "16/9",
-                    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    background: "#ffffff",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: "white",
-                    fontSize: 24,
-                    fontWeight: 700,
+                    border: "1px solid rgba(0,0,0,0.06)",
+                    borderBottom: "none",
                   }}
                 >
-                  Corevia
+                  <Image
+                    src="/logo-horizontal.png"
+                    alt="CoreVia Fitness"
+                    width={180}
+                    height={44}
+                    style={{ objectFit: "contain" }}
+                  />
                 </div>
               )}
               <div style={{ padding: 16 }}>

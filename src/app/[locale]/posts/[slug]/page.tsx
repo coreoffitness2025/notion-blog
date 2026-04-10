@@ -171,7 +171,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </header>
 
       <div className="max-w-none">
-        <ReactMarkdown components={components} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+        <ReactMarkdown components={components} remarkPlugins={[[remarkGfm, { singleTilde: false }]]} rehypePlugins={[rehypeRaw]}>
           {post.content}
         </ReactMarkdown>
       </div>
