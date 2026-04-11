@@ -15,6 +15,12 @@ export interface Post {
   tags: string[];
   category?: string;
   type?: "Blog" | "Case"; // Blog 또는 Case 구분
+  // i18n: 영어 버전 (핸드북 등 다국어 콘텐츠)
+  titleEn?: string;
+  descriptionEn?: string;
+  contentEn?: string;
+  categoryEn?: string;
+  tagsEn?: string[];
 }
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
@@ -272,19 +278,35 @@ export async function getPostFromNotion(pageId: string): Promise<Post | null> {
  * 빌드 시 scripts/cache-posts.ts가 생성하는 파일을 읽어옴
  * (레포 루트의 posts-cache.json)
  */
-export function getPostsFromCache(type?: "Blog" | "Case"): Post[] {
+/**
+ * locale이 "en"이면 영어 필드를 기본 필드로 매핑하여 반환.
+ * 영어 필드가 없는 글(Notion 등)은 원본 그대로 반환.
+ */
+function localizePost(post: Post, locale: string): Post {
+  if (locale !== "en") return post;
+  return {
+    ...post,
+    title: post.titleEn || post.title,
+    description: post.descriptionEn || post.description,
+    content: post.contentEn || post.content,
+    category: post.categoryEn || post.category,
+    tags: post.tagsEn && post.tagsEn.length > 0 ? post.tagsEn : post.tags,
+  };
+}
+
+export function getPostsFromCache(type?: "Blog" | "Case", locale?: string): Post[] {
   try {
     const cachePath = path.join(process.cwd(), "posts-cache.json");
     if (!fs.existsSync(cachePath)) return [];
     const raw = fs.readFileSync(cachePath, "utf8");
     const posts = JSON.parse(raw);
     const allPosts = Array.isArray(posts) ? (posts as Post[]) : [];
-    
+
     // type 필터가 있으면 해당 type만 반환
-    if (type) {
-      return allPosts.filter((p) => p.type === type);
-    }
-    return allPosts;
+    const filtered = type ? allPosts.filter((p) => p.type === type) : allPosts;
+
+    // locale에 맞게 변환
+    return locale ? filtered.map((p) => localizePost(p, locale)) : filtered;
   } catch (e) {
     console.error("[notion] failed to read posts-cache.json:", e);
     return [];
@@ -294,8 +316,8 @@ export function getPostsFromCache(type?: "Blog" | "Case"): Post[] {
 /**
  * 캐시에서 slug로 단건 찾기
  */
-export function getPostBySlugFromCache(slug: string, type?: "Blog" | "Case"): Post | undefined {
-  const posts = getPostsFromCache(type);
+export function getPostBySlugFromCache(slug: string, type?: "Blog" | "Case", locale?: string): Post | undefined {
+  const posts = getPostsFromCache(type, locale);
   return posts.find((p) => p.slug === slug);
 }
 

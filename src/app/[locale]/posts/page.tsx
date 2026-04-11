@@ -18,6 +18,9 @@ const CATEGORY_KO_TO_EN: Record<string, string> = {
   "부상 방지": "Injury Prevention", "보충제": "Supplements", "마인드셋": "Mindset",
   "부위별 운동": "Body Part Training", "초보자": "Beginner",
 };
+const CATEGORY_EN_TO_KO: Record<string, string> = Object.fromEntries(
+  Object.entries(CATEGORY_KO_TO_EN).map(([ko, en]) => [en, ko])
+);
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
@@ -70,17 +73,17 @@ export default async function PostsPage({ params, searchParams }: PostsPageProps
   const isKo = locale === "ko";
   const categories = isKo ? CATEGORIES_KO : CATEGORIES_EN;
 
-  // 캐시에서 Blog 타입만 가져오기 (Type이 없으면 전체 반환)
-  const allPosts = getPostsFromCache();
+  // 캐시에서 Blog 타입만 가져오기 (locale에 맞는 언어로 반환)
+  const allPosts = getPostsFromCache(undefined, locale);
   // Blog 타입이거나 Type이 없는 것들을 블로그로 표시
   const blogPosts = allPosts.filter((p) => p.type === "Blog" || !p.type);
 
-  // 카테고리 필터 적용
+  // 카테고리 필터 적용 — locale에 맞는 카테고리명으로 비교
   const posts = selectedCategory
     ? blogPosts.filter((p) => p.category === selectedCategory)
     : blogPosts;
 
-  // 카테고리별 글 수 계산
+  // 카테고리별 글 수 계산 (locale에 맞는 카테고리명 기준)
   const categoryCounts: Record<string, number> = {};
   for (const p of blogPosts) {
     if (p.category) {
@@ -101,13 +104,16 @@ export default async function PostsPage({ params, searchParams }: PostsPageProps
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 24 }}>
         {categories.map((cat, i) => {
           const isAll = i === 0;
-          const koCategory = isKo ? cat : Object.entries(CATEGORY_KO_TO_EN).find(([, v]) => v === cat)?.[0] || "";
-          const isActive = isAll ? !selectedCategory : selectedCategory === koCategory;
-          const count = isAll ? blogPosts.length : categoryCounts[koCategory] || 0;
+          // locale에 맞는 카테고리명 (post.category와 일치하는 키)
+          const categoryKey = isKo
+            ? cat
+            : cat; // EN일 때 post.category도 영어이므로 그대로 사용
+          const isActive = isAll ? !selectedCategory : selectedCategory === categoryKey;
+          const count = isAll ? blogPosts.length : categoryCounts[categoryKey] || 0;
           if (!isAll && count === 0) return null;
           const href = isAll
             ? `${prefix}/posts`
-            : `${prefix}/posts?category=${encodeURIComponent(koCategory)}`;
+            : `${prefix}/posts?category=${encodeURIComponent(categoryKey)}`;
           return (
             <Link
               key={cat}

@@ -73,7 +73,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { locale, slug } = await params;
 
-  const posts = getPostsFromCache();
+  const posts = getPostsFromCache(undefined, locale);
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) {
@@ -118,7 +118,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const dict = getDictionary(locale);
   const prefix = locale === "ko" ? "" : `/${locale}`;
 
-  const posts = getPostsFromCache();
+  const posts = getPostsFromCache(undefined, locale);
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) notFound();

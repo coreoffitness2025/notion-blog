@@ -8,13 +8,18 @@ function getHandbookPosts(): Post[] {
   return HANDBOOK_DATA.map((article) => ({
     id: `handbook-${article.id}`,
     title: article.title,
+    titleEn: article.titleEn,
     slug: article.id,
     description: article.summary,
+    descriptionEn: article.summaryEn,
     date: article.publishedDate,
     content: article.content,
+    contentEn: article.contentEn,
     author: article.author,
     tags: [article.category],
+    tagsEn: [article.categoryEn],
     category: article.category,
+    categoryEn: article.categoryEn,
     type: "Blog" as const,
   }));
 }
