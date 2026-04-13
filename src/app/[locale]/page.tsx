@@ -9,6 +9,9 @@ import GuidePreview from "@/components/GuidePreview";
 import BlogPreview from "@/components/BlogPreview";
 import AppDownloadCTA from "@/components/AppDownloadCTA";
 import { getPostsFromCache } from "@/lib/notion";
+
+export const revalidate = 86400;
+
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 

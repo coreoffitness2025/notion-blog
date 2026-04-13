@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { getDictionary } from "@/lib/i18n";
 import type { Metadata } from "next";
 
+export const revalidate = 3600;
+
 interface PostsPageProps {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ category?: string }>;

@@ -3,93 +3,74 @@ import { getAllExerciseIds } from "@/data/exerciseDatabase";
 import { getAllNutritionIds } from "@/data/nutritionDatabase";
 import { MEAL_PLAN_DATA } from "@/data/mealPlanData";
 
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 const locales = ["", "/en"];
 
-function urlEntry(
-  url: string,
-  lastmod: string,
-  changefreq: string,
-  priority: number,
-  koUrl: string,
-  enUrl: string,
-) {
+function urlEntry(loc: string, koUrl: string, enUrl: string, lastmod?: string) {
   return `<url>
-<loc>${url}</loc>
-<lastmod>${lastmod}</lastmod>
-<changefreq>${changefreq}</changefreq>
-<priority>${priority}</priority>
-<xhtml:link rel="alternate" hreflang="ko" href="${koUrl}" />
-<xhtml:link rel="alternate" hreflang="en" href="${enUrl}" />
+<loc>${loc}</loc>${lastmod ? `\n<lastmod>${lastmod}</lastmod>` : ""}
+<xhtml:link rel="alternate" hreflang="x-default" href="${koUrl}"/>
+<xhtml:link rel="alternate" hreflang="ko" href="${koUrl}"/>
+<xhtml:link rel="alternate" hreflang="en" href="${enUrl}"/>
 </url>`;
 }
 
 export async function GET() {
-  const now = new Date().toISOString();
-
   const staticPages = [
-    { path: "", priority: 1, freq: "daily" },
-    { path: "/coach", priority: 0.9, freq: "weekly" },
-    { path: "/team", priority: 0.7, freq: "monthly" },
-    { path: "/ebook", priority: 0.8, freq: "monthly" },
-    { path: "/guide", priority: 0.8, freq: "weekly" },
-    { path: "/guide/workout", priority: 0.8, freq: "weekly" },
-    { path: "/guide/workout/1rm", priority: 0.8, freq: "monthly" },
-    { path: "/guide/workout/exercises", priority: 0.8, freq: "monthly" },
-    { path: "/guide/workout/programs", priority: 0.7, freq: "monthly" },
-    { path: "/guide/nutrition", priority: 0.8, freq: "weekly" },
-    { path: "/guide/nutrition/calorie", priority: 0.8, freq: "monthly" },
-    { path: "/guide/nutrition/meal-plans", priority: 0.7, freq: "monthly" },
-    { path: "/posts", priority: 0.8, freq: "daily" },
-    { path: "/shop", priority: 0.6, freq: "monthly" },
-    { path: "/contact", priority: 0.5, freq: "monthly" },
+    "",
+    "/coach",
+    "/team",
+    "/ebook",
+    "/guide",
+    "/guide/workout",
+    "/guide/workout/1rm",
+    "/guide/workout/exercises",
+    "/guide/workout/programs",
+    "/guide/nutrition",
+    "/guide/nutrition/calorie",
+    "/guide/nutrition/meal-plans",
+    "/posts",
+    "/shop",
+    "/contact",
   ];
 
   const entries: string[] = [];
 
-  // Static pages
   for (const p of staticPages) {
     for (const locale of locales) {
       entries.push(
         urlEntry(
-          `${siteUrl}${locale}${p.path}`,
-          now,
-          p.freq,
-          locale === "" ? p.priority : p.priority * 0.9,
-          `${siteUrl}${p.path}`,
-          `${siteUrl}/en${p.path}`,
+          `${siteUrl}${locale}${p}`,
+          `${siteUrl}${p}`,
+          `${siteUrl}/en${p}`,
         ),
       );
     }
   }
 
-  // Blog posts
   const posts = getPostsFromCache();
   for (const post of posts as Post[]) {
     for (const locale of locales) {
       entries.push(
         urlEntry(
           `${siteUrl}${locale}/posts/${post.slug}`,
-          new Date(post.date).toISOString(),
-          "weekly",
-          locale === "" ? 0.7 : 0.6,
           `${siteUrl}/posts/${post.slug}`,
           `${siteUrl}/en/posts/${post.slug}`,
+          new Date(post.date).toISOString().split("T")[0],
         ),
       );
     }
   }
 
-  // Exercises (99)
   for (const eid of getAllExerciseIds()) {
     for (const locale of locales) {
       entries.push(
         urlEntry(
           `${siteUrl}${locale}/guide/workout/exercises/${eid}`,
-          now,
-          "monthly",
-          locale === "" ? 0.6 : 0.5,
           `${siteUrl}/guide/workout/exercises/${eid}`,
           `${siteUrl}/en/guide/workout/exercises/${eid}`,
         ),
@@ -97,15 +78,11 @@ export async function GET() {
     }
   }
 
-  // Meal plans
   for (const plan of MEAL_PLAN_DATA) {
     for (const locale of locales) {
       entries.push(
         urlEntry(
           `${siteUrl}${locale}/guide/nutrition/meal-plans/${plan.id}`,
-          now,
-          "monthly",
-          locale === "" ? 0.6 : 0.5,
           `${siteUrl}/guide/nutrition/meal-plans/${plan.id}`,
           `${siteUrl}/en/guide/nutrition/meal-plans/${plan.id}`,
         ),
@@ -113,15 +90,11 @@ export async function GET() {
     }
   }
 
-  // Nutrition DB (5,672)
   for (const nid of getAllNutritionIds()) {
     for (const locale of locales) {
       entries.push(
         urlEntry(
           `${siteUrl}${locale}/guide/nutrition/${nid}`,
-          now,
-          "monthly",
-          locale === "" ? 0.5 : 0.4,
           `${siteUrl}/guide/nutrition/${nid}`,
           `${siteUrl}/en/guide/nutrition/${nid}`,
         ),
@@ -138,7 +111,7 @@ ${entries.join("\n")}
   return new Response(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "public, max-age=86400, s-maxage=86400",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

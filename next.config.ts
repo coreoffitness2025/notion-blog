@@ -27,7 +27,6 @@ const nextConfig: NextConfig = {
       { source: "/guide/calorie", destination: "/guide/nutrition/calorie", permanent: true },
       { source: "/guide/meal-plans", destination: "/guide/nutrition/meal-plans", permanent: true },
       { source: "/guide/handbook", destination: "/posts", permanent: true },
-      // EN locale redirects
       { source: "/en/guide/1rm", destination: "/en/guide/workout/1rm", permanent: true },
       { source: "/en/guide/programs", destination: "/en/guide/workout/programs", permanent: true },
       { source: "/en/guide/exercises", destination: "/en/guide/workout/exercises", permanent: true },
