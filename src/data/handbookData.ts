@@ -203,7 +203,7 @@ Most importantly, avoid rushing. Consistent effort, combined with attentive adju
 Using tools like workout tracking apps with AI coaching and form analysis can streamline this process, making your training more effective and enjoyable. Start applying these principles today, and watch your strength and muscle mass grow steadily over time.
     `,
     author: 'Corevia Fitness',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-06-12',
   },
   {
     id: 'muscle-building-fundamentals',
@@ -329,7 +329,7 @@ Remember, lifting heavy isn’t the only answer. Maintaining good form, controll
 So, ditch the myths—train scientifically, eat smart, and rest well. Your gains will thank you.
     `,
     author: 'Corevia Fitness',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-06-26',
   },
   {
     id: 'fat-loss-science',
@@ -516,7 +516,7 @@ To support your journey, tools like the CoreVia app can help you track your work
 Try applying these science-based tips today, and take your fat loss journey to the next level!
     `,
     author: 'Corevia Nutrition',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-07-10',
   },
   {
     id: 'compound-vs-isolation',
@@ -709,7 +709,7 @@ Remember, compound and isolation exercises aren’t mutually exclusive—they’
 And don’t forget—use the CoreVia app to track your workouts, plan your meals, and leverage AI coaching and form analysis to boost your results! So, are you ready to craft your perfect workout routine? Mix the best of both worlds and tailor it to your needs!
     `,
     author: 'Corevia Fitness',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-07-24',
   },
   {
     id: 'diet-macros-guide',
@@ -894,7 +894,7 @@ Adjusting your macro ratios to fit your personal situation and goals is a game-c
 Start today with the CoreVia app — track workouts, plan meals, and get AI-driven macro recommendations all in one place. Use its form analysis to perfect your technique and stay injury-free. It’s your partner in making smarter, healthier choices every day.
     `,
     author: 'Corevia Nutrition',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-08-05',
   },
   {
     id: 'sleep-and-recovery',
@@ -1120,7 +1120,7 @@ By fine-tuning your sleep habits and environment, you'll unlock more GH secretio
 Start applying these sleep strategies today. Combining effective training with quality sleep maximizes your muscle-building potential. Using apps like CoreVia, you can track your progress, optimize your routines, and get personalized advice to reach your fitness goals faster.
     `,
     author: 'Corevia Fitness',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-08-18',
   },
   {
     id: 'plateau-breaking',
@@ -1305,7 +1305,7 @@ Start today by tweaking your routine, setting a new mini-goal, and focusing on g
 Use apps like CoreVia to track your workouts, manage your food intake, and get personalized coaching. Staying organized and motivated makes all the difference in turning your plateau into a comeback.
     `,
     author: 'Corevia Fitness',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-08-28',
   },
   {
     id: 'intermittent-fasting',
@@ -1488,7 +1488,7 @@ The key takeaway is that intermittent fasting, especially the 16:8 method, isn�
 Try applying these tips today with tools like the CoreVia app — track your workouts, plan your meals, and monitor your progress all in one place. Features like AI coaching and posture analysis can help you stay motivated and optimize your fasting journey. It might feel challenging at first, but stick with it — your body will thank you as you start to see and feel the results.
     `,
     author: 'Corevia Nutrition',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-09-10',
   },
   {
     id: 'motivation-psychology',
@@ -1705,7 +1705,7 @@ If you understand the psychology behind motivation and habits, exercise stops fe
 Start today by applying these principles. Use apps that track your progress, get feedback, and keep your routines flexible. The more aligned your habits are with your inner drives, the easier it becomes to stay consistent—and enjoy the journey.
     `,
     author: 'Corevia Mindset',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-09-22',
   },
   {
     id: 'injury-prevention',
@@ -1943,7 +1943,7 @@ Recovery isn’t just physical. Regular, gentle movement through stretching can 
 Consistent, mindful stretching is a cornerstone of injury prevention and recovery. From personal experience, I’ve learned that taking preventative steps is far easier than dealing with setbacks. Listen to your body, progress patiently, and don’t hesitate to seek professional guidance. Using tools like fitness apps can help you stay organized and motivated on your journey to a safe, healthy return to activity.
     `,
     author: 'Corevia Safety',
-    publishedDate: '2025-09-16',
+    publishedDate: '2025-10-06',
   },
   {
     id: 'protein-timing',
@@ -2104,7 +2104,7 @@ While the idea of “timing your protein perfectly” might sound complicated, i
 Try applying these tips today with the CoreVia app. Track your workouts and meals in one place, and make managing your protein timing easier than ever.
     `,
     author: 'Corevia Nutrition',
-    publishedDate: '2025-09-15',
+    publishedDate: '2025-10-20',
   },
   {
     id: 'cardio-vs-weights',
@@ -2295,7 +2295,7 @@ Combining cardio with strength training offers the best of both worlds: faster f
 Try using apps like CoreFit to log your workouts and meals, and leverage their AI coaching and posture analysis features to optimize your routine. With the right approach, the benefits of combining cardio and strength training become clear. Ready to feel the difference? Start today and see how your body transforms!
     `,
     author: 'Corevia Fitness',
-    publishedDate: '2025-09-14',
+    publishedDate: '2025-11-03',
   },
   {
     id: 'metabolism-myths',
@@ -2540,7 +2540,7 @@ Remember: consistency beats quick fixes. Use tools like CoreVia to monitor your 
 Understanding the facts about metabolism helps you take control—your body is more adaptable than you think. Get moving, fuel wisely, and enjoy the journey toward a healthier you.
     `,
     author: 'Corevia Science',
-    publishedDate: '2025-09-13',
+    publishedDate: '2025-11-17',
   },
   {
     id: 'supplements-guide',
@@ -2723,7 +2723,7 @@ Many athletes and fitness enthusiasts have achieved great results through consis
 In summary: Choosing the right fitness supplements isn’t about taking everything at once. Focus on science-backed options like creatine, whey protein, and multivitamins, ensure they're certified, and combine them with proper training, nutrition, and rest. Start with basic supplements, consider your personal health, and use tools like fitness apps to stay on track. With patience and consistency, supplementing your routine can become a simple, effective way to reach your fitness goals. Give it a try—your body will thank you!
     `,
     author: 'Corevia Science',
-    publishedDate: '2025-09-12',
+    publishedDate: '2025-12-01',
   },
   {
     id: 'form-technique',
@@ -2949,7 +2949,7 @@ I’ve also made my share of mistakes lifting heavy without proper form. That’
 Start with simple stretches and strength exercises, check your form regularly with mirrors or recordings, and consider using supportive tools or smart apps. For a comprehensive approach, try platforms like CoreVia — they help you track and improve your form, diet, and workouts all in one place. Prioritize proper exercise form, and enjoy safer, more effective training with lasting results!
     `,
     author: 'Corevia Technique',
-    publishedDate: '2025-09-11',
+    publishedDate: '2025-12-15',
   },
   {
     id: 'hydration-importance',
@@ -3100,7 +3100,7 @@ Using tools like the CoreVia app, you can track workouts, nutrition, and hydrati
 Apply these hydration tips today to elevate your workouts. Keep a consistent routine, monitor your intake, and stay energized. Your body will thank you!
     `,
     author: 'Corevia Health',
-    publishedDate: '2025-09-10',
+    publishedDate: '2025-12-29',
   },
   {
     id: 'mindful-eating',
@@ -3275,7 +3275,7 @@ Use the CoreVia app to put these principles into action. From tracking meals to 
 Remember, mindful eating is about respecting your body’s signals and maintaining a balanced relationship with food. Recognizing true hunger, managing stress, and listening to your body will lead to lasting health and happiness. Take it slow, stay consistent, and over time, mindful eating can become your natural way of life.
     `,
     author: 'Corevia Mindset',
-    publishedDate: '2025-09-09',
+    publishedDate: '2026-01-12',
   },
   {
     id: 'beginner-workout-plan',
@@ -3488,7 +3488,7 @@ Getting started and sticking with it for 12 weeks may seem tough at first, but d
 Use tools like fitness apps to help stay organized, and remember—consistency is everything. Your healthier, stronger self is just around the corner!
     `,
     author: 'Corevia Program',
-    publishedDate: '2025-09-08',
+    publishedDate: '2026-01-26',
   },
   {
     id: 'home-workout-guide',
@@ -3695,7 +3695,7 @@ Always warm up properly, check your form, and avoid overexertion. Start simple, 
 > Use apps like CoreVia to log your workouts, track your diet, and get AI-driven feedback on your form. Stay smart, stay safe, and enjoy your home fitness journey!
     `,
     author: 'Corevia Home',
-    publishedDate: '2025-09-07',
+    publishedDate: '2026-02-09',
   },
   {
     id: 'nutrition-timing',
@@ -3898,7 +3898,7 @@ For example, for strength training, having grilled chicken with sweet potatoes b
 Apply these tips, and with consistent effort, you’ll see better results and feel more energized.
     `,
     author: 'Corevia Nutrition',
-    publishedDate: '2025-09-06',
+    publishedDate: '2026-02-23',
   },
   {
     id: 'female-fitness-guide',
@@ -4083,7 +4083,7 @@ Adjust your goals based on your cycle or menopausal status—perhaps emphasizing
 Paying attention to hormonal fluctuations is essential for women’s fitness. Without considering these natural rhythms, even the most committed workouts may feel ineffective. This guide covered how to customize your exercise routine according to your cycle and hormonal state, along with tips for maintaining consistency. Remember, understanding your body’s signals turns exercise from a chore into a tailored, empowering experience. Try applying what you’ve learned today with the CoreVia app—track your workouts, manage your nutrition, and stay motivated on your journey to better health.
     `,
     author: 'Corevia Women',
-    publishedDate: '2025-09-05',
+    publishedDate: '2026-03-09',
   },
   // 부위별 운동 - 스쿼트
   {
@@ -4275,7 +4275,7 @@ Incorporate ankle mobility drills, balance training, and unilateral strength exe
 **In summary**, a stable, pain-free squat relies on good ankle flexibility, sharp proprioception, and balanced strength. Regularly practicing mobility stretches, balance exercises, and unilateral strength routines will transform your squat technique, reduce injury risk, and improve overall movement quality. Use tools like the CoreVia app to track your progress and fine-tune your form. Remember: consistency is key—your better squat starts today!
     `,
     author: 'Corevia Technique',
-    publishedDate: '2025-09-17',
+    publishedDate: '2026-03-20',
   },
   // 부위별 운동 - 데드리프트
   {
@@ -4525,7 +4525,7 @@ Using tools like the CoreVia app can help you track progress and analyze your fo
 Try applying these tips today with the CoreVia app—track your workouts, monitor your technique, and keep progressing safely!
     `,
     author: 'Corevia Technique',
-    publishedDate: '2025-09-17',
+    publishedDate: '2026-03-31',
   },
   // 보충제 - 크레아틴
   {
@@ -4697,7 +4697,7 @@ By following these guidelines, you can confidently incorporate creatine into you
 Try applying what you’ve learned today with the CoreVia app: track your workouts, manage your diet, and establish a tailored creatine routine. With steady logging, AI coaching, and form analysis, you’ll optimize your results and support your health journey. Here’s to smarter, safer training!
     `,
     author: 'Corevia Science',
-    publishedDate: '2025-09-17',
+    publishedDate: '2026-04-07',
   },
   // 벌크업 가이드
   {
@@ -4827,7 +4827,7 @@ When in doubt, leverage tools like calorie tracking and workout apps—especiall
 Use the CoreVia app today to kickstart your lean bulking plan. Track workouts and meals in one place, get real-time feedback, and benefit from AI coaching and form analysis to stay on course. Building muscle healthily is a gradual process—stay consistent, and you’ll see results.
     `,
     author: 'Corevia Bulk',
-    publishedDate: '2025-09-17',
+    publishedDate: '2026-04-11',
   },
   // 컷팅 가이드
   {
@@ -4989,7 +4989,7 @@ Use tools like fitness apps to implement what you’ve learned today—track you
 By focusing on fat loss without sacrificing muscle, you’ll enjoy a leaner, stronger, more resilient body—ready to take on anything.
     `,
     author: 'Corevia Cut',
-    publishedDate: '2025-09-17',
+    publishedDate: '2026-04-17',
   },
 ]; 
 
