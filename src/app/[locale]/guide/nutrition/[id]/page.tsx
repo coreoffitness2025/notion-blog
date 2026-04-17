@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/i18n";
 import {
   getNutritionById,
   getNutritionName,
+  getNutritionDescription,
   getSimilarNutrition,
   type NutritionItem,
 } from "@/data/nutritionDatabase";
@@ -36,19 +37,22 @@ export async function generateMetadata({
 
   const isKo = locale === "ko";
   const name = getNutritionName(id, locale);
+  const desc = getNutritionDescription(id, locale);
   const path = `/guide/nutrition/${id}`;
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
   const sourceLabel = item.source === "kfda"
     ? isKo ? "식약처" : "KFDA"
     : "USDA";
 
+  const fallbackDesc = isKo
+    ? `${name} 100g 기준 ${item.calories}kcal, 단백질 ${item.protein}g, 탄수화물 ${item.carbs}g, 지방 ${item.fat}g. ${sourceLabel} 공식 데이터 기반 영양 정보.`
+    : `${name}: ${item.calories}kcal, ${item.protein}g protein, ${item.carbs}g carbs, ${item.fat}g fat per 100g. Based on official ${sourceLabel} data.`;
+
   return {
     title: isKo
       ? `${name} 칼로리 ${item.calories}kcal, 단백질 ${item.protein}g - 영양성분`
       : `${name} ${item.calories}kcal, ${item.protein}g Protein - Nutrition Facts`,
-    description: isKo
-      ? `${name} 100g 기준 ${item.calories}kcal, 단백질 ${item.protein}g, 탄수화물 ${item.carbs}g, 지방 ${item.fat}g. ${sourceLabel} 공식 데이터 기반 영양 정보.`
-      : `${name}: ${item.calories}kcal, ${item.protein}g protein, ${item.carbs}g carbs, ${item.fat}g fat per 100g. Based on official ${sourceLabel} data.`,
+    description: desc || fallbackDesc,
     keywords: isKo
       ? [name, `${name} 칼로리`, `${name} 영양성분`, `${name} 단백질`,
          ...(name.includes("닭") ? ["치킨 칼로리", "치킨 영양성분"] : []),
@@ -138,6 +142,7 @@ export default async function NutritionDetailPage({
   const prefix = locale === "ko" ? "" : `/${locale}`;
   const name = getNutritionName(id, locale);
   const secondaryName = getNutritionName(id, locale === "ko" ? "en" : "ko");
+  const description = getNutritionDescription(id, locale);
   const dv = getDailyValue(item);
 
   const sourceLabel = item.source === "kfda"
@@ -191,6 +196,12 @@ export default async function NutritionDetailPage({
               </span>
             </div>
           </div>
+
+          {description && (
+            <p className="text-gray-600 text-base leading-relaxed mb-8">
+              {description}
+            </p>
+          )}
 
           <div className="grid md:grid-cols-2 gap-6 items-stretch">
             {/* Nutrition Facts Table (FDA-style) */}

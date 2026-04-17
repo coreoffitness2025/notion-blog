@@ -1,6 +1,8 @@
 import nutritionDb from "./nutrition-db.json";
 import namesKo from "./nutrition-names-ko.json";
 import namesEn from "./nutrition-names-en.json";
+import descKo from "./nutrition-desc-ko.json";
+import descEn from "./nutrition-desc-en.json";
 
 export interface NutritionItem {
   id: string;
@@ -21,6 +23,10 @@ const NAMES: Record<string, Record<string, string>> = {
   ko: namesKo as Record<string, string>,
   en: namesEn as Record<string, string>,
 };
+const DESCS: Record<string, Record<string, string>> = {
+  ko: descKo as Record<string, string>,
+  en: descEn as Record<string, string>,
+};
 
 // ── Public API ──
 
@@ -31,6 +37,11 @@ export function getNutritionById(id: string): NutritionItem | undefined {
 export function getNutritionName(id: string, locale: string): string {
   const lang = locale === "en" ? "en" : "ko";
   return NAMES[lang]?.[id] || NAMES["ko"]?.[id] || id;
+}
+
+export function getNutritionDescription(id: string, locale: string): string | undefined {
+  const lang = locale === "en" ? "en" : "ko";
+  return DESCS[lang]?.[id] || undefined;
 }
 
 export function getAllNutritionIds(): string[] {
