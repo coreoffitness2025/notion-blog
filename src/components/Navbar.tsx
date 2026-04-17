@@ -79,9 +79,10 @@ export default function Navbar({ locale }: { locale: string }) {
   ];
 
   const otherLocale = locale === "ko" ? "en" : "ko";
+  const cleanPath = pathname.replace(/^\/(ko|en)/, "") || "/";
   const switchPath = locale === "ko"
-    ? `/en${pathname}`
-    : pathname.replace(/^\/en/, "") || "/";
+    ? `/en${cleanPath}`
+    : cleanPath;
 
   return (
     <header className="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">

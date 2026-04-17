@@ -66,6 +66,7 @@ export async function GET() {
     }
   }
 
+  const guideLastmod = new Date().toISOString().split("T")[0];
   for (const eid of getAllExerciseIds()) {
     for (const locale of locales) {
       entries.push(
@@ -73,6 +74,7 @@ export async function GET() {
           `${siteUrl}${locale}/guide/workout/exercises/${eid}`,
           `${siteUrl}/guide/workout/exercises/${eid}`,
           `${siteUrl}/en/guide/workout/exercises/${eid}`,
+          guideLastmod,
         ),
       );
     }
@@ -85,6 +87,7 @@ export async function GET() {
           `${siteUrl}${locale}/guide/nutrition/meal-plans/${plan.id}`,
           `${siteUrl}/guide/nutrition/meal-plans/${plan.id}`,
           `${siteUrl}/en/guide/nutrition/meal-plans/${plan.id}`,
+          guideLastmod,
         ),
       );
     }
@@ -97,6 +100,7 @@ export async function GET() {
           `${siteUrl}${locale}/guide/nutrition/${nid}`,
           `${siteUrl}/guide/nutrition/${nid}`,
           `${siteUrl}/en/guide/nutrition/${nid}`,
+          guideLastmod,
         ),
       );
     }
