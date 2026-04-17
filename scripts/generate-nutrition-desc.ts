@@ -107,8 +107,8 @@ function classifyMacro(item: NutritionItem): MacroProfile {
   // 초저칼로리 (채소, 해조류)
   if (cal <= 30) return "very_low_cal";
 
-  // 당류 과다 (디저트/음료 - 당류가 탄수화물의 60% 이상)
-  if (sugar && sugar > 20 && c > 0 && sugar / c > 0.6 && f >= 10) return "sugar_heavy";
+  // 당류 과다 (디저트/음료 - 당류가 탄수화물의 50% 이상)
+  if (sugar && sugar > 15 && c > 0 && sugar / c > 0.5) return "sugar_heavy";
 
   // 고���백 저지방 (다이어트 핵심)
   if (p >= 20 && f <= 5) return "high_protein_low_fat";
@@ -126,7 +126,7 @@ function classifyMacro(item: NutritionItem): MacroProfile {
   if (c >= 30 && f >= 15) return "high_carb_high_fat";
 
   // 고지방 (��과류 등)
-  if (fRatio > 0.6) return "high_fat";
+  if (fRatio > 0.6 && cal >= 200) return "high_fat";
 
   // 고칼로리 밀도
   if (cal >= 350) return "high_cal_dense";
@@ -135,6 +135,31 @@ function classifyMacro(item: NutritionItem): MacroProfile {
   if (cal <= 100) return "low_cal_balanced";
 
   return "moderate_balanced";
+}
+
+// ── Post-classification: resolve profile-category contradictions ──
+function adjustProfileForCategory(
+  profile: MacroProfile,
+  category: FoodCategory,
+  item: NutritionItem,
+): MacroProfile {
+  const { calories: cal, sugar } = item;
+
+  // Safety net: low-cal items should never get "high_fat" / "bulking" language
+  if (profile === "high_fat" && cal < 200) {
+    return cal <= 100 ? "low_cal_balanced" : "moderate_balanced";
+  }
+
+  // Dessert/ice cream/snacks in moderate_balanced with sugar → sugar_heavy
+  if (
+    profile === "moderate_balanced" &&
+    ["디저트", "빙과류", "과자류"].includes(category) &&
+    sugar && sugar > 10
+  ) {
+    return "sugar_heavy";
+  }
+
+  return profile;
 }
 
 // ── Food Category Classification ──
@@ -160,7 +185,7 @@ const CATEGORY_RULES: [RegExp | string, FoodCategory][] = [
   [/(구이|스테이크)$/, "구이류"],
   // 어패류
   [/^(연어|참치|고등어|갈치|삼치|광어|우럭|조기|대구|명태|아귀|꽃게|새우|랍스터|오징어|문어|낙지|조개|굴|홍합|전복|가리비|멍게|해삼|게|꼬막)/, "어패류"],
-  [/(회|구이|조림|찜|탕|젓갈|젓)$/, "어패류"],
+  [/(회|젓갈|젓)$/, "어패류"],
   // 난류
   [/^(계란|달걀|에그|오믈렛|스크램블)/, "난류"],
   // 채소류
@@ -265,7 +290,7 @@ function classifyCategory(id: string, nameKo: string): FoodCategory {
   if (/크로켓|고로케/.test(clean)) return "튀김류";
   if (/빈대떡|완자전|부추전|호박전/.test(clean)) return "전류";
   if (/만두/.test(clean)) return "가공식품";
-  if (/식혜|수정과|매실|유자/.test(clean)) return "음료류";
+  if (/식혜|수정과|매실|유자|액상커피/.test(clean)) return "음료류";
   if (/김치|나물|무침|장아찌|피클|젓갈|겉절이|생채/.test(clean)) return "채소류";
   if (/잼|시럽|꿀|설탕/.test(clean)) return "조미료";
 
@@ -347,14 +372,24 @@ function generateKo(item: NutritionItem, profile: MacroProfile, category: FoodCa
       ], id));
       break;
 
-    case "very_low_cal":
-      sentences.push(pick([
-        `100g당 ${cal}kcal에 불과해, 다이어트 시 부피감 있는 식사를 구성하는 데 이상적인 볼륨 푸드입니다.`,
-        `${cal}kcal의 극히 낮은 열량으로 포만감 대비 칼로�� 효율이 뛰어나, 체중 감량기 식단의 필수 재료입니다.`,
-        `칼로리가 100g당 ${cal}kcal로 매우 낮아, 먹는 양의 제한 없이 식단에 풍성함을 더할 수 있습니다.`,
-        `100g 기준 ${cal}kcal의 초저칼로리 식품으로, 다이어트 식단에서 볼륨을 채우면서 칼���리를 절약할 수 있습니다.`,
-      ], id));
+    case "very_low_cal": {
+      const isNonFood = ["음료류", "조미료", "유지류"].includes(category);
+      if (isNonFood) {
+        sentences.push(pick([
+          `100g당 ${cal}kcal로 열량이 매우 낮아, 일반적인 섭취량에서는 칼로리 영향이 거의 없습니다.`,
+          `${cal}kcal의 극히 낮은 열량으로, 식단 기록 시 별도 계산 없이도 전체 칼로리에 큰 영향을 주지 않는 수준입니다.`,
+          `100g 기준 ${cal}kcal에 불과하며, 실제 사용량을 고려하면 칼로리 기여도가 매우 낮습니다.`,
+        ], id));
+      } else {
+        sentences.push(pick([
+          `100g당 ${cal}kcal에 불과해, 다이어트 시 부피감 있는 식사를 구성하는 데 이상적인 볼륨 푸드입니다.`,
+          `${cal}kcal의 극히 낮은 열량으로 포만감 대비 칼로리 효율이 뛰어나, 체중 감량기 식단의 필수 재료입니다.`,
+          `칼로리가 100g당 ${cal}kcal로 매우 낮아, 먹는 양의 제한 없이 식단에 풍성함을 더할 수 있습니다.`,
+          `100g 기준 ${cal}kcal의 초저칼로리 식품으로, 다이어트 식단에서 볼륨을 채우면서 칼로리를 절약할 수 있습니다.`,
+        ], id));
+      }
       break;
+    }
 
     case "low_cal_balanced":
       sentences.push(pick([
@@ -391,14 +426,31 @@ function generateKo(item: NutritionItem, profile: MacroProfile, category: FoodCa
       ], id));
       break;
 
-    default: // moderate_balanced
-      sentences.push(pick([
-        `100g당 ${cal}kcal에 단백질 ${p}g, 탄수화물 ${c}g, 지방 ${f}g의 균형 잡힌 영양 구성을 가지고 있습니다.`,
-        `${cal}kcal에 주요 영양소가 고루 분포되어 있어, 균형 잡힌 식단 구성 시 활용하기 좋은 식품입니다.`,
-        `탄수화물 ${c}g, 단백질 ${p}g, 지방 ${f}g이 적절히 배분된 ${cal}kcal의 식품으로, 일상 식단에 무리 없이 포함됩니다.`,
-        `100g 기준 ${cal}kcal로, 매크로 영양소가 비교적 균형 있게 분포되어 다양한 식단 목표에 맞춰 활용 가능합니다.`,
-      ], id));
+    default: { // moderate_balanced — 칼로리 구간별 뉘앙스 분기
+      const mbPool: string[] = [];
+      if (cal <= 150) {
+        mbPool.push(
+          `100g당 ${cal}kcal에 단백질 ${p}g, 탄수화물 ${c}g, 지방 ${f}g의 가벼운 영양 구성으로, 칼로리 부담 없이 식단에 활용할 수 있습니다.`,
+          `${cal}kcal의 비교적 낮은 열량에 영양소가 고루 분포되어, 다이어트 식단에서도 부담 없이 즐길 수 있는 식품입니다.`,
+          `100g 기준 ${cal}kcal로 가벼우며, 단백질 ${p}g과 탄수화물 ${c}g이 적절히 배분되어 간식이나 반찬으로 적합합니다.`,
+        );
+      } else if (cal <= 250) {
+        mbPool.push(
+          `100g당 ${cal}kcal에 단백질 ${p}g, 탄수화물 ${c}g, 지방 ${f}g의 균형 잡힌 영양 구성을 가지고 있습니다.`,
+          `${cal}kcal에 주요 영양소가 고루 분포되어 있어, 균형 잡힌 식단 구성 시 활용하기 좋은 식품입니다.`,
+          `단백질 ${p}g, 탄수화물 ${c}g, 지방 ${f}g의 고른 배분으로 ${cal}kcal를 구성하며, 다양한 식사 목표에 맞춰 조절할 수 있습니다.`,
+          `100g 기준 ${cal}kcal로, 매크로 영양소가 비교적 균형 있게 분포되어 일상 식단에 자연스럽게 포함할 수 있습니다.`,
+        );
+      } else {
+        mbPool.push(
+          `100g당 ${cal}kcal에 탄수화물 ${c}g, 단백질 ${p}g, 지방 ${f}g이 포함된 식품으로, 한 끼 식사의 주요 열량원으로 활용됩니다.`,
+          `${cal}kcal로 열량이 적지 않으며, 매크로 영양소가 고루 배분되어 있어 섭취량 조절이 중요합니다.`,
+          `100g 기준 ${cal}kcal의 보통 수준 열량에 탄수화물 ${c}g, 단백질 ${p}g이 포함되어 있어, 운동 식단에 적절히 배분하면 좋습니다.`,
+        );
+      }
+      sentences.push(pick(mbPool, id));
       break;
+    }
   }
 
   // ── 두 번째 문장: 카테고리 + 피트니스 맥락 ──
@@ -437,6 +489,8 @@ function generateKo(item: NutritionItem, profile: MacroProfile, category: FoodCa
       "양질의 단백질과 함께 오메가-3 지방산을 공급하여, 운동 후 근육 회복과 항염증 효과를 동시에 기대할 수 있습니다.",
       "저지방 고단백 수산물은 다이어트 식단의 핵심 단백질원이며, 포만감 대비 칼로리가 낮아 체중 감량에 유리합니다.",
       "EPA와 DHA 같은 오메가-3 지방산이 근육 단백질 합성을 촉진하고 관절 건강을 지원합니다.",
+      "해산물 특유의 미네랄(아연, 셀레늄)이 운동 시 항산화 방어에 기여하며, 소량이라도 다양한 영양소를 보충할 수 있습니다.",
+      "수분이 풍부한 해산물 요리는 포만감이 높아, 다이어트 식단에서 칼로리 대비 만족감을 높이는 데 유용합니다.",
     ],
     "난류": [
       "완전 단백질 식품으로 필수 아미노산을 모두 함유���고 있어, 근육 ���성의 기본이 되는 식재료입니다.",
@@ -531,17 +585,74 @@ function generateKo(item: NutritionItem, profile: MacroProfile, category: FoodCa
     ],
   };
 
-  const categoryTip = fitnessTips[category];
-  if (categoryTip && categoryTip.length > 0) {
-    sentences.push(pick(categoryTip, id + "_tip"));
+  // 카테고리 팁 선택 (어패류 단백질 가드 포함)
+  let availableTips = fitnessTips[category] || [];
+  if (category === "어패류" && p < 10) {
+    availableTips = availableTips.filter(tip =>
+      !tip.includes("고단백") && !tip.includes("저지방 고단백") && !tip.includes("단백질원")
+    );
+  }
+
+  if (availableTips.length > 0) {
+    sentences.push(pick(availableTips, id + "_tip"));
   } else {
-    // Fallback: general fitness tip based on macro profile
-    const generalTips = [
-      "체중 관리 시 정확한 식사량 기록이 중요하며, CoreVia 앱을 활용하면 간편하게 매크로를 트래킹할 수 있습니다.",
-      "하루 총 칼로리와 단백질 목표를 고려하여 적절한 양을 배분하는 것이 효과적인 식단 관리의 핵심입니다.",
-      "운동 목표(감량/유지/증량)에 맞춰 섭취량을 조절하면 원하는 체형 변화에 한 걸음 더 가까워질 수 있습니다.",
-    ];
-    sentences.push(pick(generalTips, id + "_gen"));
+    // Fallback: 매크로 프로파일별 전용 팁 (CTA 없음)
+    const fallbackByProfile: Record<string, string[]> = {
+      high_protein_low_fat: [
+        "하루 체중 1kg당 1.6~2.2g의 단백질 목표에 맞춰 배분하면, 근손실 없이 체지방을 줄일 수 있습니다.",
+        "단백질은 매 끼 균등하게 나누어 섭취하면 근단백질 합성 효율이 높아집니다.",
+        "식단 기록 시 조리법에 따른 칼로리 변화를 반영하면 더 정확한 매크로 관리가 가능합니다.",
+      ],
+      high_protein_high_fat: [
+        "증량기에는 체중 1kg당 1.6~2.0g의 단백질과 함께 충분한 총 칼로리를 확보하는 것이 중요합니다.",
+        "지방이 높은 단백질원은 포만감이 오래 지속되어, 간식 욕구를 줄이는 데 도움이 됩니다.",
+        "칼로리 밀도가 높은 식품은 정확한 계량 후 식단에 기록해야 목표 칼로리 관리가 수월합니다.",
+      ],
+      high_protein_balanced: [
+        "운동 후 30분~2시간 이내에 단백질과 탄수화물을 함께 섭취하면 회복 효율이 극대화됩니다.",
+        "하루 단백질 목표량을 3~5끼에 고르게 나누면 근단백질 합성이 24시간 유지됩니다.",
+        "식사량을 정확히 기록하면 목표 체중 변화에 맞는 칼로리 조절이 가능합니다.",
+      ],
+      high_carb_low_fat: [
+        "운동 전 1~2시간에 탄수화물 위주로 섭취하면 글리코겐 저장량을 최적화할 수 있습니다.",
+        "탄수화물 섭취 타이밍을 훈련 전후로 집중시키면 에너지 활용도가 높아집니다.",
+        "다이어트 중에도 적절한 탄수화물 섭취는 운동 퍼포먼스 유지에 필수적입니다.",
+      ],
+      high_carb_high_fat: [
+        "고탄수·고지방 식품은 섭취량을 정확히 계량하고 주간 칼로리 예산 내에서 관리하는 것이 핵심입니다.",
+        "증량기나 고강도 훈련일에 집중 배치하면 에너지 활용 효율을 높일 수 있습니다.",
+        "체중 감량기에는 1회 섭취량을 줄이거나 운동일에만 포함하는 전략이 효과적입니다.",
+      ],
+      high_fat: [
+        "지방이 풍부한 식품은 소량으로도 칼로리가 높으므로, 1회 섭취 기준을 정해 관리하는 것이 좋습니다.",
+        "불포화지방산이 풍부한 식품은 호르몬 생성과 세포막 건강에 기여합니다.",
+        "하루 총 칼로리 중 지방 비율을 20~35%로 유지하면 건강과 퍼포먼스 모두 챙길 수 있습니다.",
+      ],
+      very_low_cal: [
+        "초저칼로리 식품은 식사의 부피를 늘려 포만감을 높이는 볼륨 이팅 전략의 핵심입니다.",
+        "다이어트 식단에서 기본 반찬으로 활용하면 전체 칼로리를 줄이면서 식사 만족도를 유지할 수 있습니다.",
+        "비타민과 미네랄 보충을 위해 다양한 색상의 식재료를 조합하는 것이 좋습니다.",
+      ],
+      low_cal_balanced: [
+        "저칼로리이지만 영양 균형이 잡혀 있어, 다이어트 식단의 기본 구성 요소로 활용하기 좋습니다.",
+        "칼로리 여유분을 단백질이 풍부한 주 요리에 투자하면 더 효율적인 식단이 됩니다.",
+        "소량의 칼로리로 다양한 영양소를 섭취할 수 있어, 칼로리 제한 기간에도 영양 결핍을 예방합니다.",
+      ],
+      sugar_heavy: [
+        "당류가 높은 식품은 운동 직후가 아닌 경우 소량만 섭취하고, 주간 빈도를 관리하는 것이 효과적입니다.",
+        "간식으로 즐길 때는 1회 분량을 미리 정해두면 과잉 섭취를 방지할 수 있습니다.",
+        "혈당 급등을 완화하려면 단백질이나 식이섬유가 포함된 식품과 함께 섭취하는 것이 좋습니다.",
+      ],
+      moderate_balanced: [
+        "식단 기록 시 조리법에 따른 칼로리 변화를 반영하면 더 정확한 매크로 관리가 가능합니다.",
+        "하루 총 칼로리와 단백질 목표를 고려하여 적절한 양을 배분하는 것이 효과적인 식단 관리의 핵심입니다.",
+        "운동 목표(감량/유지/증량)에 맞춰 섭취량을 조절하면 원하는 체형 변화에 다가갈 수 있습니다.",
+        "균형 잡힌 식품도 총 칼로리 관리가 핵심이므로, 1회 섭취량을 정확히 파악하고 기록하는 것이 좋습니다.",
+        "다양한 식재료를 조합하면 미량 영양소까지 고르게 섭취할 수 있어 장기적인 건강 유지에 도움이 됩니다.",
+      ],
+    };
+    const profileTips = fallbackByProfile[profile] || fallbackByProfile["moderate_balanced"]!;
+    sentences.push(pick(profileTips, id + "_gen"));
   }
 
   // ── 세 번째 ���장 (선택적): 나트륨/포화지방 경고 또는 추가 팁 ──
@@ -625,14 +736,24 @@ function generateEn(item: NutritionItem, profile: MacroProfile, category: FoodCa
       ], id));
       break;
 
-    case "very_low_cal":
-      sentences.push(pick([
-        `At just ${cal}kcal per 100g, this is a perfect volume food for dieting — fill your plate without filling your calorie budget.`,
-        `With only ${cal}kcal per 100g, this is one of the lowest-calorie options available, ideal for creating satisfying, high-volume meals during a cut.`,
-        `Extremely low in calories (${cal}kcal/100g), this food allows generous portions during weight loss without meaningful caloric impact.`,
-        `Just ${cal}kcal per 100g makes this a dieter's best friend — add bulk to any meal while keeping calories in check.`,
-      ], id));
+    case "very_low_cal": {
+      const isNonFoodEn = ["음료류", "조미료", "유지류"].includes(category);
+      if (isNonFoodEn) {
+        sentences.push(pick([
+          `At just ${cal}kcal per 100g, the calorie impact from typical serving sizes is negligible.`,
+          `With only ${cal}kcal per 100g, this has virtually no calorie impact in normal usage amounts.`,
+          `Extremely low at ${cal}kcal per 100g — actual serving sizes contribute minimal calories to your daily total.`,
+        ], id));
+      } else {
+        sentences.push(pick([
+          `At just ${cal}kcal per 100g, this is a perfect volume food for dieting — fill your plate without filling your calorie budget.`,
+          `With only ${cal}kcal per 100g, this is one of the lowest-calorie options available, ideal for creating satisfying, high-volume meals during a cut.`,
+          `Extremely low in calories (${cal}kcal/100g), this food allows generous portions during weight loss without meaningful caloric impact.`,
+          `Just ${cal}kcal per 100g makes this a dieter's best friend — add bulk to any meal while keeping calories in check.`,
+        ], id));
+      }
       break;
+    }
 
     case "low_cal_balanced":
       sentences.push(pick([
@@ -669,14 +790,31 @@ function generateEn(item: NutritionItem, profile: MacroProfile, category: FoodCa
       ], id));
       break;
 
-    default:
-      sentences.push(pick([
-        `At ${cal}kcal per 100g with ${p}g protein, ${c}g carbs, and ${f}g fat, this offers a balanced nutritional profile for general fitness goals.`,
-        `With a well-distributed macro profile (P:${p}g, C:${c}g, F:${f}g) at ${cal}kcal, this food fits flexibly into most meal plans.`,
-        `Providing ${cal}kcal with balanced macronutrients, this is a versatile food that can be incorporated into various dietary approaches.`,
-        `A ${cal}kcal food with proportionate macros — suitable as part of a balanced diet whether cutting, maintaining, or bulking.`,
-      ], id));
+    default: {
+      const mbPoolEn: string[] = [];
+      if (cal <= 150) {
+        mbPoolEn.push(
+          `At ${cal}kcal per 100g with ${p}g protein, ${c}g carbs, and ${f}g fat, this is a light option that fits easily into calorie-controlled diets.`,
+          `A modest ${cal}kcal per 100g with balanced macros makes this a low-impact addition to any fitness meal plan.`,
+          `With only ${cal}kcal and a balanced macro split (P:${p}g, C:${c}g, F:${f}g), this works well as a side dish or light snack without calorie concern.`,
+        );
+      } else if (cal <= 250) {
+        mbPoolEn.push(
+          `At ${cal}kcal per 100g with ${p}g protein, ${c}g carbs, and ${f}g fat, this offers a balanced nutritional profile for general fitness goals.`,
+          `With a well-distributed macro profile (P:${p}g, C:${c}g, F:${f}g) at ${cal}kcal, this food fits flexibly into most meal plans.`,
+          `Providing ${cal}kcal with evenly distributed macros — ${p}g protein, ${c}g carbs, ${f}g fat — this adapts to various dietary approaches.`,
+          `A balanced ${cal}kcal food with proportionate macros that can serve cutting, maintenance, or bulking goals depending on portion size.`,
+        );
+      } else {
+        mbPoolEn.push(
+          `At ${cal}kcal per 100g with ${c}g carbs, ${p}g protein, and ${f}g fat, this serves as a substantial calorie source — portion control is key.`,
+          `Packing ${cal}kcal with distributed macros, this food carries moderate calorie density that requires mindful portioning during a deficit.`,
+          `With ${cal}kcal and a mix of ${c}g carbs, ${p}g protein, and ${f}g fat, this is best portioned carefully within your daily calorie framework.`,
+        );
+      }
+      sentences.push(pick(mbPoolEn, id));
       break;
+    }
   }
 
   // ── Second sentence: Category-specific fitness context ──
@@ -792,16 +930,72 @@ function generateEn(item: NutritionItem, profile: MacroProfile, category: FoodCa
     ],
   };
 
-  const categoryTip = enTips[category];
-  if (categoryTip && categoryTip.length > 0) {
-    sentences.push(pick(categoryTip, id + "_tip"));
+  let availableEnTips = enTips[category] || [];
+  if (category === "어패류" && p < 10) {
+    availableEnTips = availableEnTips.filter(tip =>
+      !tip.includes("lean protein") && !tip.includes("quality protein") && !tip.includes("protein source")
+    );
+  }
+
+  if (availableEnTips.length > 0) {
+    sentences.push(pick(availableEnTips, id + "_tip"));
   } else {
-    const generalTips = [
-      "Track your intake accurately using a food scale and the CoreVia app to ensure your daily macros align with your fitness goals.",
-      "Adjust portion sizes based on your current goal — deficit for cutting, surplus for bulking, maintenance for recomposition.",
-      "Consider your total daily calories and protein target when incorporating this food into your meal plan for optimal results.",
-    ];
-    sentences.push(pick(generalTips, id + "_gen"));
+    const fallbackEnByProfile: Record<string, string[]> = {
+      high_protein_low_fat: [
+        "Aim for 1.6-2.2g of protein per kg of bodyweight daily, distributed evenly across meals, to maximize muscle retention during a cut.",
+        "Splitting protein intake across 3-5 meals optimizes muscle protein synthesis throughout the day.",
+        "Accurate food tracking, including cooking method variations, ensures your macro targets are truly met.",
+      ],
+      high_protein_high_fat: [
+        "During a bulk, pair adequate protein (1.6-2.0g/kg) with sufficient total calories to support muscle growth.",
+        "High-fat protein sources provide lasting satiety, which can help reduce snacking urges between meals.",
+        "Calorie-dense foods require precise weighing and logging to keep your calorie surplus controlled and intentional.",
+      ],
+      high_protein_balanced: [
+        "Consuming protein with carbs within 30 minutes to 2 hours post-workout maximizes recovery efficiency.",
+        "Distributing daily protein across 3-5 meals maintains elevated muscle protein synthesis around the clock.",
+        "Consistent food logging helps fine-tune calorie intake to match your body composition goals over time.",
+      ],
+      high_carb_low_fat: [
+        "Timing carb intake 1-2 hours before training optimizes glycogen stores for peak workout performance.",
+        "Concentrating carb intake around training windows improves energy utilization and workout quality.",
+        "Even during a calorie deficit, adequate carb intake is essential for maintaining training intensity.",
+      ],
+      high_carb_high_fat: [
+        "High-carb, high-fat foods demand precise portioning within your weekly calorie budget for successful body composition management.",
+        "Strategically placing these foods on high-volume training days maximizes their energy contribution.",
+        "During a cut, reduce serving size or limit to training days only for effective calorie management.",
+      ],
+      high_fat: [
+        "Fat-rich foods deliver concentrated calories in small volumes — setting a fixed serving size helps prevent overconsumption.",
+        "Foods rich in unsaturated fats support hormone production and cell membrane health alongside your training.",
+        "Keeping daily fat at 20-35% of total calories balances both health markers and athletic performance.",
+      ],
+      very_low_cal: [
+        "Ultra-low-calorie foods are the foundation of volume eating — use them to build satisfying meals on minimal calories.",
+        "Use as a base for meals during a diet, adding lean protein on top for a complete, low-calorie plate.",
+        "Varying colors and types of low-calorie foods ensures broad micronutrient coverage even on restricted diets.",
+      ],
+      low_cal_balanced: [
+        "Low-calorie but nutritionally balanced — a reliable building block for any calorie-controlled meal plan.",
+        "Save your calorie budget for protein-rich main dishes by using low-calorie options like this as supporting sides.",
+        "Small calorie cost with diverse nutrients helps prevent deficiencies during extended calorie restriction.",
+      ],
+      sugar_heavy: [
+        "High-sugar foods are best limited to post-workout windows; at other times, keep portions small and planned.",
+        "Pre-portioning treats prevents overconsumption — decide the amount before you start eating.",
+        "Pairing high-sugar foods with protein or fiber slows blood sugar spikes and improves satiety.",
+      ],
+      moderate_balanced: [
+        "Account for cooking method variations when logging — oils, sauces, and preparation changes can shift the calorie count significantly.",
+        "Balance this food within your daily calorie and protein targets for effective, sustainable body composition management.",
+        "Adjust portions based on your current phase — deficit for fat loss, surplus for muscle gain, maintenance for recomposition.",
+        "Even balanced foods require accurate portioning — know your serving size and log it consistently.",
+        "Combining diverse food sources ensures you cover micronutrient needs that support long-term health alongside training.",
+      ],
+    };
+    const enProfileTips = fallbackEnByProfile[profile] || fallbackEnByProfile["moderate_balanced"]!;
+    sentences.push(pick(enProfileTips, id + "_gen"));
   }
 
   // ── Third sentence (optional): sodium/saturated fat warning ──
@@ -833,8 +1027,9 @@ function main() {
   for (const item of db) {
     const nameKo = namesKo[item.id] || item.id;
     const nameEn = namesEn[item.id] || item.id;
-    const profile = classifyMacro(item);
+    const rawProfile = classifyMacro(item);
     const category = classifyCategory(item.id, nameKo);
+    const profile = adjustProfileForCategory(rawProfile, category, item);
 
     profileStats[profile] = (profileStats[profile] || 0) + 1;
     categoryStats[category] = (categoryStats[category] || 0) + 1;
