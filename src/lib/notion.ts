@@ -83,10 +83,10 @@ function getPostSlug(properties: any, fallbackTitle: string): string {
   return slugify(fallbackTitle) || "untitled";
 }
 
-function getPostDate(properties: any): string {
-  // "Published Date" 컬럼명 기준
-  const d = properties?.["Published Date"]?.date?.start;
-  return d ?? new Date().toISOString();
+function getPostDate(properties: any, createdTime?: string): string {
+  // "Published Date" 또는 "Date" 컬럼 → 없으면 페이지 생성 시각 (2026-09-11: 실제 DB는 "Date"만 존재)
+  const d = properties?.["Published Date"]?.date?.start ?? properties?.Date?.date?.start;
+  return d ?? createdTime ?? new Date().toISOString();
 }
 
 function getPostCover(properties: any): string | undefined {
@@ -134,11 +134,19 @@ function getPostType(properties: any): "Blog" | "Case" | undefined {
 /** ---------------------------
  * Notion query: build Status filter dynamically
  * -------------------------- */
+let _dbPropsCache: Record<string, any> | null = null;
+async function getDbProps(): Promise<Record<string, any>> {
+  if (_dbPropsCache) return _dbPropsCache;
+  const db = (await notion.databases.retrieve({ database_id: databaseId! })) as any;
+  _dbPropsCache = db?.properties ?? {};
+  return _dbPropsCache!;
+}
+
 async function buildPublishedFilter(): Promise<any | undefined> {
   if (!databaseId) return undefined;
 
-  const db = (await notion.databases.retrieve({ database_id: databaseId })) as any;
-  const statusProp = db?.properties?.Status;
+  const props = await getDbProps();
+  const statusProp = props?.Status;
 
   // Status 컬럼이 없다면 필터 없이 전체 가져오는 쪽으로
   if (!statusProp) return undefined;
@@ -188,21 +196,23 @@ export async function fetchPublishedPosts(options: FetchPostsOptions = {}): Prom
       }
     }
     
-    // Type 필터 (Blog/Case 구분)
-    if (type) {
+    // Type 필터 (Blog/Case 구분) — DB에 Type 속성이 있을 때만 (없으면 전부 Blog로 취급)
+    const props = await getDbProps();
+    if (type && props?.Type) {
       filterConditions.push({
         property: "Type",
         select: { equals: type }
       });
     }
 
+    // 정렬: "Published Date" → "Date" → 생성 시각 (존재하지 않는 속성으로 정렬하면 400)
+    const dateProp = props?.["Published Date"] ? "Published Date" : props?.Date ? "Date" : null;
     const queryParams: any = {
       database_id: databaseId,
       sorts: [
-        {
-          property: "Published Date",
-          direction: "descending",
-        },
+        dateProp
+          ? { property: dateProp, direction: "descending" }
+          : { timestamp: "created_time", direction: "descending" },
       ],
     };
 
@@ -251,7 +261,7 @@ export async function getPostFromNotion(pageId: string): Promise<Post | null> {
     const title = getPostTitle(properties);
     const slug = getPostSlug(properties, title);
     const coverImage = getPostCover(properties);
-    const date = getPostDate(properties);
+    const date = getPostDate(properties, page?.created_time);
 
     const post: Post = {
       id: page.id,
