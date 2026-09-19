@@ -2,7 +2,8 @@ import { getPostsFromCache, getWordCount, type Post } from "@/lib/notion";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { POST_REDIRECTS } from "@/data/postRedirects";
 import type { Metadata, ResolvingMetadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { Badge } from "@/components/ui/badge";
@@ -130,7 +131,11 @@ export default async function PostPage({ params }: PostPageProps) {
   const posts = getPostsFromCache(undefined, locale);
   const post = posts.find((p) => p.slug === slug);
 
-  if (!post) notFound();
+  if (!post) {
+    const to = POST_REDIRECTS[decodeURIComponent(slug)];
+    if (to) permanentRedirect(`${locale === "ko" ? "" : `/${locale}`}/posts/${to}`);
+    notFound();
+  }
 
   const wordCount = post.content ? getWordCount(post.content) : 0;
 
