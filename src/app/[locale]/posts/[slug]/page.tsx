@@ -140,7 +140,7 @@ export default async function PostPage({ params }: PostPageProps) {
           __html: JSON.stringify(getJsonLd(post, locale, wordCount)),
         }}
       />
-      <article className="max-w-3xl mx-auto prose dark:prose-invert">
+      <article className="max-w-3xl mx-auto px-5 md:px-0 prose dark:prose-invert prose-blockquote:not-italic prose-blockquote:font-normal [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none">
       {/* Back to blog list */}
       <div className="mb-6 not-prose">
         <Link
@@ -162,7 +162,6 @@ export default async function PostPage({ params }: PostPageProps) {
           <time>{format(new Date(post.date), "yyyy.MM.dd")}</time>
           {post.author && <span>By {post.author}</span>}
           <span>{calculateReadingTime(wordCount)}</span>
-          <span>{wordCount} words</span>
         </div>
 
         <h1 className="text-4xl font-bold mb-4 text-foreground">{post.title}</h1>

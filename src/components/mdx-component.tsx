@@ -35,7 +35,7 @@ const components = {
     <li className="mb-2">{children}</li>
   ),
   blockquote: ({ children }: { children?: React.ReactNode }) => (
-    <blockquote className="mb-4 border-neutral-300 border-l-2 py-2 pl-4 italic">
+    <blockquote className="my-6 rounded-lg border-l-4 border-blue-600 bg-slate-50 px-5 py-4 not-italic font-normal text-foreground dark:bg-slate-900">
       {children}
     </blockquote>
   ),
