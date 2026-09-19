@@ -25,7 +25,8 @@ export function generateStaticParams() {
 }
 
 function getJsonLd(post: Post, locale: string, wordCount: number) {
-  const isKo = locale === "ko";
+  // 영어 본문이 없는 글(Notion 한국어 글)은 /en 주소도 한국어 → 한국어 URL·언어로 표기 (중복 방지, 2026-09-20)
+  const isKo = locale === "ko" || !post.contentEn;
   const prefix = isKo ? "" : "/en";
   return [
     {
@@ -87,7 +88,8 @@ export async function generateMetadata(
     return { title: "Post Not Found" };
   }
 
-  const prefix = locale === "ko" ? "" : `/${locale}`;
+  // 영어 본문이 없는 글은 /en 페이지도 한국어 원문과 같은 내용 → 대표 주소를 한국어 URL로 (noindex 는 섞지 않음)
+  const prefix = locale === "ko" || !post.contentEn ? "" : `/${locale}`;
 
   return {
     title: post.title,

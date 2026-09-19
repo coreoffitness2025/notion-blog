@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         { source: "/sitemap.xml", destination: "/api/sitemap" },
+        { source: "/rss.xml", destination: "/api/rss" },
+        { source: "/feed.xml", destination: "/api/rss" },
       ],
       afterFiles: [],
       fallback: [],

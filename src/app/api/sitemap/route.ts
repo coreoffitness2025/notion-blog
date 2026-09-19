@@ -54,15 +54,20 @@ export async function GET() {
 
   const posts = getPostsFromCache();
   for (const post of posts as Post[]) {
+    const koUrl = `${siteUrl}/posts/${post.slug}`;
+    const lastmod = new Date(post.date).toISOString().split("T")[0];
+    if (!post.contentEn) {
+      // 영어 본문 없는 글: /en 은 한국어 중복이라 사이트맵·hreflang 에서 제외 (2026-09-20)
+      entries.push(`<url>
+<loc>${koUrl}</loc>
+<lastmod>${lastmod}</lastmod>
+<xhtml:link rel="alternate" hreflang="x-default" href="${koUrl}"/>
+<xhtml:link rel="alternate" hreflang="ko" href="${koUrl}"/>
+</url>`);
+      continue;
+    }
     for (const locale of locales) {
-      entries.push(
-        urlEntry(
-          `${siteUrl}${locale}/posts/${post.slug}`,
-          `${siteUrl}/posts/${post.slug}`,
-          `${siteUrl}/en/posts/${post.slug}`,
-          new Date(post.date).toISOString().split("T")[0],
-        ),
-      );
+      entries.push(urlEntry(`${siteUrl}${locale}/posts/${post.slug}`, koUrl, `${siteUrl}/en/posts/${post.slug}`, lastmod));
     }
   }
 
