@@ -46,3 +46,7 @@ next-env.d.ts
 
 # cache
 /cache
+.claude/settings.local.json
+
+# 빌드 때 받은 Notion 이미지 (scripts/cache-posts.ts)
+/public/notion-images/

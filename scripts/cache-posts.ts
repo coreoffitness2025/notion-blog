@@ -2,6 +2,51 @@ import { fetchPublishedPosts, getPostFromNotion, type Post } from "../src/lib/no
 import { HANDBOOK_DATA } from "../src/data/handbookData";
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
+
+// Notion 파일 URL(S3 서명)은 1시간 뒤 만료 → 빌드 때 받아서 public/notion-images 로 고정 (2026-09-19 본문 이미지 깨짐 수정)
+const IMG_DIR = path.join(process.cwd(), "public", "notion-images");
+const isNotionFile = (u: string) => /amazonaws\.com|notion-static\.com|notion\.so\/image|file\.notion\.so|notionusercontent\.com/.test(u);
+
+async function localize(url: string | undefined): Promise<string | undefined> {
+  if (!url || !isNotionFile(url)) return url;
+  try {
+    const u = new URL(url);
+    const ext = (path.extname(u.pathname).toLowerCase().match(/^\.(png|jpe?g|webp|gif|svg|avif)$/) || [".png"])[0];
+    const name = crypto.createHash("sha1").update(u.origin + u.pathname).digest("hex").slice(0, 16) + ext;
+    const out = path.join(IMG_DIR, name);
+    if (!fs.existsSync(out)) {
+      const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      fs.mkdirSync(IMG_DIR, { recursive: true });
+      fs.writeFileSync(out, Buffer.from(await res.arrayBuffer()));
+    }
+    return `/notion-images/${name}`;
+  } catch (e) {
+    console.warn(`[cache-posts] image localize failed, keeping remote URL: ${String(e).slice(0, 120)}`);
+    return url;
+  }
+}
+
+async function localizeMarkdown(md: string | undefined): Promise<string | undefined> {
+  if (!md) return md;
+  const found = [...md.matchAll(/!\[[^\]]*\]\((https?:\/\/[^)\s]+)\)/g)].map((m) => m[1]);
+  let out = md;
+  for (const url of new Set(found)) {
+    const local = await localize(url);
+    if (local && local !== url) out = out.split(url).join(local);
+  }
+  return out;
+}
+
+async function localizePost(p: Post): Promise<Post> {
+  return {
+    ...p,
+    coverImage: await localize(p.coverImage),
+    content: (await localizeMarkdown(p.content)) ?? p.content,
+    contentEn: await localizeMarkdown(p.contentEn),
+  };
+}
 
 // 핸드북 아티클을 Post 형식으로 변환
 function getHandbookPosts(): Post[] {
@@ -46,7 +91,7 @@ async function cachePosts() {
     for (const p of posts) {
       try {
         const full = await getPostFromNotion(p.id);
-        if (full) allPosts.push(full);
+        if (full) allPosts.push(await localizePost(full));
       } catch (e) {
         console.error(`Failed to fetch post detail: ${p.id}`, e);
         // 한 개 글이 깨져도 전체 빌드는 살린다
