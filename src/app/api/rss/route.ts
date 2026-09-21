@@ -37,7 +37,7 @@ export async function GET() {
 <description>운동·식단을 연구 근거로 정리하는 코비아 피트니스 블로그</description>
 <language>ko</language>
 <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+<lastBuildDate>${posts[0] ? new Date(posts[0].date).toUTCString() : new Date().toUTCString()}</lastBuildDate>
 ${items}
 </channel>
 </rss>`;

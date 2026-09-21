@@ -3,6 +3,9 @@ import { getAllExerciseIds } from "@/data/exerciseDatabase";
 import { getAllNutritionIds } from "@/data/nutritionDatabase";
 import { MEAL_PLAN_DATA } from "@/data/mealPlanData";
 
+/** 가이드 데이터 최종 갱신일 — src/data/ 의 가이드 데이터를 고치면 같이 올린다 */
+const GUIDE_CONTENT_UPDATED = "2026-04-17";
+
 export const dynamic = "force-static";
 export const revalidate = 3600;
 
@@ -71,7 +74,11 @@ export async function GET() {
     }
   }
 
-  const guideLastmod = new Date().toISOString().split("T")[0];
+  // 가이드 페이지는 자동 생성이라 내용이 거의 안 바뀐다. 빌드 날짜를 쓰면 매일 1만 페이지가
+  // 수정된 것처럼 보여 검색엔진이 새 글을 노이즈 속에 묻는다 → 실제 데이터 갱신일로 고정 (2026-09-21).
+  // src/data/ 의 가이드 데이터(exerciseDatabase·nutritionDatabase·mealPlanData·exerciseGifMap)를
+  // 고칠 때 이 날짜를 같이 올릴 것.
+  const guideLastmod = GUIDE_CONTENT_UPDATED;
   for (const eid of getAllExerciseIds()) {
     for (const locale of locales) {
       entries.push(

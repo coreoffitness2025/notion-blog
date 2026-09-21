@@ -128,7 +128,11 @@ function getPostType(properties: any): "Blog" | "Case" | undefined {
   // Type 컬럼 (Select)에서 Blog/Case 구분
   const typeName = properties?.Type?.select?.name;
   if (typeName === "Blog" || typeName === "Case") return typeName;
-  return undefined;
+  // Type 을 안 채운 글은 Blog 로 본다 (2026-09-21).
+  // 파이프라인(publish_notion.py)이 Type 을 안 넣어서 4월 이후 새 글이 전부 undefined →
+  // getPostsFromCache("Blog") 를 쓰는 RSS·홈 최근글에서 통째로 빠져 있었다.
+  // 그 탓에 네이버는 RSS 로 새 글을 못 찾고, 구글은 색인된 홈에서 새 글로 가는 내부링크가 없었다.
+  return "Blog";
 }
 
 /** ---------------------------
