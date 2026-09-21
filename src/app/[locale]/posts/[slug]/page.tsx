@@ -6,6 +6,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { POST_REDIRECTS } from "@/data/postRedirects";
 import type { Metadata, ResolvingMetadata } from "next";
 import ReactMarkdown from "react-markdown";
+import { extractFaq } from "@/lib/faq";
 import { Badge } from "@/components/ui/badge";
 import { calculateReadingTime } from "@/lib/utils";
 import { components } from "@/components/mdx-component";
@@ -25,7 +26,10 @@ export function generateStaticParams() {
   );
 }
 
+const BYLINE = "코비아 피트니스";
+
 function getJsonLd(post: Post, locale: string, wordCount: number) {
+  const faq = extractFaq(post.content);
   // 영어 본문이 없는 글(Notion 한국어 글)은 /en 주소도 한국어 → 한국어 URL·언어로 표기 (중복 방지, 2026-09-20)
   const isKo = locale === "ko" || !post.contentEn;
   const prefix = isKo ? "" : "/en";
@@ -36,9 +40,9 @@ function getJsonLd(post: Post, locale: string, wordCount: number) {
       headline: post.title,
       description: post.description,
       datePublished: new Date(post.date).toISOString(),
-      ...(post.author
-        ? { author: { "@type": "Person", name: post.author } }
-        : {}),
+      // 2026-09-19 대표 결정: 블로그 바이라인은 "코비아 피트니스". 노션에 남아 있는
+      // Corevia Nutrition/Science 같은 값은 실존 인물이 아니라 Person 으로 쓰면 거짓 신호가 된다.
+      author: { "@type": "Organization", name: BYLINE, url: siteUrl },
       image: post.coverImage || `${siteUrl}/og-ko.png`,
       url: `${siteUrl}${prefix}/posts/${post.slug}`,
       publisher: {
@@ -70,6 +74,20 @@ function getJsonLd(post: Post, locale: string, wordCount: number) {
         { "@type": "ListItem", position: 3, name: post.title },
       ],
     },
+    // 본문 FAQ 가 2개 이상일 때만. 구글 AI 개요·네이버 AI 브리핑이 무는 형식이다 (2026-09-21)
+    ...(faq.length >= 2
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faq.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
+        ]
+      : []),
   ];
 }
 
@@ -103,7 +121,7 @@ export async function generateMetadata(
       url: `${siteUrl}${prefix}/posts/${post.slug}`,
       locale: locale === "ko" ? "ko_KR" : "en_US",
       publishedTime: new Date(post.date).toISOString(),
-      authors: post.author ? [post.author] : [],
+      authors: [BYLINE],
       tags: post.tags,
       images: [
         {
@@ -167,7 +185,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <header className="mb-8">
         <div className="flex flex-wrap items-center gap-4 text-muted-foreground mb-4">
           <time>{format(new Date(post.date), "yyyy.MM.dd")}</time>
-          {post.author && <span>By {post.author}</span>}
+          <span>{BYLINE}</span>
           <span>{calculateReadingTime(wordCount)}</span>
         </div>
 
