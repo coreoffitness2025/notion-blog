@@ -23,5 +23,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon|ads\\.txt|robots\\.txt|sitemap|.*\\..*).*)" ],
+  // go = 앱 다운로드 리다이렉트(로케일 프리픽스를 붙이면 안 된다)
+  matcher: ["/((?!_next|api|go|favicon|ads\\.txt|robots\\.txt|sitemap|.*\\..*).*)" ],
 };
