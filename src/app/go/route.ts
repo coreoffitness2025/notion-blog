@@ -59,8 +59,11 @@ export function GET(request: NextRequest) {
     return NextResponse.redirect(app.ios, 302);
   }
 
-  // 데스크톱 등: 스토어 대신 사이트로 (여기는 UTM 이 그대로 살아 GA/로그에서 보인다)
-  const site = new URL("/", request.nextUrl.origin);
-  Object.entries(utm).forEach(([k, v]) => site.searchParams.set(k, v));
-  return NextResponse.redirect(site, 302);
+  // 데스크톱·기타: 이 링크는 "앱 받기" 버튼이다. 홈으로 보내지 말고 Play 웹 스토어 페이지로 보낸다
+  // (2026-09-22 대표 지적: 리틀리는 원래 스토어로 직행했는데 홈으로 가면 링크 의미가 사라진다)
+  const referrer = new URLSearchParams(utm).toString();
+  return NextResponse.redirect(
+    `https://play.google.com/store/apps/details?id=${app.android}&referrer=${encodeURIComponent(referrer)}`,
+    302,
+  );
 }
