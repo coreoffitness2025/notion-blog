@@ -71,7 +71,7 @@ export default async function ShopPage({
             App Store
           </a>
           <a
-            href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+            href="/go?p=android&c=site-shop"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[var(--corevia-primary)] text-white text-sm font-medium px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors"

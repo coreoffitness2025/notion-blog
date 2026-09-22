@@ -67,7 +67,7 @@ export default function HeroSection({ locale }: { locale: string }) {
               App Store
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+              href="/go?p=android&c=site-hero"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-[var(--corevia-primary)] text-white font-medium px-8 py-4 rounded-2xl text-base hover:bg-blue-600 transition-all shadow-sm"

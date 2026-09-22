@@ -236,7 +236,7 @@ export default async function PostPage({ params }: PostPageProps) {
               App Store
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+              href={`/go?p=android&c=bl-${slug}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[var(--corevia-primary)] text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-blue-600 transition-colors"

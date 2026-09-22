@@ -59,7 +59,7 @@ export default function PointLimitModal({
                 App Store
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.corevia.fitness"
+                href="/go?p=android&c=site-chat"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors"

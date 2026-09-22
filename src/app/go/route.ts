@@ -36,6 +36,8 @@ export function GET(request: NextRequest) {
   const campaign = clean(params.get("c"), "unknown");
   const source = clean(params.get("s"), campaign.split("-")[0] || "link");
 
+  // p=android|ios — 스토어 버튼처럼 기기가 이미 정해진 자리에서 쓴다. 없으면 UA 로 판단
+  const forced = clean(params.get("p"), "");
   const ua = request.headers.get("user-agent") ?? "";
   const utm = {
     utm_source: source,
@@ -44,7 +46,7 @@ export function GET(request: NextRequest) {
   };
 
   // 안드로이드: Play 링크에 referrer 를 실어야 Firebase 가 설치를 캠페인에 귀속시킨다
-  if (/android/i.test(ua)) {
+  if (forced === "android" || (!forced && /android/i.test(ua))) {
     const referrer = new URLSearchParams(utm).toString();
     return NextResponse.redirect(
       `https://play.google.com/store/apps/details?id=${app.android}&referrer=${encodeURIComponent(referrer)}`,
@@ -53,7 +55,7 @@ export function GET(request: NextRequest) {
   }
 
   // iOS: 파라미터를 붙여봐야 App Store 가 버린다. 그냥 스토어로 보낸다
-  if (/iphone|ipad|ipod/i.test(ua)) {
+  if (forced === "ios" || (!forced && /iphone|ipad|ipod/i.test(ua))) {
     return NextResponse.redirect(app.ios, 302);
   }
 
