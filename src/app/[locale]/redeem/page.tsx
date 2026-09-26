@@ -14,10 +14,10 @@ export async function generateMetadata({
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
 
   return {
-    title: isKo ? "사은품 코드 등록 - 코비아 피트니스" : "Redeem a code - CoreVia Fitness",
+    title: isKo ? "전자책 받기 · 코드 등록 - 코비아 피트니스" : "Get your ebook - CoreVia Fitness",
     description: isKo
-      ? "전자책·체중계 구매 시 받으신 코드를 등록하면 코비아 피트니스 Pro를 이용하실 수 있습니다."
-      : "Register the code you received with your purchase to activate CoreVia Fitness Pro.",
+      ? "주문번호 또는 코드를 넣으면 전자책 PDF와 코비아 피트니스 Pro 이용 기간을 받으실 수 있습니다."
+      : "Enter your order number or code to get your ebook and CoreVia Fitness Pro.",
     alternates: { canonical: pageUrl },
     // 코드 등록 페이지는 검색에 노출될 이유가 없다. 메일·상세페이지로만 들어온다.
     robots: { index: false, follow: false },
@@ -39,12 +39,12 @@ export default async function RedeemPage({
   return (
     <main className="mx-auto w-full max-w-[640px] px-5 py-14">
       <h1 className="text-2xl font-bold text-[#1B2433]">
-        {isKo ? "사은품 코드 등록" : "Redeem a code"}
+        {isKo ? "전자책 받기" : "Get your ebook"}
       </h1>
       <p className="mt-3 leading-7 text-gray-600">
         {isKo
-          ? "전자책이나 체중계를 구매하시면서 받으신 코드를 등록해 주세요. 앱에 로그인한 계정에 Pro 이용 기간이 더해집니다."
-          : "Enter the code you received with your purchase. Pro access will be added to the account you sign in with."}
+          ? "주문번호(또는 받으신 코드)를 넣어 주세요. 전자책 PDF를 내려받으실 수 있고, 앱에 로그인한 계정에 Pro 이용 기간이 함께 더해집니다."
+          : "Enter your order number (or the code you received). You will get the ebook PDF, and Pro access will be added to the account you sign in with."}
       </p>
       <div className="mt-8">
         <RedeemClient initialCode={c ?? ""} />
