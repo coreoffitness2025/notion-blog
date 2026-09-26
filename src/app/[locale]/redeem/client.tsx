@@ -15,17 +15,19 @@
 import { useState } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { getFirebaseApp } from "@/lib/firebase/client";
-import { signInWithGoogle } from "@/lib/firebase/auth";
+import { signInWithGoogle, signInWithApple, signInWithEmail } from "@/lib/firebase/auth";
 import { useAuth } from "@/lib/auth/AuthContext";
 
 type Result = { tier: string; expiresAt: string; months: number; extended: boolean };
 
-export default function RedeemClient() {
+export default function RedeemClient({ initialCode = "" }: { initialCode?: string }) {
   const { user, loading } = useAuth();
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(initialCode);
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [mail, setMail] = useState("");
+  const [pw, setPw] = useState("");
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,14 +76,36 @@ export default function RedeemClient() {
       {!user ? (
         <div className="rounded-2xl border border-gray-200 p-6">
           <p className="text-gray-700">
-            코드는 <b>앱에 로그인한 계정</b>에 적용됩니다. 먼저 그 계정으로 로그인해 주세요.
+            코드는 <b>앱에서 쓰시는 계정</b>에 적용됩니다.{" "}
+            <b>앱에 가입할 때 쓴 방법 그대로</b> 로그인해 주세요.
           </p>
-          <button
-            onClick={() => signInWithGoogle()}
-            className="mt-4 rounded-lg bg-[#00347F] px-5 py-3 font-semibold text-white"
-          >
-            로그인하고 코드 등록하기
-          </button>
+          <div className="mt-4 grid gap-2">
+            <button onClick={() => signInWithGoogle().catch(() => setError("구글 로그인을 마치지 못했습니다."))}
+              className="rounded-lg border border-gray-300 px-5 py-3 font-semibold text-gray-800">
+              Google로 로그인
+            </button>
+            <button onClick={() => signInWithApple().catch(() => setError("Apple 로그인을 마치지 못했습니다."))}
+              className="rounded-lg bg-black px-5 py-3 font-semibold text-white">
+              Apple로 로그인
+            </button>
+          </div>
+          <details className="mt-4">
+            <summary className="cursor-pointer text-sm text-gray-600">이메일로 가입했어요</summary>
+            <div className="mt-3 grid gap-2">
+              <input type="email" placeholder="이메일" value={mail}
+                onChange={(e) => setMail(e.target.value)} autoComplete="email"
+                className="rounded-lg border border-gray-300 px-4 py-3" />
+              <input type="password" placeholder="비밀번호" value={pw}
+                onChange={(e) => setPw(e.target.value)} autoComplete="current-password"
+                className="rounded-lg border border-gray-300 px-4 py-3" />
+              <button
+                onClick={() => signInWithEmail(mail, pw).catch(() => setError("이메일 또는 비밀번호가 맞지 않습니다."))}
+                className="rounded-lg bg-[#00347F] px-5 py-3 font-semibold text-white">
+                이메일로 로그인
+              </button>
+            </div>
+          </details>
+          {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
         </div>
       ) : (
         <form onSubmit={submit} className="rounded-2xl border border-gray-200 p-6">

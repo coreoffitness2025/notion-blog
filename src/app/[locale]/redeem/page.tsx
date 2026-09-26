@@ -26,10 +26,14 @@ export async function generateMetadata({
 
 export default async function RedeemPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ c?: string }>;
 }) {
   const { locale } = await params;
+  // 메일 링크가 `?c=CV-...` 로 코드를 실어 온다 — 받는 사람은 입력할 게 없다
+  const { c } = await searchParams;
   const isKo = locale === "ko";
 
   return (
@@ -43,7 +47,7 @@ export default async function RedeemPage({
           : "Enter the code you received with your purchase. Pro access will be added to the account you sign in with."}
       </p>
       <div className="mt-8">
-        <RedeemClient />
+        <RedeemClient initialCode={c ?? ""} />
       </div>
     </main>
   );
