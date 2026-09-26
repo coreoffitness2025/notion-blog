@@ -29,6 +29,7 @@ type Result = {
   months: number;
   extended: boolean;
   downloadUrl?: string;
+  mailQueued?: boolean;
 };
 
 /** 주문번호는 숫자가 길다 — 코드(CV-…)인지 주문번호인지로 이름칸 필요 여부가 갈린다 */
@@ -43,6 +44,8 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
   const [error, setError] = useState<string | null>(null);
   const [mail, setMail] = useState("");
   const [pw, setPw] = useState("");
+  // 받으실 메일 주소 — 네이버에서는 못 받지만(옵션 수집 금지) 여기서 받는 건 문제가 없다
+  const [deliverTo, setDeliverTo] = useState("");
 
   const isOrder = looksLikeOrderNo(code);
 
@@ -51,11 +54,15 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
     setError(null);
     setBusy(true);
     try {
-      const fn = httpsCallable<{ code: string; name?: string }, Result>(
+      const fn = httpsCallable<{ code: string; name?: string; deliverTo?: string }, Result>(
         getFunctions(getFirebaseApp(), "asia-northeast3"),
         "redeemProCode",
       );
-      const { data } = await fn({ code, name: name.trim() || undefined });
+      const { data } = await fn({
+        code,
+        name: name.trim() || undefined,
+        deliverTo: deliverTo.trim() || undefined,
+      });
       setResult(data);
     } catch (err) {
       // Cloud Function 이 HttpsError 로 한국어 사유를 담아 보낸다. 없으면 일반 문구.
@@ -83,6 +90,12 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
             >
               PDF 내려받기
             </a>
+            {result.mailQueued && (
+              <p className="mt-4 rounded-lg bg-white/70 px-4 py-3 text-sm leading-6 text-gray-700">
+                적어 주신 메일 주소로도 <b>곧 보내 드립니다.</b> 조금 걸릴 수 있으니, 급하시면 위에서
+                먼저 내려받아 주세요.
+              </p>
+            )}
             <p className="mt-4 text-sm leading-6 text-gray-600">
               파일에는 주문번호와 구매자 성함이 옅게 표기되어 있습니다. 개인 열람용으로만 사용해
               주세요. 이 링크는 이 페이지를 닫으면 다시 열 수 없으니 파일을 저장해 두시는 편이 좋습니다.
@@ -177,6 +190,23 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
               />
               <p className="mt-2 text-xs text-gray-500">
                 주문번호만으로는 확인하지 않습니다. 주문하신 분 본인만 받으실 수 있게 하기 위한 것입니다.
+              </p>
+
+              <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="deliverTo">
+                메일로도 받기 <span className="font-normal text-gray-500">(선택)</span>
+              </label>
+              <input
+                id="deliverTo"
+                type="email"
+                value={deliverTo}
+                onChange={(e) => setDeliverTo(e.target.value)}
+                placeholder="받으실 메일 주소"
+                autoComplete="email"
+                className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3"
+              />
+              <p className="mt-2 text-xs text-gray-500">
+                적어 주시면 PDF를 메일로도 보내 드립니다. 아래에서 바로 내려받으실 수도 있으니
+                꼭 적지 않으셔도 됩니다.
               </p>
             </>
           )}
