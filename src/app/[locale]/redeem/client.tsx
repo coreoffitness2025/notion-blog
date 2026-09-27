@@ -46,6 +46,9 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
   const [pw, setPw] = useState("");
   // 받으실 메일 주소 — 네이버에서는 못 받지만(옵션 수집 금지) 여기서 받는 건 문제가 없다
   const [deliverTo, setDeliverTo] = useState("");
+  // Pro 를 받을 앱 계정의 이메일. 로그인하지 않아도 이것만 있으면 부여된다 —
+  // 서버가 uid 로 못 찾으면 이메일로 다시 찾기 때문(functions resolveUserTier).
+  const [proEmail, setProEmail] = useState("");
 
   const isOrder = looksLikeOrderNo(code);
 
@@ -54,7 +57,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
     setError(null);
     setBusy(true);
     try {
-      const fn = httpsCallable<{ code: string; name?: string; deliverTo?: string }, Result>(
+      const fn = httpsCallable<{ code: string; name?: string; deliverTo?: string; proEmail?: string }, Result>(
         getFunctions(getFirebaseApp(), "asia-northeast3"),
         "redeemProCode",
       );
@@ -62,6 +65,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
         code,
         name: name.trim() || undefined,
         deliverTo: deliverTo.trim() || undefined,
+        proEmail: proEmail.trim() || undefined,
       });
       setResult(data);
     } catch (err) {
@@ -120,7 +124,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
 
   return (
     <div className="space-y-6">
-      {!user ? (
+      {false ? (
         <div className="rounded-2xl border border-gray-200 p-6">
           <p className="text-gray-700">
             Pro 이용 기간은 <b>앱에서 쓰시는 계정</b>에 적용됩니다.{" "}
@@ -156,9 +160,11 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
         </div>
       ) : (
         <form onSubmit={submit} className="rounded-2xl border border-gray-200 p-6">
-          <p className="text-sm text-gray-600">
-            로그인 계정: <b>{user.email ?? user.uid}</b>
-          </p>
+          {user && (
+            <p className="text-sm text-gray-600">
+              로그인 계정: <b>{user.email ?? user.uid}</b> — 이 계정에 바로 적용됩니다
+            </p>
+          )}
           <label className="mt-4 block text-sm font-semibold text-gray-800" htmlFor="code">
             주문번호 또는 코드
           </label>
@@ -192,6 +198,23 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
                 주문번호만으로는 확인하지 않습니다. 주문하신 분 본인만 받으실 수 있게 하기 위한 것입니다.
               </p>
 
+              <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="proEmail">
+                Pro 3개월을 받으실 이메일
+              </label>
+              <input
+                id="proEmail"
+                type="email"
+                value={proEmail}
+                onChange={(e) => setProEmail(e.target.value)}
+                placeholder="앱에 가입하신 이메일"
+                autoComplete="email"
+                className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3"
+              />
+              <p className="mt-2 text-xs text-gray-500">
+                <b>앱에 가입할 때 쓰신 이메일</b>을 적어 주세요. 그 계정에 3개월이 더해집니다.
+                구글·애플로 가입하셨다면 그때 쓰신 주소입니다. 로그인은 하지 않으셔도 됩니다.
+              </p>
+
               <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="deliverTo">
                 메일로도 받기 <span className="font-normal text-gray-500">(선택)</span>
               </label>
@@ -213,7 +236,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
 
           <button
             type="submit"
-            disabled={busy || code.trim().length < 6 || (isOrder && !name.trim())}
+            disabled={busy || code.trim().length < 6 || (isOrder && (!name.trim() || !proEmail.trim()))}
             className="mt-5 w-full rounded-lg bg-[#00347F] px-5 py-3 font-semibold text-white disabled:opacity-40"
           >
             {busy ? "확인 중…" : "받기"}
