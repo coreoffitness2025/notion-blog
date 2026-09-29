@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -45,6 +46,8 @@ export default function RootLayout({
     <html>
       <body className={inter.className}>
         {children}
+        {/* 방문 측정 (2026-09-30) — 사이트 조회수·유입 경로가 0으로만 보이던 것. Vercel 대시보드에서 Analytics 활성화 필요 */}
+        <Analytics />
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2952925573999681"
           strategy="afterInteractive"
