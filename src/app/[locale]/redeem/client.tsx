@@ -101,7 +101,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
               </p>
             )}
             <p className="mt-4 text-sm leading-6 text-gray-600">
-              파일에는 주문번호와 구매자 성함이 옅게 표기되어 있습니다. 개인 열람용으로만 사용해
+              파일에는 모든 페이지에 구매자 성함 · 이메일 · 주문번호가 표기되어 있습니다. 개인 열람용으로만 사용해
               주세요. 이 링크는 이 페이지를 닫으면 다시 열 수 없으니 파일을 저장해 두시는 편이 좋습니다.
             </p>
           </div>
