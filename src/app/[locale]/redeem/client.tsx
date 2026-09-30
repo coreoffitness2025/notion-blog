@@ -115,7 +115,12 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
           </p>
           <p className="mt-4 text-sm leading-6 text-emerald-800">
             앱에 바로 반영되지 않으면 <b>앱을 껐다 다시 켜 주세요.</b> 권한을 잠시 저장해 두기 때문에
-            최대 5분쯤 걸릴 수 있습니다. 로그인한 계정이 앱 계정과 같아야 합니다.
+            최대 5분쯤 걸릴 수 있습니다.{" "}
+            {user ? (
+              "로그인한 계정이 앱 계정과 같아야 합니다."
+            ) : (
+              <>앱에서 <b>{proEmail.trim()}</b> 계정으로 로그인하시면 Pro로 보입니다.</>
+            )}
           </p>
         </div>
       </div>
