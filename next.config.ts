@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         { source: "/sitemap.xml", destination: "/api/sitemap" },
+        { source: "/sitemap-posts.xml", destination: "/api/sitemap-posts" }, // 블로그 글 전용 (2026-10-03)
         { source: "/rss.xml", destination: "/api/rss" },
         { source: "/feed.xml", destination: "/api/rss" },
         { source: "/llms.txt", destination: "/api/llms" },

@@ -11,6 +11,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getExerciseImages } from "@/data/exerciseGifMap";
 import AdSense from "@/components/AdSense";
+import RelatedPosts from "@/components/RelatedPosts";
+import { relatedPostsForExercise } from "@/lib/relatedPosts";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -423,6 +425,14 @@ export default async function ExerciseDetailPage({
               </div>
             </section>
           )}
+          {/* 가이드 → 블로그 내부 링크 (2026-10-03, 가이드가 조회의 87%·블로그 7%) */}
+          <RelatedPosts
+            posts={relatedPostsForExercise(exercise, isEn)}
+            prefix={prefix}
+            isEn={isEn}
+            source="exercise"
+          />
+
           {/* Cross-link to Nutrition */}
           <div className="mt-6 bg-white border border-gray-100 rounded-xl p-4">
             <Link

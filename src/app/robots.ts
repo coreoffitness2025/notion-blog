@@ -8,10 +8,11 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/api/sitemap", "/api/rss"],
+        allow: ["/", "/api/sitemap", "/api/sitemap-posts", "/api/rss"],
         disallow: ["/api/", "/private/"],
       },
     ],
-    sitemap: `${siteUrl}/sitemap.xml`,
+    // 블로그 글 전용 사이트맵을 따로 건다 — 메인은 97%가 자동 생성 가이드라 새 글이 묻힌다 (2026-10-03)
+    sitemap: [`${siteUrl}/sitemap.xml`, `${siteUrl}/sitemap-posts.xml`],
   };
 }
