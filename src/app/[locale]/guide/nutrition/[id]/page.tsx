@@ -4,8 +4,9 @@ import { getDictionary } from "@/lib/i18n";
 import {
   getNutritionById,
   getNutritionName,
-  getNutritionDescription,
   getSimilarNutrition,
+  servingFacts,
+  factualDescription,
   type NutritionItem,
 } from "@/data/nutritionDatabase";
 import { notFound } from "next/navigation";
@@ -39,22 +40,21 @@ export async function generateMetadata({
 
   const isKo = locale === "ko";
   const name = getNutritionName(id, locale);
-  const desc = getNutritionDescription(id, locale);
+  // 설명은 숫자로만 만든다 — 예전 생성 문장은 틀린 해석이 섞여 있었다(2026-10-05)
+  const desc = factualDescription(item, name, locale);
+  const sv = servingFacts(item);
   const path = `/guide/nutrition/${id}`;
   const pageUrl = isKo ? `${siteUrl}${path}` : `${siteUrl}/${locale}${path}`;
-  const sourceLabel = item.source === "kfda"
-    ? isKo ? "식약처" : "KFDA"
-    : "USDA";
-
-  const fallbackDesc = isKo
-    ? `${name} 100g 기준 ${item.calories}kcal, 단백질 ${item.protein}g, 탄수화물 ${item.carbs}g, 지방 ${item.fat}g. ${sourceLabel} 공식 데이터 기반 영양 정보.`
-    : `${name}: ${item.calories}kcal, ${item.protein}g protein, ${item.carbs}g carbs, ${item.fat}g fat per 100g. Based on official ${sourceLabel} data.`;
-
+  // 검색하는 사람은 '한 그릇·한 개'의 칼로리를 찾는다 — 1회 제공량이 쓸 만하면 그 값을 제목 앞에 (2026-10-05)
   return {
     title: isKo
-      ? `${name} 칼로리 ${item.calories}kcal, 단백질 ${item.protein}g - 영양성분`
-      : `${name} ${item.calories}kcal, ${item.protein}g Protein - Nutrition Facts`,
-    description: desc || fallbackDesc,
+      ? sv
+        ? `${name} 칼로리 ${sv.kcal}kcal (${sv.g}g) · 100g당 ${item.calories}kcal`
+        : `${name} 칼로리 100g당 ${item.calories}kcal · 단백질 ${item.protein}g`
+      : sv
+        ? `${name} Calories: ${sv.kcal}kcal per ${sv.g}g · ${item.calories}kcal per 100g`
+        : `${name} Calories: ${item.calories}kcal per 100g · ${item.protein}g Protein`,
+    description: desc,
     keywords: isKo
       ? [name, `${name} 칼로리`, `${name} 영양성분`, `${name} 단백질`,
          ...(name.includes("닭") ? ["치킨 칼로리", "치킨 영양성분"] : []),
@@ -75,8 +75,8 @@ export async function generateMetadata({
         ? `${name} 영양성분`
         : `${name} Nutrition Facts`,
       description: isKo
-        ? `${item.calories}kcal | 단백질 ${item.protein}g | 탄수 ${item.carbs}g | 지방 ${item.fat}g`
-        : `${item.calories}kcal | Protein ${item.protein}g | Carbs ${item.carbs}g | Fat ${item.fat}g`,
+        ? `100g당 ${item.calories}kcal | 단백질 ${item.protein}g | 탄수 ${item.carbs}g | 지방 ${item.fat}g`
+        : `Per 100g: ${item.calories}kcal | Protein ${item.protein}g | Carbs ${item.carbs}g | Fat ${item.fat}g`,
       url: pageUrl,
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
@@ -101,7 +101,9 @@ function getJsonLd(item: NutritionItem, name: string, locale: string) {
       ...(item.saturated_fat != null ? { saturatedFatContent: `${item.saturated_fat} g` } : {}),
       ...(item.sodium != null ? { sodiumContent: `${item.sodium} mg` } : {}),
       ...(item.sugar != null ? { sugarContent: `${item.sugar} g` } : {}),
-      ...(item.serving_size ? { servingSize: `${item.serving_size} g` } : {}),
+      // 값이 전부 100g 기준이라 servingSize 도 100g. 예전엔 1회 제공량(예: 410g)을 넣어
+      // '410g에 145kcal'로 읽혔다(2026-10-05).
+      servingSize: "100 g",
       inLanguage: isKo ? "ko" : "en",
     },
     {
@@ -144,7 +146,7 @@ export default async function NutritionDetailPage({
   const prefix = locale === "ko" ? "" : `/${locale}`;
   const name = getNutritionName(id, locale);
   const secondaryName = getNutritionName(id, locale === "ko" ? "en" : "ko");
-  const description = getNutritionDescription(id, locale);
+  const description = factualDescription(item, name, locale);
   const dv = getDailyValue(item);
 
   const sourceLabel = item.source === "kfda"

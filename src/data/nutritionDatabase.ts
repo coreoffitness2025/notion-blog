@@ -36,7 +36,66 @@ export function getNutritionById(id: string): NutritionItem | undefined {
 
 export function getNutritionName(id: string, locale: string): string {
   const lang = locale === "en" ? "en" : "ko";
-  return NAMES[lang]?.[id] || NAMES["ko"]?.[id] || id;
+  const raw = NAMES[lang]?.[id] || NAMES["ko"]?.[id] || id;
+  return lang === "ko" || !NAMES.en?.[id] ? readableKoName(raw) : raw;
+}
+
+/**
+ * 식약처 DB 이름("분류_세부")을 사람이 검색하는 말로 (2026-10-05 SEO).
+ * 한국어 이름 5,679개 중 2,356개가 "국밥_순대국밥"·"김밥_참치" 꼴로 제목·h1 에 그대로 나갔다.
+ * 사람은 "순대국밥 칼로리"·"참치 김밥 칼로리"로 검색한다. 표시용일 뿐 id·URL 은 그대로.
+ *   국밥_순대국밥 → 순대국밥 (세부에 분류가 들어 있으면 세부만)
+ *   우동_해물     → 해물 우동 (짧은 수식어는 앞에)
+ *   스무디_엑스트라 자바칩 탐앤치노 → 엑스트라 자바칩 탐앤치노 (스무디)
+ *   김치국_김치_두부 → 김치국 (김치·두부)
+ */
+export function readableKoName(raw: string): string {
+  if (!raw.includes("_")) return raw;
+  const [cat, ...rest] = raw.split("_").map((x) => x.trim()).filter(Boolean);
+  if (!cat || rest.length === 0) return raw.replace(/_/g, " ");
+  if (rest.length > 1) return `${cat} (${rest.join("·")})`;
+  const d = rest[0];
+  if (d.includes(cat)) return d;
+  if (d.length <= 4 && !d.includes(" ")) return `${d} ${cat}`;
+  return `${d} (${cat})`;
+}
+
+/**
+ * 1회 제공량 기준 값. DB 값은 전부 100g 기준이다.
+ * 식약처 '1회 제공량'은 피자처럼 한 판 전체(중앙값 850g)인 경우가 있어 '1인분'이라 부르지 않는다.
+ * 20g 미만·800g 초과(436개)는 숫자로 내세우기 어려워 null — 100g 기준만 쓴다.
+ */
+export function servingFacts(item: NutritionItem): { g: number; kcal: number; protein: number; carbs: number; fat: number } | null {
+  const g = item.serving_size;
+  if (!g || g === 100 || g < 20 || g > 800) return null;
+  const k = g / 100;
+  const r1 = (n: number) => Math.round(n * k * 10) / 10;
+  return { g, kcal: Math.round(item.calories * k), protein: r1(item.protein), carbs: r1(item.carbs), fat: r1(item.fat) };
+}
+
+/**
+ * 숫자로만 만든 설명 (2026-10-05). 예전 설명(nutrition-desc-*.json)은 생성 문장이라
+ * 회덮밥에 "간식이나 반찬으로 적합" 같은 틀린 해석이 붙어 있었다 — 정확한 숫자가 낫다.
+ */
+export function factualDescription(item: NutritionItem, name: string, locale: string): string {
+  const ko = locale !== "en";
+  const src = item.source === "kfda" ? (ko ? "식약처 식품영양성분 DB" : "Korea MFDS food composition data") : "USDA FoodData Central";
+  const kc = (item.protein * 4 + item.carbs * 4 + item.fat * 9) || 1;
+  const pct = (g: number, f: number) => Math.round((g * f * 100) / kc);
+  const split = item.calories > 0
+    ? (ko
+        ? ` 열량 구성은 탄수화물 ${pct(item.carbs, 4)}%·단백질 ${pct(item.protein, 4)}%·지방 ${pct(item.fat, 9)}%입니다.`
+        : ` Energy split: carbs ${pct(item.carbs, 4)}%, protein ${pct(item.protein, 4)}%, fat ${pct(item.fat, 9)}%.`)
+    : "";
+  const sv = servingFacts(item);
+  const head = sv
+    ? (ko
+        ? `${name} 1회 제공량(${sv.g}g)은 ${sv.kcal}kcal, 단백질 ${sv.protein}g·탄수화물 ${sv.carbs}g·지방 ${sv.fat}g입니다. 100g당 ${item.calories}kcal.`
+        : `${name}: ${sv.kcal}kcal per ${sv.g}g serving (${sv.protein}g protein, ${sv.carbs}g carbs, ${sv.fat}g fat). ${item.calories}kcal per 100g.`)
+    : (ko
+        ? `${name} 100g당 ${item.calories}kcal, 단백질 ${item.protein}g·탄수화물 ${item.carbs}g·지방 ${item.fat}g입니다.`
+        : `${name}: ${item.calories}kcal per 100g (${item.protein}g protein, ${item.carbs}g carbs, ${item.fat}g fat).`);
+  return `${head}${split} ${ko ? `${src} 기준.` : `Source: ${src}.`}`;
 }
 
 export function getNutritionDescription(id: string, locale: string): string | undefined {
