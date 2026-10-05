@@ -63,13 +63,10 @@ export async function generateMetadata({
       : [name, `${name} calories`, `${name} nutrition`, `${name} protein`,
          ...(name.toLowerCase().includes("chicken") ? ["chicken calories", "chicken nutrition"] : []),
         ],
-    alternates: {
-      canonical: pageUrl,
-      languages: {
-        ko: `${siteUrl}/guide/nutrition/${id}`,
-        en: `${siteUrl}/en/guide/nutrition/${id}`,
-      },
-    },
+    // 영어판은 검색에서 뺀다(사이트맵에서도 제외, 2026-10-05) — 얇은 번역 페이지 5,681개가 사이트 품질 신호를
+    // 끌어내렸다. 한국어판이 짝으로 가리키지도 않는다(noindex 페이지를 hreflang 으로 묶지 않는다).
+    alternates: { canonical: pageUrl },
+    ...(isKo ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       title: isKo
         ? `${name} 영양성분`

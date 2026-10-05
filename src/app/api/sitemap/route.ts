@@ -5,6 +5,8 @@ import { MEAL_PLAN_DATA } from "@/data/mealPlanData";
 
 /** 가이드 데이터 최종 갱신일 — src/data/ 의 가이드 데이터를 고치면 같이 올린다 */
 const GUIDE_CONTENT_UPDATED = "2026-04-17";
+// 음식 페이지 제목·설명을 바꾼 날 (2026-10-05) — 운동 가이드는 그대로라 따로 둔다
+const NUTRITION_CONTENT_UPDATED = "2026-10-05";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -105,17 +107,14 @@ export async function GET() {
     }
   }
 
+  // 음식 페이지는 한국어만 싣는다 (2026-10-05). 영어판 5,681개는 한국 음식 DB 이름을 옮긴 얇은 페이지라
+  // 구글 '크롤링됨-색인 안 함' 1.17만의 절반이었고, 7일 조회 75회 중 검색 유입은 3회였다 → 페이지에서도 noindex.
   for (const nid of getAllNutritionIds()) {
-    for (const locale of locales) {
-      entries.push(
-        urlEntry(
-          `${siteUrl}${locale}/guide/nutrition/${nid}`,
-          `${siteUrl}/guide/nutrition/${nid}`,
-          `${siteUrl}/en/guide/nutrition/${nid}`,
-          guideLastmod,
-        ),
-      );
-    }
+    const koUrl = `${siteUrl}/guide/nutrition/${nid}`;
+    entries.push(`<url>
+<loc>${koUrl}</loc>
+<lastmod>${NUTRITION_CONTENT_UPDATED}</lastmod>
+</url>`);
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
