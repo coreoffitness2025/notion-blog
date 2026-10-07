@@ -39,6 +39,15 @@ export default async function ProductsPage({
   const isKo = locale === "ko";
   const prefix = isKo ? "" : `/${locale}`;
 
+  const store = (id: string, detail: string) =>
+    `https://smartstore.naver.com/coreviafitness_store/products/${id}?nt_source=site&nt_medium=products&nt_detail=${detail}`;
+  const quick = [
+    { href: "/go?app=fitness&c=site-products-top", label: isKo ? "피트니스 앱 받기" : "Get CoreVia Fitness", sub: isKo ? "무료" : "Free", primary: true },
+    { href: "/go?app=recovery&c=site-products-top", label: isKo ? "리커버리 앱 받기" : "Get CoreVia Recovery", sub: isKo ? "무료" : "Free", primary: true },
+    { href: store("13776137889", "ebook-top"), label: isKo ? "전자책 구매" : "Buy the ebook", sub: isKo ? "20,000원 · 스마트스토어" : "₩20,000 · Naver Smart Store", primary: false },
+    { href: store("13779186739", "scale-top"), label: isKo ? "체중계 구매" : "Buy the scale", sub: isKo ? "24,000원 · 스마트스토어" : "₩24,000 · Naver Smart Store", primary: false },
+  ];
+
   const items = [
     {
       href: `${prefix}/products/apps`,
@@ -87,6 +96,25 @@ export default async function ProductsPage({
               ? "기록하는 앱, 읽는 책, 재는 기기 — 하나의 기록으로 이어집니다."
               : "An app to record, a book to read, a device to measure — all in one record."}
           </p>
+          {/* 맨 위에서 바로 받기·구매 (2026-10-08 대표). 앱은 /go 가 기기에 맞는 스토어로 보낸다 */}
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-[860px] mx-auto">
+            {quick.map((q) => (
+              <a
+                key={q.href}
+                href={q.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex flex-col items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold transition-opacity hover:opacity-90 ${
+                  q.primary
+                    ? "bg-[var(--corevia-primary)] text-white"
+                    : "bg-white border border-gray-200 text-gray-800"
+                }`}
+              >
+                <span>{q.label}</span>
+                <span className={`text-xs font-normal mt-0.5 ${q.primary ? "text-white/80" : "text-gray-500"}`}>{q.sub}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 

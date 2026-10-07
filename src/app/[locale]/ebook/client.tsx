@@ -62,6 +62,18 @@ export default function EbookPageClient({
               <p className="text-xs text-gray-400">
                 {dict.ebook.author}
               </p>
+              {/* 첫 화면에서 바로 구매 (2026-10-08 대표) */}
+              <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3 justify-center md:justify-start">
+                <a
+                  href={EBOOK_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[var(--corevia-primary)] text-white text-sm font-semibold rounded-xl transition-opacity hover:opacity-90"
+                >
+                  {dict.ebook.buyButton}
+                </a>
+                <span className="text-sm font-semibold text-gray-700">{dict.ebook.price}</span>
+              </div>
             </div>
           </motion.div>
         </div>

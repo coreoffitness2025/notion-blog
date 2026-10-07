@@ -115,6 +115,21 @@ export default async function AppsPage({
           <p className="text-gray-500">
             {isKo ? "두 앱 모두 무료로 시작할 수 있습니다." : "Both apps are free to start."}
           </p>
+          {/* 첫 화면에서 바로 다운로드 (2026-10-08 대표) */}
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 max-w-[720px] mx-auto text-left">
+            {([
+              { app: "fitness", icon: "/icon-512.png", name: isKo ? "코비아 피트니스" : "CoreVia Fitness", anchor: "#fitness" },
+              { app: "recovery", icon: "/products/recovery-icon.png", name: isKo ? "코비아 리커버리" : "CoreVia Recovery", anchor: "#recovery" },
+            ] as const).map((a) => (
+              <div key={a.app} className="bg-white border border-gray-200 rounded-2xl p-5">
+                <a href={a.anchor} className="flex items-center gap-3 mb-4">
+                  <Image src={a.icon} alt={a.name} width={44} height={44} className="rounded-xl border border-gray-200" />
+                  <span className="font-bold text-gray-800">{a.name}</span>
+                </a>
+                <StoreButtons app={a.app} isKo={isKo} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
