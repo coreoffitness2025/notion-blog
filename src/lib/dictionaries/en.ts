@@ -386,9 +386,9 @@ const en = {
       "Preparing for a competition or body profile shoot",
     ],
     priceLabel: "eBook (PDF)",
-    price: "₩30,000",
-    deliveryNote: "Instant download after purchase",
-    buyButton: "Buy Now",
+    price: "₩20,000",
+    deliveryNote: "We email the PDF to the address you enter when ordering · Naver Smart Store",
+    buyButton: "Buy on Naver Smart Store",
     freeHandbook: "Read the free handbook first →",
   },
   contact: {

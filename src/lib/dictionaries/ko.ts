@@ -382,9 +382,9 @@ const ko = {
       "대회나 바디프로필을 준비하고 있는 분",
     ],
     priceLabel: "전자책 (PDF)",
-    price: "₩30,000",
-    deliveryNote: "구매 후 즉시 다운로드",
-    buyButton: "구매하기",
+    price: "₩20,000",
+    deliveryNote: "주문할 때 적은 이메일로 PDF를 보내 드립니다 · 스마트스토어",
+    buyButton: "스마트스토어에서 구매하기",
     freeHandbook: "무료 핸드북 먼저 보기 →",
   },
   contact: {

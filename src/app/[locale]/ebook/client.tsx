@@ -5,7 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n";
 
-const CAFE24_EBOOK_URL = "https://coreviafitness.cafe24.com/";
+// 2026-10-08: 카페24 홈(상품 아님·보류 중) → 스마트스토어 전자책 상품. 주문 옵션 이메일로 워터마크 PDF 발송(허브 주문 레일)
+const EBOOK_STORE_URL =
+  "https://smartstore.naver.com/coreviafitness_store/products/13776137889?nt_source=site&nt_medium=products&nt_detail=ebook";
 
 export default function EbookPageClient({
   dict,
@@ -231,7 +233,7 @@ export default function EbookPageClient({
             <p className="text-xs text-gray-400 mb-6">{dict.ebook.deliveryNote}</p>
 
             <a
-              href={CAFE24_EBOOK_URL}
+              href={EBOOK_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full py-4 bg-[var(--corevia-primary)] text-white font-semibold rounded-xl transition-opacity hover:opacity-90 text-center"

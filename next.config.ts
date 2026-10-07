@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // 빈 Shop(Coming Soon) → 제품 페이지 (2026-10-08)
+      { source: "/shop", destination: "/products", permanent: true },
+      { source: "/en/shop", destination: "/en/products", permanent: true },
       { source: "/guide/1rm", destination: "/guide/workout/1rm", permanent: true },
       { source: "/guide/programs", destination: "/guide/workout/programs", permanent: true },
       { source: "/guide/exercises", destination: "/guide/workout/exercises", permanent: true },

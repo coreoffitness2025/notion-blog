@@ -7,9 +7,10 @@ export default function Footer({ locale }: { locale: string }) {
 
   const footerLinks = {
     [dict.footer.product]: [
-      { href: `${prefix}/#features`, label: dict.footer.features },
+      { href: `${prefix}/products/apps`, label: locale === "en" ? "Apps" : "애플리케이션" },
+      { href: `${prefix}/ebook`, label: locale === "en" ? "Ebook" : "전자책" },
+      { href: `${prefix}/products/scale`, label: locale === "en" ? "Smart Scale" : "스마트 체중계" },
       { href: `${prefix}/guide`, label: dict.footer.fitnessGuide },
-      { href: `${prefix}/#cta`, label: dict.footer.download },
     ],
     "Workout Guide": [
       { href: `${prefix}/guide/workout/1rm`, label: dict.footer.oneRmCalc },

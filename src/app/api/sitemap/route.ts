@@ -39,7 +39,9 @@ export async function GET() {
     "/guide/nutrition/calorie",
     "/guide/nutrition/meal-plans",
     "/posts",
-    "/shop",
+    "/products",
+    "/products/apps",
+    "/products/scale",
     "/contact",
   ];
 

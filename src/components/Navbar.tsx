@@ -11,6 +11,11 @@ function isActive(pathname: string, href: string) {
   if (href.startsWith("/#")) return false;
   // /guide exact match only — don't highlight when on /guide/workout or /guide/nutrition
   if (/^(\/en)?\/guide$/.test(href)) return pathname === href;
+  // Product 메뉴: 제품 페이지 전부 + 전자책(/ebook 은 /products 밖에 있다)
+  if (/^(\/en)?\/products$/.test(href)) {
+    const p = pathname.replace(/^\/en/, "");
+    return p === "/products" || p.startsWith("/products/") || p === "/ebook";
+  }
   return pathname === href || pathname.startsWith(href + "/");
 }
 
@@ -29,7 +34,28 @@ export default function Navbar({ locale }: { locale: string }) {
   };
 
   const nav: NavItem[] = [
-    { href: `${prefix}/#features`, label: dict.nav.features },
+    {
+      // 2026-10-08 대표: Product = 애플리케이션 / 전자책 / 스마트 체중계 (빈 Shop 메뉴 대체)
+      href: `${prefix}/products`,
+      label: dict.nav.features,
+      children: [
+        {
+          href: `${prefix}/products/apps`,
+          label: isEn ? "Apps" : "애플리케이션",
+          desc: isEn ? "CoreVia Fitness · CoreVia Recovery" : "코비아 피트니스 · 코비아 리커버리",
+        },
+        {
+          href: `${prefix}/ebook`,
+          label: isEn ? "Ebook" : "전자책",
+          desc: isEn ? "Core of Fitness (PDF)" : "Core of Fitness (PDF)",
+        },
+        {
+          href: `${prefix}/products/scale`,
+          label: isEn ? "Smart Scale" : "스마트 체중계",
+          desc: isEn ? "Body composition, saved to the app" : "체성분 15가지 앱 자동 기록",
+        },
+      ],
+    },
     { href: `${prefix}/guide`, label: dict.nav.guide },
     {
       href: `${prefix}/guide/workout`,
@@ -74,7 +100,6 @@ export default function Navbar({ locale }: { locale: string }) {
       ],
     },
     { href: `${prefix}/posts`, label: dict.nav.blog },
-    { href: `${prefix}/shop`, label: isEn ? "Shop" : "Shop" },
     { href: `${prefix}/team`, label: isEn ? "About" : "About" },
   ];
 
