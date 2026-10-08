@@ -50,8 +50,6 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
   const [error, setError] = useState<string | null>(null);
   const [mail, setMail] = useState("");
   const [pw, setPw] = useState("");
-  // 받으실 메일 주소 — 네이버에서는 못 받지만(옵션 수집 금지) 여기서 받는 건 문제가 없다
-  const [deliverTo, setDeliverTo] = useState("");
   // Pro 를 받을 앱 계정의 이메일. 로그인하지 않아도 이것만 있으면 부여된다 —
   // 서버가 uid 로 못 찾으면 이메일로 다시 찾기 때문(functions resolveUserTier).
   const [proEmail, setProEmail] = useState("");
@@ -71,7 +69,9 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
       const { data } = await fn({
         code,
         name: name.trim() || undefined,
-        deliverTo: (hasEbook && deliverTo.trim()) || undefined,
+        // 2026-10-08 대표 "굳이 왜 다운로드하게 해, 이메일 받아두고" — 전자책은 내려받기 대신
+        // 적어 주신 이메일로 보낸다(허브 10분 잡이 발송). 칸을 따로 두지 않고 Pro 이메일을 그대로 쓴다.
+        deliverTo: (hasEbook && proEmail.trim()) || undefined,
         proEmail: proEmail.trim() || undefined,
       });
       setResult(data);
@@ -92,35 +92,14 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
     });
     return (
       <div className="space-y-4">
-        {result.downloadUrl && (
-          <div className="rounded-2xl border border-[#00347F]/20 bg-[#00347F]/5 p-6">
-            <h2 className="text-xl font-bold text-[#00347F]">전자책을 받으실 수 있습니다</h2>
-            <a
-              href={result.downloadUrl}
-              className="mt-4 inline-block rounded-lg bg-[#00347F] px-5 py-3 font-semibold text-white"
-            >
-              PDF 내려받기
-            </a>
-            {result.mailQueued && (
-              <p className="mt-4 rounded-lg bg-white/70 px-4 py-3 text-sm leading-6 text-gray-700">
-                적어 주신 메일 주소로도 <b>곧 보내 드립니다.</b> 조금 걸릴 수 있으니, 급하시면 위에서
-                먼저 내려받아 주세요.
-              </p>
-            )}
-            <p className="mt-4 text-sm leading-6 text-gray-600">
-              파일에는 모든 페이지에 구매자 성함 · 이메일 · 주문번호가 표기되어 있습니다. 개인 열람용으로만 사용해
-              주세요. 이 링크는 이 페이지를 닫으면 다시 열 수 없으니 파일을 저장해 두시는 편이 좋습니다.
-            </p>
-          </div>
-        )}
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
-          <h2 className="text-xl font-bold text-emerald-900">
+        <div className="rounded-2xl border border-[#00347F]/20 bg-[#00347F]/5 p-6">
+          <h2 className="text-xl font-bold text-[#00347F]">
             {result.extended ? "Pro 기간이 연장됐습니다" : "Pro가 적용됐습니다"}
           </h2>
-          <p className="mt-2 text-emerald-900">
+          <p className="mt-2 text-gray-900">
             {result.months > 0 && <>Pro {result.months}개월 — </>}<b>{until}</b>까지 Pro를 쓰실 수 있습니다.
           </p>
-          <p className="mt-4 text-sm leading-6 text-emerald-800">
+          <p className="mt-4 text-sm leading-6 text-gray-700">
             앱에 바로 반영되지 않으면 <b>앱을 껐다 다시 켜 주세요.</b> 권한을 잠시 저장해 두기 때문에
             최대 5분쯤 걸릴 수 있습니다.{" "}
             {user ? (
@@ -130,6 +109,17 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
             )}
           </p>
         </div>
+        {result.mailQueued && (
+          <div className="rounded-2xl border border-gray-200 p-6">
+            <h2 className="text-lg font-bold text-gray-900">전자책은 메일로 보내드립니다</h2>
+            <p className="mt-2 text-sm leading-6 text-gray-700">
+              <b>{proEmail.trim()}</b> 로 10분 안에 도착합니다. 보이지 않으면 스팸함도 확인해 주세요.
+            </p>
+            <p className="mt-3 text-xs leading-5 text-gray-500">
+              파일 모든 페이지에 구매자 성함 · 이메일이 표기되어 있습니다. 개인 열람용으로만 사용해 주세요.
+            </p>
+          </div>
+        )}
       </div>
     );
   }
@@ -211,7 +201,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
               </p>
 
               <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="proEmail">
-                Pro 이용권을 받으실 이메일
+                {hasEbook ? "Pro 이용권·전자책을 받으실 이메일" : "Pro 이용권을 받으실 이메일"}
               </label>
               <input
                 id="proEmail"
@@ -225,28 +215,9 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
               <p className="mt-2 text-xs text-gray-500">
                 <b>앱에 가입할 때 쓰신 이메일</b>을 적어 주세요. 그 계정에 주문하신 상품의 Pro 기간이 더해집니다.
                 구글·애플로 가입하셨다면 그때 쓰신 주소입니다. 로그인은 하지 않으셔도 됩니다.
+                {hasEbook && " 전자책 PDF도 이 주소로 보내드립니다."}
               </p>
 
-              {hasEbook && (
-                <>
-                  <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="deliverTo">
-                    메일로도 받기 <span className="font-normal text-gray-500">(선택)</span>
-                  </label>
-                  <input
-                    id="deliverTo"
-                    type="email"
-                    value={deliverTo}
-                    onChange={(e) => setDeliverTo(e.target.value)}
-                    placeholder="받으실 메일 주소"
-                    autoComplete="email"
-                    className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3"
-                  />
-                  <p className="mt-2 text-xs text-gray-500">
-                    적어 주시면 PDF를 메일로도 보내 드립니다. 아래에서 바로 내려받으실 수도 있으니
-                    꼭 적지 않으셔도 됩니다.
-                  </p>
-                </>
-              )}
             </>
           )}
 
