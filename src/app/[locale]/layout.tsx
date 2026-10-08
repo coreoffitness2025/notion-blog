@@ -57,8 +57,8 @@ export async function generateMetadata({
     openGraph: {
       title: isKo ? "코비아 피트니스 | 웰니스를 AI로 혁신합니다" : "CoreVia Fitness | Reinventing Wellness with AI",
       description: isKo
-        ? "당신의 모든 피트니스, 코비아 피트니스. 운동·식단 코칭 앱부터 스마트 체중계까지."
-        : "All your fitness, CoreVia Fitness. From a coaching app to a smart scale.",
+        ? "당신의 스마트 피트니스 라이프, 코비아 피트니스가 함께합니다."
+        : "Your smart fitness life, with CoreVia Fitness.",
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
       type: "website",
@@ -76,8 +76,8 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: isKo ? "코비아 피트니스 | 웰니스를 AI로 혁신합니다" : "CoreVia Fitness | Reinventing Wellness with AI",
       description: isKo
-        ? "당신의 모든 피트니스, 코비아 피트니스."
-        : "All your fitness, CoreVia Fitness.",
+        ? "당신의 스마트 피트니스 라이프, 코비아 피트니스가 함께합니다."
+        : "Your smart fitness life, with CoreVia Fitness.",
       images: [isKo ? "/og-ko.png" : "/og-en.png"],
     },
   };

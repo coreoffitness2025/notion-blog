@@ -33,8 +33,8 @@ const en = {
     contactUs: "Contact Us",
   },
   hero: {
-    title1: "All your fitness,",
-    title2: "CoreVia Fitness",
+    title1: "Your smart fitness life,",
+    title2: "with CoreVia Fitness",
     subtitle1: "Reinventing wellness with AI.",
     subtitle2: "From a workout & nutrition coaching app to a smart scale and fitness guides.",
     subtext1: "Get the CoreVia Fitness app — free",
@@ -799,7 +799,7 @@ const en = {
   metadata: {
     homeTitle: "CoreVia Fitness | Reinventing Wellness with AI",
     homeDesc:
-      "All your fitness, CoreVia Fitness. A workout & nutrition coaching app, an app-connected smart scale and fitness guides — wellness you can track, understand and keep up.",
+      "Your smart fitness life, with CoreVia Fitness. A workout & nutrition coaching app, an app-connected smart scale and fitness guides — wellness you can track, understand and keep up.",
     coachTitle: "AI Coach",
     coachDesc:
       "Coach Kay and Coach Jane — 4 coaching styles to manage both your workouts and diet.",

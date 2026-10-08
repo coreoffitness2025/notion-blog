@@ -16,7 +16,7 @@ export default function HeroSection({ locale }: { locale: string }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-[length:var(--text-display)] font-bold text-gray-800 leading-[1.1] mb-4 md:mb-6 tracking-tight"
+            className="text-[length:var(--text-display)] font-bold text-gray-800 leading-[1.1] mb-4 md:mb-6 tracking-tight break-keep"
           >
             {dict.hero.title1}
             <br />
@@ -29,7 +29,7 @@ export default function HeroSection({ locale }: { locale: string }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[length:var(--text-body-lg)] text-gray-500 leading-relaxed mb-8 md:mb-12 max-w-lg md:max-w-xl mx-auto"
+            className="text-[length:var(--text-body-lg)] text-gray-500 leading-relaxed mb-8 md:mb-12 max-w-lg md:max-w-xl mx-auto break-keep"
           >
             {dict.hero.subtitle1}
             {dict.hero.subtitle2 && <><br />{dict.hero.subtitle2}</>}
