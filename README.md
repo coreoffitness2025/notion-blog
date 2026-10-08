@@ -87,6 +87,13 @@ Posts DB에 다음 속성들을 설정하세요:
    - `NOTION_TOKEN`
    - `NOTION_DATABASE_ID`
    - `NEXT_PUBLIC_SITE_URL`
+   - Firebase 6개 (로그인·포인트 코치·`/redeem` 주문 혜택 받기에 필수, `src/lib/firebase/client.ts`):
+     `NEXT_PUBLIC_FIREBASE_API_KEY` · `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` · `NEXT_PUBLIC_FIREBASE_PROJECT_ID` ·
+     `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` · `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` · `NEXT_PUBLIC_FIREBASE_APP_ID`
+     - 값 출처: Firebase 콘솔 `corevia-fitness-tracking` → 프로젝트 설정 → 웹 앱 `1:118613268034:web:eb0c8db85ee52b60f8ffdb` 의 SDK 설정
+     - **Production 범위**로 등록하고 저장 후 **재배포**해야 번들에 들어간다(`NEXT_PUBLIC_*` 는 빌드 시점에 박힘)
+     - 빠지면 사이트는 멀쩡해 보이고 로그인 버튼·/redeem 만 조용히 죽는다(2026-02~10 실제 사고)
+     - Firebase Auth → 승인된 도메인에 `coreviafitness.com` 이 있어야 구글·애플 로그인이 뜬다
 
 ## 기술 스택
 

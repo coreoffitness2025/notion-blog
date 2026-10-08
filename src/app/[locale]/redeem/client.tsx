@@ -32,8 +32,14 @@ type Result = {
   mailQueued?: boolean;
 };
 
-/** 주문번호는 숫자가 길다 — 코드(CV-…)인지 주문번호인지로 이름칸 필요 여부가 갈린다 */
-const looksLikeOrderNo = (v: string) => /^\d[\d\s-]{7,}$/.test(v.trim());
+/**
+ * 주문번호는 숫자가 길다 — 코드(CV-…)인지 주문번호인지로 이름칸 필요 여부가 갈린다.
+ * 스타트팩·체중계 주문은 메일 링크가 `주문번호-SP` / `주문번호-SC` 로 온다
+ * (허브 naver_orders_sync.py 의 suffix — 같은 주문의 전자책 단품과 문서 키가 겹치지 않게).
+ */
+const looksLikeOrderNo = (v: string) => /^\d[\d\s-]{7,}(?:-?(?:SP|SC))?$/i.test(v.trim());
+/** 체중계(-SC) 주문에는 전자책이 없다 → PDF 메일 칸을 띄우지 않는다 */
+const isScaleOrder = (v: string) => /SC$/i.test(v.trim());
 
 export default function RedeemClient({ initialCode = "" }: { initialCode?: string }) {
   const { user, loading } = useAuth();
@@ -51,6 +57,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
   const [proEmail, setProEmail] = useState("");
 
   const isOrder = looksLikeOrderNo(code);
+  const hasEbook = isOrder && !isScaleOrder(code);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +71,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
       const { data } = await fn({
         code,
         name: name.trim() || undefined,
-        deliverTo: deliverTo.trim() || undefined,
+        deliverTo: (hasEbook && deliverTo.trim()) || undefined,
         proEmail: proEmail.trim() || undefined,
       });
       setResult(data);
@@ -111,7 +118,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
             {result.extended ? "Pro 기간이 연장됐습니다" : "Pro가 적용됐습니다"}
           </h2>
           <p className="mt-2 text-emerald-900">
-            <b>{until}</b>까지 Pro를 쓰실 수 있습니다.
+            {result.months > 0 && <>Pro {result.months}개월 — </>}<b>{until}</b>까지 Pro를 쓰실 수 있습니다.
           </p>
           <p className="mt-4 text-sm leading-6 text-emerald-800">
             앱에 바로 반영되지 않으면 <b>앱을 껐다 다시 켜 주세요.</b> 권한을 잠시 저장해 두기 때문에
@@ -204,7 +211,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
               </p>
 
               <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="proEmail">
-                Pro 3개월을 받으실 이메일
+                Pro 이용권을 받으실 이메일
               </label>
               <input
                 id="proEmail"
@@ -216,26 +223,30 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
                 className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3"
               />
               <p className="mt-2 text-xs text-gray-500">
-                <b>앱에 가입할 때 쓰신 이메일</b>을 적어 주세요. 그 계정에 3개월이 더해집니다.
+                <b>앱에 가입할 때 쓰신 이메일</b>을 적어 주세요. 그 계정에 주문하신 상품의 Pro 기간이 더해집니다.
                 구글·애플로 가입하셨다면 그때 쓰신 주소입니다. 로그인은 하지 않으셔도 됩니다.
               </p>
 
-              <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="deliverTo">
-                메일로도 받기 <span className="font-normal text-gray-500">(선택)</span>
-              </label>
-              <input
-                id="deliverTo"
-                type="email"
-                value={deliverTo}
-                onChange={(e) => setDeliverTo(e.target.value)}
-                placeholder="받으실 메일 주소"
-                autoComplete="email"
-                className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3"
-              />
-              <p className="mt-2 text-xs text-gray-500">
-                적어 주시면 PDF를 메일로도 보내 드립니다. 아래에서 바로 내려받으실 수도 있으니
-                꼭 적지 않으셔도 됩니다.
-              </p>
+              {hasEbook && (
+                <>
+                  <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="deliverTo">
+                    메일로도 받기 <span className="font-normal text-gray-500">(선택)</span>
+                  </label>
+                  <input
+                    id="deliverTo"
+                    type="email"
+                    value={deliverTo}
+                    onChange={(e) => setDeliverTo(e.target.value)}
+                    placeholder="받으실 메일 주소"
+                    autoComplete="email"
+                    className="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3"
+                  />
+                  <p className="mt-2 text-xs text-gray-500">
+                    적어 주시면 PDF를 메일로도 보내 드립니다. 아래에서 바로 내려받으실 수도 있으니
+                    꼭 적지 않으셔도 됩니다.
+                  </p>
+                </>
+              )}
             </>
           )}
 

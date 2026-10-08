@@ -17,6 +17,12 @@ let _db: Firestore | null = null;
 
 export function getFirebaseApp(): FirebaseApp {
   if (_app) return _app;
+  // 6개는 Vercel 환경변수(Production)로만 번들에 들어간다 — README "Vercel 배포" 참고.
+  // 2026-10-08: 2월 도입 때 등록이 빠져 /redeem 이 'internal' 로만 실패했다(함수 주소가
+  // `asia-northeast3-undefined` 가 됨). 원인이 화면에 보이도록 여기서 먼저 막는다.
+  if (!config.projectId || !config.apiKey) {
+    throw new Error("사이트 설정 오류로 지금은 처리할 수 없습니다. 잠시 후 다시 시도하시거나 문의해 주세요.");
+  }
   _app = getApps().length ? getApp() : initializeApp(config);
   return _app;
 }
