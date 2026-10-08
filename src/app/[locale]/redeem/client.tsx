@@ -69,9 +69,8 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
       const { data } = await fn({
         code,
         name: name.trim() || undefined,
-        // 2026-10-08 대표 "굳이 왜 다운로드하게 해, 이메일 받아두고" — 전자책은 내려받기 대신
-        // 적어 주신 이메일로 보낸다(허브 10분 잡이 발송). 칸을 따로 두지 않고 Pro 이메일을 그대로 쓴다.
-        deliverTo: (hasEbook && proEmail.trim()) || undefined,
+        // 2026-10-08 대표: 전자책은 **주문 때 스마트스토어에 적은 이메일**로 이미 간다(그 메일에 이 페이지 링크가 있다).
+        // 이 페이지는 Pro 등록만 한다 — 내려받기·재발송 없음(deliverTo 를 보내지 않는다).
         proEmail: proEmail.trim() || undefined,
       });
       setResult(data);
@@ -109,16 +108,11 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
             )}
           </p>
         </div>
-        {result.mailQueued && (
-          <div className="rounded-2xl border border-gray-200 p-6">
-            <h2 className="text-lg font-bold text-gray-900">전자책은 메일로 보내드립니다</h2>
-            <p className="mt-2 text-sm leading-6 text-gray-700">
-              <b>{proEmail.trim()}</b> 로 10분 안에 도착합니다. 보이지 않으면 스팸함도 확인해 주세요.
-            </p>
-            <p className="mt-3 text-xs leading-5 text-gray-500">
-              파일 모든 페이지에 구매자 성함 · 이메일이 표기되어 있습니다. 개인 열람용으로만 사용해 주세요.
-            </p>
-          </div>
+        {hasEbook && (
+          <p className="px-1 text-sm leading-6 text-gray-600">
+            전자책 PDF는 주문하실 때 적어 주신 이메일로 보내 드렸습니다. 보이지 않으면 스팸함을 확인해 주시고,
+            그래도 없으면 주문번호와 함께 support@coreviafitness.com 으로 알려 주세요.
+          </p>
         )}
       </div>
     );
@@ -201,7 +195,7 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
               </p>
 
               <label className="mt-5 block text-sm font-semibold text-gray-800" htmlFor="proEmail">
-                {hasEbook ? "Pro 이용권·전자책을 받으실 이메일" : "Pro 이용권을 받으실 이메일"}
+                Pro 이용권을 받으실 이메일
               </label>
               <input
                 id="proEmail"
@@ -215,7 +209,6 @@ export default function RedeemClient({ initialCode = "" }: { initialCode?: strin
               <p className="mt-2 text-xs text-gray-500">
                 <b>앱에 가입할 때 쓰신 이메일</b>을 적어 주세요. 그 계정에 주문하신 상품의 Pro 기간이 더해집니다.
                 구글·애플로 가입하셨다면 그때 쓰신 주소입니다. 로그인은 하지 않으셔도 됩니다.
-                {hasEbook && " 전자책 PDF도 이 주소로 보내드립니다."}
               </p>
 
             </>
