@@ -55,10 +55,10 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: isKo ? "CoreVia - 진짜 온라인 PT" : "CoreVia - Real Online PT",
+      title: isKo ? "코비아 피트니스 | 웰니스를 AI로 혁신합니다" : "CoreVia Fitness | Reinventing Wellness with AI",
       description: isKo
-        ? "스마트폰 하나로 운동+식단 통합 관리. 운동과 식단을 함께 분석해서 개인화 피드백을 제공합니다."
-        : "All-in-one workout + diet management. Analyzes both workouts and diet together for personalized feedback.",
+        ? "당신의 모든 피트니스, 코비아 피트니스. 운동·식단 코칭 앱부터 스마트 체중계까지."
+        : "All your fitness, CoreVia Fitness. From a coaching app to a smart scale.",
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
       type: "website",
@@ -68,16 +68,16 @@ export async function generateMetadata({
           url: isKo ? "/og-ko.png" : "/og-en.png",
           width: 1024,
           height: 500,
-          alt: isKo ? "CoreVia - 진짜 온라인 PT" : "CoreVia - Real Online PT",
+          alt: isKo ? "코비아 피트니스 | 웰니스를 AI로 혁신합니다" : "CoreVia Fitness | Reinventing Wellness with AI",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isKo ? "CoreVia - 진짜 온라인 PT" : "CoreVia - Real Online PT",
+      title: isKo ? "코비아 피트니스 | 웰니스를 AI로 혁신합니다" : "CoreVia Fitness | Reinventing Wellness with AI",
       description: isKo
-        ? "스마트폰 하나로 운동+식단 통합 관리."
-        : "All-in-one workout + diet management.",
+        ? "당신의 모든 피트니스, 코비아 피트니스."
+        : "All your fitness, CoreVia Fitness.",
       images: [isKo ? "/og-ko.png" : "/og-en.png"],
     },
   };

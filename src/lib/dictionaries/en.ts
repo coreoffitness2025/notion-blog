@@ -33,11 +33,11 @@ const en = {
     contactUs: "Contact Us",
   },
   hero: {
-    title1: "Real Online PT,",
+    title1: "All your fitness,",
     title2: "CoreVia Fitness",
-    subtitle1: "Workouts and diet, managed by a real online PT.",
-    subtitle2: "Built by CoreVia Fitness.",
-    subtext1: "Download now",
+    subtitle1: "Reinventing wellness with AI.",
+    subtitle2: "From a workout & nutrition coaching app to a smart scale and fitness guides.",
+    subtext1: "Get the CoreVia Fitness app — free",
     subtext2: "",
     download: "Download App",
     explore: "Learn More",
@@ -797,10 +797,9 @@ const en = {
     goHome: "Go to Homepage",
   },
   metadata: {
-    homeTitle:
-      "CoreVia - Your Online PT | Workout & Diet Integrated Coaching App",
+    homeTitle: "CoreVia Fitness | Reinventing Wellness with AI",
     homeDesc:
-      "All-in-one workout + diet management on your smartphone. Many apps just record — only CoreVia analyzes both workouts and diet together for personalized feedback.",
+      "All your fitness, CoreVia Fitness. A workout & nutrition coaching app, an app-connected smart scale and fitness guides — wellness you can track, understand and keep up.",
     coachTitle: "AI Coach",
     coachDesc:
       "Coach Kay and Coach Jane — 4 coaching styles to manage both your workouts and diet.",

@@ -33,11 +33,11 @@ const ko = {
     contactUs: "문의하기",
   },
   hero: {
-    title1: "진짜 온라인 PT,",
+    title1: "당신의 모든 피트니스,",
     title2: "코비아 피트니스",
-    subtitle1: "운동과 식단, 제대로 봐주는 진짜 온라인 PT",
-    subtitle2: "CoreVia Fitness가 만들어나갑니다.",
-    subtext1: "지금 다운로드 받으세요",
+    subtitle1: "웰니스를 AI로 혁신합니다.",
+    subtitle2: "운동·식단 코칭 앱부터 스마트 체중계, 피트니스 가이드까지.",
+    subtext1: "코비아 피트니스 앱 무료 다운로드",
     subtext2: "",
     download: "앱 다운로드",
     explore: "어떤 앱인지 보기",
@@ -784,9 +784,9 @@ const ko = {
     goHome: "홈으로 돌아가기",
   },
   metadata: {
-    homeTitle: "CoreVia - 나만의 온라인 PT | 운동 식단 통합 코칭 앱",
+    homeTitle: "코비아 피트니스 | 웰니스를 AI로 혁신합니다",
     homeDesc:
-      "스마트폰 하나로 운동+식단 통합 관리. 기록만 하는 앱은 많지만, 운동과 식단을 함께 분석해서 개인화 피드백을 주는 앱은 CoreVia뿐.",
+      "당신의 모든 피트니스, 코비아 피트니스. 운동·식단 코칭 앱, 앱 연동 스마트 체중계, 피트니스 가이드로 기록하고 이해하고 이어가는 웰니스를 만듭니다.",
     coachTitle: "AI 코치 소개",
     coachDesc:
       "코치 케이와 코치 제인, 4가지 코칭 스타일로 운동과 식단을 함께 관리해줍니다.",
