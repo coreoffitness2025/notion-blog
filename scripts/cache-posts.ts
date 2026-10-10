@@ -93,8 +93,8 @@ async function cachePosts() {
         // 2026-10-10: 노션 429(요청 과다) 때 getPostFromNotion 이 null 을 돌려 글이 조용히 빠졌다
         // (등 운동·휴식 타이머 글이 사이트에서 404). null 이면 잠깐 쉬고 다시 받는다.
         let full = await getPostFromNotion(p.id);
-        for (let i = 1; !full && i <= 4; i++) {
-          await new Promise((r) => setTimeout(r, 1500 * i));
+        for (let i = 1; !full && i <= 6; i++) {
+          await new Promise((r) => setTimeout(r, 3000 * i));
           full = await getPostFromNotion(p.id);
         }
         if (full) allPosts.push(await localizePost(full));
