@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-// 스마트 체중계 소개 (2026-10-08)
-// 문구·수치는 판매 중인 스마트스토어 상세 v8.1(corevia-fitness-app docs/assets/scale-detail/v8) 그대로 — 새 수치 만들지 않는다.
+// 블루투스 체중계 소개 (2026-10-08, 10/11 개정)
+// 10/9 공장 확인: 이 모델(ZH-S1402-V02)은 체성분을 재지 않는다(임피던스 고정값) → '블루투스 체중계', 체성분 문구 없음, Pro 3개월(대표 10/9).
+// 문구는 판매 중인 스마트스토어 상세 v9(corevia-fitness-app docs/assets/scale-detail/v9)와 맞춘다 — 새 수치 만들지 않는다.
 // 판매·반품 조건은 스마트스토어 값만(policy/commerce-sale-terms): 24,000 · 무료배송 · 변심 반품·교환 배송비 0원(반품안심케어).
 // 이미지로 굽지 않고 텍스트로 둔다(네이버 검색이 실제 유입원).
 
@@ -27,17 +28,17 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? "코비아 스마트 체중계 — 체성분 15가지 앱 자동 기록 | CoreVia"
-      : "CoreVia Smart Scale — 15 body composition metrics, saved to the app | CoreVia",
+      ? "코비아 블루투스 체중계 — 올라서면 앱에 자동 기록 | CoreVia"
+      : "CoreVia Bluetooth Scale — step on, saved to the app | CoreVia",
     description: isKo
-      ? "올라서면 몸무게와 체성분 15가지가 코비아 피트니스 앱에 날짜별로 쌓입니다. 24,000원 · 무료배송 · KC 인증 · 블루투스 앱 연동."
-      : "Step on and your weight plus 15 body composition metrics are saved by date in the CoreVia Fitness app. ₩24,000 · Bluetooth · KC certified.",
+      ? "올라서면 몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월(16,500원 상당) 포함 · 24,000원 · 무료배송 · KC 인증."
+      : "Step on and your weight is saved by date in the CoreVia Fitness app. Includes 3 months of CoreVia Pro · ₩24,000 · KC certified.",
     alternates: {
       canonical: pageUrl,
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
     },
     openGraph: {
-      title: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale",
+      title: isKo ? "코비아 블루투스 체중계" : "CoreVia Bluetooth Scale",
       url: pageUrl,
       siteName: "CoreVia",
       images: [{ url: `${siteUrl}/products/scale-photo.jpg`, width: 1000, height: 1000 }],
@@ -58,15 +59,15 @@ export default async function ScalePage({
 
   const t = isKo
     ? {
-        badge: "스마트 체중계",
-        title: "코비아 스마트 체중계",
+        badge: "블루투스 체중계",
+        title: "코비아 블루투스 체중계",
         headline: "올라서면, 기록은 끝.",
-        sub: "몸무게와 체성분 15가지가 코비아 피트니스 앱에 날짜별로 쌓입니다.",
+        sub: "몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월(16,500원 상당)을 함께 드립니다.",
         price: "24,000원",
         priceNote: "무료배송 · KC 인증",
         buy: "스마트스토어에서 구매하기",
         specs: [
-          { n: "15", l: "체성분 지표" },
+          { n: "Pro 3개월", l: "앱 이용권 포함" },
           { n: "180kg", l: "최대 측정" },
           { n: "AAA×2", l: "건전지" },
           { n: "1년", l: "품질보증" },
@@ -74,21 +75,21 @@ export default async function ScalePage({
         whyTitle: "'재는 것' 다음을 만들었습니다",
         whySub: "운동·식단 기록 앱 코비아 피트니스가 만든 체중계입니다.",
         points: [
-          { k: "01 · 기록이 끊기지 않게", t: "손으로 적지 않아도 오늘이 남습니다", d: "앱 홈에서 '체중계 연결'을 누르고 올라서면 몸무게와 체성분이 오늘 날짜로 바로 저장됩니다." },
+          { k: "01 · 기록이 끊기지 않게", t: "손으로 적지 않아도 오늘이 남습니다", d: "앱 홈에서 '체중계 연결'을 누르고 올라서면 몸무게가 오늘 날짜로 바로 저장됩니다." },
           { k: "02 · 숫자에 흔들리지 않게", t: "하루 숫자 말고 방향을 봅니다", d: "쌓인 기록은 1주·1개월·3개월 그래프로 이어집니다. 오늘 오른 숫자보다 몸이 가는 방향이 먼저 보입니다." },
-          { k: "03 · 숫자 다음이 보이게", t: "몸무게 뒤에 있는 15가지", d: "체지방률·골격근량·내장지방 등 주요 지표가 지금 어느 구간인지(표준·경계 등) 함께 표시됩니다." },
+          { k: "03 · 숫자 다음이 보이게", t: "코치진이 기록을 함께 읽습니다", d: "Pro 3개월 동안 코치진이 몸무게·운동·식단 기록을 한 주 단위로 읽고 다음 주를 제안합니다." },
         ],
-        estimate: "가정용 체성분은 추정값입니다. 절댓값보다 같은 조건(아침 공복)에서의 변화로 보세요.",
+        estimate: "체지방·근육량 같은 체성분은 측정하지 않습니다. 몸무게를 재서 앱에 남기는 블루투스 체중계입니다.",
         shotPair: "실제 앱 화면 · 체중계 등록",
-        shotBody: "실제 앱 화면 · 체성분 결과",
+        shotBody: "실제 앱 화면 · 홈 몸무게",
         planTitle: "체중계 기능은 무료입니다",
         free: "무료",
-        freeDesc: "체중계 측정 · 자동 기록 · 체성분 15지표 · 추이 그래프",
+        freeDesc: "체중계 측정 · 자동 기록 · 추이 그래프",
         pro: "Pro (선택)",
         proDesc: "코치진의 주간 종합 분석",
-        bonus: "구매하면 앱 Pro 1개월 이용권을 함께 드립니다. 주문할 때 옵션칸에 이메일을 적어 주시면 등록 링크를 메일로 보내 드립니다(1개월 뒤 자동 종료 · 자동 결제 없음).",
+        bonus: "구매하면 앱 Pro 3개월 이용권(16,500원 상당)을 함께 드립니다. 주문할 때 옵션칸에 이메일을 적어 주시면 등록 링크를 메일로 보내 드립니다(3개월 뒤 자동 종료 · 자동 결제 없음).",
         packTitle: "체중계 + 전자책을 함께",
-        packDesc: "체중계, 전자책 Core of Fitness, 앱 Pro 이용권을 묶은 다이어트 스타트 팩도 있습니다.",
+        packDesc: "체중계, 전자책 Core of Fitness, 앱 Pro 12개월 이용권을 묶은 다이어트 스타트 팩도 있습니다.",
         packCta: "스타트 팩 보기",
         stepsTitle: "연결은 처음 한 번이면 끝",
         steps: [
@@ -115,7 +116,6 @@ export default async function ScalePage({
         ],
         cautionTitle: "사용 전 꼭 확인하세요",
         cautions: [
-          "심장박동기 등 체내 삽입형 의료기기를 사용하는 분은 사용하지 마세요. 측정할 때 미세한 전류가 몸을 통과합니다.",
           "의료기기가 아니며, 질병의 진단·치료 목적으로 사용할 수 없습니다.",
           "계량법상 거래·증명용 저울이 아닙니다.",
           "젖은 발이나 미끄러운 바닥에서는 넘어질 수 있으니 사용하지 마세요.",
@@ -131,15 +131,15 @@ export default async function ScalePage({
         appLink: "코비아 피트니스 앱 소개 보기",
       }
     : {
-        badge: "Smart scale",
-        title: "CoreVia Smart Scale",
+        badge: "Bluetooth scale",
+        title: "CoreVia Bluetooth Scale",
         headline: "Step on. It's recorded.",
-        sub: "Your weight and 15 body composition metrics are saved by date in the CoreVia Fitness app.",
+        sub: "Your weight is saved by date in the CoreVia Fitness app. Includes 3 months of CoreVia Pro.",
         price: "₩24,000",
         priceNote: "Free shipping · KC certified · Sold in Korea via Naver Smart Store",
         buy: "Buy on Naver Smart Store",
         specs: [
-          { n: "15", l: "Body composition metrics" },
+          { n: "3-month Pro", l: "App pass included" },
           { n: "180kg", l: "Max capacity" },
           { n: "AAA×2", l: "Batteries" },
           { n: "1 yr", l: "Warranty" },
@@ -147,21 +147,21 @@ export default async function ScalePage({
         whyTitle: "We built what comes after the measurement",
         whySub: "Made by CoreVia Fitness, the workout and meal logging app.",
         points: [
-          { k: "01 · Never miss a record", t: "Today is saved without writing it down", d: "Tap 'Connect scale' on the app home and step on — your weight and body composition are saved to today's date." },
+          { k: "01 · Never miss a record", t: "Today is saved without writing it down", d: "Tap 'Connect scale' on the app home and step on — your weight is saved to today's date." },
           { k: "02 · Don't chase daily swings", t: "See the direction, not one number", d: "Your records become 1-week, 1-month and 3-month graphs, so the direction your body is heading comes first." },
-          { k: "03 · See what's behind the number", t: "15 metrics behind your weight", d: "Key metrics such as body fat, skeletal muscle and visceral fat show which range you're in (standard, borderline, etc.)." },
+          { k: "03 · See what's behind the number", t: "The coaching team reads your records", d: "For 3 months of Pro, the coaching team reviews your weight, workouts and meals each week and suggests the next week." },
         ],
-        estimate: "Home body composition values are estimates. Compare changes under the same conditions (morning, before eating) rather than absolute values.",
+        estimate: "This scale does not measure body composition such as body fat or muscle mass. It weighs you and saves the result to the app.",
         shotPair: "Actual app screen · Scale pairing",
-        shotBody: "Actual app screen · Body composition",
+        shotBody: "Actual app screen · Home weight",
         planTitle: "Scale features are free",
         free: "Free",
-        freeDesc: "Measurement · Auto logging · 15 metrics · Trend graphs",
+        freeDesc: "Measurement · Auto logging · Trend graphs",
         pro: "Pro (optional)",
         proDesc: "Weekly analysis from the coaching team",
-        bonus: "Every scale comes with a 1-month CoreVia Pro pass. Enter your email in the order option field and we'll email you the activation link (ends automatically after 1 month · no auto-renewal).",
+        bonus: "Every scale comes with a 3-month CoreVia Pro pass. Enter your email in the order option field and we'll email you the activation link (ends automatically after 3 months · no auto-renewal).",
         packTitle: "Scale + ebook together",
-        packDesc: "The Diet Start Pack bundles the scale, the Core of Fitness ebook and a Pro pass.",
+        packDesc: "The Diet Start Pack bundles the scale, the Core of Fitness ebook and a 12-month Pro pass.",
         packCta: "See the Start Pack",
         stepsTitle: "Connect once, that's it",
         steps: [
@@ -188,7 +188,6 @@ export default async function ScalePage({
         ],
         cautionTitle: "Before you use it",
         cautions: [
-          "Do not use if you have an implanted medical device such as a pacemaker. A small current passes through the body during measurement.",
           "Not a medical device; not for diagnosing or treating any condition.",
           "Not a scale for trade or certification.",
           "Do not use with wet feet or on slippery floors.",
@@ -270,7 +269,7 @@ export default async function ScalePage({
               <figcaption className="text-xs text-gray-400 mt-2 text-center">{t.shotPair}</figcaption>
             </figure>
             <figure>
-              <Image src="/products/scale-app-bodycomp-result.jpg" alt={t.shotBody} width={552} height={1200} className="w-full h-auto rounded-2xl border border-gray-200" />
+              <Image src="/products/scale-app-weight-home.jpg" alt={t.shotBody} width={552} height={1200} className="w-full h-auto rounded-2xl border border-gray-200" />
               <figcaption className="text-xs text-gray-400 mt-2 text-center">{t.shotBody}</figcaption>
             </figure>
           </div>

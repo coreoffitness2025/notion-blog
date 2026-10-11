@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
-// 제품 개요 — 메뉴 'Product' 의 첫 화면 (2026-10-08 대표: 애플리케이션 / 전자책 / 스마트 체중계로 구분)
+// 제품 개요 — 메뉴 'Product' 의 첫 화면 (2026-10-08 대표: 애플리케이션 / 전자책 / 체중계로 구분 · 10/11 블루투스 체중계로 개칭)
 // 기존 /shop(Coming Soon) 은 next.config 에서 여기로 보낸다.
 
 const siteUrl =
@@ -21,8 +21,8 @@ export async function generateMetadata({
   return {
     title: isKo ? "제품 | CoreVia Fitness" : "Products | CoreVia Fitness",
     description: isKo
-      ? "코비아 피트니스 앱·코비아 리커버리 앱, 전자책 Core of Fitness, 앱에 바로 기록되는 코비아 스마트 체중계."
-      : "CoreVia Fitness and CoreVia Recovery apps, the Core of Fitness ebook, and the CoreVia smart scale that records straight to the app.",
+      ? "코비아 피트니스 앱·코비아 리커버리 앱, 전자책 Core of Fitness, 앱에 바로 기록되는 코비아 블루투스 체중계."
+      : "CoreVia Fitness and CoreVia Recovery apps, the Core of Fitness ebook, and the CoreVia Bluetooth scale that records straight to the app.",
     alternates: {
       canonical: pageUrl,
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
@@ -74,12 +74,12 @@ export default async function ProductsPage({
     {
       href: `${prefix}/products/scale`,
       image: "/products/scale-photo.jpg",
-      imageAlt: isKo ? "코비아 스마트 체중계" : "CoreVia smart scale",
-      label: isKo ? "스마트 체중계" : "Smart scale",
-      title: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale",
+      imageAlt: isKo ? "코비아 블루투스 체중계" : "CoreVia Bluetooth scale",
+      label: isKo ? "블루투스 체중계" : "Bluetooth scale",
+      title: isKo ? "코비아 블루투스 체중계" : "CoreVia Bluetooth Scale",
       desc: isKo
-        ? "올라서면 몸무게와 체성분 15가지가 코비아 피트니스 앱에 날짜별로 쌓입니다."
-        : "Step on and your weight plus 15 body composition metrics are saved by date in the CoreVia Fitness app.",
+        ? "올라서면 몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월 포함."
+        : "Step on and your weight is saved by date in the CoreVia Fitness app. Includes 3 months of Pro.",
       meta: isKo ? "24,000원 · 무료배송" : "₩24,000 · Free shipping (Korea)",
     },
   ];

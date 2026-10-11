@@ -51,8 +51,8 @@ export default function Navbar({ locale }: { locale: string }) {
         },
         {
           href: `${prefix}/products/scale`,
-          label: isEn ? "Smart Scale" : "스마트 체중계",
-          desc: isEn ? "Body composition, saved to the app" : "체성분 15가지 앱 자동 기록",
+          label: isEn ? "Bluetooth Scale" : "블루투스 체중계",
+          desc: isEn ? "Your weight, saved to the app" : "올라서면 앱에 몸무게 자동 기록",
         },
       ],
     },

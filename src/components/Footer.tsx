@@ -9,7 +9,7 @@ export default function Footer({ locale }: { locale: string }) {
     [dict.footer.product]: [
       { href: `${prefix}/products/apps`, label: locale === "en" ? "Apps" : "애플리케이션" },
       { href: `${prefix}/ebook`, label: locale === "en" ? "Ebook" : "전자책" },
-      { href: `${prefix}/products/scale`, label: locale === "en" ? "Smart Scale" : "스마트 체중계" },
+      { href: `${prefix}/products/scale`, label: locale === "en" ? "Bluetooth Scale" : "블루투스 체중계" },
       { href: `${prefix}/guide`, label: dict.footer.fitnessGuide },
     ],
     "Workout Guide": [
