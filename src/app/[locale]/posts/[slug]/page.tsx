@@ -10,6 +10,7 @@ import { extractFaq } from "@/lib/faq";
 import { Badge } from "@/components/ui/badge";
 import { calculateReadingTime } from "@/lib/utils";
 import { components } from "@/components/mdx-component";
+import ScaleStoreCTA from "@/components/ScaleStoreCTA";
 import { getDictionary } from "@/lib/i18n";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -247,6 +248,8 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
         </div>
       </section>
+
+      <ScaleStoreCTA locale={locale} medium="post" detail={slug} />
     </article>
     </>
   );

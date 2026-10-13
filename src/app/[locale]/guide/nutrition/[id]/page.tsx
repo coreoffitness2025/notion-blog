@@ -12,6 +12,7 @@ import {
 import { notFound } from "next/navigation";
 import ServingCalculator from "./client";
 import AdSense from "@/components/AdSense";
+import ScaleStoreCTA from "@/components/ScaleStoreCTA";
 import RelatedPosts from "@/components/RelatedPosts";
 import { relatedPostsForNutrition } from "@/lib/relatedPosts";
 
@@ -402,6 +403,8 @@ export default async function NutritionDetailPage({
               </div>
             </div>
           </section>
+
+          <ScaleStoreCTA locale={locale} medium="nutrition" detail={id} />
 
           {/* Similar Foods — internal link network */}
           {(() => {

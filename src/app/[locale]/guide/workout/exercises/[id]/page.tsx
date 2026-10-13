@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getExerciseImages } from "@/data/exerciseGifMap";
 import AdSense from "@/components/AdSense";
+import ScaleStoreCTA from "@/components/ScaleStoreCTA";
 import RelatedPosts from "@/components/RelatedPosts";
 import { relatedPostsForExercise } from "@/lib/relatedPosts";
 
@@ -384,6 +385,7 @@ export default async function ExerciseDetailPage({
             </div>
           </section>
 
+          <ScaleStoreCTA locale={locale} medium="exercise" detail={id} className="mb-8" />
 
           {/* Related Exercises */}
           {related.length > 0 && (

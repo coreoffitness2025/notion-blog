@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getDictionary } from "@/lib/i18n";
 import { MEAL_PLAN_DATA, type MealPlan } from "@/data/mealPlanData";
 import { notFound } from "next/navigation";
+import ScaleStoreCTA from "@/components/ScaleStoreCTA";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -229,6 +230,8 @@ export default async function MealPlanDetailPage({
             </div>
           </div>
         </section>
+
+        <ScaleStoreCTA locale={locale} medium="mealplan" detail={id} />
       </div>
     </main>
     </>
