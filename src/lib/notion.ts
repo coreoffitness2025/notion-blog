@@ -33,6 +33,24 @@ if (!databaseId) {
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+// 유튜브 영상 블록 → 본문 안 재생 (대표 10/16 "유튜브 영상에 맞춰 블로그"). 기본 변환은 링크 한 줄뿐.
+// 쇼츠는 세로(9:16)라 폭을 줄여 가운데 둔다. 유튜브가 아니면 링크로 남긴다.
+function youtubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/(?:shorts\/|watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+n2m.setCustomTransformer("video", async (block: any) => {
+  const v = block?.video ?? {};
+  const url: string = v?.external?.url ?? v?.file?.url ?? "";
+  const id = url ? youtubeId(url) : null;
+  if (!id) return url ? `[영상 보기](${url})` : "";
+  const shorts = url.includes("/shorts/");
+  const box = shorts
+    ? "position:relative;width:100%;max-width:360px;aspect-ratio:9/16;margin:24px auto;border-radius:12px;overflow:hidden"
+    : "position:relative;width:100%;aspect-ratio:16/9;margin:24px 0;border-radius:12px;overflow:hidden";
+  return `<div style="${box}"><iframe src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+});
+
 /** ---------------------------
  * Helpers (Notion property safe getters)
  * -------------------------- */
