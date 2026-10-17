@@ -24,5 +24,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // go = 앱 다운로드 리다이렉트(로케일 프리픽스를 붙이면 안 된다)
-  matcher: ["/((?!_next|api|go|favicon|ads\\.txt|robots\\.txt|sitemap|.*\\..*).*)" ],
+  // ko/·en/ = 이미 로케일이 붙은 주소는 할 일이 없는데 매 요청 함수가 돌았다(요청의 ~37%, 2026-10-17 Vercel 사용량 정리)
+  matcher: ["/((?!_next|api|go|favicon|ads\\.txt|robots\\.txt|sitemap|ko/|ko$|en/|en$|.*\\..*).*)" ],
 };
