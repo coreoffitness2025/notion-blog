@@ -64,6 +64,9 @@ export async function generateMetadata({
         en: `${siteUrl}/en/guide/workout/exercises/${id}`,
       },
     },
+    // 구글봇만 색인 제외(2026-10-22 대표 '구글 색인 문제부터') — 자동 생성 가이드 1만여 쪽이 '크롤링됨-미색인'으로 쌓여
+    // 구글이 이 도메인에서 새 주소를 아예 발견하지 않는다(크롤 통계 90일 '발견' 0%). 네이버(Yeti) 유입원이라 일반 robots 는 index 유지.
+    robots: { index: true, follow: true, googleBot: { index: false, follow: true } },
     openGraph: {
       title: isKo
         ? `${name} 운동 가이드`
