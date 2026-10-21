@@ -33,7 +33,7 @@ function Hero({ isKo, prefix }: L) {
     <section className="bg-white border-b border-gray-100">
       <div className="max-w-[1120px] mx-auto px-5 pt-14 pb-16 md:pt-20 md:pb-24 grid gap-12 md:grid-cols-[1fr_1.05fr] items-center">
         <div>
-          <p className="text-sm font-semibold text-gray-500 mb-4">{isKo ? "코비아 · 운동 기록에서 센터 운영까지" : "CoreVia · From workout logs to center operations"}</p>
+          <p className="text-sm font-semibold text-gray-500 mb-4">{isKo ? "코비아 · 운동 기록 앱과 센터 운영 웹" : "CoreVia · From workout logs to center operations"}</p>
           <h1 className="text-[34px] leading-[1.25] md:text-[46px] md:leading-[1.2] font-bold text-gray-900 tracking-[-0.02em] break-keep mb-5">
             {isKo ? <>운동, 식단, 몸무게를<br />한 앱에 기록합니다</> : <>Workouts, meals and weight<br />in one app</>}
           </h1>
@@ -61,10 +61,10 @@ function Hero({ isKo, prefix }: L) {
 
 function Lines({ isKo, prefix }: L) {
   const items = [
-    { group: isKo ? "코비아 SW" : "CoreVia SW", title: isKo ? "코비아 CRM" : "CoreVia CRM", desc: isKo ? "웰니스 센터 운영 웹. 회원권·예약·출석·급여에 회원 앱 기록까지." : "Web CRM for wellness centers — memberships to payroll, plus members' app logs.", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true, tag: isKo ? "베타" : "Beta" },
+    { group: isKo ? "코비아 SW" : "CoreVia SW", title: isKo ? "코비아 CRM" : "CoreVia CRM", desc: isKo ? "웰니스 센터 운영 웹. 회원권·예약·출석·급여와 회원 앱 기록." : "Web CRM for wellness centers — memberships to payroll, plus members' app logs.", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true, tag: isKo ? "베타" : "Beta" },
     { group: isKo ? "애플리케이션" : "Apps", title: isKo ? "코비아 피트니스" : "CoreVia Fitness", desc: isKo ? "운동·식단·몸무게 기록과 코치진 피드백." : "Workout, meal and weight logs with coaching team feedback.", href: `${prefix}/products/apps#fitness`, img: "/icon-512.png" },
     { group: isKo ? "애플리케이션" : "Apps", title: isKo ? "코비아 리커버리" : "CoreVia Recovery", desc: isKo ? "통증 일지·재활 운동·가동범위 사진 기록." : "Pain journal, rehab exercises and range-of-motion photos.", href: `${prefix}/products/apps#recovery`, img: "/products/recovery-icon.png" },
-    { group: isKo ? "커머스" : "Commerce", title: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale", desc: isKo ? "올라서면 몸무게가 앱에 날짜별로. 24,000원." : "Step on and it's saved by date. ₩24,000.", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
+    { group: isKo ? "커머스" : "Commerce", title: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale", desc: isKo ? "올라서면 날짜별로 앱에 기록. 24,000원." : "Step on and it's saved by date. ₩24,000.", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
   ];
   return (
     <section className="bg-[var(--corevia-bg)]">
@@ -111,7 +111,7 @@ function AppFeatures({ isKo }: L) {
       <div className="max-w-[1120px] mx-auto px-5 py-16 md:py-24 grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
         <div>
           <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em] leading-snug mb-4 break-keep">{isKo ? <>코비아 피트니스로<br />하는 일</> : "What CoreVia Fitness does"}</h2>
-          <p className="text-gray-500 leading-relaxed break-keep mb-6">{isKo ? "운동과 식단을 따로 보지 않고, 한 화면에서 같이 봅니다." : "Workouts and meals, looked at together."}</p>
+          <p className="text-gray-500 leading-relaxed break-keep mb-6">{isKo ? "운동과 식단을 한 화면에서 같이 봅니다." : "Workouts and meals, looked at together."}</p>
           <Link href={isKo ? "/products/apps" : "/en/products/apps"} className="text-sm font-semibold text-[var(--corevia-primary)] hover:underline">{isKo ? "앱 자세히 보기 →" : "More about the app →"}</Link>
         </div>
         <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2">
@@ -141,7 +141,7 @@ function Connected({ isKo, prefix }: L) {
         <div className="order-1 md:order-2">
           <p className="text-sm font-semibold text-gray-500 mb-3">{isKo ? "트레이너 · 센터" : "Trainers · Centers"}</p>
           <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em] leading-snug mb-6 break-keep">
-            {isKo ? "수업 밖의 기록까지 트레이너와 센터가 함께 봅니다" : "Trainers and centers see what happens between sessions"}
+            {isKo ? "수업 밖 기록도 트레이너와 센터가 같이 봅니다" : "Trainers and centers see what happens between sessions"}
           </h2>
           <ul className="grid gap-3 mb-8">
             {rows.map((r) => (
@@ -201,8 +201,8 @@ function Guides({ isKo, prefix }: L) {
             <Img src="/ebook-cover.png" alt="Core of Fitness 전자책 표지" className="w-14 h-[72px] object-contain shrink-0" />
             <span className="flex-1 min-w-0">
               <span className="block text-xs font-semibold text-gray-400 mb-1">전자책</span>
-              <span className="block text-[16px] font-bold text-gray-900">Core of Fitness — 가이드의 원리를 한 권으로</span>
-              <span className="block text-sm text-gray-500 mt-0.5">체중 감량과 근비대의 핵심, 식단·운동 프로그램 · 20,000원</span>
+              <span className="block text-[16px] font-bold text-gray-900">Core of Fitness — 가이드의 원리를 한 권에 정리</span>
+              <span className="block text-sm text-gray-500 mt-0.5">체중 감량·근비대 핵심 정리와 식단·운동 프로그램 · 20,000원</span>
             </span>
             <span className="text-gray-300" aria-hidden="true">→</span>
           </Link>
