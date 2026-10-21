@@ -3,6 +3,7 @@ import Link from "next/link";
 // 메인 리뉴얼 (2026-10-21, docs/site-renewal-2026-10.md) — 'AI 티' 걷어내기
 // 원칙: 사실로 쓴 문장 · 파랑 한 계열 + 그레이 · 진짜 그림만(CRM 실제 화면·체중계 사진·전자책 표지·앱 아이콘·Icon3D) · 움직임 효과 없음.
 // 코치는 'CoreVia Fitness 코치진'(policy/no-ai-emphasis, decision/coach-single-tone). 앱 받기는 /go 로 추적.
+// 10/22 대표: 첫 화면 = 회사 슬로건 '웰니스를 AI로 혁신합니다' + 푸는 문제. 회사 차원의 AI 슬로건은 대표 결정(코치를 AI로 내세우는 것과 별개).
 
 type L = { isKo: boolean; prefix: string };
 
@@ -29,21 +30,24 @@ function StoreButtons({ isKo, c, dark = false }: { isKo: boolean; c: string; dar
 }
 
 function Hero({ isKo, prefix }: L) {
+  // 대표 10/22: 메인 첫 화면 = 회사가 풀려는 문제와 슬로건. 앱 강조 X — 솔루션을 계속 늘려 가는 회사
   return (
     <section className="bg-white border-b border-gray-100">
       <div className="max-w-[1120px] mx-auto px-5 pt-14 pb-16 md:pt-20 md:pb-24 grid gap-12 md:grid-cols-[1fr_1.05fr] items-center">
         <div>
-          <p className="text-sm font-semibold text-gray-500 mb-4">{isKo ? "코비아 · 운동 기록 앱과 센터 운영 웹" : "CoreVia · From workout logs to center operations"}</p>
-          <h1 className="text-[34px] leading-[1.25] md:text-[46px] md:leading-[1.2] font-bold text-gray-900 tracking-[-0.02em] break-keep mb-5">
-            {isKo ? <>운동, 식단, 몸무게를<br />한 앱에 기록합니다</> : <>Workouts, meals and weight<br />in one app</>}
+          <p className="text-sm font-semibold text-gray-500 mb-4">{isKo ? "코비아 · 웰니스 AX" : "CoreVia · Wellness AX"}</p>
+          <h1 className="text-[36px] leading-[1.2] md:text-[50px] md:leading-[1.15] font-bold text-gray-900 tracking-[-0.02em] break-keep mb-5">
+            {isKo ? <>웰니스를<br />AI로 혁신합니다</> : <>Transforming wellness<br />with AI</>}
           </h1>
-          <p className="text-[17px] leading-relaxed text-gray-600 break-keep mb-8 max-w-[460px]">
+          <p className="text-[17px] md:text-[18px] leading-relaxed text-gray-600 break-keep mb-8 max-w-[480px]">
             {isKo
-              ? "코비아 피트니스에 남긴 기록은 체중계와 이어지고, 회원이 동의하면 담당 트레이너와 센터에서도 같은 기록을 봅니다."
-              : "What you log in CoreVia Fitness connects to the scale, and with your consent your trainer and center see the same record."}
+              ? "웰니스 전반에 걸친 다양한 페인 포인트를 AI로 풀어냅니다."
+              : "We solve pain points across wellness with AI."}
           </p>
-          <StoreButtons isKo={isKo} c="site-home-hero" />
-          <p className="mt-3 text-sm text-gray-400">{isKo ? "무료 · iPhone·Android" : "Free · iPhone & Android"}</p>
+          <div className="flex flex-wrap gap-2.5">
+            <a href="#problems" className="inline-flex items-center px-5 py-3 rounded-xl bg-gray-900 text-white text-[15px] font-semibold hover:bg-gray-800 transition-colors">{isKo ? "우리가 푸는 문제" : "Problems we solve"}</a>
+            <Link href={`${prefix}/contact`} className="inline-flex items-center px-5 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 text-[15px] font-semibold hover:bg-gray-50 transition-colors">{isKo ? "문의하기" : "Contact"}</Link>
+          </div>
         </div>
         <div className="relative">
           <div className="rounded-2xl border border-gray-200 bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)]">
@@ -59,30 +63,40 @@ function Hero({ isKo, prefix }: L) {
   );
 }
 
-function Lines({ isKo, prefix }: L) {
-  const items = [
-    { group: isKo ? "코비아 SW" : "CoreVia SW", title: isKo ? "코비아 CRM" : "CoreVia CRM", desc: isKo ? "웰니스 센터 운영 웹. 회원권·예약·출석·급여와 회원 앱 기록." : "Web CRM for wellness centers — memberships to payroll, plus members' app logs.", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true, tag: isKo ? "베타" : "Beta" },
-    { group: isKo ? "애플리케이션" : "Apps", title: isKo ? "코비아 피트니스" : "CoreVia Fitness", desc: isKo ? "운동·식단·몸무게 기록과 코치진 피드백." : "Workout, meal and weight logs with coaching team feedback.", href: `${prefix}/products/apps#fitness`, img: "/icon-512.png" },
-    { group: isKo ? "애플리케이션" : "Apps", title: isKo ? "코비아 리커버리" : "CoreVia Recovery", desc: isKo ? "통증 일지·재활 운동·가동범위 사진 기록." : "Pain journal, rehab exercises and range-of-motion photos.", href: `${prefix}/products/apps#recovery`, img: "/products/recovery-icon.png" },
-    { group: isKo ? "커머스" : "Commerce", title: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale", desc: isKo ? "올라서면 날짜별로 앱에 기록. 24,000원." : "Step on and it's saved by date. ₩24,000.", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
-  ];
+function Problems({ isKo, prefix }: L) {
+  const items = isKo
+    ? [
+        { who: "센터", pain: "회원권·예약·출석·급여가 여러 프로그램에 흩어져 있고, 수업 밖에서 회원이 무엇을 했는지는 보이지 않습니다.", name: "코비아 CRM", tag: "베타", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true },
+        { who: "운동하는 사람", pain: "운동 기록과 식단 기록이 따로 놀고, 무엇을 고쳐야 할지 알려 주는 사람이 없습니다.", name: "코비아 피트니스", href: `${prefix}/products/apps#fitness`, img: "/icon-512.png" },
+        { who: "회복 중인 사람", pain: "통증과 재활 운동, 가동범위 변화를 날짜별로 남겨 두기 어렵습니다.", name: "코비아 리커버리", href: `${prefix}/products/apps#recovery`, img: "/products/recovery-icon.png" },
+        { who: "몸을 재는 순간", pain: "체중을 재도 숫자가 기록으로 이어지지 않고 흩어집니다.", name: "코비아 스마트 체중계", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
+      ]
+    : [
+        { who: "Centers", pain: "Memberships, bookings, check-ins and payroll live in separate tools, and what members do between sessions is invisible.", name: "CoreVia CRM", tag: "Beta", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true },
+        { who: "People who train", pain: "Workout and meal logs don't connect, and no one tells you what to fix.", name: "CoreVia Fitness", href: `${prefix}/products/apps#fitness`, img: "/icon-512.png" },
+        { who: "People recovering", pain: "Pain, rehab exercises and range-of-motion changes are hard to keep by date.", name: "CoreVia Recovery", href: `${prefix}/products/apps#recovery`, img: "/products/recovery-icon.png" },
+        { who: "Weighing in", pain: "You step on a scale, but the number never becomes a record.", name: "CoreVia Smart Scale", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
+      ];
   return (
-    <section className="bg-[var(--corevia-bg)]">
+    <section id="problems" className="bg-[var(--corevia-bg)] scroll-mt-20">
       <div className="max-w-[1120px] mx-auto px-5 py-16 md:py-24">
-        <div className="flex items-end justify-between gap-4 mb-8">
-          <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em]">{isKo ? "코비아가 만드는 것" : "What we make"}</h2>
+        <div className="flex items-end justify-between gap-4 mb-3">
+          <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em]">{isKo ? "우리가 푸는 문제" : "Problems we solve"}</h2>
           <Link href={`${prefix}/products`} className="text-sm font-semibold text-gray-500 hover:text-gray-900 shrink-0">{isKo ? "제품 전체 →" : "All products →"}</Link>
         </div>
-        <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
+        <p className="text-gray-500 mb-8 break-keep">{isKo ? "문제 하나에 솔루션 하나씩, 계속 늘려 가고 있습니다." : "One solution per problem, and we keep adding more."}</p>
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
           {items.map((it) => (
-            <Link key={it.title} href={it.href} className="group flex flex-col rounded-2xl border border-gray-200 bg-white overflow-hidden hover:border-gray-300 transition-colors">
-              <div className="aspect-[4/3] bg-gray-50 overflow-hidden flex items-center justify-center">
-                <Img src={it.img} alt={it.title} className={it.cover ? "w-full h-full object-cover object-left-top" : "w-16 h-16 sm:w-24 sm:h-24 rounded-[18px] sm:rounded-[22px]"} />
+            <Link key={it.name} href={it.href} className="group flex gap-4 sm:gap-5 rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 hover:border-gray-300 transition-colors">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center">
+                <Img src={it.img} alt={it.name} className={it.cover ? "w-full h-full object-cover object-left-top" : "w-16 h-16 rounded-[16px]"} />
               </div>
-              <div className="p-4 sm:p-5 flex-1">
-                <p className="text-xs font-semibold text-gray-400 mb-1.5">{it.group}{it.tag ? ` · ${it.tag}` : ""}</p>
-                <h3 className="text-[15px] sm:text-[17px] font-bold text-gray-900 mb-1.5 group-hover:text-[var(--corevia-primary)] transition-colors">{it.title}</h3>
-                <p className="text-[13px] sm:text-sm text-gray-500 leading-relaxed break-keep">{it.desc}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold text-gray-400 mb-1.5">{it.who}</p>
+                <p className="text-[15px] text-gray-700 leading-relaxed break-keep mb-3">{it.pain}</p>
+                <p className="text-[15px] font-bold text-gray-900 group-hover:text-[var(--corevia-primary)] transition-colors">
+                  → {it.name}{it.tag ? <span className="ml-1.5 text-xs font-semibold text-gray-400">{it.tag}</span> : null}
+                </p>
               </div>
             </Link>
           ))}
@@ -112,7 +126,8 @@ function AppFeatures({ isKo }: L) {
         <div>
           <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em] leading-snug mb-4 break-keep">{isKo ? <>코비아 피트니스로<br />하는 일</> : "What CoreVia Fitness does"}</h2>
           <p className="text-gray-500 leading-relaxed break-keep mb-6">{isKo ? "운동과 식단을 한 화면에서 같이 봅니다." : "Workouts and meals, looked at together."}</p>
-          <Link href={isKo ? "/products/apps" : "/en/products/apps"} className="text-sm font-semibold text-[var(--corevia-primary)] hover:underline">{isKo ? "앱 자세히 보기 →" : "More about the app →"}</Link>
+          <StoreButtons isKo={isKo} c="site-home-app" />
+          <Link href={isKo ? "/products/apps" : "/en/products/apps"} className="inline-block mt-4 text-sm font-semibold text-gray-500 hover:text-gray-900">{isKo ? "앱 자세히 보기 →" : "More about the app →"}</Link>
         </div>
         <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2">
           {items.map((f) => (
@@ -212,15 +227,18 @@ function Guides({ isKo, prefix }: L) {
   );
 }
 
-function FinalCta({ isKo }: L) {
+function FinalCta({ isKo, prefix }: L) {
   return (
     <section className="bg-gray-900">
       <div className="max-w-[1120px] mx-auto px-5 py-14 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div>
-          <h2 className="text-[24px] md:text-[28px] font-bold text-white tracking-[-0.02em] mb-1.5">{isKo ? "코비아 피트니스는 무료로 시작합니다" : "CoreVia Fitness is free to start"}</h2>
-          <p className="text-gray-400">{isKo ? "기록이 쌓이면 Pro로 더 자세한 분석을 볼 수 있어요." : "Upgrade to Pro for deeper analysis when you're ready."}</p>
+          <h2 className="text-[24px] md:text-[28px] font-bold text-white tracking-[-0.02em] mb-1.5 break-keep">{isKo ? "함께 풀고 싶은 문제가 있다면 알려 주세요" : "Have a problem you want solved? Tell us"}</h2>
+          <p className="text-gray-400 break-keep">{isKo ? "센터 도입·제휴·기기 연동 문의는 메일로 받습니다." : "Center adoption, partnerships and device integration — by email."}</p>
         </div>
-        <StoreButtons isKo={isKo} c="site-home-bottom" dark />
+        <div className="flex flex-wrap gap-2.5">
+          <Link href={`${prefix}/contact`} className="inline-flex items-center px-5 py-3 rounded-xl bg-white text-gray-900 text-[15px] font-semibold hover:bg-gray-100 transition-colors">{isKo ? "문의하기" : "Contact"}</Link>
+          <Link href={`${prefix}/products/crm#inquiry`} className="inline-flex items-center px-5 py-3 rounded-xl bg-[var(--corevia-primary)] text-white text-[15px] font-semibold hover:opacity-90 transition-opacity">{isKo ? "CRM 베타 도입 문의" : "CRM beta inquiry"}</Link>
+        </div>
       </div>
     </section>
   );
@@ -232,9 +250,9 @@ export default function HomeRenewal({ locale, blog }: { locale: string; blog: Re
   return (
     <div className="min-h-screen bg-white">
       <Hero {...l} />
-      <Lines {...l} />
-      <AppFeatures {...l} />
+      <Problems {...l} />
       <Connected {...l} />
+      <AppFeatures {...l} />
       <Guides {...l} />
       {blog}
       <FinalCta {...l} />
