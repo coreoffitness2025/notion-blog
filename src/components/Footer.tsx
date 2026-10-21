@@ -10,6 +10,7 @@ export default function Footer({ locale }: { locale: string }) {
       { href: `${prefix}/products/apps`, label: locale === "en" ? "Apps" : "애플리케이션" },
       { href: `${prefix}/ebook`, label: locale === "en" ? "Ebook" : "전자책" },
       { href: `${prefix}/products/scale`, label: locale === "en" ? "Bluetooth Scale" : "블루투스 체중계" },
+      { href: `${prefix}/products/crm`, label: locale === "en" ? "Center CRM (Beta)" : "센터용 CRM (베타)" },
       { href: `${prefix}/guide`, label: dict.footer.fitnessGuide },
     ],
     "Workout Guide": [

@@ -59,6 +59,15 @@ export async function GET() {
     }
   }
 
+  // 한국어 전용 페이지(센터용 CRM, 2026-10-21) — /en 은 한국어 중복이라 넣지 않는다
+  for (const p of ["/products/crm"]) {
+    entries.push(`<url>
+<loc>${siteUrl}${p}</loc>
+<xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${p}"/>
+<xhtml:link rel="alternate" hreflang="ko" href="${siteUrl}${p}"/>
+</url>`);
+  }
+
   const posts = getPostsFromCache();
   for (const post of posts as Post[]) {
     const koUrl = `${siteUrl}/posts/${post.slug}`;
