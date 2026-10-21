@@ -1,9 +1,11 @@
 import Link from "next/link";
+import CrmInquiryForm from "@/components/CrmInquiryForm";
 
-// 메인 리뉴얼 (2026-10-21, docs/site-renewal-2026-10.md) — 'AI 티' 걷어내기
-// 원칙: 사실로 쓴 문장 · 파랑 한 계열 + 그레이 · 진짜 그림만(CRM 실제 화면·체중계 사진·전자책 표지·앱 아이콘·Icon3D) · 움직임 효과 없음.
-// 코치는 'CoreVia Fitness 코치진'(policy/no-ai-emphasis, decision/coach-single-tone). 앱 받기는 /go 로 추적.
-// 10/22 대표: 첫 화면 = 회사 슬로건 '웰니스를 AI로 혁신합니다' + 푸는 문제. 회사 차원의 AI 슬로건은 대표 결정(코치를 AI로 내세우는 것과 별개).
+// 메인 — 회사 사명 중심 (2026-10-22 대표 "사명이랑 슬로건을 걸어놓고 왜 제품을 걸어놔", docs/site-renewal-2026-10.md 2차)
+// 순서(벤치마킹: FDE 회사들 = 미션 문장으로 열고 → FDE 정의 → 원칙·단계 → 증거 → 연락 하나):
+//   사명 → 현장의 문제 → 솔루션 ① 웰니스 FDE → 솔루션 ② 영상 인식 → 보유 기술 → 직접 만든 제품 → 상담 신청
+// 문구 선: 진단·처방·치료 효과 금지, 측정값 = 참고값·담당자 확인, 코치 = 'CoreVia Fitness 코치진', 고객 로고·후기·근거 없는 수치 없음.
+// 숫자는 코드 기준(운동 109종 exerciseDatabase.ts · 음식 5,672 food-db-audit · CRM 화면 31 web/src/pages · 루틴 23 routineTemplates.ts).
 
 type L = { isKo: boolean; prefix: string };
 
@@ -12,129 +14,59 @@ function Img({ src, alt, className = "" }: { src: string; alt: string; className
   return <img src={src} alt={alt} className={className} loading="lazy" decoding="async" />;
 }
 
-function StoreButtons({ isKo, c, dark = false }: { isKo: boolean; c: string; dark?: boolean }) {
-  return (
-    <div className="flex flex-wrap gap-2.5">
-      <a href={`/go?app=fitness&p=ios&c=${c}`} target="_blank" rel="noopener noreferrer"
-        className={`inline-flex items-center gap-2 text-[15px] font-semibold px-5 py-3 rounded-xl transition-colors ${dark ? "bg-white text-gray-900 hover:bg-gray-100" : "bg-gray-900 text-white hover:bg-gray-800"}`}>
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" /></svg>
-        App Store
-      </a>
-      <a href={`/go?app=fitness&p=android&c=${c}`} target="_blank" rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 bg-[var(--corevia-primary)] text-white text-[15px] font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-opacity">
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8 13.8 12 3.6 22.2a1.4 1.4 0 0 1-.6-1.2V3c0-.5.2-.9.6-1.2zm11.6 11.6 2.4 2.4-11.1 6.3 8.7-8.7zm3.8-3.4 2.6 1.5c.9.5.9 1.8 0 2.3L19 15.3 16.2 12.5 19 10zM6.5 1.9l11.1 6.3-2.4 2.4-8.7-8.7z" /></svg>
-        Google Play
-      </a>
-    </div>
-  );
-}
+const H2 = ({ children }: { children: React.ReactNode }) => (
+  <h2 className="text-[28px] md:text-[38px] leading-[1.25] font-bold text-gray-900 tracking-[-0.025em] break-keep">{children}</h2>
+);
+const Eyebrow = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-sm font-semibold text-[var(--corevia-primary)] mb-3">{children}</p>
+);
 
-function Hero({ isKo, prefix }: L) {
-  // 대표 10/22: 메인 첫 화면 = 회사가 풀려는 문제와 슬로건. 앱 강조 X — 솔루션을 계속 늘려 가는 회사
+function Mission({ isKo }: L) {
   return (
-    <section className="bg-white border-b border-gray-100">
-      <div className="max-w-[1120px] mx-auto px-5 pt-14 pb-16 md:pt-20 md:pb-24 grid gap-12 md:grid-cols-[1fr_1.05fr] items-center">
-        <div>
-          <p className="text-sm font-semibold text-gray-500 mb-4">{isKo ? "코비아 · 웰니스 AX" : "CoreVia · Wellness AX"}</p>
-          <h1 className="text-[36px] leading-[1.2] md:text-[50px] md:leading-[1.15] font-bold text-gray-900 tracking-[-0.02em] break-keep mb-5">
-            {isKo ? <>웰니스를<br />AI로 혁신합니다</> : <>Transforming wellness<br />with AI</>}
-          </h1>
-          <p className="text-[17px] md:text-[18px] leading-relaxed text-gray-600 break-keep mb-8 max-w-[480px]">
-            {isKo
-              ? "웰니스 전반에 걸친 다양한 페인 포인트를 AI로 풀어냅니다."
-              : "We solve pain points across wellness with AI."}
-          </p>
-          <div className="flex flex-wrap gap-2.5">
-            <a href="#problems" className="inline-flex items-center px-5 py-3 rounded-xl bg-gray-900 text-white text-[15px] font-semibold hover:bg-gray-800 transition-colors">{isKo ? "우리가 푸는 문제" : "Problems we solve"}</a>
-            <Link href={`${prefix}/contact`} className="inline-flex items-center px-5 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 text-[15px] font-semibold hover:bg-gray-50 transition-colors">{isKo ? "문의하기" : "Contact"}</Link>
-          </div>
-        </div>
-        <div className="relative">
-          <div className="rounded-2xl border border-gray-200 bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)]">
-            <Img src="/crm/member-measure.webp" alt={isKo ? "코비아 CRM 회원 카드 — 날짜별 측정 기록" : "CoreVia CRM member card — measurements by date"} className="w-full h-auto rounded-xl" />
-          </div>
-          <div className="absolute -bottom-8 -left-4 md:-left-10 w-[42%] max-w-[220px] rounded-2xl border border-gray-200 bg-white p-3 shadow-[0_12px_30px_-12px_rgba(15,23,42,0.3)]">
-            <Img src="/products/scale-photo.jpg" alt={isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale"} className="w-full aspect-square object-cover rounded-xl" />
-            <p className="mt-2 text-xs font-semibold text-gray-700">{isKo ? "올라서면 앱에 자동 기록" : "Step on, saved to the app"}</p>
-          </div>
+    <section className="relative overflow-hidden bg-white">
+      {/* 바탕: 옅은 격자 한 겹(그림 대신) */}
+      <div aria-hidden="true" className="absolute inset-0 [background-image:linear-gradient(to_right,#eef2f7_1px,transparent_1px),linear-gradient(to_bottom,#eef2f7_1px,transparent_1px)] [background-size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
+      <div className="relative max-w-[1120px] mx-auto px-5 pt-20 pb-24 md:pt-32 md:pb-36">
+        <p className="text-sm font-semibold text-gray-500 mb-6">{isKo ? "코비아 · 웰니스 AX" : "CoreVia · Wellness AX"}</p>
+        <h1 className="text-[44px] leading-[1.12] md:text-[76px] md:leading-[1.08] font-bold text-gray-900 tracking-[-0.035em] break-keep">
+          {isKo ? <>웰니스를<br />AI로 혁신합니다</> : <>Transforming<br />wellness with AI</>}
+        </h1>
+        <p className="mt-7 text-[18px] md:text-[21px] leading-relaxed text-gray-600 break-keep max-w-[620px]">
+          {isKo ? "웰니스 전반에 걸친 다양한 페인 포인트를 AI로 풀어냅니다." : "We solve pain points across wellness with AI."}
+        </p>
+        <div className="mt-10 flex flex-wrap gap-2.5">
+          <a href="#contact" className="inline-flex items-center px-6 py-3.5 rounded-xl bg-gray-900 text-white text-[15px] font-semibold hover:bg-gray-800 transition-colors">{isKo ? "AI 도입 상담 신청" : "Talk to us about AI"}</a>
+          <a href="#solutions" className="inline-flex items-center px-6 py-3.5 rounded-xl border border-gray-300 bg-white text-gray-800 text-[15px] font-semibold hover:bg-gray-50 transition-colors">{isKo ? "솔루션 보기" : "Our solutions"}</a>
         </div>
       </div>
     </section>
   );
 }
 
-function Problems({ isKo, prefix }: L) {
-  const items = isKo
+function Problems({ isKo }: L) {
+  const rows = isKo
     ? [
-        { who: "센터", pain: "회원권·예약·출석·급여가 여러 프로그램에 흩어져 있고, 수업 밖에서 회원이 무엇을 했는지는 보이지 않습니다.", name: "코비아 CRM", tag: "베타", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true },
-        { who: "운동하는 사람", pain: "운동 기록과 식단 기록이 따로 놀고, 무엇을 고쳐야 할지 알려 주는 사람이 없습니다.", name: "코비아 피트니스", href: `${prefix}/products/apps#fitness`, img: "/icon-512.png" },
-        { who: "회복 중인 사람", pain: "통증과 재활 운동, 가동범위 변화를 날짜별로 남겨 두기 어렵습니다.", name: "코비아 리커버리", href: `${prefix}/products/apps#recovery`, img: "/products/recovery-icon.png" },
-        { who: "몸을 재는 순간", pain: "체중을 재도 숫자가 기록으로 이어지지 않고 흩어집니다.", name: "코비아 스마트 체중계", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
+        { who: "피트니스·PT샵", pain: "회원권·예약·출석·급여가 여러 프로그램에 흩어져 있고, 수업 밖에서 회원이 무엇을 했는지는 보이지 않습니다." },
+        { who: "주간보호 운동 관리", pain: "어르신 운동 평가와 매일의 운동 기록을 종이와 엑셀로 옮겨 적느라 정작 운동 관리에 쓸 시간이 부족합니다." },
+        { who: "물리치료·재활 센터", pain: "통증과 가동범위 변화가 사람마다 다른 곳에 적혀 있어, 날짜별 추이를 한눈에 보기 어렵습니다." },
       ]
     : [
-        { who: "Centers", pain: "Memberships, bookings, check-ins and payroll live in separate tools, and what members do between sessions is invisible.", name: "CoreVia CRM", tag: "Beta", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true },
-        { who: "People who train", pain: "Workout and meal logs don't connect, and no one tells you what to fix.", name: "CoreVia Fitness", href: `${prefix}/products/apps#fitness`, img: "/icon-512.png" },
-        { who: "People recovering", pain: "Pain, rehab exercises and range-of-motion changes are hard to keep by date.", name: "CoreVia Recovery", href: `${prefix}/products/apps#recovery`, img: "/products/recovery-icon.png" },
-        { who: "Weighing in", pain: "You step on a scale, but the number never becomes a record.", name: "CoreVia Smart Scale", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
+        { who: "Fitness & PT studios", pain: "Memberships, bookings, check-ins and payroll are scattered, and what members do between sessions is invisible." },
+        { who: "Day-care exercise programs", pain: "Staff copy assessments and daily exercise logs between paper and spreadsheets instead of managing exercise." },
+        { who: "Physio & rehab centers", pain: "Pain and range-of-motion notes live in different places, so trends by date are hard to see." },
       ];
   return (
-    <section id="problems" className="bg-[var(--corevia-bg)] scroll-mt-20">
-      <div className="max-w-[1120px] mx-auto px-5 py-16 md:py-24">
-        <div className="flex items-end justify-between gap-4 mb-3">
-          <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em]">{isKo ? "우리가 푸는 문제" : "Problems we solve"}</h2>
-          <Link href={`${prefix}/products`} className="text-sm font-semibold text-gray-500 hover:text-gray-900 shrink-0">{isKo ? "제품 전체 →" : "All products →"}</Link>
-        </div>
-        <p className="text-gray-500 mb-8 break-keep">{isKo ? "문제 하나에 솔루션 하나씩, 계속 늘려 가고 있습니다." : "One solution per problem, and we keep adding more."}</p>
-        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
-          {items.map((it) => (
-            <Link key={it.name} href={it.href} className="group flex gap-4 sm:gap-5 rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 hover:border-gray-300 transition-colors">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center">
-                <Img src={it.img} alt={it.name} className={it.cover ? "w-full h-full object-cover object-left-top" : "w-16 h-16 rounded-[16px]"} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-gray-400 mb-1.5">{it.who}</p>
-                <p className="text-[15px] text-gray-700 leading-relaxed break-keep mb-3">{it.pain}</p>
-                <p className="text-[15px] font-bold text-gray-900 group-hover:text-[var(--corevia-primary)] transition-colors">
-                  → {it.name}{it.tag ? <span className="ml-1.5 text-xs font-semibold text-gray-400">{it.tag}</span> : null}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AppFeatures({ isKo }: L) {
-  const items = isKo
-    ? [
-        { icon: "dumbbell", title: "운동 기록", desc: "세트마다 무게와 횟수를 남기면 지난 기록과 나란히 보여 줍니다. 주기화 프로그램도 들어 있어요." },
-        { icon: "camera", title: "식단 기록", desc: "음식 사진 한 장으로 칼로리와 영양소를 기록합니다. 직접 검색해 넣을 수도 있어요." },
-        { icon: "scale", title: "체중계 연동", desc: "코비아 스마트 체중계에 올라서면 몸무게가 그날 날짜로 저장됩니다." },
-        { icon: "feedback", title: "코치진 피드백", desc: "운동과 식단 기록을 함께 보고 CoreVia Fitness 코치진이 피드백합니다." },
-      ]
-    : [
-        { icon: "dumbbell", title: "Workout log", desc: "Log weight and reps per set and see them next to your last session. Periodized programs included." },
-        { icon: "camera", title: "Meal log", desc: "Log calories and nutrients from one food photo, or search and add foods yourself." },
-        { icon: "scale", title: "Scale sync", desc: "Step on the CoreVia Smart Scale and your weight is saved to today." },
-        { icon: "feedback", title: "Coaching team feedback", desc: "The CoreVia Fitness coaching team looks at workouts and meals together." },
-      ];
-  return (
-    <section className="bg-white">
-      <div className="max-w-[1120px] mx-auto px-5 py-16 md:py-24 grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
+    <section className="bg-[var(--corevia-bg)] border-y border-gray-100">
+      <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28 grid gap-10 md:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em] leading-snug mb-4 break-keep">{isKo ? <>코비아 피트니스로<br />하는 일</> : "What CoreVia Fitness does"}</h2>
-          <p className="text-gray-500 leading-relaxed break-keep mb-6">{isKo ? "운동과 식단을 한 화면에서 같이 봅니다." : "Workouts and meals, looked at together."}</p>
-          <StoreButtons isKo={isKo} c="site-home-app" />
-          <Link href={isKo ? "/products/apps" : "/en/products/apps"} className="inline-block mt-4 text-sm font-semibold text-gray-500 hover:text-gray-900">{isKo ? "앱 자세히 보기 →" : "More about the app →"}</Link>
+          <Eyebrow>{isKo ? "현장의 문제" : "The problem"}</Eyebrow>
+          <H2>{isKo ? <>웰니스 현장은 아직<br />손으로 일합니다</> : <>Wellness still runs<br />by hand</>}</H2>
         </div>
-        <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2">
-          {items.map((f) => (
-            <div key={f.title}>
-              <Img src={`/icons3d/${f.icon}.webp`} alt="" className="w-14 h-14 mb-3" />
-              <h3 className="text-[17px] font-bold text-gray-900 mb-1.5">{f.title}</h3>
-              <p className="text-[15px] text-gray-500 leading-relaxed break-keep">{f.desc}</p>
+        <div className="divide-y divide-gray-200 border-y border-gray-200">
+          {rows.map((r) => (
+            <div key={r.who} className="py-6">
+              <p className="text-[15px] font-bold text-gray-900 mb-1.5">{r.who}</p>
+              <p className="text-[16px] text-gray-600 leading-relaxed break-keep">{r.pain}</p>
             </div>
           ))}
         </div>
@@ -143,119 +75,218 @@ function AppFeatures({ isKo }: L) {
   );
 }
 
-function Connected({ isKo, prefix }: L) {
-  const rows = isKo
-    ? ["회원이 동의하면 담당 트레이너가 앱 기록을 봅니다", "수업을 마치면 회차가 차감되고 회원이 앱에서 확인합니다", "센터에서 잰 측정값이 날짜별로 쌓입니다"]
-    : ["With consent, the trainer sees the member's app logs", "Finishing a session deducts it and the member confirms in the app", "Measurements taken at the center build up by date"];
+function Fde({ isKo }: L) {
+  const steps = isKo
+    ? [
+        { n: "01", t: "현장 진단", d: "센터에 직접 가서 하루 업무를 함께 보고, 시간이 새는 곳과 기록이 끊기는 곳을 찾습니다." },
+        { n: "02", t: "도입 설계", d: "무엇을 AI와 자동화로 바꾸고 무엇을 사람이 계속할지, 센터에 맞는 순서를 정합니다." },
+        { n: "03", t: "구축·적용", d: "이미 만들어 둔 앱·CRM·자동화를 센터에 맞게 붙이고, 없는 부분은 새로 만듭니다." },
+        { n: "04", t: "운영 정착", d: "직원이 매일 쓰게 될 때까지 함께 운영하며 고칩니다." },
+      ]
+    : [
+        { n: "01", t: "On-site diagnosis", d: "We spend a working day at the center and find where time leaks and records break." },
+        { n: "02", t: "Adoption design", d: "We decide what AI and automation should take over, what stays human, and in what order." },
+        { n: "03", t: "Build & apply", d: "We fit our existing apps, CRM and automations to the center and build what's missing." },
+        { n: "04", t: "Settle in", d: "We run it alongside staff until it's part of the daily routine." },
+      ];
   return (
-    <section className="bg-[var(--corevia-bg)]">
-      <div className="max-w-[1120px] mx-auto px-5 py-16 md:py-24 grid gap-10 md:grid-cols-2 items-center">
-        <div className="order-2 md:order-1 rounded-2xl border border-gray-200 bg-white p-1.5">
-          <Img src="/crm/member.webp" alt={isKo ? "코비아 CRM 회원 카드 — 이용권과 앱 연결" : "CoreVia CRM member card"} className="w-full h-auto rounded-xl" />
+    <section id="solutions" className="bg-white scroll-mt-20">
+      <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28">
+        <Eyebrow>{isKo ? "솔루션 01 · 웰니스 FDE" : "Solution 01 · Wellness FDE"}</Eyebrow>
+        <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-end mb-14">
+          <H2>{isKo ? <>현장에 들어가<br />AI 도입을 이끕니다</> : <>We go on site and<br />lead AI adoption</>}</H2>
+          <p className="text-[16px] md:text-[17px] text-gray-600 leading-relaxed break-keep">
+            {isKo
+              ? "FDE(Forward Deployed Engineering)는 엔지니어가 고객 현장에 들어가 문제를 직접 보고 풀어내는 방식입니다. 코비아는 피트니스 센터, 주간보호 운동 시설, 물리치료 시설을 상담하고 상황을 진단한 뒤, 우리가 만든 앱과 자동화 자산으로 AI 도입을 주도합니다."
+              : "FDE (Forward Deployed Engineering) means engineers working inside the customer's site. We consult fitness centers, day-care exercise programs and physio facilities, diagnose the situation, then lead AI adoption with the apps and automations we've already built."}
+          </p>
         </div>
-        <div className="order-1 md:order-2">
-          <p className="text-sm font-semibold text-gray-500 mb-3">{isKo ? "트레이너 · 센터" : "Trainers · Centers"}</p>
-          <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em] leading-snug mb-6 break-keep">
-            {isKo ? "수업 밖 기록도 트레이너와 센터가 같이 봅니다" : "Trainers and centers see what happens between sessions"}
-          </h2>
-          <ul className="grid gap-3 mb-8">
-            {rows.map((r) => (
-              <li key={r} className="flex gap-3 text-[15px] text-gray-700 leading-relaxed break-keep">
-                <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--corevia-primary)]" />{r}
-              </li>
+        <ol className="grid gap-px bg-gray-200 border border-gray-200 rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s) => (
+            <li key={s.n} className="bg-white p-6">
+              <p className="text-[13px] font-bold text-[var(--corevia-primary)] mb-6 tabular-nums">{s.n}</p>
+              <p className="text-[18px] font-bold text-gray-900 mb-2">{s.t}</p>
+              <p className="text-[15px] text-gray-500 leading-relaxed break-keep">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-5 text-sm text-gray-400 break-keep">{isKo ? "기간과 범위는 진단 뒤 센터와 함께 정합니다." : "Timeline and scope are agreed with the center after diagnosis."}</p>
+      </div>
+    </section>
+  );
+}
+
+/** 막대 인형 도식 — 관절점·어깨선 기준선. 실제 앱 캡처가 아니라 설명 그림 */
+function PoseDiagram({ isKo }: { isKo: boolean }) {
+  const j: [number, number][] = [[100, 40], [70, 78], [130, 82], [62, 128], [140, 130], [58, 172], [146, 172], [82, 162], [120, 164], [80, 222], [122, 222], [78, 282], [124, 282]];
+  const bones = [[1, 2], [1, 3], [3, 5], [2, 4], [4, 6], [1, 7], [2, 8], [7, 8], [7, 9], [8, 10], [9, 11], [10, 12]];
+  return (
+    <svg viewBox="0 0 200 310" className="w-full h-auto" role="img" aria-label={isKo ? "관절점과 어깨 기준선을 표시한 설명 그림" : "Illustration of joints and shoulder line"}>
+      <rect x="0" y="0" width="200" height="310" rx="16" fill="#FFFFFF" stroke="#E5E7EB" />
+      <line x1="20" y1="80" x2="180" y2="80" stroke="#CBD5E1" strokeDasharray="4 4" />
+      <line x1="62" y1="78" x2="138" y2="82" stroke="#4285F4" strokeWidth="2" />
+      <text x="146" y="72" fontSize="10" fill="#1E40AF" fontWeight="700">3°</text>
+      <circle cx="100" cy="40" r="16" fill="none" stroke="#94A3B8" strokeWidth="2" />
+      {bones.map(([a, b], i) => <line key={i} x1={j[a][0]} y1={j[a][1]} x2={j[b][0]} y2={j[b][1]} stroke="#94A3B8" strokeWidth="2.5" strokeLinecap="round" />)}
+      {j.slice(1).map(([x, y], i) => <circle key={i} cx={x} cy={y} r="4.5" fill="#fff" stroke="#4285F4" strokeWidth="2" />)}
+    </svg>
+  );
+}
+
+function Vision({ isKo, prefix }: L) {
+  const items = isKo
+    ? [
+        { t: "사진 체형분석", s: "출시", d: "정면·측면 사진 두 장에서 관절점을 찾아 어깨·골반의 좌우 기울기와 몸 비율을 잽니다. 트레이너가 점을 바로잡고 확인합니다." },
+        { t: "수업 영상 분석", s: "베타", d: "수업 영상에서 반복 횟수, 가장 깊이 내려간 각도, 좌우 차이를 숫자로 뽑아 수업 리포트에 붙입니다. 영상은 폰 밖으로 보내지 않습니다." },
+      ]
+    : [
+        { t: "Photo posture analysis", s: "Live", d: "Finds joints in a front and side photo and measures shoulder and pelvis tilt and body ratios. The trainer adjusts points and confirms." },
+        { t: "Session video analysis", s: "Beta", d: "Pulls reps, lowest angle and left-right difference from a session video into the session report. Video stays on the phone." },
+      ];
+  return (
+    <section className="bg-[var(--corevia-bg)] border-y border-gray-100">
+      <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28 grid gap-12 md:grid-cols-[1.15fr_0.85fr] items-center">
+        <div>
+          <Eyebrow>{isKo ? "솔루션 02 · 영상 인식" : "Solution 02 · Vision"}</Eyebrow>
+          <H2>{isKo ? <>스마트폰 카메라 하나로<br />자세와 운동을 숫자로</> : <>One phone camera,<br />posture and movement in numbers</>}</H2>
+          <div className="mt-10 grid gap-7">
+            {items.map((it) => (
+              <div key={it.t}>
+                <p className="text-[18px] font-bold text-gray-900 mb-1.5">{it.t} <span className="ml-1 align-middle text-xs font-semibold text-gray-500 border border-gray-300 rounded-full px-2 py-0.5">{it.s}</span></p>
+                <p className="text-[15px] text-gray-600 leading-relaxed break-keep">{it.d}</p>
+              </div>
             ))}
-          </ul>
-          <div className="flex flex-wrap gap-2.5">
-            <Link href={`${prefix}/products/crm`} className="inline-flex items-center px-5 py-3 rounded-xl bg-gray-900 text-white text-[15px] font-semibold hover:bg-gray-800 transition-colors">{isKo ? "코비아 CRM 보기" : "See CoreVia CRM"}</Link>
-            <Link href={`${prefix}/products/crm#inquiry`} className="inline-flex items-center px-5 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 text-[15px] font-semibold hover:bg-gray-50 transition-colors">{isKo ? "베타 도입 문의" : "Beta inquiry"}</Link>
           </div>
+          <p className="mt-8 text-sm text-gray-400 break-keep">
+            {isKo ? "측정·기록 도구입니다. 진단하지 않으며, 값은 트레이너가 확인한 참고값으로 남습니다." : "A measurement and recording tool. It does not diagnose; values are reference values confirmed by a trainer."}
+          </p>
+          <Link href={`${prefix}/products/apps#fitness`} className="inline-block mt-6 text-sm font-semibold text-gray-700 hover:text-gray-900">{isKo ? "코비아 피트니스 트레이너 모드에서 써 보기 →" : "Try it in CoreVia Fitness trainer mode →"}</Link>
+        </div>
+        <div className="max-w-[280px] w-full mx-auto">
+          <PoseDiagram isKo={isKo} />
+          <p className="mt-3 text-center text-xs text-gray-400">{isKo ? "설명 그림 · 관절점과 어깨 기준선" : "Illustration · joints and shoulder line"}</p>
         </div>
       </div>
     </section>
   );
 }
 
-function Guides({ isKo, prefix }: L) {
-  const links = isKo
+function Tech({ isKo }: L) {
+  const t = isKo
     ? [
-        { icon: "dumbbell", t: "운동 가이드", d: "99개 운동의 자세와 주의할 점", href: "/guide/workout/exercises" },
-        { icon: "book", t: "영양성분 사전", d: "음식 5,672개의 칼로리·탄단지", href: "/guide/nutrition" },
-        { icon: "calculator", t: "칼로리 계산기", d: "하루 필요 열량과 탄단지 비율", href: "/guide/nutrition/calorie" },
-        { icon: "chart", t: "1RM 계산기", d: "들어 본 무게로 최대 중량 추정", href: "/guide/workout/1rm" },
+        { i: "camera", h: "AI 칼로리 분석", d: "음식 사진에서 메뉴와 양을 알아보고 공공 영양 DB로 보정합니다.", n: "음식 DB 5,672개" },
+        { i: "ruler", h: "자세·동작 인식", d: "폰 안에서 관절점을 찾아 기울기·각도·반복 수를 잽니다.", n: "기기 안에서 처리" },
+        { i: "feedback", h: "회원 맞춤 코칭", d: "운동·식단·건강 앱 기록을 한 페이지로 묶어, CoreVia Fitness 코치진과 트레이너가 같은 정보를 보고 피드백합니다.", n: "주간 리포트" },
+        { i: "dumbbell", h: "운동 기록·주기화", d: "세트 기록부터 1RM 기반 주기화 프로그램, 목표별 루틴 추천까지.", n: "운동 109종 · 루틴 23개" },
+        { i: "scale", h: "블루투스 기기 연동", d: "체중계에 올라서면 몸무게가 앱에 바로 기록됩니다.", n: "KC 인증 체중계" },
+        { i: "link", h: "건강 앱 연동", d: "Health Connect·Apple 건강에서 걸음·활동·수면·심박 하루 요약을 읽어 옵니다.", n: "Android · iOS" },
+        { i: "people", h: "센터 운영 CRM", d: "회원권·예약·출석·급여·전자계약에 회원 앱 기록과 측정이 이어집니다.", n: "웹 화면 31개" },
+        { i: "chart", h: "기기 게이트웨이", d: "센터의 측정 장비·출입 단말이 기기별 키로 CRM에 기록을 보냅니다.", n: "연동 구조 준비" },
+        { i: "calculator", h: "운영 자동화", d: "콘텐츠 발행·주문 처리·메일·알림을 정해진 시간에 사람 손 없이 돌립니다.", n: "자동 작업 약 30개" },
       ]
     : [
-        { icon: "dumbbell", t: "Exercise guide", d: "Form and cues for 99 exercises", href: "/en/guide/workout/exercises" },
-        { icon: "book", t: "Food database", d: "Calories and macros for 5,672 foods", href: "/en/guide/nutrition" },
-        { icon: "calculator", t: "Calorie calculator", d: "Daily calories and macro split", href: "/en/guide/nutrition/calorie" },
-        { icon: "chart", t: "1RM calculator", d: "Estimate your one-rep max", href: "/en/guide/workout/1rm" },
+        { i: "camera", h: "Food photo analysis", d: "Recognizes dishes and portions from a photo, corrected with public nutrition data.", n: "5,672 foods" },
+        { i: "ruler", h: "Pose & motion", d: "Finds joints on the phone to measure tilt, angles and reps.", n: "On-device" },
+        { i: "feedback", h: "Member-aware coaching", d: "Workout, meal and health logs in one page so the coaching team and trainers work from the same facts.", n: "Weekly reports" },
+        { i: "dumbbell", h: "Training & periodization", d: "From set logging to 1RM-based periodized programs and routine suggestions.", n: "109 exercises · 23 routines" },
+        { i: "scale", h: "Bluetooth devices", d: "Step on the scale and the weight lands in the app.", n: "KC-certified scale" },
+        { i: "link", h: "Health app sync", d: "Reads daily steps, activity, sleep and heart-rate summaries.", n: "Android · iOS" },
+        { i: "people", h: "Center CRM", d: "Memberships, bookings, check-ins, payroll and contracts, connected to members' app logs.", n: "31 web screens" },
+        { i: "chart", h: "Device gateway", d: "Center devices send measurements and check-ins to the CRM with per-device keys.", n: "Integration-ready" },
+        { i: "calculator", h: "Ops automation", d: "Content publishing, orders, mail and alerts run on schedule without hands.", n: "~30 jobs" },
       ];
   return (
     <section className="bg-white">
-      <div className="max-w-[1120px] mx-auto px-5 py-16 md:py-24">
-        <div className="flex items-end justify-between gap-4 mb-8">
-          <div>
-            <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 tracking-[-0.02em] mb-2">{isKo ? "무료 가이드" : "Free guides"}</h2>
-            <p className="text-gray-500">{isKo ? "앱 없이도 볼 수 있어요." : "No app needed."}</p>
-          </div>
-          <Link href={`${prefix}/guide`} className="text-sm font-semibold text-gray-500 hover:text-gray-900 shrink-0">{isKo ? "가이드 전체 →" : "All guides →"}</Link>
+      <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28">
+        <Eyebrow>{isKo ? "보유 기술" : "Technology"}</Eyebrow>
+        <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-end mb-12">
+          <H2>{isKo ? <>직접 만들어<br />매일 운영하는 기술</> : <>Technology we built<br />and run every day</>}</H2>
+          <p className="text-[16px] text-gray-600 leading-relaxed break-keep">{isKo ? "솔루션은 이 기술들을 센터에 맞게 조합해 만듭니다." : "Our solutions combine these for each center."}</p>
         </div>
-        <div className="grid gap-px bg-gray-200 border border-gray-200 rounded-2xl overflow-hidden sm:grid-cols-2">
-          {links.map((l) => (
-            <Link key={l.t} href={l.href} className="flex items-center gap-4 bg-white p-5 hover:bg-gray-50 transition-colors">
-              <Img src={`/icons3d/${l.icon}.webp`} alt="" className="w-11 h-11 shrink-0" />
-              <span className="flex-1 min-w-0">
-                <span className="block text-[16px] font-bold text-gray-900">{l.t}</span>
-                <span className="block text-sm text-gray-500 mt-0.5">{l.d}</span>
-              </span>
-              <span className="text-gray-300" aria-hidden="true">→</span>
+        <div className="grid gap-px bg-gray-200 border border-gray-200 rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
+          {t.map((x) => (
+            <div key={x.h} className="bg-white p-6 flex flex-col">
+              <Img src={`/icons3d/${x.i}.webp`} alt="" className="w-12 h-12 mb-4" />
+              <p className="text-[17px] font-bold text-gray-900 mb-1.5">{x.h}</p>
+              <p className="text-[14px] text-gray-500 leading-relaxed break-keep flex-1">{x.d}</p>
+              <p className="mt-4 text-[13px] font-semibold text-gray-700">{x.n}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Products({ isKo, prefix }: L) {
+  const items = [
+    { t: isKo ? "코비아 CRM" : "CoreVia CRM", s: isKo ? "웰니스 센터 운영 웹 · 베타" : "Center operations web · Beta", href: `${prefix}/products/crm`, img: "/crm/today.webp", cover: true },
+    { t: isKo ? "코비아 피트니스" : "CoreVia Fitness", s: isKo ? "운동·식단·몸무게 기록 앱" : "Workout, meal & weight app", href: `${prefix}/products/apps#fitness`, img: "/icon-512.png" },
+    { t: isKo ? "코비아 리커버리" : "CoreVia Recovery", s: isKo ? "통증·재활 운동 기록 앱" : "Pain & rehab log app", href: `${prefix}/products/apps#recovery`, img: "/products/recovery-icon.png" },
+    { t: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale", s: isKo ? "앱에 자동 기록 · KC 인증" : "Saves to the app · KC certified", href: `${prefix}/products/scale`, img: "/products/scale-photo.jpg", cover: true },
+  ];
+  return (
+    <section className="bg-[var(--corevia-bg)] border-y border-gray-100">
+      <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-24">
+        <div className="flex items-end justify-between gap-4 mb-10">
+          <div>
+            <Eyebrow>{isKo ? "직접 만든 제품" : "Products"}</Eyebrow>
+            <H2>{isKo ? "솔루션의 바탕이 되는 제품" : "The products behind our solutions"}</H2>
+          </div>
+          <Link href={`${prefix}/products`} className="hidden sm:inline text-sm font-semibold text-gray-500 hover:text-gray-900 shrink-0">{isKo ? "제품 전체 →" : "All products →"}</Link>
+        </div>
+        <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
+          {items.map((it) => (
+            <Link key={it.t} href={it.href} className="group rounded-2xl border border-gray-200 bg-white overflow-hidden hover:border-gray-300 transition-colors">
+              <div className="aspect-[4/3] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <Img src={it.img} alt={it.t} className={it.cover ? "w-full h-full object-cover object-left-top" : "w-16 h-16 sm:w-20 sm:h-20 rounded-[18px]"} />
+              </div>
+              <div className="p-4 sm:p-5">
+                <p className="text-[15px] sm:text-[17px] font-bold text-gray-900 group-hover:text-[var(--corevia-primary)] transition-colors">{it.t}</p>
+                <p className="text-[13px] sm:text-sm text-gray-500 mt-1 break-keep">{it.s}</p>
+              </div>
             </Link>
           ))}
         </div>
-        {isKo && (
-          <Link href="/ebook?from=home" className="mt-4 flex items-center gap-5 rounded-2xl border border-gray-200 p-4 sm:p-5 hover:bg-gray-50 transition-colors">
-            <Img src="/ebook-cover.png" alt="Core of Fitness 전자책 표지" className="w-14 h-[72px] object-contain shrink-0" />
-            <span className="flex-1 min-w-0">
-              <span className="block text-xs font-semibold text-gray-400 mb-1">전자책</span>
-              <span className="block text-[16px] font-bold text-gray-900">Core of Fitness — 가이드의 원리를 한 권에 정리</span>
-              <span className="block text-sm text-gray-500 mt-0.5">체중 감량·근비대 핵심 정리와 식단·운동 프로그램 · 20,000원</span>
-            </span>
-            <span className="text-gray-300" aria-hidden="true">→</span>
-          </Link>
+      </div>
+    </section>
+  );
+}
+
+function Contact({ isKo }: L) {
+  return (
+    <section id="contact" className="bg-white scroll-mt-20">
+      <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28 grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <Eyebrow>{isKo ? "AI 도입 상담" : "Talk to us"}</Eyebrow>
+          <H2>{isKo ? <>센터의 하루를<br />먼저 들려주세요</> : <>Tell us about<br />your center&apos;s day</>}</H2>
+          <p className="mt-5 text-[16px] text-gray-600 leading-relaxed break-keep">
+            {isKo ? "어떤 일이 가장 손이 많이 가는지 남겨 주시면, 이메일로 현장 진단 일정을 안내해 드립니다." : "Tell us what takes the most effort and we'll email you to schedule an on-site diagnosis."}
+          </p>
+          <p className="mt-4 text-sm text-gray-400">support@coreviafitness.com</p>
+        </div>
+        {isKo ? <CrmInquiryForm kind="ax" /> : (
+          <div className="rounded-2xl border border-gray-200 p-8">
+            <a href="mailto:support@coreviafitness.com" className="text-lg font-bold text-[var(--corevia-primary)]">support@coreviafitness.com</a>
+          </div>
         )}
       </div>
     </section>
   );
 }
 
-function FinalCta({ isKo, prefix }: L) {
-  return (
-    <section className="bg-gray-900">
-      <div className="max-w-[1120px] mx-auto px-5 py-14 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        <div>
-          <h2 className="text-[24px] md:text-[28px] font-bold text-white tracking-[-0.02em] mb-1.5 break-keep">{isKo ? "함께 풀고 싶은 문제가 있다면 알려 주세요" : "Have a problem you want solved? Tell us"}</h2>
-          <p className="text-gray-400 break-keep">{isKo ? "센터 도입·제휴·기기 연동 문의는 메일로 받습니다." : "Center adoption, partnerships and device integration — by email."}</p>
-        </div>
-        <div className="flex flex-wrap gap-2.5">
-          <Link href={`${prefix}/contact`} className="inline-flex items-center px-5 py-3 rounded-xl bg-white text-gray-900 text-[15px] font-semibold hover:bg-gray-100 transition-colors">{isKo ? "문의하기" : "Contact"}</Link>
-          <Link href={`${prefix}/products/crm#inquiry`} className="inline-flex items-center px-5 py-3 rounded-xl bg-[var(--corevia-primary)] text-white text-[15px] font-semibold hover:opacity-90 transition-opacity">{isKo ? "CRM 베타 도입 문의" : "CRM beta inquiry"}</Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export default function HomeRenewal({ locale, blog }: { locale: string; blog: React.ReactNode }) {
+export default function HomeRenewal({ locale }: { locale: string; blog?: React.ReactNode }) {
   const isKo = locale === "ko";
   const l = { isKo, prefix: isKo ? "" : `/${locale}` };
   return (
     <div className="min-h-screen bg-white">
-      <Hero {...l} />
+      <Mission {...l} />
       <Problems {...l} />
-      <Connected {...l} />
-      <AppFeatures {...l} />
-      <Guides {...l} />
-      {blog}
-      <FinalCta {...l} />
+      <Fde {...l} />
+      <Vision {...l} />
+      <Tech {...l} />
+      <Products {...l} />
+      <Contact {...l} />
     </div>
   );
 }
