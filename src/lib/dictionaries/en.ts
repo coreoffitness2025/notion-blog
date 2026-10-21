@@ -2,7 +2,7 @@ const en = {
   nav: {
     features: "Product",
     team: "Team",
-    guide: "Fitness Guide",
+    guide: "Guide",
     workoutGuide: "Workout Guide",
     nutritionGuide: "Nutrition Guide",
     pricing: "Pricing",

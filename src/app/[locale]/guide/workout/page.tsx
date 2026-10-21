@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n";
 import { EXERCISE_DATABASE } from "@/data/exerciseDatabase";
 import WorkoutHubClient from "./client";
+import EbookCTA from "@/components/EbookCTA";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -48,5 +49,10 @@ export default async function WorkoutGuidePage({
   const { locale } = await params;
   const dict = getDictionary(locale);
 
-  return <WorkoutHubClient dict={dict} locale={locale} />;
+  return (
+    <>
+      <WorkoutHubClient dict={dict} locale={locale} />
+      <EbookCTA locale={locale} from="workout" className="pb-16" />
+    </>
+  );
 }

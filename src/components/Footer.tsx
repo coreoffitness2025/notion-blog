@@ -13,14 +13,13 @@ export default function Footer({ locale }: { locale: string }) {
       { href: `${prefix}/products/apps#recovery`, label: locale === "en" ? "CoreVia Recovery" : "코비아 리커버리" },
       { href: `${prefix}/products/scale`, label: locale === "en" ? "CoreVia Smart Scale" : "코비아 스마트 체중계" },
       { href: `${prefix}/ebook`, label: locale === "en" ? "Ebook" : "전자책" },
+    ],
+    // 10/21 대표: 가이드 셋을 하나로
+    Guide: [
       { href: `${prefix}/guide`, label: dict.footer.fitnessGuide },
-    ],
-    "Workout Guide": [
-      { href: `${prefix}/guide/workout/1rm`, label: dict.footer.oneRmCalc },
-      { href: `${prefix}/guide/workout/programs`, label: dict.footer.programs },
       { href: `${prefix}/guide/workout/exercises`, label: dict.footer.exerciseDb },
-    ],
-    "Nutrition Guide": [
+      { href: `${prefix}/guide/workout/programs`, label: dict.footer.programs },
+      { href: `${prefix}/guide/workout/1rm`, label: dict.footer.oneRmCalc },
       { href: `${prefix}/guide/nutrition/calorie`, label: dict.footer.calorieCalc },
       { href: `${prefix}/guide/nutrition/meal-plans`, label: dict.footer.mealPlans || "Meal Plans" },
       { href: `${prefix}/guide/nutrition`, label: dict.footer.nutritionDb },

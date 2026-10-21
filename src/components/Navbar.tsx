@@ -9,8 +9,8 @@ import NavbarAuthSection from "./NavbarAuthSection";
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   if (href.startsWith("/#")) return false;
-  // /guide exact match only — don't highlight when on /guide/workout or /guide/nutrition
-  if (/^(\/en)?\/guide$/.test(href)) return pathname === href;
+  // 가이드 메뉴 하나로 합침(10/21) — /guide 아래 전부
+  if (/^(\/en)?\/guide$/.test(href)) { const p = pathname.replace(/^\/en/, ""); return p === "/guide" || p.startsWith("/guide/"); }
   // Product 메뉴: 제품 페이지 전부 + 전자책(/ebook 은 /products 밖에 있다)
   if (/^(\/en)?\/products$/.test(href)) {
     const p = pathname.replace(/^\/en/, "");
@@ -71,47 +71,19 @@ export default function Navbar({ locale }: { locale: string }) {
         },
       ],
     },
-    { href: `${prefix}/guide`, label: dict.nav.guide },
     {
-      href: `${prefix}/guide/workout`,
-      label: dict.nav.workoutGuide,
+      // 2026-10-21 대표: Fitness·Workout·Nutrition Guide 셋을 하나로 — 기초 / 운동 / 영양 / 전자책. 주소는 그대로(네이버 유입)
+      href: `${prefix}/guide`,
+      label: dict.nav.guide,
       children: [
-        {
-          href: `${prefix}/guide/workout/1rm`,
-          label: isEn ? "1RM Calculator" : "1RM 계산기",
-          desc: isEn ? "Calculate your one-rep max" : "최대 중량 계산",
-        },
-        {
-          href: `${prefix}/guide/workout/programs`,
-          label: isEn ? "Programs" : "운동 프로그램",
-          desc: isEn ? "Custom workout programs" : "맞춤 운동 프로그램",
-        },
-        {
-          href: `${prefix}/guide/workout/exercises`,
-          label: isEn ? "Fitness Guide" : "운동 가이드",
-          desc: isEn ? "99 exercises with proper form" : "99개 운동 올바른 자세",
-        },
-      ],
-    },
-    {
-      href: `${prefix}/guide/nutrition`,
-      label: dict.nav.nutritionGuide,
-      children: [
-        {
-          href: `${prefix}/guide/nutrition/calorie`,
-          label: isEn ? "Calorie Calculator" : "칼로리 계산기",
-          desc: isEn ? "Daily calories & macros" : "일일 칼로리 & 매크로",
-        },
-        {
-          href: `${prefix}/guide/nutrition/meal-plans`,
-          label: isEn ? "Meal Plans" : "식단 추천",
-          desc: isEn ? "Plans for your goals" : "목표별 식단 플랜",
-        },
-        {
-          href: `${prefix}/guide/nutrition`,
-          label: isEn ? "Food Database" : "영양성분 사전",
-          desc: isEn ? "5,672 foods nutrition facts" : "5,672개 음식 영양 정보",
-        },
+        { group: isEn ? "Basics" : "기초", href: `${prefix}/guide`, label: isEn ? "Fitness Guide" : "피트니스 가이드", desc: isEn ? "Training and nutrition principles" : "훈련 원리부터 영양 기초까지" },
+        { group: isEn ? "Workout" : "운동", href: `${prefix}/guide/workout/exercises`, label: isEn ? "Exercise Guide" : "운동 가이드", desc: isEn ? "99 exercises with proper form" : "99개 운동 올바른 자세" },
+        { group: isEn ? "Workout" : "운동", href: `${prefix}/guide/workout/programs`, label: isEn ? "Programs" : "운동 프로그램", desc: isEn ? "Custom workout programs" : "맞춤 운동 프로그램" },
+        { group: isEn ? "Workout" : "운동", href: `${prefix}/guide/workout/1rm`, label: isEn ? "1RM Calculator" : "1RM 계산기", desc: isEn ? "Calculate your one-rep max" : "최대 중량 계산" },
+        { group: isEn ? "Nutrition" : "영양", href: `${prefix}/guide/nutrition/calorie`, label: isEn ? "Calorie Calculator" : "칼로리 계산기", desc: isEn ? "Daily calories & macros" : "일일 칼로리 & 매크로" },
+        { group: isEn ? "Nutrition" : "영양", href: `${prefix}/guide/nutrition/meal-plans`, label: isEn ? "Meal Plans" : "식단 추천", desc: isEn ? "Plans for your goals" : "목표별 식단 플랜" },
+        { group: isEn ? "Nutrition" : "영양", href: `${prefix}/guide/nutrition`, label: isEn ? "Food Database" : "영양성분 사전", desc: isEn ? "5,672 foods nutrition facts" : "5,672개 음식 영양 정보" },
+        { group: isEn ? "Ebook" : "전자책", href: `${prefix}/ebook`, label: "Core of Fitness", desc: isEn ? "Fat loss and muscle gain, in one book" : "체중 감량·근비대 핵심을 한 권에" },
       ],
     },
     { href: `${prefix}/posts`, label: dict.nav.blog },

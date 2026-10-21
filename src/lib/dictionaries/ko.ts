@@ -2,7 +2,7 @@ const ko = {
   nav: {
     features: "Product",
     team: "About",
-    guide: "Fitness Guide",
+    guide: "Guide",
     workoutGuide: "Workout Guide",
     nutritionGuide: "Nutrition Guide",
     pricing: "가격",
@@ -14,7 +14,7 @@ const ko = {
   },
   footer: {
     product: "Product",
-    fitnessGuide: "Fitness Guide",
+    fitnessGuide: "피트니스 가이드",
     company: "회사",
     tagline1: "스마트폰 하나로,",
     tagline2: "나만의 PT 선생님",

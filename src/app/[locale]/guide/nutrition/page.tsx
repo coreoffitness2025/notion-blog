@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n";
 import NutritionHubClient from "./client";
+import EbookCTA from "@/components/EbookCTA";
 import { getNutritionCount } from "@/data/nutritionDatabase";
 
 const siteUrl =
@@ -106,6 +107,7 @@ export default async function NutritionPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLd(locale)) }}
       />
       <NutritionHubClient dict={dict} locale={locale} />
+      <EbookCTA locale={locale} from="nutrition" className="pb-16" />
     </>
   );
 }
