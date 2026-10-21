@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-// 센터 CRM 베타 도입 문의 폼 — /api/crm-inquiry 로 보낸다. 개인정보 수집·이용 동의 필수
+// 센터 CRM 베타 도입 문의 폼 — Firebase 함수 submitCrmInquiry 로 보낸다(Vercel 에 서비스 계정 비밀을 두지 않음). 개인정보 수집·이용 동의 필수
+const ENDPOINT = "https://asia-northeast3-corevia-fitness-tracking.cloudfunctions.net/submitCrmInquiry";
 const VERTICALS = [
   ["fitness", "피트니스·PT샵"],
   ["pilates", "필라테스·요가"],
@@ -35,7 +36,7 @@ export default function CrmInquiryForm() {
     if (!agree) { setErr("개인정보 수집·이용에 동의해 주세요."); return; }
     setState("sending");
     try {
-      const r = await fetch("/api/crm-inquiry", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ...f, agree: true }) });
+      const r = await fetch(ENDPOINT, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ...f, agree: true, source: "site-products-crm" }) });
       if (r.ok) { setState("done"); return; }
       const j = await r.json().catch(() => ({}));
       setErr(j.error === "too-many" ? "잠시 뒤 다시 보내 주세요." : j.error === "required" ? "이메일 주소를 확인해 주세요." : "보내지 못했어요. support@coreviafitness.com 으로 메일 주셔도 돼요.");
