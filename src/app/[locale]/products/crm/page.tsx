@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import CrmInquiryForm from "@/components/CrmInquiryForm";
 
-// 센터용 CRM 소개 + 베타 도입 문의 (2026-10-21 대표 "실제로 셀링할 수 있는 수준으로. 베타 테스트인거 밝히고 문의 버튼")
+// 웰니스 센터 CRM 소개 + 베타 도입 문의 (2026-10-21 대표 "실제로 셀링할 수 있는 수준으로. 베타 테스트인거 밝히고 문의 버튼")
+// 포지셔닝(대표 10/21): 웰니스 CRM — 웰니스 전체가 확장 영역. 주간보호는 뭉뚱그리지 말고 "주간보호 운동 관리"로 정의.
 // 결정: 위키 decision/vertical-wellness-crm. 화면은 가상 데모 센터(이름·번호 가상)를 실제 CRM 으로 띄워 캡처한 것.
 // 문구 선: 진단·처방·치료·교정 효과 표현 금지, 측정값은 참고값·담당자 확인 / 도입 사례·숫자 지어내기 금지 / 가격은 문의 후 안내.
 // 한국어 전용 페이지 — /en 도 한국어로 보여 주고 canonical 은 한국어 주소.
@@ -9,9 +10,9 @@ import CrmInquiryForm from "@/components/CrmInquiryForm";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
 export const metadata: Metadata = {
-  title: "센터용 CRM (베타) | CoreVia",
+  title: "웰니스 센터 CRM (베타) | CoreVia",
   description:
-    "피트니스·PT샵, 주간보호, 재활·교정센터를 위한 웹 CRM. 회원권 판매·결제 기록·예약·출석·급여 정산에 회원 앱 운동 기록과 측정 추이까지 한 화면에서. 베타 도입 센터를 모집합니다.",
+    "웰니스 센터를 위한 웹 CRM — 피트니스·PT샵, 필라테스, 주간보호 운동 관리, 재활·교정센터부터. 회원권 판매·결제 기록·예약·출석·급여 정산에 회원 앱 운동 기록과 측정 추이까지 한 화면에서. 베타 도입 센터를 모집합니다.",
   alternates: { canonical: `${siteUrl}/products/crm` },
   openGraph: { images: [{ url: `${siteUrl}/crm/today.webp`, width: 1600, height: 1000 }] },
 };
@@ -47,7 +48,7 @@ const DIFF = [
 
 const VERTICAL = [
   { title: "피트니스·PT샵·필라테스", items: ["PT 회차 차감과 회원 확인", "체력·체성분 측정 추이", "그룹 수업 정원·대기자", "회원 앱 운동·식단 기록 연결"] },
-  { title: "주간보호·요양시설", items: ["위험 평가(낙상·욕창·인지 척도 점수 기록)", "기능 측정(악력·의자 일어서기·TUG·걷기)", "측정 근거로 운동 계획 초안 → 담당자 확인", "보호자용 리포트 링크·인쇄"] },
+  { title: "주간보호 운동 관리", items: ["어르신 운동 평가(악력·의자 일어서기·TUG·4m 걷기)", "낙상·욕창·인지 위험 점수 기록", "평가 근거로 운동 계획 초안 → 담당자 확인", "오늘 운동 수행 기록·수행률과 12주 재평가", "보호자용 운동 리포트 링크·인쇄"] },
   { title: "재활·교정센터", items: ["통증 정도·가동범위·기능 검사 기록", "날짜별 추이와 담당자 확인", "회원 숙제 운동 기록(회원 앱)", "기록·안내 도구 — 판정 문구 없이"] },
 ];
 
@@ -76,7 +77,7 @@ export default function CrmPage() {
             한 화면에서
           </h1>
           <p className="text-lg text-gray-500 max-w-[680px] mx-auto mb-8">
-            피트니스·PT샵, 주간보호, 재활·교정센터를 위한 웹 CRM입니다. 회원권 판매부터 급여 정산까지 센터 운영에 필요한 기능에, 회원 앱의 운동 기록과 측정 추이를 더했어요.
+            웰니스 센터를 위한 웹 CRM입니다. 피트니스·PT샵, 필라테스, 주간보호 운동 관리, 재활·교정센터부터 시작해요. 회원권 판매부터 급여 정산까지 센터 운영에 필요한 기능에, 회원 앱의 운동 기록과 측정 추이를 더했어요.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="#inquiry" className="px-8 py-3.5 bg-[var(--corevia-primary)] text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
@@ -148,7 +149,8 @@ export default function CrmPage() {
       {/* 업종별 */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-10">업종에 맞춰 달라지는 화면</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">업종에 맞춰 달라지는 화면</h2>
+          <p className="text-gray-500 mb-10">몸을 돌보는 웰니스 센터라면 어디든 쓸 수 있도록 넓혀 가고 있어요. 지금은 아래 업종부터 지원해요.</p>
           <div className="grid gap-4 md:grid-cols-3">
             {VERTICAL.map((v) => (
               <div key={v.title} className="rounded-2xl border border-gray-200 p-6">

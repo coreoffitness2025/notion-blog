@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 
-// 센터 CRM 베타 도입 문의 폼 — Firebase 함수 submitCrmInquiry 로 보낸다(Vercel 에 서비스 계정 비밀을 두지 않음). 개인정보 수집·이용 동의 필수
+// 웰니스 센터 CRM 베타 도입 문의 폼 — Firebase 함수 submitCrmInquiry 로 보낸다(Vercel 에 서비스 계정 비밀을 두지 않음). 개인정보 수집·이용 동의 필수
 const ENDPOINT = "https://asia-northeast3-corevia-fitness-tracking.cloudfunctions.net/submitCrmInquiry";
 const VERTICALS = [
   ["fitness", "피트니스·PT샵"],
   ["pilates", "필라테스·요가"],
-  ["daycare", "주간보호·요양"],
+  ["daycare", "주간보호 운동 관리"],
   ["rehab", "재활·교정센터"],
-  ["other", "기타"],
+  ["other", "기타 웰니스 센터"],
 ] as const;
 const SIZES = [
   ["", "선택 안 함"],

@@ -55,8 +55,8 @@ export default function Navbar({ locale }: { locale: string }) {
           desc: isEn ? "Your weight, saved to the app" : "올라서면 앱에 몸무게 자동 기록",
         },        {
           href: `${prefix}/products/crm`,
-          label: isEn ? "Center CRM (Beta)" : "센터용 CRM (베타)",
-          desc: isEn ? "For fitness, day care and rehab centers" : "피트니스·주간보호·재활 센터 운영",
+          label: isEn ? "Wellness Center CRM (Beta)" : "웰니스 센터 CRM (베타)",
+          desc: isEn ? "Fitness, day-care exercise and rehab centers" : "피트니스·주간보호 운동 관리·재활 센터",
         },
       ],
     },
