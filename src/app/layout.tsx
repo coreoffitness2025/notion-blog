@@ -44,7 +44,11 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className={inter.className}>
+      <head>
+        {/* SUIT — 앱·CRM 웹과 같은 글꼴(10/21 리뉴얼). 라틴은 Inter 로 받쳐 준다 */}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2.0.5/fonts/variable/woff2/SUIT-Variable.css" />
+      </head>
+      <body className={inter.className} style={{ fontFamily: "'SUIT Variable', 'SUIT', " + inter.style.fontFamily + ", -apple-system, 'Apple SD Gothic Neo', sans-serif" }}>
         {children}
         {/* 방문 측정 (2026-09-30) — 사이트 조회수·유입 경로가 0으로만 보이던 것. Vercel 대시보드에서 Analytics 활성화 필요 */}
         <Analytics />

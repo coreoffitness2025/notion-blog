@@ -81,13 +81,13 @@ export default async function AppsPage({
     ? [
         { title: "점진적 과부하 기록", desc: "지난 무게·횟수·볼륨을 자동으로 비교해 오늘 더 나은 기록을 세웁니다. 주기화 프로그램도 지원합니다." },
         { title: "AI 칼로리 분석", desc: "음식 사진 한 장으로 칼로리와 영양소를 기록합니다. 한국 음식도 지원합니다." },
-        { title: "코치진 상담", desc: "운동과 식단 기록을 함께 보고 피드백합니다. 코치 성격은 직접 고를 수 있습니다." },
+        { title: "코치진 피드백", desc: "운동과 식단 기록을 함께 보고 CoreVia Fitness 코치진이 피드백합니다." },
         { title: "체중계 연동", desc: "코비아 스마트 체중계에 올라서면 몸무게가 오늘 날짜로 저장됩니다." },
       ]
     : [
         { title: "Progressive overload tracking", desc: "Automatically compares your last weight, reps and volume so you can beat them today. Periodized programs included." },
         { title: "AI calorie analysis", desc: "Log calories and nutrients from a single food photo. Korean dishes supported." },
-        { title: "Coaching team feedback", desc: "Feedback that looks at your workouts and meals together. Pick the coach personality you like." },
+        { title: "Coaching team feedback", desc: "The CoreVia Fitness coaching team gives feedback looking at your workouts and meals together." },
         { title: "Scale sync", desc: "Step on the CoreVia Smart Scale and your weight is saved to today." },
       ];
 

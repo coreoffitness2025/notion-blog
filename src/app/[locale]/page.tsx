@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import HeroSection from "@/components/HeroSection";
-import FeatureCards from "@/components/FeatureCards";
-import RecordingUI from "@/components/RecordingUI";
-
-import PointsCustomization from "@/components/PointsCustomization";
-import TrainerSection from "@/components/TrainerSection";
-import GuidePreview from "@/components/GuidePreview";
+import HomeRenewal from "@/components/home/HomeRenewal";
 import BlogPreview from "@/components/BlogPreview";
-import AppDownloadCTA from "@/components/AppDownloadCTA";
 import { getPostsFromCache } from "@/lib/notion";
 
 export const revalidate = 86400;
@@ -43,16 +36,6 @@ export default async function HomePage({
   const { locale } = await params;
   const posts = getPostsFromCache("Blog").slice(0, 3);
 
-  return (
-    <div className="min-h-screen bg-white">
-      <HeroSection locale={locale} />
-      <FeatureCards locale={locale} />
-      <RecordingUI locale={locale} />
-      <PointsCustomization locale={locale} />
-      <TrainerSection locale={locale} />
-      <GuidePreview locale={locale} />
-      <BlogPreview posts={posts} locale={locale} />
-      <AppDownloadCTA locale={locale} />
-    </div>
-  );
+  // 10/21 리뉴얼 — docs/site-renewal-2026-10.md
+  return <HomeRenewal locale={locale} blog={<BlogPreview posts={posts} locale={locale} />} />;
 }

@@ -12,18 +12,18 @@ export default function BlogPreview({ posts, locale }: { posts: Post[]; locale: 
   }
 
   return (
-    <section className="py-[var(--section-py)] px-[var(--section-px)] bg-white">
-      <div className="max-w-[1120px] mx-auto">
+    <section className="bg-white border-t border-gray-100">
+      <div className="max-w-[1120px] mx-auto px-5 py-16 md:py-24">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-2">
           <div>
-            <h2 className="text-[length:var(--text-heading)] font-bold text-gray-900 mb-2 tracking-tight">
+            <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 mb-2 tracking-[-0.02em]">
               {dict.blog.title}
             </h2>
             <p className="text-gray-500">{dict.blog.subtitle}</p>
           </div>
           <Link
             href={`${prefix}/posts`}
-            className="text-sm font-semibold text-[var(--corevia-primary)] hover:underline hidden md:block shrink-0"
+            className="text-sm font-semibold text-gray-500 hover:text-gray-900 hidden md:block shrink-0"
           >
             {dict.blog.viewAll}
           </Link>
