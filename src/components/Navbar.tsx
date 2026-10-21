@@ -72,7 +72,7 @@ export default function Navbar({ locale }: { locale: string }) {
       ],
     },
     {
-      // 2026-10-21 대표: Fitness·Workout·Nutrition Guide 셋을 하나로 — 기초 / 운동 / 영양 / 전자책. 주소는 그대로(네이버 유입)
+      // 2026-10-21 대표: Fitness·Workout·Nutrition Guide 셋을 하나로 — 기초 / 운동 / 영양. 주소는 그대로(네이버 유입). 전자책은 Product 에만(10/22 대표: 겹침)
       href: `${prefix}/guide`,
       label: dict.nav.guide,
       children: [
@@ -83,7 +83,6 @@ export default function Navbar({ locale }: { locale: string }) {
         { group: isEn ? "Nutrition" : "영양", href: `${prefix}/guide/nutrition/calorie`, label: isEn ? "Calorie Calculator" : "칼로리 계산기", desc: isEn ? "Daily calories & macros" : "일일 칼로리 & 매크로" },
         { group: isEn ? "Nutrition" : "영양", href: `${prefix}/guide/nutrition/meal-plans`, label: isEn ? "Meal Plans" : "식단 추천", desc: isEn ? "Plans for your goals" : "목표별 식단 플랜" },
         { group: isEn ? "Nutrition" : "영양", href: `${prefix}/guide/nutrition`, label: isEn ? "Food Database" : "영양성분 사전", desc: isEn ? "5,672 foods nutrition facts" : "5,672개 음식 영양 정보" },
-        { group: isEn ? "Ebook" : "전자책", href: `${prefix}/ebook`, label: "Core of Fitness", desc: isEn ? "Fat loss and muscle gain, in one book" : "체중 감량·근비대 핵심을 한 권에" },
       ],
     },
     { href: `${prefix}/posts`, label: dict.nav.blog },

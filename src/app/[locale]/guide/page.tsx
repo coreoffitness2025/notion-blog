@@ -90,32 +90,6 @@ export default async function GuidePage({
         </div>
       </section>
 
-      {/* Ebook Promotion */}
-      <section className="max-w-6xl mx-auto px-4 pb-12">
-        <Link
-          href={`${prefix}/ebook`}
-          className="block border border-gray-200 rounded-3xl p-8 md:p-10 hover:border-[var(--corevia-primary)]/30 hover:shadow-md transition-all group"
-        >
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="text-center md:text-left flex-1 order-2 md:order-1">
-              <span className="inline-block px-3 py-1 bg-[var(--corevia-primary)]/10 text-[var(--corevia-primary)] rounded-full text-xs font-semibold mb-3">
-                {dict.guide.ebookBadge}
-              </span>
-              <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 group-hover:text-[var(--corevia-primary)] transition-colors">
-                {dict.guide.ebookTitle}
-              </h2>
-              <p className="text-sm text-gray-500 leading-relaxed max-w-lg">
-                <span className="text-gray-800 font-semibold">Core of Fitness</span>
-                {dict.guide.ebookDesc}
-              </p>
-            </div>
-            <div className="flex-shrink-0 w-[140px] rounded-xl overflow-hidden shadow-sm border border-gray-100 order-1 md:order-2">
-              <img src="/ebook-cover.png" alt="Core of Fitness" className="w-full h-auto" />
-            </div>
-          </div>
-        </Link>
-      </section>
-
       {/* Quick Links to Sub-guides */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
         <div className="grid md:grid-cols-2 gap-4">
