@@ -35,7 +35,7 @@ export default function Navbar({ locale }: { locale: string }) {
 
   const nav: NavItem[] = [
     {
-      // 2026-10-21 대표: Product = 코비아 SW(코비아 CRM) / 애플리케이션(코비아 피트니스·코비아 리커버리) / 커머스(코비아 스마트 체중계)
+      // 2026-10-21 대표: Product = 코비아 SW(코비아 CRM) / 애플리케이션(코비아 피트니스·코비아 리커버리) / 커머스(코비아 스마트 체중계·전자책)
       href: `${prefix}/products`,
       label: dict.nav.features,
       children: [
@@ -62,6 +62,12 @@ export default function Navbar({ locale }: { locale: string }) {
           href: `${prefix}/products/scale`,
           label: isEn ? "CoreVia Smart Scale" : "코비아 스마트 체중계",
           desc: isEn ? "Your weight, saved to the app" : "올라서면 앱에 몸무게 자동 기록",
+        },
+        {
+          group: isEn ? "Commerce" : "커머스",
+          href: `${prefix}/ebook`,
+          label: isEn ? "Ebook" : "전자책",
+          desc: isEn ? "Core of Fitness (PDF)" : "Core of Fitness (PDF)",
         },
       ],
     },

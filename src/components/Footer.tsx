@@ -12,6 +12,7 @@ export default function Footer({ locale }: { locale: string }) {
       { href: `${prefix}/products/apps#fitness`, label: locale === "en" ? "CoreVia Fitness" : "코비아 피트니스" },
       { href: `${prefix}/products/apps#recovery`, label: locale === "en" ? "CoreVia Recovery" : "코비아 리커버리" },
       { href: `${prefix}/products/scale`, label: locale === "en" ? "CoreVia Smart Scale" : "코비아 스마트 체중계" },
+      { href: `${prefix}/ebook`, label: locale === "en" ? "Ebook" : "전자책" },
       { href: `${prefix}/guide`, label: dict.footer.fitnessGuide },
     ],
     "Workout Guide": [

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // 제품 개요 — 메뉴 'Product' 의 첫 화면 (2026-10-08 대표: 애플리케이션 / 전자책 / 체중계로 구분 · 10/11 블루투스 체중계로 개칭)
-// 10/21 대표 개편: 코비아 SW(코비아 CRM) / 애플리케이션(코비아 피트니스·코비아 리커버리) / 커머스(코비아 스마트 체중계). 전자책은 목록에서 빠짐(/ebook 페이지는 그대로).
+// 10/21 대표 개편: 코비아 SW(코비아 CRM) / 애플리케이션(코비아 피트니스·코비아 리커버리) / 커머스(코비아 스마트 체중계·전자책).
 // 기존 /shop(Coming Soon) 은 next.config 에서 여기로 보낸다.
 
 const siteUrl =
@@ -22,7 +22,7 @@ export async function generateMetadata({
   return {
     title: isKo ? "제품 | CoreVia Fitness" : "Products | CoreVia Fitness",
     description: isKo
-      ? "웰니스 센터를 위한 코비아 CRM, 코비아 피트니스·코비아 리커버리 앱, 앱에 바로 기록되는 코비아 스마트 체중계."
+      ? "웰니스 센터를 위한 코비아 CRM, 코비아 피트니스·코비아 리커버리 앱, 앱에 바로 기록되는 코비아 스마트 체중계, 전자책 Core of Fitness."
       : "CoreVia CRM for wellness centers, the CoreVia Fitness and CoreVia Recovery apps, and the CoreVia Smart Scale that records straight to the app.",
     alternates: {
       canonical: pageUrl,
@@ -46,6 +46,7 @@ export default async function ProductsPage({
     { href: "/go?app=fitness&c=site-products-top", label: isKo ? "피트니스 앱 받기" : "Get CoreVia Fitness", sub: isKo ? "무료" : "Free", primary: true, external: true },
     { href: "/go?app=recovery&c=site-products-top", label: isKo ? "리커버리 앱 받기" : "Get CoreVia Recovery", sub: isKo ? "무료" : "Free", primary: true, external: true },
     { href: store("13779186739", "scale-top"), label: isKo ? "체중계 구매" : "Buy the scale", sub: isKo ? "24,000원 · 스마트스토어" : "₩24,000 · Naver Smart Store", primary: false, external: true },
+    { href: store("13776137889", "ebook-top"), label: isKo ? "전자책 구매" : "Buy the ebook", sub: isKo ? "20,000원 · 스마트스토어" : "₩20,000 · Naver Smart Store", primary: false, external: true },
     { href: `${prefix}/products/crm#inquiry`, label: isKo ? "CRM 도입 문의" : "CRM inquiry", sub: isKo ? "베타 센터 모집" : "Beta centers wanted", primary: false, external: false },
   ];
 
@@ -92,7 +93,7 @@ export default async function ProductsPage({
     },
     {
       label: isKo ? "커머스" : "Commerce",
-      desc: isKo ? "앱과 이어지는 기기" : "Devices that connect to the app",
+      desc: isKo ? "앱과 이어지는 기기와 책" : "A device and a book that go with the app",
       items: [
         {
           href: `${prefix}/products/scale`,
@@ -103,6 +104,16 @@ export default async function ProductsPage({
             ? "올라서면 몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월 포함."
             : "Step on and your weight is saved by date in the CoreVia Fitness app. Includes 3 months of Pro.",
           meta: isKo ? "24,000원 · 무료배송" : "₩24,000 · Free shipping (Korea)",
+        },
+        {
+          href: `${prefix}/ebook`,
+          image: "/ebook-cover.png",
+          imageAlt: "Core of Fitness",
+          title: isKo ? "전자책 Core of Fitness" : "Core of Fitness Ebook",
+          desc: isKo
+            ? "체중 감량과 근비대의 핵심을 정리한 PDF 전자책. 식단·운동 프로그램 수록."
+            : "A PDF ebook on the essentials of fat loss and muscle gain, with meal and workout programs.",
+          meta: isKo ? "20,000원" : "₩20,000",
         },
       ],
     },
@@ -117,11 +128,11 @@ export default async function ProductsPage({
           </h1>
           <p className="text-gray-500">
             {isKo
-              ? "센터를 돕는 소프트웨어, 기록하는 앱, 재는 기기 — 하나의 기록으로 이어집니다."
+              ? "센터를 돕는 소프트웨어, 기록하는 앱, 재는 기기, 읽는 책 — 하나의 기록으로 이어집니다."
               : "Software for centers, apps to record, a device to measure — all in one record."}
           </p>
           {/* 맨 위에서 바로 받기·구매 (2026-10-08 대표). 앱은 /go 가 기기에 맞는 스토어로 보낸다 */}
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-[860px] mx-auto">
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-5 gap-3 max-w-[1000px] mx-auto">
             {quick.map((q) => (
               <a
                 key={q.href}
