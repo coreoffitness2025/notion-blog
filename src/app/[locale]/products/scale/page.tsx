@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-// 블루투스 체중계 소개 (2026-10-08, 10/11 개정)
+// 코비아 스마트 체중계 소개 (2026-10-08, 10/11 개정 · 10/21 대표 Product 개편으로 '코비아 스마트 체중계' 개칭, '스마트' 허용 10/12)
 // 10/9 공장 확인: 이 모델(ZH-S1402-V02)은 체성분을 재지 않는다(임피던스 고정값) → '블루투스 체중계', 체성분 문구 없음, Pro 3개월(대표 10/9).
 // 문구는 판매 중인 스마트스토어 상세 v9(corevia-fitness-app docs/assets/scale-detail/v9)와 맞춘다 — 새 수치 만들지 않는다.
 // 판매·반품 조건은 스마트스토어 값만(policy/commerce-sale-terms): 24,000 · 무료배송 · 변심 반품·교환 배송비 0원(반품안심케어).
@@ -28,8 +28,8 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? "코비아 블루투스 체중계 — 올라서면 앱에 자동 기록 | CoreVia"
-      : "CoreVia Bluetooth Scale — step on, saved to the app | CoreVia",
+      ? "코비아 스마트 체중계 — 올라서면 앱에 자동 기록 | CoreVia"
+      : "CoreVia Smart Scale — step on, saved to the app | CoreVia",
     description: isKo
       ? "올라서면 몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월(16,500원 상당) 포함 · 24,000원 · 무료배송 · KC 인증."
       : "Step on and your weight is saved by date in the CoreVia Fitness app. Includes 3 months of CoreVia Pro · ₩24,000 · KC certified.",
@@ -38,7 +38,7 @@ export async function generateMetadata({
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
     },
     openGraph: {
-      title: isKo ? "코비아 블루투스 체중계" : "CoreVia Bluetooth Scale",
+      title: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale",
       url: pageUrl,
       siteName: "CoreVia",
       images: [{ url: `${siteUrl}/products/scale-photo.jpg`, width: 1000, height: 1000 }],
@@ -59,8 +59,8 @@ export default async function ScalePage({
 
   const t = isKo
     ? {
-        badge: "블루투스 체중계",
-        title: "코비아 블루투스 체중계",
+        badge: "블루투스 스마트 체중계",
+        title: "코비아 스마트 체중계",
         headline: "올라서면, 기록은 끝.",
         sub: "몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월(16,500원 상당)을 함께 드립니다.",
         price: "24,000원",
@@ -79,7 +79,7 @@ export default async function ScalePage({
           { k: "02 · 숫자에 흔들리지 않게", t: "하루 숫자 말고 방향을 봅니다", d: "쌓인 기록은 1주·1개월·3개월 그래프로 이어집니다. 오늘 오른 숫자보다 몸이 가는 방향이 먼저 보입니다." },
           { k: "03 · 숫자 다음이 보이게", t: "코치진이 기록을 함께 읽습니다", d: "Pro 3개월 동안 코치진이 몸무게·운동·식단 기록을 한 주 단위로 읽고 다음 주를 제안합니다." },
         ],
-        estimate: "체지방·근육량 같은 체성분은 측정하지 않습니다. 몸무게를 재서 앱에 남기는 블루투스 체중계입니다.",
+        estimate: "체지방·근육량 같은 체성분은 측정하지 않습니다. 몸무게를 재서 앱에 남기는 블루투스 스마트 체중계입니다.",
         shotPair: "실제 앱 화면 · 체중계 등록",
         shotBody: "실제 앱 화면 · 홈 몸무게",
         planTitle: "체중계 기능은 무료입니다",
@@ -131,8 +131,8 @@ export default async function ScalePage({
         appLink: "코비아 피트니스 앱 소개 보기",
       }
     : {
-        badge: "Bluetooth scale",
-        title: "CoreVia Bluetooth Scale",
+        badge: "Bluetooth smart scale",
+        title: "CoreVia Smart Scale",
         headline: "Step on. It's recorded.",
         sub: "Your weight is saved by date in the CoreVia Fitness app. Includes 3 months of CoreVia Pro.",
         price: "₩24,000",

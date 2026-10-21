@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // 제품 개요 — 메뉴 'Product' 의 첫 화면 (2026-10-08 대표: 애플리케이션 / 전자책 / 체중계로 구분 · 10/11 블루투스 체중계로 개칭)
+// 10/21 대표 개편: 코비아 SW(코비아 CRM) / 애플리케이션(코비아 피트니스·코비아 리커버리) / 커머스(코비아 스마트 체중계). 전자책은 목록에서 빠짐(/ebook 페이지는 그대로).
 // 기존 /shop(Coming Soon) 은 next.config 에서 여기로 보낸다.
 
 const siteUrl =
@@ -21,8 +22,8 @@ export async function generateMetadata({
   return {
     title: isKo ? "제품 | CoreVia Fitness" : "Products | CoreVia Fitness",
     description: isKo
-      ? "코비아 피트니스 앱·코비아 리커버리 앱, 전자책 Core of Fitness, 앱에 바로 기록되는 코비아 블루투스 체중계."
-      : "CoreVia Fitness and CoreVia Recovery apps, the Core of Fitness ebook, and the CoreVia Bluetooth scale that records straight to the app.",
+      ? "웰니스 센터를 위한 코비아 CRM, 코비아 피트니스·코비아 리커버리 앱, 앱에 바로 기록되는 코비아 스마트 체중계."
+      : "CoreVia CRM for wellness centers, the CoreVia Fitness and CoreVia Recovery apps, and the CoreVia Smart Scale that records straight to the app.",
     alternates: {
       canonical: pageUrl,
       languages: { ko: `${siteUrl}${path}`, en: `${siteUrl}/en${path}` },
@@ -42,45 +43,68 @@ export default async function ProductsPage({
   const store = (id: string, detail: string) =>
     `https://smartstore.naver.com/coreviafitness_store/products/${id}?nt_source=site&nt_medium=products&nt_detail=${detail}`;
   const quick = [
-    { href: "/go?app=fitness&c=site-products-top", label: isKo ? "피트니스 앱 받기" : "Get CoreVia Fitness", sub: isKo ? "무료" : "Free", primary: true },
-    { href: "/go?app=recovery&c=site-products-top", label: isKo ? "리커버리 앱 받기" : "Get CoreVia Recovery", sub: isKo ? "무료" : "Free", primary: true },
-    { href: store("13776137889", "ebook-top"), label: isKo ? "전자책 구매" : "Buy the ebook", sub: isKo ? "20,000원 · 스마트스토어" : "₩20,000 · Naver Smart Store", primary: false },
-    { href: store("13779186739", "scale-top"), label: isKo ? "체중계 구매" : "Buy the scale", sub: isKo ? "24,000원 · 스마트스토어" : "₩24,000 · Naver Smart Store", primary: false },
+    { href: "/go?app=fitness&c=site-products-top", label: isKo ? "피트니스 앱 받기" : "Get CoreVia Fitness", sub: isKo ? "무료" : "Free", primary: true, external: true },
+    { href: "/go?app=recovery&c=site-products-top", label: isKo ? "리커버리 앱 받기" : "Get CoreVia Recovery", sub: isKo ? "무료" : "Free", primary: true, external: true },
+    { href: store("13779186739", "scale-top"), label: isKo ? "체중계 구매" : "Buy the scale", sub: isKo ? "24,000원 · 스마트스토어" : "₩24,000 · Naver Smart Store", primary: false, external: true },
+    { href: `${prefix}/products/crm#inquiry`, label: isKo ? "CRM 도입 문의" : "CRM inquiry", sub: isKo ? "베타 센터 모집" : "Beta centers wanted", primary: false, external: false },
   ];
 
-  const items = [
+  type Item = { href: string; image: string; imageAlt: string; cover?: boolean; title: string; desc: string; meta: string };
+  const groups: { label: string; desc: string; items: Item[] }[] = [
     {
-      href: `${prefix}/products/apps`,
-      image: "/icon-512.png",
-      imageAlt: "CoreVia Fitness",
+      label: isKo ? "코비아 SW" : "CoreVia SW",
+      desc: isKo ? "센터를 위한 소프트웨어" : "Software for centers",
+      items: [
+        {
+          href: `${prefix}/products/crm`,
+          image: "/crm/today.webp",
+          imageAlt: isKo ? "코비아 CRM 오늘 관리 화면" : "CoreVia CRM today screen",
+          cover: true,
+          title: isKo ? "코비아 CRM" : "CoreVia CRM",
+          desc: isKo
+            ? "웰니스 센터를 위한 웹 CRM. 회원권 판매부터 급여 정산까지, 회원 앱 운동 기록과 측정 추이를 한 화면에서."
+            : "A web CRM for wellness centers — from memberships to payroll, with members' app workouts and measurements on one screen.",
+          meta: isKo ? "베타 · 도입 문의" : "Beta · Contact us",
+        },
+      ],
+    },
+    {
       label: isKo ? "애플리케이션" : "Apps",
-      title: isKo ? "코비아 피트니스 · 코비아 리커버리" : "CoreVia Fitness · CoreVia Recovery",
-      desc: isKo
-        ? "운동·식단을 함께 기록하는 피트니스 앱, 통증과 재활 운동을 기록하는 리커버리 앱."
-        : "A fitness app that logs workouts and meals together, and a recovery app that logs pain and rehab exercises.",
-      meta: isKo ? "무료 다운로드" : "Free to download",
+      desc: isKo ? "무료로 시작하는 기록 앱" : "Logging apps, free to start",
+      items: [
+        {
+          href: `${prefix}/products/apps#fitness`,
+          image: "/icon-512.png",
+          imageAlt: "CoreVia Fitness",
+          title: isKo ? "코비아 피트니스" : "CoreVia Fitness",
+          desc: isKo ? "운동·식단·체중을 함께 기록하고 코치진 피드백을 받는 피트니스 앱." : "A fitness app that logs workouts, meals and weight together, with coaching team feedback.",
+          meta: isKo ? "무료 다운로드" : "Free to download",
+        },
+        {
+          href: `${prefix}/products/apps#recovery`,
+          image: "/products/recovery-icon.png",
+          imageAlt: "CoreVia Recovery",
+          title: isKo ? "코비아 리커버리" : "CoreVia Recovery",
+          desc: isKo ? "통증 일지와 재활 운동, 가동범위 사진 기록을 남기는 회복 기록 앱." : "A recovery log for pain, rehab exercises and range-of-motion photos.",
+          meta: isKo ? "무료 다운로드" : "Free to download",
+        },
+      ],
     },
     {
-      href: `${prefix}/ebook`,
-      image: "/ebook-cover.png",
-      imageAlt: "Core of Fitness",
-      label: isKo ? "전자책" : "Ebook",
-      title: "Core of Fitness",
-      desc: isKo
-        ? "체중 감량과 근비대의 핵심을 정리한 PDF 전자책. 식단·운동 프로그램 수록."
-        : "A PDF ebook on the essentials of fat loss and muscle gain, with meal and workout programs.",
-      meta: isKo ? "20,000원" : "₩20,000",
-    },
-    {
-      href: `${prefix}/products/scale`,
-      image: "/products/scale-photo.jpg",
-      imageAlt: isKo ? "코비아 블루투스 체중계" : "CoreVia Bluetooth scale",
-      label: isKo ? "블루투스 체중계" : "Bluetooth scale",
-      title: isKo ? "코비아 블루투스 체중계" : "CoreVia Bluetooth Scale",
-      desc: isKo
-        ? "올라서면 몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월 포함."
-        : "Step on and your weight is saved by date in the CoreVia Fitness app. Includes 3 months of Pro.",
-      meta: isKo ? "24,000원 · 무료배송" : "₩24,000 · Free shipping (Korea)",
+      label: isKo ? "커머스" : "Commerce",
+      desc: isKo ? "앱과 이어지는 기기" : "Devices that connect to the app",
+      items: [
+        {
+          href: `${prefix}/products/scale`,
+          image: "/products/scale-photo.jpg",
+          imageAlt: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale",
+          title: isKo ? "코비아 스마트 체중계" : "CoreVia Smart Scale",
+          desc: isKo
+            ? "올라서면 몸무게가 코비아 피트니스 앱에 날짜별로 쌓입니다. 앱 Pro 3개월 포함."
+            : "Step on and your weight is saved by date in the CoreVia Fitness app. Includes 3 months of Pro.",
+          meta: isKo ? "24,000원 · 무료배송" : "₩24,000 · Free shipping (Korea)",
+        },
+      ],
     },
   ];
 
@@ -93,8 +117,8 @@ export default async function ProductsPage({
           </h1>
           <p className="text-gray-500">
             {isKo
-              ? "기록하는 앱, 읽는 책, 재는 기기 — 하나의 기록으로 이어집니다."
-              : "An app to record, a book to read, a device to measure — all in one record."}
+              ? "센터를 돕는 소프트웨어, 기록하는 앱, 재는 기기 — 하나의 기록으로 이어집니다."
+              : "Software for centers, apps to record, a device to measure — all in one record."}
           </p>
           {/* 맨 위에서 바로 받기·구매 (2026-10-08 대표). 앱은 /go 가 기기에 맞는 스토어로 보낸다 */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-[860px] mx-auto">
@@ -102,8 +126,8 @@ export default async function ProductsPage({
               <a
                 key={q.href}
                 href={q.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={q.external ? "_blank" : undefined}
+                rel={q.external ? "noopener noreferrer" : undefined}
                 className={`flex flex-col items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold transition-opacity hover:opacity-90 ${
                   q.primary
                     ? "bg-[var(--corevia-primary)] text-white"
@@ -119,36 +143,44 @@ export default async function ProductsPage({
       </section>
 
       <section className="pb-24 px-4">
-        <div className="max-w-[1000px] mx-auto grid gap-6 md:grid-cols-3">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow flex flex-col"
-            >
-              <div className="aspect-square bg-gray-50 flex items-center justify-center overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.imageAlt}
-                  width={480}
-                  height={480}
-                  className="w-full h-full object-contain p-8 group-hover:scale-[1.03] transition-transform"
-                />
+        <div className="max-w-[1000px] mx-auto grid gap-12">
+          {groups.map((g) => (
+            <div key={g.label}>
+              <div className="flex items-baseline gap-3 mb-4">
+                <h2 className="text-xl font-bold text-gray-800">{g.label}</h2>
+                <span className="text-sm text-gray-400">{g.desc}</span>
               </div>
-              <div className="p-6 flex flex-col flex-1">
-                <span className="text-xs font-semibold text-[var(--corevia-primary)] mb-2">
-                  {item.label}
-                </span>
-                <h2 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h2>
-                <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{item.desc}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-gray-700">{item.meta}</span>
-                  <span className="text-sm font-medium text-[var(--corevia-primary)]">
-                    {isKo ? "자세히 보기 →" : "Learn more →"}
-                  </span>
-                </div>
+              <div className="grid gap-6 md:grid-cols-3">
+                {g.items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow flex flex-col"
+                  >
+                    <div className="aspect-square bg-gray-50 flex items-center justify-center overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.imageAlt}
+                        width={480}
+                        height={480}
+                        className={`w-full h-full group-hover:scale-[1.03] transition-transform ${item.cover ? "object-cover object-left-top" : "object-contain p-8"}`}
+                      />
+                    </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      <span className="text-xs font-semibold text-[var(--corevia-primary)] mb-2">{g.label}</span>
+                      <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{item.desc}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-semibold text-gray-700">{item.meta}</span>
+                        <span className="text-sm font-medium text-[var(--corevia-primary)]">
+                          {isKo ? "자세히 보기 →" : "Learn more →"}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>

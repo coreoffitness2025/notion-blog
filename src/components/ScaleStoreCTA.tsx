@@ -30,10 +30,10 @@ export default function ScaleStoreCTA({
         className="flex items-center gap-4 p-4 sm:p-5 hover:bg-gray-50 transition-colors"
       >
         <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-xl overflow-hidden bg-gray-50">
-          <Image src="/products/scale-photo.jpg" alt="코비아 블루투스 체중계" fill className="object-cover" sizes="96px" />
+          <Image src="/products/scale-photo.jpg" alt="코비아 스마트 체중계" fill className="object-cover" sizes="96px" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-[var(--corevia-primary)] mb-1">코비아 블루투스 체중계</p>
+          <p className="text-xs font-semibold text-[var(--corevia-primary)] mb-1">코비아 스마트 체중계</p>
           <p className="text-base sm:text-lg font-bold text-gray-800 leading-snug">
             올라서면 몸무게가 앱에 날짜별로 쌓여요
           </p>

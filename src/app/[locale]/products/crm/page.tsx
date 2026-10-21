@@ -10,7 +10,7 @@ import CrmInquiryForm from "@/components/CrmInquiryForm";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
 
 export const metadata: Metadata = {
-  title: "웰니스 센터 CRM (베타) | CoreVia",
+  title: "코비아 CRM — 웰니스 센터 CRM (베타) | CoreVia",
   description:
     "웰니스 센터를 위한 웹 CRM — 피트니스·PT샵, 필라테스, 주간보호 운동 관리, 재활·교정센터부터. 회원권 판매·결제 기록·예약·출석·급여 정산에 회원 앱 운동 기록과 측정 추이까지 한 화면에서. 베타 도입 센터를 모집합니다.",
   alternates: { canonical: `${siteUrl}/products/crm` },
@@ -71,6 +71,7 @@ export default function CrmPage() {
           <span className="inline-block mb-5 px-3 py-1 rounded-full bg-white border border-gray-200 text-sm font-semibold text-[var(--corevia-primary)]">
             베타 테스트 중 · 도입 센터 모집
           </span>
+          <p className="text-sm font-semibold text-gray-500 mb-2">코비아 CRM · 웰니스 센터 CRM</p>
           <h1 className="text-3xl md:text-5xl font-bold text-gray-800 tracking-tight leading-tight mb-5">
             센터 운영과 회원 운동 기록을
             <br />

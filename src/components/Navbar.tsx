@@ -30,33 +30,38 @@ export default function Navbar({ locale }: { locale: string }) {
   type NavItem = {
     href: string;
     label: string;
-    children?: { href: string; label: string; desc: string }[];
+    children?: { href: string; label: string; desc: string; group?: string }[];
   };
 
   const nav: NavItem[] = [
     {
-      // 2026-10-08 대표: Product = 애플리케이션 / 전자책 / 스마트 체중계 (빈 Shop 메뉴 대체)
+      // 2026-10-21 대표: Product = 코비아 SW(코비아 CRM) / 애플리케이션(코비아 피트니스·코비아 리커버리) / 커머스(코비아 스마트 체중계)
       href: `${prefix}/products`,
       label: dict.nav.features,
       children: [
         {
-          href: `${prefix}/products/apps`,
-          label: isEn ? "Apps" : "애플리케이션",
-          desc: isEn ? "CoreVia Fitness · CoreVia Recovery" : "코비아 피트니스 · 코비아 리커버리",
-        },
-        {
-          href: `${prefix}/ebook`,
-          label: isEn ? "Ebook" : "전자책",
-          desc: isEn ? "Core of Fitness (PDF)" : "Core of Fitness (PDF)",
-        },
-        {
-          href: `${prefix}/products/scale`,
-          label: isEn ? "Bluetooth Scale" : "블루투스 체중계",
-          desc: isEn ? "Your weight, saved to the app" : "올라서면 앱에 몸무게 자동 기록",
-        },        {
+          group: isEn ? "CoreVia SW" : "코비아 SW",
           href: `${prefix}/products/crm`,
-          label: isEn ? "Wellness Center CRM (Beta)" : "웰니스 센터 CRM (베타)",
-          desc: isEn ? "Fitness, day-care exercise and rehab centers" : "피트니스·주간보호 운동 관리·재활 센터",
+          label: isEn ? "CoreVia CRM (Beta)" : "코비아 CRM (베타)",
+          desc: isEn ? "CRM for wellness centers" : "웰니스 센터 CRM",
+        },
+        {
+          group: isEn ? "Apps" : "애플리케이션",
+          href: `${prefix}/products/apps#fitness`,
+          label: isEn ? "CoreVia Fitness" : "코비아 피트니스",
+          desc: isEn ? "Workouts and meals in one log" : "운동·식단을 함께 기록",
+        },
+        {
+          group: isEn ? "Apps" : "애플리케이션",
+          href: `${prefix}/products/apps#recovery`,
+          label: isEn ? "CoreVia Recovery" : "코비아 리커버리",
+          desc: isEn ? "Pain and rehab exercise log" : "통증·재활 운동 기록",
+        },
+        {
+          group: isEn ? "Commerce" : "커머스",
+          href: `${prefix}/products/scale`,
+          label: isEn ? "CoreVia Smart Scale" : "코비아 스마트 체중계",
+          desc: isEn ? "Your weight, saved to the app" : "올라서면 앱에 몸무게 자동 기록",
         },
       ],
     },
@@ -147,15 +152,19 @@ export default function Navbar({ locale }: { locale: string }) {
                   </Link>
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <div className="bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[220px]">
-                      {item.children.map((child) => (
+                      {item.children.map((child, ci) => (
+                        <div key={child.href}>
+                        {child.group && child.group !== item.children![ci - 1]?.group && (
+                          <span className={`block px-4 pb-1 text-[11px] font-semibold text-gray-400 ${ci ? "pt-3 mt-1 border-t border-gray-100" : "pt-1"}`}>{child.group}</span>
+                        )}
                         <Link
-                          key={child.href}
                           href={child.href}
                           className="block px-4 py-2.5 hover:bg-gray-50 transition-colors"
                         >
                           <span className="text-sm font-medium text-gray-800">{child.label}</span>
                           <span className="block text-xs text-gray-400 mt-0.5">{child.desc}</span>
                         </Link>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -236,15 +245,19 @@ export default function Navbar({ locale }: { locale: string }) {
               </Link>
               {item.children && (
                 <div className="pl-4 pb-2">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block py-2 text-sm text-gray-500 hover:text-gray-800"
-                    >
-                      {child.label}
-                    </Link>
+                  {item.children.map((child, ci) => (
+                    <div key={child.href}>
+                      {child.group && child.group !== item.children![ci - 1]?.group && (
+                        <span className="block pt-2 text-[11px] font-semibold text-gray-400">{child.group}</span>
+                      )}
+                      <Link
+                        href={child.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block py-2 text-sm text-gray-500 hover:text-gray-800"
+                      >
+                        {child.label}
+                      </Link>
+                    </div>
                   ))}
                 </div>
               )}

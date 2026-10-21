@@ -6,11 +6,12 @@ export default function Footer({ locale }: { locale: string }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
 
   const footerLinks = {
+    // 10/21 대표 Product 개편: 코비아 SW / 애플리케이션 / 커머스
     [dict.footer.product]: [
-      { href: `${prefix}/products/apps`, label: locale === "en" ? "Apps" : "애플리케이션" },
-      { href: `${prefix}/ebook`, label: locale === "en" ? "Ebook" : "전자책" },
-      { href: `${prefix}/products/scale`, label: locale === "en" ? "Bluetooth Scale" : "블루투스 체중계" },
-      { href: `${prefix}/products/crm`, label: locale === "en" ? "Wellness Center CRM (Beta)" : "웰니스 센터 CRM (베타)" },
+      { href: `${prefix}/products/crm`, label: locale === "en" ? "CoreVia CRM (Beta)" : "코비아 CRM (베타)" },
+      { href: `${prefix}/products/apps#fitness`, label: locale === "en" ? "CoreVia Fitness" : "코비아 피트니스" },
+      { href: `${prefix}/products/apps#recovery`, label: locale === "en" ? "CoreVia Recovery" : "코비아 리커버리" },
+      { href: `${prefix}/products/scale`, label: locale === "en" ? "CoreVia Smart Scale" : "코비아 스마트 체중계" },
       { href: `${prefix}/guide`, label: dict.footer.fitnessGuide },
     ],
     "Workout Guide": [
