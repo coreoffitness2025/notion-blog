@@ -3,7 +3,8 @@ import CrmInquiryForm from "@/components/CrmInquiryForm";
 
 // 메인 — 회사 사명 중심 (2026-10-22 대표 "사명이랑 슬로건을 걸어놓고 왜 제품을 걸어놔", docs/site-renewal-2026-10.md 2차)
 // 순서(벤치마킹: FDE 회사들 = 미션 문장으로 열고 → FDE 정의 → 원칙·단계 → 증거 → 연락 하나):
-//   사명 → 현장의 문제 → 솔루션 ① 웰니스 FDE → 솔루션 ② 영상 인식 → 보유 기술 → 직접 만든 제품 → 상담 신청
+//   사명(슬로건만, 움직임) → 현장의 문제 → 보유 기술 → 직접 만든 제품 → 앞으로 만들 솔루션 ① FDE ② 영상 인식(준비 중) → 먼저 함께할 센터
+// 10/22 대표 3차: "솔루션 1·2는 미래의 일, 첫 장에는 웰니스를 AI로 혁신합니다만, 애니메이션 효과(웰니스·AI·primary·로고)"
 // 문구 선: 진단·처방·치료 효과 금지, 측정값 = 참고값·담당자 확인, 코치 = 'CoreVia Fitness 코치진', 고객 로고·후기·근거 없는 수치 없음.
 // 숫자는 코드 기준(운동 109종 exerciseDatabase.ts · 음식 5,672 food-db-audit · CRM 화면 31 web/src/pages · 루틴 23 routineTemplates.ts).
 
@@ -21,24 +22,66 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="text-sm font-semibold text-[var(--corevia-primary)] mb-3">{children}</p>
 );
 
+/** 첫 화면 움직임 — 로고의 동심 사분원을 오른쪽 아래 모서리에서 그린다(10/22 대표 "웰니스와 AI, primary 색과 로고 느낌을 조합").
+ *  웰니스 = 숨 쉬듯 천천히 커졌다 줄어드는 호(6초), AI = 모서리에서 퍼져 나가는 파란 신호, 데이터 = 호를 따라 움직이는 점.
+ *  CSS·SVG만(스크립트 없음), 움직임 줄이기 설정이면 멈춘다. */
+function HeroMotion() {
+  const C = 1000; // 원의 중심 = 그림 오른쪽 아래 모서리
+  const arc = (r: number) => `M ${C - r} ${C} A ${r} ${r} 0 0 1 ${C} ${C - r}`;
+  const rings = [150, 270, 390, 510, 630, 750, 870, 990];
+  const dots = [{ r: 390, d: 11, delay: 0 }, { r: 630, d: 15, delay: -5 }, { r: 870, d: 19, delay: -11 }, { r: 510, d: 13, delay: -8 }];
+  return (
+    <svg className="cv-hero-art" viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+      <defs>
+        <linearGradient id="cvArc" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#4285F4" stopOpacity="0.05" />
+          <stop offset="1" stopColor="#4285F4" stopOpacity="0.45" />
+        </linearGradient>
+      </defs>
+      <g className="cv-breathe">
+        {rings.map((r) => <path key={r} d={arc(r)} fill="none" stroke="url(#cvArc)" strokeWidth={r < 300 ? 1.6 : 1.2} />)}
+        {/* 로고의 두 조각(채운 사분원 + 띠) */}
+        <path d={`M ${C - 120} ${C} A 120 120 0 0 1 ${C} ${C - 120} L ${C} ${C} Z`} fill="#0B3A8C" />
+        <path d={`M ${C - 250} ${C} A 250 250 0 0 1 ${C} ${C - 250} L ${C} ${C - 175} A 175 175 0 0 0 ${C - 175} ${C} Z`} fill="#4285F4" />
+      </g>
+      {[0, 1, 2].map((i) => (
+        <path key={i} className="cv-pulse" style={{ animationDelay: `${i * 2.6}s` }} d={arc(980)} fill="none" stroke="#4285F4" strokeWidth="2" />
+      ))}
+      {dots.map((x, i) => (
+        <g key={i} className="cv-orbit" style={{ animationDuration: `${x.d}s`, animationDelay: `${x.delay}s` }}>
+          <circle cx={C - x.r} cy={C} r="6" fill="#fff" stroke="#4285F4" strokeWidth="2.5" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 function Mission({ isKo }: L) {
   return (
-    <section className="relative overflow-hidden bg-white">
-      {/* 바탕: 옅은 격자 한 겹(그림 대신) */}
-      <div aria-hidden="true" className="absolute inset-0 [background-image:linear-gradient(to_right,#eef2f7_1px,transparent_1px),linear-gradient(to_bottom,#eef2f7_1px,transparent_1px)] [background-size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
-      <div className="relative max-w-[1120px] mx-auto px-5 pt-20 pb-24 md:pt-32 md:pb-36">
-        <p className="text-sm font-semibold text-gray-500 mb-6">{isKo ? "코비아 · 웰니스 AX" : "CoreVia · Wellness AX"}</p>
-        <h1 className="text-[44px] leading-[1.12] md:text-[76px] md:leading-[1.08] font-bold text-gray-900 tracking-[-0.035em] break-keep">
-          {isKo ? <>웰니스를<br />AI로 혁신합니다</> : <>Transforming<br />wellness with AI</>}
+    <section className="cv-hero relative overflow-hidden bg-white min-h-[calc(100svh-73px)] flex items-center">
+      <style>{`
+        .cv-hero-art{position:absolute;right:0;bottom:0;width:min(78vw,860px);height:auto;pointer-events:none}
+        .cv-breathe{transform-origin:1000px 1000px;animation:cvBreathe 6s ease-in-out infinite}
+        .cv-pulse{transform-origin:1000px 1000px;opacity:0;animation:cvPulse 7.8s cubic-bezier(.2,.6,.3,1) infinite}
+        .cv-orbit{transform-origin:1000px 1000px;animation-name:cvOrbit;animation-timing-function:linear;animation-iteration-count:infinite}
+        .cv-rise{opacity:0;transform:translateY(18px);animation:cvRise .9s cubic-bezier(.2,.7,.2,1) forwards}
+        @keyframes cvBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+        @keyframes cvPulse{0%{transform:scale(.12);opacity:0}15%{opacity:.55}100%{transform:scale(1);opacity:0}}
+        @keyframes cvOrbit{from{transform:rotate(0deg)}to{transform:rotate(90deg)}}
+        @keyframes cvRise{to{opacity:1;transform:none}}
+        @media (max-width:767px){.cv-hero-art{width:118vw;right:-18vw;bottom:-6vw;opacity:.9}}
+        @media (prefers-reduced-motion:reduce){.cv-breathe,.cv-pulse,.cv-orbit,.cv-rise{animation:none}.cv-rise{opacity:1;transform:none}.cv-pulse{display:none}}
+      `}</style>
+      <HeroMotion />
+      <div className="relative w-full max-w-[1120px] mx-auto px-5 py-24">
+        <h1 className="text-[52px] leading-[1.1] sm:text-[72px] md:text-[96px] md:leading-[1.04] font-bold text-gray-900 tracking-[-0.04em] break-keep">
+          <span className="cv-rise block">{isKo ? "웰니스를" : "Transforming"}</span>
+          <span className="cv-rise block" style={{ animationDelay: ".18s" }}>{isKo ? "AI로 혁신합니다" : "wellness with AI"}</span>
         </h1>
-        <p className="mt-7 text-[18px] md:text-[21px] leading-relaxed text-gray-600 break-keep max-w-[620px]">
-          {isKo ? "웰니스 전반에 걸친 다양한 페인 포인트를 AI로 풀어냅니다." : "We solve pain points across wellness with AI."}
-        </p>
-        <div className="mt-10 flex flex-wrap gap-2.5">
-          <a href="#contact" className="inline-flex items-center px-6 py-3.5 rounded-xl bg-gray-900 text-white text-[15px] font-semibold hover:bg-gray-800 transition-colors">{isKo ? "AI 도입 상담 신청" : "Talk to us about AI"}</a>
-          <a href="#solutions" className="inline-flex items-center px-6 py-3.5 rounded-xl border border-gray-300 bg-white text-gray-800 text-[15px] font-semibold hover:bg-gray-50 transition-colors">{isKo ? "솔루션 보기" : "Our solutions"}</a>
-        </div>
       </div>
+      <a href="#problems" aria-label={isKo ? "아래로" : "Scroll"} className="absolute left-1/2 bottom-7 -translate-x-1/2 text-gray-400 hover:text-gray-700 transition-colors">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 9l6 6 6-6" /></svg>
+      </a>
     </section>
   );
 }
@@ -56,11 +99,12 @@ function Problems({ isKo }: L) {
         { who: "Physio & rehab centers", pain: "Pain and range-of-motion notes live in different places, so trends by date are hard to see." },
       ];
   return (
-    <section className="bg-[var(--corevia-bg)] border-y border-gray-100">
+    <section id="problems" className="bg-[var(--corevia-bg)] border-y border-gray-100 scroll-mt-16">
       <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28 grid gap-10 md:grid-cols-[0.9fr_1.1fr]">
         <div>
           <Eyebrow>{isKo ? "현장의 문제" : "The problem"}</Eyebrow>
           <H2>{isKo ? <>웰니스 현장은 아직<br />손으로 일합니다</> : <>Wellness still runs<br />by hand</>}</H2>
+          <p className="mt-5 text-[16px] md:text-[17px] text-gray-600 leading-relaxed break-keep">{isKo ? "코비아는 웰니스 전반에 걸친 다양한 페인 포인트를 AI로 풀어냅니다." : "CoreVia solves pain points across wellness with AI."}</p>
         </div>
         <div className="divide-y divide-gray-200 border-y border-gray-200">
           {rows.map((r) => (
@@ -92,13 +136,13 @@ function Fde({ isKo }: L) {
   return (
     <section id="solutions" className="bg-white scroll-mt-20">
       <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28">
-        <Eyebrow>{isKo ? "솔루션 01 · 웰니스 FDE" : "Solution 01 · Wellness FDE"}</Eyebrow>
+        <Eyebrow>{isKo ? "앞으로 만들 솔루션 01 · 웰니스 FDE · 준비 중" : "Coming · Solution 01 · Wellness FDE"}</Eyebrow>
         <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-end mb-14">
-          <H2>{isKo ? <>현장에 들어가<br />AI 도입을 이끕니다</> : <>We go on site and<br />lead AI adoption</>}</H2>
+          <H2>{isKo ? <>현장에 들어가<br />AI 도입을 이끌려 합니다</> : <>We will go on site and<br />lead AI adoption</>}</H2>
           <p className="text-[16px] md:text-[17px] text-gray-600 leading-relaxed break-keep">
             {isKo
-              ? "FDE(Forward Deployed Engineering)는 엔지니어가 고객 현장에 들어가 문제를 직접 보고 풀어내는 방식입니다. 코비아는 피트니스 센터, 주간보호 운동 시설, 물리치료 시설을 상담하고 상황을 진단한 뒤, 우리가 만든 앱과 자동화 자산으로 AI 도입을 주도합니다."
-              : "FDE (Forward Deployed Engineering) means engineers working inside the customer's site. We consult fitness centers, day-care exercise programs and physio facilities, diagnose the situation, then lead AI adoption with the apps and automations we've already built."}
+              ? "FDE(Forward Deployed Engineering)는 엔지니어가 고객 현장에 들어가 문제를 직접 보고 풀어내는 방식입니다. 코비아는 피트니스 센터, 주간보호 운동 시설, 물리치료 시설을 상담하고 상황을 진단한 뒤, 우리가 만든 앱과 자동화 자산으로 AI 도입을 주도하는 일을 준비하고 있습니다."
+              : "FDE (Forward Deployed Engineering) means engineers working inside the customer's site. We consult fitness centers, day-care exercise programs and physio facilities, diagnose the situation, and we are preparing to lead AI adoption with the apps and automations we've already built."}
           </p>
         </div>
         <ol className="grid gap-px bg-gray-200 border border-gray-200 rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
@@ -110,7 +154,7 @@ function Fde({ isKo }: L) {
             </li>
           ))}
         </ol>
-        <p className="mt-5 text-sm text-gray-400 break-keep">{isKo ? "기간과 범위는 진단 뒤 센터와 함께 정합니다." : "Timeline and scope are agreed with the center after diagnosis."}</p>
+        <p className="mt-5 text-sm text-gray-400 break-keep">{isKo ? "지금은 함께할 센터를 찾고 있습니다. 기간과 범위는 진단 뒤 센터와 함께 정합니다." : "We are looking for first partner centers. Scope is agreed after diagnosis."}</p>
       </div>
     </section>
   );
@@ -147,8 +191,9 @@ function Vision({ isKo, prefix }: L) {
     <section className="bg-[var(--corevia-bg)] border-y border-gray-100">
       <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28 grid gap-12 md:grid-cols-[1.15fr_0.85fr] items-center">
         <div>
-          <Eyebrow>{isKo ? "솔루션 02 · 영상 인식" : "Solution 02 · Vision"}</Eyebrow>
+          <Eyebrow>{isKo ? "앞으로 만들 솔루션 02 · 영상 인식 · 준비 중" : "Coming · Solution 02 · Vision"}</Eyebrow>
           <H2>{isKo ? <>스마트폰 카메라 하나로<br />자세와 운동을 숫자로</> : <>One phone camera,<br />posture and movement in numbers</>}</H2>
+          <p className="mt-5 text-[16px] text-gray-600 leading-relaxed break-keep">{isKo ? "코비아 피트니스 트레이너 모드에 들어 있는 인식 기술을 센터와 기기에 붙일 수 있는 솔루션으로 만들고 있습니다." : "We are turning the recognition built into CoreVia Fitness trainer mode into a solution centers and devices can use."}</p>
           <div className="mt-10 grid gap-7">
             {items.map((it) => (
               <div key={it.t}>
@@ -258,10 +303,10 @@ function Contact({ isKo }: L) {
     <section id="contact" className="bg-white scroll-mt-20">
       <div className="max-w-[1120px] mx-auto px-5 py-20 md:py-28 grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <Eyebrow>{isKo ? "AI 도입 상담" : "Talk to us"}</Eyebrow>
+          <Eyebrow>{isKo ? "먼저 함께할 센터" : "First partners"}</Eyebrow>
           <H2>{isKo ? <>센터의 하루를<br />먼저 들려주세요</> : <>Tell us about<br />your center&apos;s day</>}</H2>
           <p className="mt-5 text-[16px] text-gray-600 leading-relaxed break-keep">
-            {isKo ? "어떤 일이 가장 손이 많이 가는지 남겨 주시면, 이메일로 현장 진단 일정을 안내해 드립니다." : "Tell us what takes the most effort and we'll email you to schedule an on-site diagnosis."}
+            {isKo ? "준비 중인 솔루션을 먼저 써 보고 싶은 센터를 찾고 있습니다. 어떤 일이 가장 손이 많이 가는지 남겨 주시면 이메일로 연락드립니다." : "We're looking for centers to try our solutions first. Tell us what takes the most effort and we'll email you."}
           </p>
           <p className="mt-4 text-sm text-gray-400">support@coreviafitness.com</p>
         </div>
@@ -282,10 +327,10 @@ export default function HomeRenewal({ locale }: { locale: string; blog?: React.R
     <div className="min-h-screen bg-white">
       <Mission {...l} />
       <Problems {...l} />
-      <Fde {...l} />
-      <Vision {...l} />
       <Tech {...l} />
       <Products {...l} />
+      <Fde {...l} />
+      <Vision {...l} />
       <Contact {...l} />
     </div>
   );
