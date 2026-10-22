@@ -31,12 +31,12 @@ export default function EbookPageClient({
           >
             {/* Cover Image */}
             <div className="flex-shrink-0">
-              <div className="w-[260px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+              <div className="w-[300px] rounded-2xl overflow-hidden border border-gray-200">
                 <Image
-                  src="/ebook-cover.png"
+                  src="/ebook-thumb.webp"
                   alt={dict.ebook.title}
-                  width={260}
-                  height={368}
+                  width={300}
+                  height={300}
                   className="w-full h-auto"
                   priority
                 />

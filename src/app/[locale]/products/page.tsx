@@ -50,7 +50,7 @@ export default async function ProductsPage({
     { href: `${prefix}/products/crm#inquiry`, label: isKo ? "CRM 도입 문의" : "CRM inquiry", sub: isKo ? "베타 센터 모집" : "Beta centers wanted", primary: false, external: false },
   ];
 
-  type Item = { href: string; image: string; imageAlt: string; cover?: boolean; title: string; desc: string; meta: string };
+  type Item = { href: string; image: string; imageAlt: string; cover?: boolean; coverPos?: string; title: string; desc: string; meta: string };
   const groups: { label: string; desc: string; items: Item[] }[] = [
     {
       label: isKo ? "코비아 SW" : "CoreVia SW",
@@ -107,7 +107,10 @@ export default async function ProductsPage({
         },
         {
           href: `${prefix}/ebook`,
-          image: "/ebook-cover.png",
+          // 10/22 대표: 스마트스토어 썸네일과 같은 표지(9/30 확정 남색 책)
+          image: "/ebook-thumb.webp",
+          cover: true,
+          coverPos: "object-center",
           imageAlt: "Core of Fitness",
           title: isKo ? "전자책 Core of Fitness" : "Core of Fitness Ebook",
           desc: isKo
@@ -174,7 +177,7 @@ export default async function ProductsPage({
                         alt={item.imageAlt}
                         width={480}
                         height={480}
-                        className={`w-full h-full group-hover:scale-[1.03] transition-transform ${item.cover ? "object-cover object-left-top" : "object-contain p-8"}`}
+                        className={`w-full h-full group-hover:scale-[1.03] transition-transform ${item.cover ? `object-cover ${item.coverPos ?? "object-left-top"}` : "object-contain p-8"}`}
                       />
                     </div>
                     <div className="p-6 flex flex-col flex-1">

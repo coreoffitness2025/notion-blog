@@ -18,8 +18,8 @@ export default function EbookCTA({ locale, from, className = "" }: { locale: str
         href={`/ebook?from=guide-${from}`}
         className="flex items-center gap-4 sm:gap-6 rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 hover:bg-gray-50 transition-colors"
       >
-        <div className="relative w-16 h-20 sm:w-20 sm:h-[104px] shrink-0 overflow-hidden rounded-md bg-gray-50">
-          <Image src="/ebook-cover.png" alt="Core of Fitness 전자책 표지" fill className="object-contain" sizes="80px" />
+        <div className="relative w-20 h-20 sm:w-[104px] sm:h-[104px] shrink-0 overflow-hidden rounded-md bg-gray-50">
+          <Image src="/ebook-thumb.webp" alt="Core of Fitness 전자책 표지" fill className="object-cover" sizes="104px" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-xs font-semibold text-[var(--corevia-primary)] mb-1">전자책 Core of Fitness</p>
