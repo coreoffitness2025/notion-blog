@@ -67,7 +67,11 @@ export async function generateMetadata({
     // 영어판은 검색에서 뺀다(사이트맵에서도 제외, 2026-10-05) — 얇은 번역 페이지 5,681개가 사이트 품질 신호를
     // 끌어내렸다. 한국어판이 짝으로 가리키지도 않는다(noindex 페이지를 hreflang 으로 묶지 않는다).
     alternates: { canonical: pageUrl },
-    ...(isKo ? {} : { robots: { index: false, follow: true } }),
+    // 구글봇만 색인 제외(2026-10-22 대표 '구글 색인 문제부터') — 자동 생성 가이드 1만여 쪽이 '크롤링됨-미색인'으로 쌓여
+    // 구글이 이 도메인에서 새 주소를 아예 발견하지 않는다(크롤 통계 90일 '발견' 0%). 네이버(Yeti) 유입원이라 일반 robots 는 index 유지.
+    robots: isKo
+      ? { index: true, follow: true, googleBot: { index: false, follow: true } }
+      : { index: false, follow: true, googleBot: { index: false, follow: true } },
     openGraph: {
       title: isKo
         ? `${name} 영양성분`
