@@ -23,36 +23,84 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="text-sm font-semibold text-[var(--corevia-primary)] mb-3">{children}</p>
 );
 
-/** 첫 화면 움직임 — 로고의 동심 사분원을 오른쪽 아래 모서리에서 그린다(10/22 대표 "웰니스와 AI, primary 색과 로고 느낌을 조합").
- *  웰니스 = 숨 쉬듯 천천히 커졌다 줄어드는 호(6초), AI = 모서리에서 퍼져 나가는 파란 신호, 데이터 = 호를 따라 움직이는 점.
+/** 첫 화면 움직임 — 로고 마크를 오른쪽 아래 모서리에 실제 비율 그대로 놓는다(10/22 대표 2차 "로고에 맞춰서, 좀 더 색감있게").
+ *  로고 = 작은 사분원(사람·코어) + 그 둘레를 감싸고 비스듬히 위로 뻗는 띠(돌봄·성장). 비율은 public/logo-horizontal.png 실측.
+ *  이야기: 일상의 기록(여러 색 점 = 체중·운동·통증·식단)이 코어로 모여들고(AI가 모은다),
+ *          코어가 숨 쉬면 로고의 바깥 윤곽이 같은 모양으로 겹겹이 퍼져 나간다(AI가 넓힌 웰니스).
+ *  색: 로고 남색 → primary 파랑 → 하늘·민트(웰니스)·보라(AI) 오로라, 따뜻한 산호색은 사람 쪽 점 둘에만.
  *  CSS·SVG만(스크립트 없음), 움직임 줄이기 설정이면 멈춘다. */
 function HeroMotion() {
-  const C = 1000; // 원의 중심 = 그림 오른쪽 아래 모서리
-  const arc = (r: number) => `M ${C - r} ${C} A ${r} ${r} 0 0 1 ${C} ${C - r}`;
-  const rings = [150, 270, 390, 510, 630, 750, 870, 990];
-  const dots = [{ r: 390, d: 11, delay: 0 }, { r: 630, d: 15, delay: -5 }, { r: 870, d: 19, delay: -11 }, { r: 510, d: 13, delay: -8 }];
+  const C = 850; // 로고 모서리 = 원의 중심(그림 오른쪽 아래에서 조금 안쪽 — 마크 전체가 보이게)
+  const U = 200; // 띠 안쪽 반지름(로고 실측 비율: 코어 0.59 · 띠 바깥 꼭짓점 (-1.55,0)(-1.19,1.17)(0,1.56))
+  const pt = (x: number, y: number, k = 1) => `${(C - x * U * k).toFixed(1)} ${(C - y * U * k).toFixed(1)}`;
+  // 로고 바깥 윤곽 — 양 끝을 그림 밖(1100)까지 같은 기울기로 늘려 선이 허공에서 끊기지 않게
+  const edge = (k: number) => {
+    const u = U * k;
+    const t0 = (1100 - C) / (1.17 * u), t2 = (1100 - C) / (1.19 * u);
+    const sx = C - 1.55 * u - t0 * 0.36 * u, ex = C + t2 * 1.19 * u, ey = C - 1.56 * u - t2 * 0.39 * u;
+    return `M ${sx.toFixed(1)} 1100 L ${pt(1.19, 1.17, k)} L ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+  };
+  const coreR = 0.59 * U;
+  const core = `M ${C - coreR} ${C} A ${coreR} ${coreR} 0 0 1 ${C} ${C - coreR} L ${C} ${C} Z`;
+  const band = `M ${pt(1.55, 0)} L ${pt(1.19, 1.17)} L ${pt(0, 1.56)} L ${C} ${C - U} A ${U} ${U} 0 0 0 ${C - U} ${C} Z`;
+  const contours = [1.8, 2.5, 3.2];
+  // 모여드는 기록 점: 시작 위치(모서리 기준 왼쪽·위로 떨어진 거리), 색, 길이, 시작 지연
+  const flows = [
+    { x: 560, y: 90, c: "#4285F4", d: 9, t: 0 }, { x: 470, y: 380, c: "#22C3E6", d: 8, t: -2 },
+    { x: 230, y: 560, c: "#34D399", d: 10, t: -4 }, { x: 600, y: 300, c: "#8B5CF6", d: 11, t: -6 },
+    { x: 400, y: 600, c: "#FF7A6B", d: 9.5, t: -1 }, { x: 120, y: 650, c: "#22C3E6", d: 12, t: -8 },
+    { x: 330, y: 440, c: "#4285F4", d: 8.5, t: -5 }, { x: 520, y: 560, c: "#8B5CF6", d: 10.5, t: -3 },
+    { x: 300, y: 200, c: "#34D399", d: 11.5, t: -9 }, { x: 620, y: 180, c: "#FF7A6B", d: 13, t: -7 },
+    { x: 180, y: 360, c: "#8B5CF6", d: 9, t: -6.5 }, { x: 440, y: 120, c: "#4285F4", d: 12.5, t: -10 },
+  ];
   return (
     <svg className="cv-hero-art" viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
       <defs>
-        <linearGradient id="cvArc" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stopColor="#4285F4" stopOpacity="0.05" />
-          <stop offset="1" stopColor="#4285F4" stopOpacity="0.45" />
+        <linearGradient id="cvBand" gradientUnits="userSpaceOnUse" x1="540" y1="850" x2="850" y2="540">
+          <stop offset="0" stopColor="#1D4ED8" />
+          <stop offset=".45" stopColor="#4285F4" />
+          <stop offset=".8" stopColor="#22C3E6" />
+          <stop offset="1" stopColor="#34D399" />
+          <animateTransform attributeName="gradientTransform" type="rotate" values="0 720 720;360 720 720" dur="16s" repeatCount="indefinite" />
         </linearGradient>
+        <linearGradient id="cvCore" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#0B2E7A" />
+          <stop offset="1" stopColor="#5B4BDB" />
+        </linearGradient>
+        <linearGradient id="cvLine" gradientUnits="userSpaceOnUse" x1="0" y1="1000" x2="1000" y2="0">
+          <stop offset="0" stopColor="#34D399" stopOpacity=".05" />
+          <stop offset=".5" stopColor="#4285F4" stopOpacity=".4" />
+          <stop offset="1" stopColor="#8B5CF6" stopOpacity=".5" />
+        </linearGradient>
+        {[["cvGlowA", "#22C3E6"], ["cvGlowB", "#8B5CF6"], ["cvGlowC", "#34D399"]].map(([id, c]) => (
+          <radialGradient key={id} id={id}>
+            <stop offset="0" stopColor={c} stopOpacity=".32" />
+            <stop offset="1" stopColor={c} stopOpacity="0" />
+          </radialGradient>
+        ))}
       </defs>
-      <g className="cv-breathe">
-        {rings.map((r) => <path key={r} d={arc(r)} fill="none" stroke="url(#cvArc)" strokeWidth={r < 300 ? 1.6 : 1.2} />)}
-        {/* 로고의 두 조각(채운 사분원 + 띠) */}
-        <path d={`M ${C - 120} ${C} A 120 120 0 0 1 ${C} ${C - 120} L ${C} ${C} Z`} fill="#0B3A8C" />
-        <path d={`M ${C - 250} ${C} A 250 250 0 0 1 ${C} ${C - 250} L ${C} ${C - 175} A 175 175 0 0 0 ${C - 175} ${C} Z`} fill="#4285F4" />
-      </g>
+      {/* 오로라 — 마크 뒤 번지는 색 */}
+      <circle className="cv-drift" cx="700" cy="720" r="320" fill="url(#cvGlowA)" />
+      <circle className="cv-drift" style={{ animationDelay: "-6s", animationDuration: "17s" }} cx="860" cy="480" r="260" fill="url(#cvGlowB)" />
+      <circle className="cv-drift" style={{ animationDelay: "-11s", animationDuration: "21s" }} cx="500" cy="880" r="240" fill="url(#cvGlowC)" />
+      {/* 로고 윤곽 등고선 — 바깥으로 갈수록 점선(데이터) */}
+      {contours.map((k, i) => (
+        <path key={k} d={edge(k)} fill="none" stroke="url(#cvLine)" strokeWidth="1.4" strokeLinejoin="round" strokeDasharray={i === 2 ? "2 9" : undefined} strokeLinecap="round" />
+      ))}
+      {/* 퍼지는 윤곽 — 로고 바깥선과 같은 모양 */}
       {[0, 1, 2].map((i) => (
-        <path key={i} className="cv-pulse" style={{ animationDelay: `${i * 2.6}s` }} d={arc(980)} fill="none" stroke="#4285F4" strokeWidth="2" />
+        <path key={i} className="cv-echo" style={{ animationDelay: `${i * 2.4}s` }} d={edge(1)} fill="none" stroke="#4285F4" strokeWidth="2" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
       ))}
-      {dots.map((x, i) => (
-        <g key={i} className="cv-orbit" style={{ animationDuration: `${x.d}s`, animationDelay: `${x.delay}s` }}>
-          <circle cx={C - x.r} cy={C} r="6" fill="#fff" stroke="#4285F4" strokeWidth="2.5" />
-        </g>
+      {/* 모여드는 기록 */}
+      {flows.map((f, i) => (
+        <circle key={i} className="cv-flow" cx={C} cy={C} r={i % 3 === 0 ? 7 : 5} fill={f.c}
+          style={{ "--fx": `${-f.x}px`, "--fy": `${-f.y}px`, animationDuration: `${f.d}s`, animationDelay: `${f.t}s` } as React.CSSProperties} />
       ))}
+      {/* 로고 마크 */}
+      <g className="cv-breathe">
+        <path d={band} fill="url(#cvBand)" />
+        <path className="cv-core" d={core} fill="url(#cvCore)" />
+      </g>
     </svg>
   );
 }
@@ -61,17 +109,21 @@ function Mission({ isKo }: L) {
   return (
     <section className="cv-hero relative overflow-hidden bg-white min-h-[calc(100svh-73px)] flex items-center">
       <style>{`
-        .cv-hero-art{position:absolute;right:0;bottom:0;width:min(78vw,860px);height:auto;pointer-events:none}
-        .cv-breathe{transform-origin:1000px 1000px;animation:cvBreathe 6s ease-in-out infinite}
-        .cv-pulse{transform-origin:1000px 1000px;opacity:0;animation:cvPulse 7.8s cubic-bezier(.2,.6,.3,1) infinite}
-        .cv-orbit{transform-origin:1000px 1000px;animation-name:cvOrbit;animation-timing-function:linear;animation-iteration-count:infinite}
+        .cv-hero-art{position:absolute;right:0;bottom:0;width:min(80vw,900px);height:auto;pointer-events:none}
+        .cv-breathe{transform-origin:850px 850px;animation:cvBreathe 6s ease-in-out infinite}
+        .cv-core{transform-origin:850px 850px;animation:cvCore 6s ease-in-out infinite}
+        .cv-echo{transform-origin:850px 850px;opacity:0;animation:cvEcho 7.2s cubic-bezier(.2,.6,.3,1) infinite}
+        .cv-flow{opacity:0;animation-name:cvFlow;animation-timing-function:cubic-bezier(.55,0,.8,.45);animation-iteration-count:infinite}
+        .cv-drift{transform-box:fill-box;transform-origin:center;animation:cvDrift 13s ease-in-out infinite}
         .cv-rise{opacity:0;transform:translateY(18px);animation:cvRise .9s cubic-bezier(.2,.7,.2,1) forwards}
-        @keyframes cvBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
-        @keyframes cvPulse{0%{transform:scale(.12);opacity:0}15%{opacity:.55}100%{transform:scale(1);opacity:0}}
-        @keyframes cvOrbit{from{transform:rotate(0deg)}to{transform:rotate(90deg)}}
+        @keyframes cvBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+        @keyframes cvCore{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+        @keyframes cvEcho{0%{transform:scale(1);opacity:0}12%{opacity:.6}100%{transform:scale(3.6);opacity:0}}
+        @keyframes cvFlow{0%{transform:translate(var(--fx),var(--fy));opacity:0}15%{opacity:.9}80%{opacity:.9}100%{transform:translate(-60px,-60px) scale(.3);opacity:0}}
+        @keyframes cvDrift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,-30px) scale(1.12)}}
         @keyframes cvRise{to{opacity:1;transform:none}}
         @media (max-width:767px){.cv-hero-art{width:118vw;right:-18vw;bottom:-6vw;opacity:.9}}
-        @media (prefers-reduced-motion:reduce){.cv-breathe,.cv-pulse,.cv-orbit,.cv-rise{animation:none}.cv-rise{opacity:1;transform:none}.cv-pulse{display:none}}
+        @media (prefers-reduced-motion:reduce){.cv-breathe,.cv-core,.cv-echo,.cv-flow,.cv-drift,.cv-rise{animation:none}.cv-rise{opacity:1;transform:none}.cv-echo,.cv-flow{display:none}}
       `}</style>
       <HeroMotion />
       <div className="relative w-full max-w-[1120px] mx-auto px-5 py-24">
