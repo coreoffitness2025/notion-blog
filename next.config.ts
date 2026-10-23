@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // 앱 링크 확인 파일(2026-10-23) — 앱이 선언한 도메인이 남의 회사 corevia.fitness 였다. 우리 도메인으로 옮기며 추가.
+  // AASA 는 확장자가 없어 기본 Content-Type 이 octet-stream → JSON 으로 내려 준다.
+  async headers() {
+    return [
+      { source: "/.well-known/apple-app-site-association", headers: [{ key: "Content-Type", value: "application/json" }] },
+      { source: "/.well-known/assetlinks.json", headers: [{ key: "Content-Type", value: "application/json" }] },
+    ];
+  },
   async rewrites() {
     return {
       beforeFiles: [
@@ -24,6 +32,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // 앱 링크(/app/…)를 앱이 없는 기기에서 열면 스토어로 — /go 가 기기별 스토어·출처 꼬리표를 붙인다(2026-10-23)
+      { source: "/app/:path*", destination: "/go?c=applink-web", permanent: false },
       // 빈 Shop(Coming Soon) → 제품 페이지 (2026-10-08)
       { source: "/shop", destination: "/products", permanent: true },
       { source: "/en/shop", destination: "/en/products", permanent: true },

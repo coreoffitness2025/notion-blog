@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["8JTC8X55S5.com.corevia.fitness"],
+        "appID": "8JTC8X55S5.com.corevia.fitness",
+        "components": [{ "/": "/app/*" }],
+        "paths": ["/app/*"]
+      }
+    ]
+  }
+}

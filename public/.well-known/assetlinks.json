@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.corevia.fitness",
+      "sha256_cert_fingerprints": [
+        "72:C3:81:B8:36:32:26:06:F3:AC:B3:5A:6D:0E:11:57:D2:4E:9F:B7:B6:26:4F:97:48:1B:42:F8:BC:8A:A0:F1",
+        "68:D7:C7:0D:71:A2:56:31:73:0E:21:D0:D8:9E:C2:1E:42:83:AE:EB:A5:99:FA:FD:29:CF:AE:D7:86:DE:11:BD"
+      ]
+    }
+  }
+]
