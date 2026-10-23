@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   return {
     title: isKo
-      ? "1RM 계산기 - 최대 중량 계산 (Epley 공식)"
+      ? "1RM 계산기 (원알엠 계산) - 최대 중량 계산 (Epley 공식)"
       : "1RM Calculator - Estimate Your One Rep Max (Epley Formula)",
     description: isKo
       ? "운동 중량과 반복 횟수를 입력하면 1RM(최대 1회 중량)을 계산합니다. Epley 공식 기반, 트레이닝 존 가이드 포함. 벤치프레스, 스쿼트, 데드리프트 1RM을 무료로 계산하세요."
@@ -24,6 +24,7 @@ export async function generateMetadata({
     keywords: isKo
       ? [
           "1RM 계산기",
+          "원알엠 계산",
           "1rm 계산",
           "원알엠 계산기",
           "최대 중량 계산",

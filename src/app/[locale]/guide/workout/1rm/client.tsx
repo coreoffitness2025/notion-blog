@@ -11,7 +11,10 @@ function calculate1RM(weight: number, reps: number): number {
 
 const ZONE_PERCENTAGES = [100, 90, 80, 70, 60, 50];
 
-export default function OneRmClient({ dict, locale }: { dict: Dictionary; locale: string }) {
+/** 종목별 1RM 페이지(2026-10-23)가 넘기는 제목·설명·연결 — 없으면 일반 1RM 계산기 그대로 */
+export type LiftCopy = { title: string; subtitle: string; guideHref: string; guideLabel: string; appHref: string; appLabel: string; note: string };
+
+export default function OneRmClient({ dict, locale, lift }: { dict: Dictionary; locale: string; lift?: LiftCopy }) {
   const prefix = locale === "ko" ? "" : `/${locale}`;
   const t = dict.guideSubpages.oneRm;
 
@@ -62,8 +65,8 @@ export default function OneRmClient({ dict, locale }: { dict: Dictionary; locale
             </svg>
             Workout Guide
           </Link>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{t.title}</h1>
-          <p className="text-gray-500">{t.subtitle}</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{lift?.title ?? t.title}</h1>
+          <p className="text-gray-500">{lift?.subtitle ?? t.subtitle}</p>
         </div>
 
         {/* Calculator Card */}
@@ -144,6 +147,26 @@ export default function OneRmClient({ dict, locale }: { dict: Dictionary; locale
               <h3 className="text-sm font-medium text-gray-500 mb-2">{t.infoTitle}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">{t.infoText}</p>
             </div>
+          </div>
+        )}
+
+        {lift && (
+          <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-6 md:p-8">
+            <p className="text-gray-600 leading-relaxed mb-4">{lift.note}</p>
+            <div className="flex flex-wrap gap-3">
+              <Link href={lift.guideHref} className="px-4 py-2 rounded-xl border border-gray-200 text-gray-800 hover:bg-gray-50">{lift.guideLabel}</Link>
+              <a href={lift.appHref} className="px-4 py-2 rounded-xl bg-[var(--corevia-primary)] text-white font-medium">{lift.appLabel}</a>
+            </div>
+          </div>
+        )}
+
+        {!lift && (
+          <div className="mt-8 flex flex-wrap gap-2">
+            {[["bench-press", "벤치프레스", "Bench Press"], ["squat", "스쿼트", "Squat"], ["deadlift", "데드리프트", "Deadlift"], ["overhead-press", "오버헤드프레스", "Overhead Press"]].map(([id, ko, en]) => (
+              <Link key={id} href={`${prefix}/guide/workout/1rm/${id}`} className="px-3 py-1.5 rounded-full bg-white border border-gray-200 text-sm text-gray-700 hover:bg-gray-50">
+                {locale === "ko" ? `${ko} 1RM` : `${en} 1RM`}
+              </Link>
+            ))}
           </div>
         )}
 

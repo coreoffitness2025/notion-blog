@@ -22,7 +22,7 @@ export async function GET() {
     "",
     "## 운동·영양 가이드",
     `- [운동 가이드](${siteUrl}/guide/workout): 종목별 자세·타겟 근육·난이도`,
-    `- [1RM 계산](${siteUrl}/guide/workout/1rm): 반복 수로 1RM 추정`,
+    `- [1RM 계산](${siteUrl}/guide/workout/1rm): 반복 수로 1RM 추정 — 종목별: [벤치프레스](${siteUrl}/guide/workout/1rm/bench-press) · [스쿼트](${siteUrl}/guide/workout/1rm/squat) · [데드리프트](${siteUrl}/guide/workout/1rm/deadlift) · [오버헤드프레스](${siteUrl}/guide/workout/1rm/overhead-press)`,
     `- [운동 프로그램](${siteUrl}/guide/workout/programs): 분할·주간 구성`,
     `- [영양 가이드](${siteUrl}/guide/nutrition): 식품별 영양 정보`,
     `- [칼로리 계산](${siteUrl}/guide/nutrition/calorie): 기초대사량·목표 섭취량`,
