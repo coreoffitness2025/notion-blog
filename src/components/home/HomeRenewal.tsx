@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import CrmInquiryForm from "@/components/CrmInquiryForm";
+import VisionDemoVideo from "@/components/home/VisionDemoVideo";
 
 // 메인 — 회사 사명 중심 (2026-10-22 대표 "사명이랑 슬로건을 걸어놓고 왜 제품을 걸어놔", docs/site-renewal-2026-10.md 2차)
 // 순서(벤치마킹: FDE 회사들 = 미션 문장으로 열고 → FDE 정의 → 원칙·단계 → 증거 → 연락 하나):
@@ -213,42 +213,6 @@ function Fde({ isKo }: L) {
   );
 }
 
-/** 앱 체형분석 촬영 안내에 쓰는 3D 마네킹 위에 관절점·어깨/골반 기준선을 얹은 설명 그림 (좌표계 600×900 = 원본 이미지) */
-function PoseDiagram({ isKo }: { isKo: boolean }) {
-  // 0 어깨L 1 어깨R 2 팔꿈치L 3 팔꿈치R 4 손목L 5 손목R 6 골반L 7 골반R 8 무릎L 9 무릎R 10 발목L 11 발목R
-  const j: [number, number][] = [[217, 200], [383, 200], [205, 345], [397, 345], [200, 485], [402, 485], [256, 440], [344, 440], [248, 640], [352, 640], [232, 810], [370, 810]];
-  const bones = [[0, 1], [0, 2], [2, 4], [1, 3], [3, 5], [0, 6], [1, 7], [6, 7], [6, 8], [8, 10], [7, 9], [9, 11]];
-  return (
-    <div className="cv-pose relative rounded-2xl border border-gray-200 bg-white overflow-hidden">
-      <Image src="/vision/mannequin-front.webp" alt="" width={600} height={900} className="w-full h-auto" />
-      <svg viewBox="0 0 600 900" className="absolute inset-0 w-full h-full" role="img" aria-label={isKo ? "사람 모형 위에 관절점과 어깨·골반 기준선을 표시한 설명 그림" : "Joints and shoulder and pelvis lines over a body model"}>
-        <defs>
-          <linearGradient id="cvScan" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stopColor="#4285F4" stopOpacity="0" />
-            <stop offset="1" stopColor="#4285F4" stopOpacity="0.18" />
-          </linearGradient>
-        </defs>
-        <rect className="cv-scan" x="0" y="-120" width="600" height="120" fill="url(#cvScan)" />
-        <line x1="120" y1="200" x2="480" y2="200" stroke="#94A3B8" strokeWidth="2" strokeDasharray="8 8" />
-        <line x1="150" y1="440" x2="450" y2="440" stroke="#94A3B8" strokeWidth="2" strokeDasharray="8 8" />
-        {bones.map(([a, b], i) => <line key={i} x1={j[a][0]} y1={j[a][1]} x2={j[b][0]} y2={j[b][1]} stroke="#4285F4" strokeOpacity="0.75" strokeWidth="4" strokeLinecap="round" />)}
-        {j.map(([x, y], i) => <circle key={i} className="cv-joint" style={{ animationDelay: `${i * 0.08}s` }} cx={x} cy={y} r="9" fill="#fff" stroke="#0B3A8C" strokeWidth="4" />)}
-        <g fontSize="26" fontWeight="700" fill="#0B3A8C">
-          <text x="486" y="194">{isKo ? "어깨" : "Shoulder"}</text>
-          <text x="456" y="434">{isKo ? "골반" : "Pelvis"}</text>
-        </g>
-      </svg>
-      <style>{`
-        .cv-pose .cv-scan{animation:cvScan 4.5s ease-in-out infinite}
-        .cv-pose .cv-joint{transform-box:fill-box;transform-origin:center;animation:cvJoint 4.5s ease-out infinite}
-        @keyframes cvScan{0%{transform:translateY(0)}70%,100%{transform:translateY(1020px)}}
-        @keyframes cvJoint{0%,8%{transform:scale(.4);opacity:0}18%{transform:scale(1.25);opacity:1}26%,100%{transform:scale(1);opacity:1}}
-        @media (prefers-reduced-motion: reduce){.cv-pose .cv-scan{display:none}.cv-pose .cv-joint{animation:none}}
-      `}</style>
-    </div>
-  );
-}
-
 function Vision({ isKo, prefix }: L) {
   const items = isKo
     ? [
@@ -279,9 +243,9 @@ function Vision({ isKo, prefix }: L) {
           </p>
           <Link href={`${prefix}/products/apps#fitness`} className="inline-block mt-6 text-sm font-semibold text-gray-700 hover:text-gray-900">{isKo ? "코비아 피트니스 트레이너 모드에서 써 보기 →" : "Try it in CoreVia Fitness trainer mode →"}</Link>
         </div>
-        <div className="max-w-[320px] w-full mx-auto">
-          <PoseDiagram isKo={isKo} />
-          <p className="mt-3 text-center text-xs text-gray-400">{isKo ? "설명 그림 · 체형분석 촬영 안내 모형에 관절점 표시" : "Illustration · joints on the capture-guide body model"}</p>
+        <div className="max-w-[280px] w-full mx-auto">
+          <VisionDemoVideo label={isKo ? "코비아 피트니스 트레이너 모드 체형분석 화면 녹화" : "Screen recording of posture analysis in CoreVia Fitness trainer mode"} />
+          <p className="mt-3 text-center text-xs text-gray-400 break-keep">{isKo ? "실제 앱 화면 · 트레이너가 점을 옮기면 값이 다시 계산됩니다 · 인물은 AI로 만든 시연용 사진" : "Actual app screen · values update when the trainer moves a point · demo person is AI-generated"}</p>
         </div>
       </div>
     </section>
