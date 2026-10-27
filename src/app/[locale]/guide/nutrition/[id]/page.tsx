@@ -218,13 +218,13 @@ export default async function NutritionDetailPage({
                     {isEn ? "Nutrition Facts" : "영양성분"}
                   </h2>
                   <p className="text-sm text-gray-300">
-                    {item.serving_size
+                    {/* 표의 값은 전부 100g 기준 — 1회 제공량은 참고로만 덧붙인다 (10/27 '200g 표기에 100g 값' 오류) */}
+                    {isEn ? "Per 100g" : "100g 기준"}
+                    {item.serving_size && item.serving_size !== 100
                       ? isEn
-                        ? `Serving size: ${item.serving_size}g`
-                        : `1회 제공량: ${item.serving_size}g`
-                      : isEn
-                        ? "Per 100g"
-                        : "100g 기준"}
+                        ? ` · 1 serving ≈ ${item.serving_size}g`
+                        : ` · 1회 제공량 약 ${item.serving_size}g`
+                      : ""}
                   </p>
                 </div>
 
