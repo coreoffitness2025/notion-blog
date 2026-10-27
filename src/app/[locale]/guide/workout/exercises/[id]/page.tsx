@@ -14,6 +14,7 @@ import AdSense from "@/components/AdSense";
 import ScaleStoreCTA from "@/components/ScaleStoreCTA";
 import RelatedPosts from "@/components/RelatedPosts";
 import { relatedPostsForExercise } from "@/lib/relatedPosts";
+import { EXERCISE_GUIDE_BOOST } from "@/data/exerciseGuideBoost";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://coreviafitness.com";
@@ -46,12 +47,16 @@ export async function generateMetadata({
   const diffLabel = isKo
     ? { beginner: "초급", intermediate: "중급", advanced: "고급" }
     : { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
+  // 보강 처리군(10/27) — 한국어 쪽만 쪽별 대표 이미지·설명문. 나머지 쪽은 대조군이라 그대로.
+  const boost = isKo ? EXERCISE_GUIDE_BOOST[id] : undefined;
 
   return {
     title: isKo
       ? `${name} 자세 & 운동법 - ${muscles} 타겟 (${diffLabel[exercise.difficulty]})`
       : `${name} Form & Guide - ${muscles} (${diffLabel[exercise.difficulty]})`,
-    description: isKo
+    description: boost
+      ? boost.description
+      : isKo
       ? `${name} 운동의 올바른 자세와 단계별 운동 방법을 확인하세요. 타겟 근육: ${muscles}. 난이도: ${diffLabel[exercise.difficulty]}. 무료 운동 가이드.`
       : `Learn proper ${name} form with step-by-step instructions. Target muscles: ${muscles}. Difficulty: ${diffLabel[exercise.difficulty]}. Free exercise guide.`,
     keywords: isKo
@@ -78,6 +83,7 @@ export async function generateMetadata({
       siteName: "CoreVia",
       locale: isKo ? "ko_KR" : "en_US",
       type: "article",
+      ...(boost ? { images: [{ url: boost.ogImage, width: 1080, height: 1350, alt: `${name} 자세` }] } : {}),
     },
   };
 }
@@ -306,6 +312,18 @@ export default async function ExerciseDetailPage({
                   </span>
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* Key points — 보강 처리군(10/27) 한국어 쪽만 */}
+          {!isEn && EXERCISE_GUIDE_BOOST[exercise.id] && (
+            <section className="mb-8">
+              <h2 className="text-xl font-bold text-gray-800 mb-4">자세 점검 포인트</h2>
+              <ul className="space-y-2 list-disc pl-5 text-gray-700 leading-relaxed">
+                {EXERCISE_GUIDE_BOOST[exercise.id].points.map((pt, idx) => (
+                  <li key={idx}>{pt}</li>
+                ))}
+              </ul>
             </section>
           )}
 
