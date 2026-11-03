@@ -36,7 +36,7 @@ const PREVIEW = {
   fitness: {
     title: "코비아 피트니스 — 운동·식단 기록, 한 앱에서 끝",
     description: "사진 한 장으로 식단 기록, 운동 기록, 블루투스 체중계에 올라서면 몸무게 자동 기록까지. 무료로 시작하세요.",
-    image: "https://coreviafitness.com/og/app-go.png",
+    image: "https://coreviafitness.com/og/app-go-v2.png",
   },
 } as const;
 
