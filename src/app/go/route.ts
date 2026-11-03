@@ -28,8 +28,39 @@ const clean = (v: string | null, fallback: string) =>
 
 export const dynamic = "force-dynamic";
 
+// 링크 미리보기 수집기(네이버 블로그 링크 카드 등)는 스토어로 보내지 않고 한국어 소개를 준다 (2026-11-03 대표
+// "앱 링크가 왜 다 영어야"). 리다이렉트를 따라간 수집기가 Play 웹페이지의 영문 og 를 읽어 카드가 영어로 나왔다.
+const PREVIEW_BOT = /Yeti|naver|Daum|kakaotalk-scrap|facebookexternalhit|facebookcatalog|Twitterbot|Slackbot|Discordbot|TelegramBot|LinkedInBot|WhatsApp|Pinterest|SkypeUriPreview|bitlybot|Embedly/i;
+
+const PREVIEW = {
+  fitness: {
+    title: "코비아 피트니스 — 운동·식단 기록, 한 앱에서 끝",
+    description: "사진 한 장으로 식단 기록, 운동 기록, 블루투스 체중계에 올라서면 몸무게 자동 기록까지. 무료로 시작하세요.",
+    image: "https://coreviafitness.com/og/app-go.png",
+  },
+} as const;
+
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+function previewPage(url: string, store: string) {
+  const p = PREVIEW.fitness;
+  const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<title>${esc(p.title)}</title>
+<meta name="description" content="${esc(p.description)}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="코비아 피트니스">
+<meta property="og:title" content="${esc(p.title)}"><meta property="og:description" content="${esc(p.description)}">
+<meta property="og:image" content="${p.image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="${esc(url)}"><meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${esc(store)}">
+</head><body><a href="${esc(store)}">${esc(p.title)}</a></body></html>`;
+  return new NextResponse(html, { headers: { "content-type": "text/html; charset=utf-8" } });
+}
+
 export function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
+  if (PREVIEW_BOT.test(request.headers.get("user-agent") ?? "") && (params.get("app") ?? "fitness") === "fitness") {
+    return previewPage(request.nextUrl.toString(), `https://play.google.com/store/apps/details?id=${APPS.fitness.android}`);
+  }
   const appKey = clean(params.get("app"), "fitness") as keyof typeof APPS;
   const app = APPS[appKey] ?? APPS.fitness;
 
